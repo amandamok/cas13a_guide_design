@@ -13,7 +13,7 @@ Rscript ~/covid-19/scripts/break_genome.R -w 20 -e Cas13a
 Rscript ~/covid-19/scripts/score_SARS-CoV-2_sensitivity.R -w 20
 
 # score specificity against other human coronaviruses
-Rscript ~/covid-19/scripts/score_human_CoV_specificity.R -m 2
+Rscript ~/covid-19/scripts/score_human_CoV_specificity.R -m 2 -e Cas13a
 
 # calculate crRNA folding structures (RNAfold)
 Rscript ~/covid-19/scripts/score_RNAfold_crRNAs.R -e Cas13a

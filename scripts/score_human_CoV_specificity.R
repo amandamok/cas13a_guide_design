@@ -5,6 +5,8 @@ library(optparse)
 
 option_list <- list(make_option(c("-g", "--genome"), type="character", default="human_CoV", 
                                 help="bowtie index prefix", metavar="character"),
+                    make_option(c("-e", "--enzyme"), type="character", default=NULL, # "Cas13a" or "Cas12"
+                                help="Cas enzyme type", metavar="character"),
                     make_option(c("-m", "--mismatch"), type="character", default=1,
                                 help="number of mismatches allowed", metavar="integer"),
                     make_option(c("-o", "--out"), type="character", default=".", 
