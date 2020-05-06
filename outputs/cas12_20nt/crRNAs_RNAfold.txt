@@ -1,0 +1,3852 @@
+AAUUUCUACUAAGUGUAGAUUUACCUGGGAAGGUAUAAAC
+....(((((.....)))))..(((((....)))))..... ( -9.80)
+AAUUUCUACUAAGUGUAGAUGAGAACAGAUCUACAAGAGA
+..(((((......(((((((........)))))))))))) ( -8.00)
+AAUUUCUACUAAGUGUAGAUAAGUUCGUUUAGAGAACAGA
+....(((((.....)))))...((((.......))))... ( -8.00)
+AAUUUCUACUAAGUGUAGAUAAAGUUCGUUUAGAGAACAG
+....(((((.....)))))....((((.......)))).. ( -8.00)
+AAUUUCUACUAAGUGUAGAUGGUCACACCCGGACGAAACC
+....(((((.....)))))(.(((.......))).).... ( -6.40)
+AAUUUCUACUAAGUGUAGAUUCGUUGAAACCAGGGACAAG
+....(((((.....))))).((.(((....))).)).... ( -7.30)
+AAUUUCUACUAAGUGUAGAUCUCGUUGAAACCAGGGACAA
+....(((((.....)))))..((.(((....))).))... ( -7.30)
+AAUUUCUACUAAGUGUAGAUAGAUGUUGACGUGCCUCUGA
+....(((((.....)))))((((.((......)).)))). ( -6.80)
+AAUUUCUACUAAGUGUAGAUAACUUCUACUAAGCCACAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAACUUCUACUAAGCCACAA
+..............(((((......))))).......... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUCAACUUCUACUAAGCCACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGAACACAUAGGGCUGUUC
+....(((((.....)))))...(((((........))))) ( -7.00)
+AAUUUCUACUAAGUGUAGAUGCCCACAUGAGGGACAAGGA
+....(((((.....)))))(((((......))).)).... ( -9.40)
+AAUUUCUACUAAGUGUAGAUUUACCGUUCUUACGAAGAAG
+....(((((.....))))).....(((....)))...... ( -6.10)
+AAUUUCUACUAAGUGUAGAUGAUCGGCGCCGUAACUAUGG
+....(((((.....))))).........((((....)))) ( -5.70)
+AAUUUCUACUAAGUGUAGAUUUGAAAAUCUUCAUAAGGAU
+....(((((.....)))))..((((....))))....... ( -5.30)
+AAUUUCUACUAAGUGUAGAUCUUGAAAAUCUUCAUAAGGA
+....(((((.....)))))...((((....))))...... ( -5.30)
+AAUUUCUACUAAGUGUAGAUGUGUUCCAGUUUUCUUGAAA
+.((.(((((.....))))).)).(((.((....)).))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUAUGCACUCAAGAGGGUAGCC
+....(((((.....)))))...((((((....)))).)). ( -8.90)
+AAUUUCUACUAAGUGUAGAUCCAGCACGUGCUAGAAGGUC
+....(((((.....)))))((.(((....))).))..... ( -7.60)
+AAUUUCUACUAAGUGUAGAUAUGCUCAUGUUCACGGCAGC
+....(((((.....)))))..((((.........)))).. ( -6.30)
+AAUUUCUACUAAGUGUAGAUAGAACGUUCCGUGUACCAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAGAACGUUCCGUGUACCAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAAGGUGUCUGCAAUUCAU
+.............((((((((.....))))))))...... ( -7.40)
+AAUUUCUACUAAGUGUAGAUAUUUCAAAAGGUGUCUGCAA
+.............(((((((((((....))))))))))). ( -9.90)
+AAUUUCUACUAAGUGUAGAUCCAAUUUAAUUUCAAAAGGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUGCCAAUUUAAUUUCAAA
+((..(((((.....)))))..))................. ( -4.90)
+AAUUUCUACUAAGUGUAGAUGACAUUCCCCAUUGAAGGUG
+....(((((.....))))).........((......)).. ( -5.10)
+AAUUUCUACUAAGUGUAGAUAGGGAAAUACAAAAUUUGGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAACCCUUGGUUGAAUAGUCU
+...(((.((((((.((.....)).)))))).)))...... ( -7.10)
+AAUUUCUACUAAGUGUAGAUCAACCCUUGGUUGAAUAGUC
+....(((((.....)))))((((((...))))))...... (-10.50)
+AAUUUCUACUAAGUGUAGAUUUUUCAACCCUUGGUUGAAU
+....(((((.....)))))...(((((((...))))))). (-11.40)
+AAUUUCUACUAAGUGUAGAUCUUUUCAACCCUUGGUUGAA
+....(((((.....)))))....(((((((...))))))) (-10.80)
+AAUUUCUACUAAGUGUAGAUUCUUUUCAACCCUUGGUUGA
+....(((((.....)))))......((((((...)))))) ( -9.90)
+AAUUUCUACUAAGUGUAGAUGUGACGCAACUGGAUAGACA
+....(((((((.((((.......))))...))).)))).. ( -5.10)
+AAUUUCUACUAAGUGUAGAUGUUGCAUUCAUUUGGUGACG
+......(((((((((..((((...)))))))))))))... ( -7.60)
+AAUUUCUACUAAGUGUAGAUACCACAAUGAUCACACUUCA
+..........((((((.(((.........))))))))).. ( -5.40)
+AAUUUCUACUAAGUGUAGAUACAAAAUCGCCCGUCUGCCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUCAAAUUCUCAGUGCCACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGGUAAGUAACCACAAGUAG
+....(((((.....)))))(((........)))....... ( -7.20)
+AAUUUCUACUAAGUGUAGAUGGGGUAAGUAACCACAAGUA
+....(((((.....)))))((((........)).)).... ( -6.90)
+AAUUUCUACUAAGUGUAGAUACAACAGCAUUUUGGGGUAA
+....(((((.....)))))(((..(((....)))..))). ( -7.40)
+AAUUUCUACUAAGUGUAGAUAACAACAGCAUUUUGGGGUA
+....(((((.....)))))..((..(((....)))..)). ( -6.30)
+AAUUUCUACUAAGUGUAGAUAAGCCAGAUUCAUUAUGGUA
+....(((((.....)))))...((((.........)))). ( -7.90)
+AAUUUCUACUAAGUGUAGAUCAAGCCAGAUUCAUUAUGGU
+....(((((.....)))))....((((.........)))) ( -7.20)
+AAUUUCUACUAAGUGUAGAUAAGAAGGUUGUCAUUAAGAC
+....(((((.....)))))..........(((.....))) ( -5.10)
+AAUUUCUACUAAGUGUAGAUGAGUAUUUCAAGAAGGUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGAGUAUUUCAAGAAGGUUG
+....(((((.....)))))((((....))))......... ( -4.80)
+AAUUUCUACUAAGUGUAGAUUGGAGUAUUUCAAGAAGGUU
+....(((((.....)))))(((((....)))))....... ( -5.70)
+AAUUUCUACUAAGUGUAGAUUCUUUUUGGAGUAUUUCAAG
+.....((((.....))))(((((....)))))........ ( -5.90)
+AAUUUCUACUAAGUGUAGAUAAGUCACCAACAAUAUUGAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCACAAAAGCACUUGUGGAAG
+...((((((.((((((...........)))))))))))). (-11.10)
+AAUUUCUACUAAGUGUAGAUACAGUUUCCACAAAAGCACU
+....(((((.....)))))....((((......))))... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUAAUCCAAACCUUUCACAGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUGCUUUAUAAUCCAAACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUGAAUGCUUUAUAAUCCA
+((..(((((.....)))))..))................. ( -4.90)
+AAUUUCUACUAAGUGUAGAUAAAUUACCACAGGAUUCAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAACUUUAAAAUUACCACAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAACUUUAAAAUUACCACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUUUGUAACUUUAAAAUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUUUUGUAACUUUAAAAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUUUUCCUUUUGUAACUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGCUUUUCCUUUUGUAACUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAGCUUUUCCUUUUGUAACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAGCUUUUCCUUUUGUAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUUCACCAAUAUUCCAGGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAGAGUGCGGGAGAAAAUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGCAGUUUCAAGAGUGCGGG
+....(((((.....)))))..(((.((....)).)))... ( -8.20)
+AAUUUCUACUAAGUGUAGAUGAGCAGUUUCAAGAGUGCGG
+....(((((.....)))))...(((.((....)).))).. ( -8.20)
+AAUUUCUACUAAGUGUAGAUAUAAACAGUGCCAAAGAUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUAAACAGUGCCAAAGAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAUAAACAGUGCCAAAGAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUUUUUCAUAAACAGUGCC
+....(((((.....)))))..((((.....))))...... ( -5.40)
+AAUUUCUACUAAGUGUAGAUCCAACCGUCUCUAAGAAACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAAUUUCCCAACCGUCUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAAGCACAGGUUGAGAUAA
+.(((((.(((..((((........)))).))).))))).. ( -7.80)
+AAUUUCUACUAAGUGUAGAUUCCACCGACAAUUUCACAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCACAGGUGACAAUUUGUCCA
+....(((((.....)))))..((((((....))))))... ( -7.50)
+AAUUUCUACUAAGUGUAGAUCUUUGCACAGGUGACAAUUU
+......((((..((((((....)))))).))))....... ( -6.10)
+AAUUUCUACUAAGUGUAGAUCAAGCUUAAAGAAUGUCUGA
+....(((((.....)))))(((.((.........)).))) ( -5.30)
+AAUUUCUACUAAGUGUAGAUUUUACAAGCUUAAAGAAUGU
+((..(((((.....)))))..))................. ( -4.90)
+AAUUUCUACUAAGUGUAGAUGCUCCACCAAUAAUGAUAGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUUUAGCUCCACCAAUAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCUAAAUUCAAGGCUUUAA
+....(((((.....)))))..(((.......)))...... ( -5.70)
+AAUUUCUACUAAGUGUAGAUAGUGCGUGACAAAUGUUUCA
+....(((((.....)))))....((((.....)))).... ( -5.80)
+AAUUUCUACUAAGUGUAGAUUGUACAAUCCCUUUGAGUGC
+....(((((.....)))))..((((...........)))) ( -5.30)
+AAUUUCUACUAAGUGUAGAUACACACUUUCUGUACAAUCC
+......(((.((((((......))))))...)))...... ( -5.10)
+AAUUUCUACUAAGUGUAGAUUUCUCUGGAUUUAACACACU
+.........(((((.((((....)))).)))))....... ( -5.60)
+AAUUUCUACUAAGUGUAGAUGAGGCAUGAGUAGGCCAGUU
+....(((((.....)))))...(((........))).... ( -8.80)
+AAUUUCUACUAAGUGUAGAUAGAGGCAUGAGUAGGCCAGU
+....(((((.....)))))....(((........)))... ( -8.80)
+AAUUUCUACUAAGUGUAGAUGGGCUUUUAGAGGCAUGAGU
+....(((((.....)))))...((((....))))...... ( -6.80)
+AAUUUCUACUAAGUGUAGAUGGGGCUUUUAGAGGCAUGAG
+....(((((.....)))))....((((....))))..... ( -6.80)
+AAUUUCUACUAAGUGUAGAUUUUUGGGGCUUUUAGAGGCA
+....(((((.....)))))........((((....)))). ( -6.80)
+AAUUUCUACUAAGUGUAGAUUCCCUCUAAGAAGAUAAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAGACAACUUCCUCUGUUAA
+....(((((.....)))))...((((........)))).. ( -5.80)
+AAUUUCUACUAAGUGUAGAUCAAGACAACUUCCUCUGUUA
+....(((((.....)))))....((((........)))). ( -5.80)
+AAUUUCUACUAAGUGUAGAUGAGCAACAUAAGCCCGUUAA
+.....((((.....))))(((.((.......)).)))... ( -5.10)
+AAUUUCUACUAAGUGUAGAUAUUUCGAGCAACAUAAGCCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUGUCUUUGAUUUCGAGCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUGUGUCUUUGAUUUCGAGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUACCAUCAUAUUAGGUGCA
+....(((((.....))))).....((((......)))).. ( -6.50)
+AAUUUCUACUAAGUGUAGAUAGUGUGAAGGUAUUGUUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGGUGCACCGCCUUUGAGU
+....(((((.....)))))...((((...))))....... ( -7.70)
+AAUUUCUACUAAGUGUAGAUAUCAAGUUCAAAAGUGAUAU
+....(((((.....)))))(((((..........))))). ( -5.50)
+AAUUUCUACUAAGUGUAGAUUCAAUCCUUUCAUCAAGUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUCUGUACCGAGUUCAACU
+.......(((..(((((((...)))))))..)))...... ( -4.80)
+AAUUUCUACUAAGUGUAGAUUGACAGCAUCUGCCACAACA
+....(((((.....))))).((.(((...))).))..... ( -5.30)
+AAUUUCUACUAAGUGUAGAUAUGACAGCAUCUGCCACAAC
+............((((((((........))))).)))... ( -5.90)
+AAUUUCUACUAAGUGUAGAUUAUGACAGCAUCUGCCACAA
+....(((((.....)))))...((.(((...))).))... ( -5.20)
+AAUUUCUACUAAGUGUAGAUAACUCACCAGACUCAUCAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUUGGUAAUCAUCUUCAGU
+......(((((((........)))))))............ ( -5.60)
+AAUUUCUACUAAGUGUAGAUUUGACUAUCAUCAUCUAACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUAGUAGUUGUCUGAUUGU
+...............((((((((....))))))))..... ( -5.40)
+AAUUUCUACUAAGUGUAGAUAAUAACCACUAAAACUAUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAUAACCACUAAAACUAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGUAUACAUUGUCAGUAAG
+......((((.((((((........))))))...)))).. ( -5.70)
+AAUUUCUACUAAGUGUAGAUAAUGUAUACAUUGUCAGUAA
+......(((.....)))(((((((....)))))))..... ( -6.30)
+AAUUUCUACUAAGUGUAGAUUAAUGUAUACAUUGUCAGUA
+....(((((.....))))).(((((....)))))...... ( -5.40)
+AAUUUCUACUAAGUGUAGAUGCUUCUUCCACAAUGUCUGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGCUUCUUCCACAAUGUCUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAGCUUCUUCCACAAUGUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUUUUUAGCUUCUUCCACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCUUUUUAGCUUCUUCCAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGGUAAACAUUGGCUGCAUU
+....(((((.....)))))(((.(((...))).))).... ( -5.30)
+AAUUUCUACUAAGUGUAGAUAGGCUCCUGCAACACCUCCU
+....(((((.....)))))...((....)).......... ( -6.00)
+AAUUUCUACUAAGUGUAGAUAGUGGUCCAUUAGUAGCUAU
+.....(((((((.((..(((....)))))))))))).... ( -5.80)
+AAUUUCUACUAAGUGUAGAUGCAAGAUUGUGUCCGCUUAA
+.........((((((..((((((....)))))))))))). ( -8.90)
+AAUUUCUACUAAGUGUAGAUGGCCGACAACAUGAAGACAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAACAUUUGGGCCGACAAC
+........((((((((.......))))))))......... ( -6.40)
+AAUUUCUACUAAGUGUAGAUAUAAGCACUCUUAAGAAGUU
+(((((((....(((((........)))))....))))))) ( -8.00)
+AAUUUCUACUAAGUGUAGAUCAUAAGCACUCUUAAGAAGU
+.((((((....(((((.........)))))....)))))) ( -6.50)
+AAUUUCUACUAAGUGUAGAUUGCGAACAGUAUCUACACAA
+............((((((((.((.....)))))))))).. (-11.20)
+AAUUUCUACUAAGUGUAGAUUCAAAGACAGCUAAGUAGAC
+....((((((.(((((..........))).)).)))))). ( -7.20)
+AAUUUCUACUAAGUGUAGAUAUCAAAGACAGCUAAGUAGA
+....((((((.(((((...........))).)).)))))) ( -6.60)
+AAUUUCUACUAAGUGUAGAUUAUCAAAGACAGCUAAGUAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAUAGAGAUUUUUAUCAAA
+....(((((.....)))))........(((....)))... ( -5.00)
+AAUUUCUACUAAGUGUAGAUCAAAAAGCUUGAAACAAGUU
+....(((((.....)))))......((((((...)))))) ( -7.30)
+AAUUUCUACUAAGUGUAGAUACUCUUCAUUUCCAAAAAGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCACUCUUCAUUUCCAAAAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUCAACUUGCUUUUCACUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUCAACUUGCUUUUCACUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGAAUCUCAGCGAUCUUUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUUAUAAAUGGCUUAACUU
+....(((((.....))))).(((((.........))))). ( -6.00)
+AAUUUCUACUAAGUGUAGAUCUUUCAGUUAUAAAUGGCUU
+....(((((.....)))))......(((((....))))). ( -5.40)
+AAUUUCUACUAAGUGUAGAUUCUGUUCAACUGAAGGUUUA
+....(((((.....)))))...(.(((....))).).... ( -4.90)
+AAUUUCUACUAAGUGUAGAUCUCUGUUCAACUGAAGGUUU
+....(((((.....)))))....(.(((....))).)... ( -4.90)
+AAUUUCUACUAAGUGUAGAUUUAUCAUCUUGUUUUCUCUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUAUCAUCUUGUUUUCUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUUUCUUAUCAUCUUGUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUCCAGAGUUGUUGUAACUU
+....(((((.....)))))......((((((...)))))) ( -6.10)
+AAUUUCUACUAAGUGUAGAUUGUGAGGAACUUAGUUUCUU
+....(((((.....)))))....(((((((...))))))) ( -8.30)
+AAUUUCUACUAAGUGUAGAUCUGUGAGGAACUUAGUUUCU
+....(((((.....)))))......((((((...)))))) ( -7.20)
+AAUUUCUACUAAGUGUAGAUAGAAAGUGAUGUCAAUGUCA
+....(((((.....))))).......((((......)))) ( -5.20)
+AAUUUCUACUAAGUGUAGAUUUUAAGAAAGUGAUGUCAAU
+((..(((((.....)))))..))................. ( -4.90)
+AAUUUCUACUAAGUGUAGAUGUAGGUAUAACCACAGCAGU
+....(((((.....)))))(((.(((...))))))..... ( -7.20)
+AAUUUCUACUAAGUGUAGAUAGUAGGUAUAACCACAGCAG
+....(((((.....)))))..((.(((...)))))..... ( -6.30)
+AAUUUCUACUAAGUGUAGAUUAGUAGGUAUAACCACAGCA
+....((((((((.......))))))))............. ( -6.70)
+AAUUUCUACUAAGUGUAGAUAGUAGUGCCACCAGCCUUUU
+....(((((.....)))))....((.((.....))))... ( -5.00)
+AAUUUCUACUAAGUGUAGAUGCUAGCAUUUCAGUAGUGCC
+.....(((((((((((........)))))).))))).... ( -8.40)
+AAUUUCUACUAAGUGUAGAUUCAAAGCUUUCGCUAGCAUU
+....(((((.....)))))......(((......)))... ( -7.20)
+AAUUUCUACUAAGUGUAGAUCUCAAAGCUUUCGCUAGCAU
+....(((((.....))))).......(((......))).. ( -7.20)
+AAUUUCUACUAAGUGUAGAUAACCCUGACCCGGGUAAGUG
+....(((((.....)))))..((((......))))..... (-10.00)
+AAUUUCUACUAAGUGUAGAUCCUCCUCUACAGUGUAACCA
+......(((....((((((......))))))..))).... ( -6.70)
+AAUUUCUACUAAGUGUAGAUAGCACUGUCUUUGCCUCCUC
+....(((((.....)))))..(((.......)))...... ( -5.40)
+AAUUUCUACUAAGUGUAGAUAAGCACUGUCUUUGCCUCCU
+....(((((.....)))))...(((.......)))..... ( -5.40)
+AAUUUCUACUAAGUGUAGAUUAAGCACUGUCUUUGCCUCC
+....(((((.....)))))....(((.......))).... ( -5.40)
+AAUUUCUACUAAGUGUAGAUCACUUUUUAAGCACUGUCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACACUUUUUAAGCACUGUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGCUUCUCAUUAGAGAUAA
+....(((((.....)))))......((((....))))... ( -7.80)
+AAUUUCUACUAAGUGUAGAUUCGCAAAUUCCAAGAAACAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUCUGCAUGUGCAAGCAUUU
+....(((((.....)))))....(((....)))....... ( -6.60)
+AAUUUCUACUAAGUGUAGAUCGUGUUUCUUCUGCAUGUGC
+....(((((.....))))).(((((.......)))))... ( -7.70)
+AAUUUCUACUAAGUGUAGAUCACACAGACAGGCAUUAAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUUCCACACAGACAGGCAU
+....(((((.....)))))(((((......)))))..... ( -5.90)
+AAUUUCUACUAAGUGUAGAUCGCUGUAUAGUUGAAACUAU
+..((((.((((((((.....))))...)))).)))).... ( -6.40)
+AAUUUCUACUAAGUGUAGAUAUACCCUUAUAUUUACGCUG
+...........((((((((((((....)))))))))))). (-11.40)
+AAUUUCUACUAAGUGUAGAUAAUACCCUUAUAUUUACGCU
+...........((((((((((.........)))))))))) ( -7.50)
+AAUUUCUACUAAGUGUAGAUCUGGUGUAAAAGUAAAAUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACUGGUGUAAAAGUAAAAUC
+....(((((.....)))))((((........))))..... ( -6.60)
+AAUUUCUACUAAGUGUAGAUGAUCGUUAAGUGUGUUGAUA
+....(((((.....))))).....(((((.....))))). ( -5.00)
+AAUUUCUACUAAGUGUAGAUAUUUAGAUCGUUAAGUGUGU
+.....((((.....))))((((((((....)))))))).. ( -6.10)
+AAUUUCUACUAAGUGUAGAUAGCCAUGUGUUACAUAGCCA
+....(((((.....)))))..((.((((...)))).)).. ( -7.40)
+AAUUUCUACUAAGUGUAGAUAGAGAUCUCAUAUACCGAGC
+.((((((((((....))).)))))))(((.......))). ( -6.00)
+AAUUUCUACUAAGUGUAGAUGAAGAAGAAGUAAGAUAACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGAAGAAGAAGUAAGAUAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUAAAAUGUUCUUCAGGUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAGGAACCAGCAAGUGAGAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCACCUCUCUUAAGAAAUUC
+(((((((..((((.(.((......))).))))))))))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUAUCACCUCUCUUAAGAAAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAACAUCAGCUCCAUCCAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUAACAUCAGCUCCAUCCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUAGUAACAUCAGCUCCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUUUAGUAACAUCAGCUCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUUCAUGUGAAUUAUGAGG
+....(((((.....)))))..(((((((.....))))))) ( -9.60)
+AAUUUCUACUAAGUGUAGAUACCUUCAUGUGAAUUAUGAG
+....(((((.....))))).....(((((.....))))). ( -7.10)
+AAUUUCUACUAAGUGUAGAUAUGCUGACAUGUACCUACCC
+.....((((.....))))(((((....)))))........ ( -5.20)
+AAUUUCUACUAAGUGUAGAUGUGUGAUUUAAUGCUGACAU
+....(((((.....))))).((((......))))...... ( -5.60)
+AAUUUCUACUAAGUGUAGAUAGUGUGAUUUAAUGCUGACA
+....(((((.....)))))((((((......))))))... ( -7.30)
+AAUUUCUACUAAGUGUAGAUUAGUGUGAUUUAAUGCUGAC
+....(((((.....)))))(((((((......))))))). ( -8.90)
+AAUUUCUACUAAGUGUAGAUCACUUUUUAGUGUGAUUUAA
+....(((((.....)))))((((........))))..... ( -8.10)
+AAUUUCUACUAAGUGUAGAUAUAGAAGUUAAACCAUUAAC
+....(((((.....))))).......(((((....))))) ( -4.90)
+AAUUUCUACUAAGUGUAGAUUUGGAGUGUUAACAAUGCAG
+....(((((.....)))))......(((((...))))).. ( -4.80)
+AAUUUCUACUAAGUGUAGAUUCUAACAUCACCUAACUCAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAGAAUCUAAAUUGGCAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCAAGAAUCUAAAUUGGCAU
+........((((...(((((......)))))..))))... ( -5.20)
+AAUUUCUACUAAGUGUAGAUCACACCACGUUCAAGACUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACACACCACGUUCAAGACUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAAAUUGUUCAUAAGAAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCACACGUACAAGGUAUCUG
+....(((((.....)))))....((.((((...)))).)) ( -4.90)
+AAUUUCUACUAAGUGUAGAUUAGCUUGUUUACCACACGUA
+....(((((.....)))))...((.(((.....))).)). ( -5.20)
+AAUUUCUACUAAGUGUAGAUGUAGCUUGUUUACCACACGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAGUGACCACACUGGUAAUU
+.....((((.....))))(((((((....))))))).... ( -8.90)
+AAUUUCUACUAAGUGUAGAUGAAGUUAUAUGUUUAUAGUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUAGAAGUUAUAUGUUUAU
+((..(((((.....)))))..))................. ( -4.90)
+AAUUUCUACUAAGUGUAGAUUAAGUAAAGCACCGUCUAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUUCUGAGGACUUUGUAAG
+......(((.((((.((((....))))...)))).))).. ( -5.40)
+AAUUUCUACUAAGUGUAGAUUAGAAAACAUCCGUAAUAGG
+....(((((.....)))))...........((......)) ( -5.00)
+AAUUUCUACUAAGUGUAGAUUUUGUAGAAAACAUCCGUAA
+..(((((((.((((....)))).))))))).......... ( -7.70)
+AAUUUCUACUAAGUGUAGAUCUUUGUAGAAAACAUCCGUA
+..(((((((.(((.......))).)))))))......... ( -7.50)
+AAUUUCUACUAAGUGUAGAUUGGUUGUUGUGUAACUGUUU
+....(((((.....)))))..(((((.....))))).... ( -5.60)
+AAUUUCUACUAAGUGUAGAUAUGGUUGUUGUGUAACUGUU
+....(((((.....))))).(((((((.....))))))). ( -6.40)
+AAUUUCUACUAAGUGUAGAUUAAGUAACUGGUUUUAUGGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUACAAACAACACCAUCCA
+....(((((.....)))))((((....))))......... ( -4.90)
+AAUUUCUACUAAGUGUAGAUUUAUAAUAAUUGUCCAACUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUACAAGAUCAAUUGGUUGC
+....(((((.....)))))....(((......)))..... ( -5.10)
+AAUUUCUACUAAGUGUAGAUGAUAUGGUUGGUUUGGUACA
+.......(((((.((((.....)))).)))))........ ( -4.80)
+AAUUUCUACUAAGUGUAGAUAUAUUAUCACAUACAAACUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUCAUCAGCAAAUUUGAUA
+....(((((.....))))).....(((((.....))))). ( -5.70)
+AAUUUCUACUAAGUGUAGAUUUAUAACCAGUUAACUGGUU
+....(((((.....))))).....((((((....)))))) (-10.50)
+AAUUUCUACUAAGUGUAGAUAGCUCUCUUGAAGCAGGUUU
+....(((((.....)))))..((((....).)))...... ( -6.80)
+AAUUUCUACUAAGUGUAGAUAGUCAGGGAAAAAUGUAACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAUCAAUAGCCACCACAUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAAAAGAGGGUGUGUAGUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUCCUUUCUUAAAAGAGGG
+....(((((.....)))))....(((((......))))). ( -8.30)
+AAUUUCUACUAAGUGUAGAUUGUAACAAUUUAGCUCCUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAGUUGCAUUGUUAACAUG
+....(((((.....)))))....((((......))))... ( -5.10)
+AAUUUCUACUAAGUGUAGAUUACGUGGCUUUAUUAGUUGC
+....(((((.....)))))....((((((.....)))))) ( -7.50)
+AAUUUCUACUAAGUGUAGAUGUUUAUACGUGGCUUUAUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGCUCCAAAGACAACGUAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGCUCCAAAGACAACGUAU
+.((.(((((.....))))).)).................. ( -4.80)
+AAUUUCUACUAAGUGUAGAUAACUGGUUUUGUGCUCCAAA
+....(((((.....)))))....(((.........))).. ( -5.80)
+AAUUUCUACUAAGUGUAGAUAUGUUUCAACUGGUUUUGUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAUCUUCGCAGGCAAGAUUA
+....(((((.....)))))((((((((....).))))))) ( -8.70)
+AAUUUCUACUAAGUGUAGAUAGAUCUUCGCAGGCAAGAUU
+....(((((.....)))))..(((((((....).)))))) ( -7.70)
+AAUUUCUACUAAGUGUAGAUCACUACUUCUUCAGAGACUG
+....(((.(((((.((((....))))..))).)))))... ( -5.50)
+AAUUUCUACUAAGUGUAGAUCCACUACUUCUUCAGAGACU
+....(((.(((((.((((.....))))..))).))))).. ( -5.40)
+AAUUUCUACUAAGUGUAGAUUGUAUGGUAGGAUUUUCCAC
+....(((((.....)))))..........(((...))).. ( -6.00)
+AAUUUCUACUAAGUGUAGAUACAUUACACUCAAGAACGUC
+...((((....(((((((.....)))))))..)))).... ( -5.60)
+AAUUUCUACUAAGUGUAGAUCACAUUACACUCAAGAACGU
+...((((....((((((........))))))..))))... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAGUAUAAUGUCUCCUACAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUGGUUUAAGUAUAAUGUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAACUAUUAUUUGCUGGUUUA
+....(((((.....))))).(((((........))))).. ( -5.70)
+AAUUUCUACUAAGUGUAGAUAAACUAUUAUUUGCUGGUUU
+....(((((.....))))).((((((........)))))) ( -6.30)
+AAUUUCUACUAAGUGUAGAUUAAACUAUUAUUUGCUGGUU
+....(((((.....)))))...(((((........))))) ( -5.50)
+AAUUUCUACUAAGUGUAGAUUUAAUAGUAAGACUAGAAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAACCUAAUACUCUAGAUAA
+....((((...(((((((......)).))))).))))... ( -4.80)
+AAUUUCUACUAAGUGUAGAUCAAACCUAAUACUCUAGAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAAGAAAAGGCUUAGCAUA
+....(((((.....))))).(((((......))))).... ( -5.70)
+AAUUUCUACUAAGUGUAGAUAACACCGUGUAACUAUGUUA
+....(((((.....)))))(((((..((...))..))))) ( -5.50)
+AAUUUCUACUAAGUGUAGAUUACUUCUAGUAAAAGUACAC
+....(((((.....)))))(((((...)))))........ ( -5.60)
+AAUUUCUACUAAGUGUAGAUAUUCUAGAAUUUGUACUUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAUAGUAGUCGGCAUAGAU
+....(((((.....)))))(((((.((.....))))))). ( -7.40)
+AAUUUCUACUAAGUGUAGAUCCGACACUCUUAACAGUAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAAAAAUUAGGUGACUUCAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAGUUUAGAAAAAUUAGGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAAGAAGGAUAGGUGUCUA
+....(((((.....)))))........((((....)))). ( -5.80)
+AAUUUCUACUAAGUGUAGAUUAUAGUUUCUAAAGAAGGAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAGAUGAAAUGGUAAUUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACAAGAUUAAUUAUUAACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUACAUAAUAAAAUGAUGC
+....(((((.....))))).(((.(((......)))))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUCCAUACAUAAUAAAAUGAUG
+....(((((.....)))))..(((.(((......)))))) ( -5.10)
+AAUUUCUACUAAGUGUAGAUUAACACAUCAUACAAGUUGA
+....(((((.....)))))(((((...........))))) ( -4.80)
+AAUUUCUACUAAGUGUAGAUCCUCCAUUAGCAUAGACAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAAAGCCUUUACCUCCAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAACUGUAGUGACAAGUCUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAACUGUAGUGACAAGUCUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGGUCUUUUAAACUGUAGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAAAGUAAAGAUGGAUGGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCAGCUUUAUCAAAGUAAA
+....(((((.....))))).....(((((...)))))... ( -5.70)
+AAUUUCUACUAAGUGUAGAUGACCAGCUUUAUCAAAGUAA
+....(((((.....)))))......(((((...))))).. ( -5.70)
+AAUUUCUACUAAGUGUAGAUAUAAGUCUUUUGACCAGCUU
+....(((((.....))))).....(((....)))...... ( -6.80)
+AAUUUCUACUAAGUGUAGAUGUGUUAUUAGCUCUCAGGUU
+.((.(((((.....))))).)).................. ( -4.80)
+AAUUUCUACUAAGUGUAGAUCCAUCAAAAACUAUAACAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUUACCAUCAAAAACUAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAUUUACCAUCAAAAACUAU
+....(((((.....)))))((((.....))))........ ( -5.00)
+AAUUUCUACUAAGUGUAGAUCAGAUGAUUCUUCACAUUUU
+....(((((.....)))))..(((((........))))). ( -5.50)
+AAUUUCUACUAAGUGUAGAUGCAGAUGAUUCUUCACAUUU
+....(((((.....)))))((.(((....))).))..... ( -5.80)
+AAUUUCUACUAAGUGUAGAUACUGCAACUUCCGCACUAUC
+....(((((.....)))))...(((.......)))..... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAACUGCAACUUCCGCACUAU
+....(((((.....)))))....(((.......))).... ( -5.90)
+AAUUUCUACUAAGUGUAGAUCAUUGGUACGUUAAAAGUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCAUUGGUACGUUAAAAGUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCCAUUGGUACGUUAAAAGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUUUUUCCAUUGGUACGUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAGUUUUUCCAUUGGUACGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAGUUCAGCUUCUGCAGUU
+....(((((.....))))).........((....)).... ( -6.10)
+AAUUUCUACUAAGUGUAGAUUACAUCUGAAUCAACAAACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUUCUACAUCUGAAUCAAC
+............(((((((....))))))).......... ( -7.30)
+AAUUUCUACUAAGUGUAGAUAGACAUUCAACAACAUCUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAUAGGUGAGCAUAUAGUU
+.......((((.((((..(((....)))..)))).)))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUAACUUUGUUAUAGGUGAGCA
+....(((((.....)))))..((((......))))..... ( -5.70)
+AAUUUCUACUAAGUGUAGAUCAACUUUGUUAUAGGUGAGC
+....(((((.....)))))(((.(((......)))))).. ( -6.10)
+AAUUUCUACUAAGUGUAGAUCUACCUGCGCAUUAAUAUGA
+............((((((......)))))).......... ( -7.10)
+AAUUUCUACUAAGUGUAGAUGCUACCUGCGCAUUAAUAUG
+............((((((.......))))))......... ( -6.50)
+AAUUUCUACUAAGUGUAGAUUGCUACCUGCGCAUUAAUAU
+............((((((........))))))........ ( -7.00)
+AAUUUCUACUAAGUGUAGAUACGUUCCAUAUCAAAGCAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAGUUGUUCAGACAAUGAC
+....(((((.....))))).((.(((((....))))).)) ( -6.20)
+AAUUUCUACUAAGUGUAGAUCGUAGUUGUUCAGACAAUGA
+....(((((.....)))))((((.(((.....))).)))) ( -7.20)
+AAUUUCUACUAAGUGUAGAUUUUUCGUAGUUGUUCAGACA
+....(((((.....))))).........(((.....))). ( -4.90)
+AAUUUCUACUAAGUGUAGAUGCAGCACUACGUAUUUGUUU
+......(((..(((((.......)))))..)))....... ( -5.10)
+AAUUUCUACUAAGUGUAGAUAGCAGCACUACGUAUUUGUU
+......(((..(((((........)))))..)))...... ( -5.60)
+AAUUUCUACUAAGUGUAGAUUAGCAGCACUACGUAUUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGUUACAACAUUAACAACU
+....(((((.....))))).((((((......)))))).. ( -7.10)
+AAUUUCUACUAAGUGUAGAUCCACCCUUAAGUGCUAUCUU
+....(((((.....)))))..(((......)))....... ( -5.30)
+AAUUUCUACUAAGUGUAGAUACCACCCUUAAGUGCUAUCU
+....(((((.....)))))...(((......)))...... ( -5.30)
+AAUUUCUACUAAGUGUAGAUAUUAACUGCUUCAACCAAUU
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUGACAUGACAUGAACAGGUGU
+....(((((.....))))).......((((......)))) ( -6.00)
+AAUUUCUACUAAGUGUAGAUACUUGAAAAGUCAGUAUGUU
+.....((((.....))))(((((.((....)))))))... ( -6.30)
+AAUUUCUACUAAGUGUAGAUUUAGCAAAACAAGUAUCUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAUUAGUAUAACUACCACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGGUGUGUAACAGAUGUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAUGGUGUGUAACAGAUGUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAAUUGUACAUUCAGCAGC
+.....((.((.((((((.(......).)))))).)).)). ( -5.70)
+AAUUUCUACUAAGUGUAGAUAUAAGCAACAGAACCUUCUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAAGUGCCGUGCCUACAGU
+...........(.(((((.(((.......))).))))).) ( -5.70)
+AAUUUCUACUAAGUGUAGAUCAGCAUCUACACCACAGAAA
+..(((((.....((((((((....))))))))...))))) ( -9.80)
+AAUUUCUACUAAGUGUAGAUUGGAAAUACAAAUGAUAUAA
+....(((((.....)))))(((......)))......... ( -5.10)
+AAUUUCUACUAAGUGUAGAUGGUAAUUACUAAAGAACCAA
+....(((((.....)))))((((..((....))..)))). ( -6.90)
+AAUUUCUACUAAGUGUAGAUACAAAAAGGUGCACAGCGCA
+....(((((.....))))).........((((...)))). ( -8.00)
+AAUUUCUACUAAGUGUAGAUUUUAACAAAAAGGUGCACAG
+............(((((..((((....))))..))))).. ( -5.80)
+AAUUUCUACUAAGUGUAGAUUUUAUUUAACAAAAAGGUGC
+((..(((((.....)))))..))................. ( -4.90)
+AAUUUCUACUAAGUGUAGAUGAUACAUUUCUUUAUUUAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCGAGAUGACAACAAGCAGCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGGUGGUUGGUAAAGAACAU
+.....(((((((.......))))))).............. ( -5.20)
+AAUUUCUACUAAGUGUAGAUUAAAACCACUCUGCAAAACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAAAACCACUCUGCAAAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUAAAACCACUCUGCAAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCAGAUGGGAAUGCCAUUUU
+....(((((.....)))))...((((((.....)))))). ( -9.70)
+AAUUUCUACUAAGUGUAGAUCAUAGAAUGUCCAAUAACCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCAUAGAAUGUCCAAUAACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUGUCAACAAAAGGUCCAU
+....(((((.....))))).(((.........)))..... ( -5.90)
+AAUUUCUACUAAGUGUAGAUUAACAGCAGCGUACAACCAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGCAGAAAGAGGUCCUAGUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGAAGCACACAUAUCUAAA
+...............((((((((.......)))))))).. ( -6.80)
+AAUUUCUACUAAGUGUAGAUAAUGAAGCACACAUAUCUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAGUAAUUCUUUUAAUGAAG
+....(((((.....)))))(((.(((.....))).))).. ( -5.30)
+AAUUUCUACUAAGUGUAGAUGCAGUAAUUCUUUUAAUGAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAAAGUAACACCUGAGCAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACUGCACUUUGGAAAGUAAC
+..((((((..((((((((...))))))))))))))..... (-11.30)
+AAUUUCUACUAAGUGUAGAUCACUGCACUUUGGAAAGUAA
+..((((((..((((((((....)))))))))))))).... (-12.20)
+AAUUUCUACUAAGUGUAGAUAUACAAAAAAAAGAACAAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUACAAAAAAAAGAACAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAAACAUCAUUGCAAAAGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUUAAAACCAGACAAACUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGCUUAAAACCAGACAAACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAACGAGUGUCAAGACAUU
+....(((((.....))))).......(((((....))))) ( -5.50)
+AAUUUCUACUAAGUGUAGAUAAGGCAUCUAUGCUAUUCUU
+...........(((((((((.....)))))))))...... ( -7.70)
+AAUUUCUACUAAGUGUAGAUAUGUUGAGUUUGAAGGCAUC
+....(((((.....))))).(((((.........))))). ( -5.40)
+AAUUUCUACUAAGUGUAGAUCCACCAACACCCAACAAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUACAAGGUUUGCCACCAAC
+....(((((.....))))).......(((.....)))... ( -6.10)
+AAUUUCUACUAAGUGUAGAUGACUGUACAGUGGCUACUUU
+..............((((.(.(((....))).)))))... ( -5.20)
+AAUUUCUACUAAGUGUAGAUAGACUGUACAGUGGCUACUU
+.....(((((..((((((.....)))))))))))...... ( -5.00)
+AAUUUCUACUAAGUGUAGAUCAUCUGACAUUUUAGACUGU
+....(((((.....)))))...(((((....))))).... ( -6.20)
+AAUUUCUACUAAGUGUAGAUGAUGAUGAUUCUACUCUGAG
+........((.((.(((((..........))))).)).)) ( -5.60)
+AAUUUCUACUAAGUGUAGAUGCUAAGAGAAUGUCAUUGUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAGGCUUCAGUAGUAUCUU
+.....(((((((((.(......).)))).)))))...... ( -7.20)
+AAUUUCUACUAAGUGUAGAUCAAAGGCUUCAGUAGUAUCU
+.....(((((((((.(.......).)))).)))))..... ( -6.60)
+AAUUUCUACUAAGUGUAGAUUCAAAGGCUUCAGUAGUAUC
+.....(((((((((.(........).)))).))))).... ( -7.10)
+AAUUUCUACUAAGUGUAGAUUUCAAAGGCUUCAGUAGUAU
+.....(((((((((.(.........).)))).)))))... ( -6.20)
+AAUUUCUACUAAGUGUAGAUUGUCUACAGCACCCUGCAUG
+............((((((..(((.....)))..)))))). ( -6.60)
+AAUUUCUACUAAGUGUAGAUUUCACAAAGCUUGUUUAUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGAACAACUUCAGAAUCACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAGAACAACUUCAGAAUCAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAGAACAACUUCAGAAUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCCACAUUCAAAGACUUCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAACUUACGUUGCAUGGCUG
+....(((((.....))))).((((....))))........ ( -6.20)
+AAUUUCUACUAAGUGUAGAUCCAACUUACGUUGCAUGGCU
+....(((((.....)))))..((((....))))....... ( -6.40)
+AAUUUCUACUAAGUGUAGAUGGUCAUAGCUUGAUCAGCCA
+....(((((.....)))))((((((.....)))))).... (-10.00)
+AAUUUCUACUAAGUGUAGAUUACAUUUGGGUCAUAGCUUG
+........(((((((((...)))))))))........... ( -7.30)
+AAUUUCUACUAAGUGUAGAUCCCUCUUGUCCUCAGAUCUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCCCUCUUGUCCUCAGAUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAGCAUAGUGAAAAGCAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUGCUGUUGUAAGAGGUAU
+....(((((.....)))))((((.((......)).)))). ( -7.60)
+AAUUUCUACUAAGUGUAGAUUAUGUGUUAUAGUCUGGUAU
+...............(((((((((...))))))))).... ( -5.30)
+AAUUUCUACUAAGUGUAGAUAUAUGUGUUAUAGUCUGGUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUAUGUGUUAUAGUCUGGU
+...............(((((((((.....))))))))).. ( -7.00)
+AAUUUCUACUAAGUGUAGAUCCACAAUGCUGAUGCAUAAG
+....(((((.....)))))......((((....))))... ( -8.30)
+AAUUUCUACUAAGUGUAGAUCUAUCUGCAUCUACAACCUG
+.............((((((((.....).)))))))..... ( -6.50)
+AAUUUCUACUAAGUGUAGAUACUAUCUGCAUCUACAACCU
+............((((((((...))))))))......... ( -6.90)
+AAUUUCUACUAAGUGUAGAUACUAAGUUGAACAAUUUUAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAGCAGAAUUGGCCCUUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUAGUACCGGCAGCACAAG
+....(((((.....)))))((((.((.......)))))). ( -5.50)
+AAUUUCUACUAAGUGUAGAUUUGUGUUGUAGUAAGCUAAC
+....(((((.....))))).....(((......))).... ( -5.10)
+AAUUUCUACUAAGUGUAGAUAAAUCCUGUAAAUCGGAUAA
+....(((((.....)))))...((((........)))).. ( -7.90)
+AAUUUCUACUAAGUGUAGAUGGUGUGUCUGUAACAAACCU
+....(((((.....))))).(((.(((.....))).))). ( -8.30)
+AAUUUCUACUAAGUGUAGAUGGACCUUUAGGUGUGUCUGU
+...............((((((.(((....))).)))))). ( -8.30)
+AAUUUCUACUAAGUGUAGAUAUAAAGUAUAAAUACUUCAC
+....(((((.....)))))....(((((....)))))... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAUCCUUUAAUAAAGUAUAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUUGUUUAAUCCUUUAAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCAGCAUCUACAGCAAAAGC
+.............((((((((...))))))))........ ( -8.20)
+AAUUUCUACUAAGUGUAGAUUAAGCUUUAGCAGCAUCUAC
+....(((((.....)))))....(((.....)))...... ( -6.10)
+AAUUUCUACUAAGUGUAGAUGAUGAUCUAUGUGGCAACGG
+.....((((.....((((((....))))))))))...... ( -5.50)
+AAUUUCUACUAAGUGUAGAUGGAUUUGGAUGAUCUAUGUG
+.....((((.....))))(((((((.....)))))))... ( -8.40)
+AAUUUCUACUAAGUGUAGAUAGUCACAAAAUCCUUUAGGA
+....(((((.....)))))...........(((....))) ( -5.60)
+AAUUUCUACUAAGUGUAGAUAAGUCACAAAAUCCUUUAGG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACAUACUUACCUUUUAAGU
+....(((((.....)))))......(((((.....))))) ( -5.40)
+AAUUUCUACUAAGUGUAGAUAGUGUAAAACCCACAGGGUC
+....(((((.....))))).........((((...)))). ( -8.30)
+AAUUUCUACUAAGUGUAGAUAAGUGUAAAACCCACAGGGU
+....(((((.....)))))..........((((...)))) ( -7.90)
+AAUUUCUACUAAGUGUAGAUUAAGUGUAAAACCCACAGGG
+....(((((.....)))))............(((...))) ( -6.40)
+AAUUUCUACUAAGUGUAGAUCACAUACCGCAGACGGUACA
+....(((((.....))))).....(((((....))))).. ( -9.50)
+AAUUUCUACUAAGUGUAGAUAAAACGAUUGUGCAUCAGCU
+....(((((.....)))))............((....)). ( -5.20)
+AAUUUCUACUAAGUGUAGAUUCAUUGUAGAUGUCAAAAGC
+....(((((..((((......))))))))).......... ( -5.30)
+AAUUUCUACUAAGUGUAGAUGCAAAACCAGCUACUUUAUC
+....(((((.....))))).((.......))......... ( -4.80)
+AAUUUCUACUAAGUGUAGAUGGAAUUUAGCAAAACCAGCU
+....(((((.....)))))........(((.......))) ( -5.40)
+AAUUUCUACUAAGUGUAGAUAGGAAUUUAGCAAAACCAGC
+(((((((((((....))).))))))))............. ( -5.20)
+AAUUUCUACUAAGUGUAGAUUAGGAAUUUAGCAAAACCAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGGAAGCGACAACAAUUAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUGGAAGCGACAACAAUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUCAUGUUGGUAGUUAGAGA
+.....((((((((((.......))).)))))))....... ( -6.20)
+AAUUUCUACUAAGUGUAGAUGCAACAGCUGGACAAUCCUU
+....(((((.....))))).((....)).(((...))).. ( -6.20)
+AAUUUCUACUAAGUGUAGAUGUAAGACGUUGACGUGAUAU
+....(((((.....))))).(((..(((....)))..))) ( -6.00)
+AAUUUCUACUAAGUGUAGAUAUGUGUCACAAUUACCUUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUGUGUCACAAUUACCUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUAAUGUGUCACAAUUAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGAAAUAAUCAUCAUCACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUGAAAUAAUCAUCAUCAC
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUUAUUGAAAUAAUCAUCAUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACAAAAUCAUACCAGUCCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUACAAAAUCAUACCAGUCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAAAGCUUGGCGUACACGU
+....(((((.....)))))...........(((....))) ( -5.00)
+AAUUUCUACUAAGUGUAGAUAACAAAGCUUGGCGUACACG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAACAAAGCUUGGCGUACAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCAUGGCAUCACAGAAUUGU
+.............(((.(((((...))))))))....... ( -6.50)
+AAUUUCUACUAAGUGUAGAUUAUGAAAUCACCGAAAUCAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAAGUCAGUGUCAACAUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAAAUCCCACUUAAUGUAA
+......(((((((((..(((....))).))))))..))). ( -5.20)
+AAUUUCUACUAAGUGUAGAUAACAAAUCCCACUUAAUGUA
+.........((((((..(((.....))).))))))..... ( -4.90)
+AAUUUCUACUAAGUGUAGAUACCUCUCUUCCGUGAAGUCA
+....(((((.....))))).......((((...))))... ( -5.40)
+AAUUUCUACUAAGUGUAGAUAACCUCUCUUCCGUGAAGUC
+....(((((.....)))))........((((...)))).. ( -5.40)
+AAUUUCUACUAAGUGUAGAUAAAUAACGGUCAAAGAGUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUGGUAUGUCUGAUCCCAA
+....(((((.....)))))(((.(((.......)))))). ( -7.30)
+AAUUUCUACUAAGUGUAGAUCACAAUGCAGAAUGCAUCUG
+....(((((.....))))).....(((((...)))))... ( -7.70)
+AAUUUCUACUAAGUGUAGAUUCACUAGUGGUCCAAAACUU
+.....((((((.(((......))))))))).......... ( -8.20)
+AAUUUCUACUAAGUGUAGAUCUCACUAGUGGUCCAAAACU
+.....((((((.(((.......)))))))))......... ( -7.60)
+AAUUUCUACUAAGUGUAGAUUCUCACUAGUGGUCCAAAAC
+.....((((((.(((........)))))))))........ ( -8.10)
+AAUUUCUACUAAGUGUAGAUCAUCCUGAUUAUGUACAACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUAGUAAUAGAUUACCAGA
+....(((((.....))))).(((.((((....)))).))) ( -6.60)
+AAUUUCUACUAAGUGUAGAUAAAAGCAACAUUGUUAGUAA
+....(((((.....)))))....((((....))))..... ( -5.30)
+AAUUUCUACUAAGUGUAGAUACAGUUUGAAAAGCAACAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAAAAUUACCGGGUUUGAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUCAACAGAACUUCCUUCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUUCAACAGAACUUCCUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUAGGUUGUUGACGAUGAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAAAUGGAAAACCAGCUGA
+....(((((.....))))).(((..(((....)))..))) ( -6.20)
+AAUUUCUACUAAGUGUAGAUUAUAUGCGAAAAGUGCAUCU
+....(((((.....)))))....(((((.....))))).. ( -7.30)
+AAUUUCUACUAAGUGUAGAUGUAUAUGCGAAAAGUGCAUC
+....(((((.....))))).....(((((.....))))). ( -7.30)
+AAUUUCUACUAAGUGUAGAUAGUUAUAGUAGGGAUGACAU
+.((((((((((..............))))))))))..... ( -7.40)
+AAUUUCUACUAAGUGUAGAUCACUAAUGGCAUACUUAAGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGAAACUGUCUAUUGGUCA
+.......((((...(((((((......))))))))))).. ( -5.60)
+AAUUUCUACUAAGUGUAGAUGAUGAAACUGUCUAUUGGUC
+....(((((.....))))).(((.((........)).))) ( -4.90)
+AAUUUCUACUAAGUGUAGAUUGAUGAAACUGUCUAUUGGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUAAUUUUUGAUGAAACUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUGUUCCAAUUACUACAGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAUGUUGUGCCAACCACCA
+....(((((.....))))).....((((...))))..... ( -5.30)
+AAUUUCUACUAAGUGUAGAUAACAUGUUGUGCCAACCACC
+....(((((.....)))))......((((...)))).... ( -5.30)
+AAUUUCUACUAAGUGUAGAUUAACAUGUUGUGCCAACCAC
+....(((((.....))))).......((((...))))... ( -5.30)
+AAUUUCUACUAAGUGUAGAUUACAUCACUAUAAACAGUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUACAUCACUAUAAACAGUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGAUAAUCCCAACCCAUAAG
+....(((((.....)))))(((......)))......... ( -6.50)
+AAUUUCUACUAAGUGUAGAUCGAGCAAGAACAAGUGAGGC
+....(((((.....)))))((..((........))..)). ( -5.10)
+AAUUUCUACUAAGUGUAGAUACUCAAUACUUGAGCACACU
+....(((((.....)))))..(((((...)))))...... ( -7.40)
+AAUUUCUACUAAGUGUAGAUACAUAUAGUGAACCGCCACA
+....(((((.....)))))........(((......))). ( -6.60)
+AAUUUCUACUAAGUGUAGAUUUACCAUCAGUAGAUAAAAG
+.....((((.....))))((((((.....))))))..... ( -5.90)
+AAUUUCUACUAAGUGUAGAUGUUACCAUCAGUAGAUAAAA
+....((((((.......((((....))))))))))..... ( -6.30)
+AAUUUCUACUAAGUGUAGAUUAUAGAGACACUCAUAAAGU
+....(((((.....)))))((((.(((...)))))))... ( -5.70)
+AAUUUCUACUAAGUGUAGAUCGCAAAUAUGCGUAAAACUC
+....(((((.....))))).((((....))))........ ( -8.00)
+AAUUUCUACUAAGUGUAGAUUGCUAGCCACUAGACCUUGA
+....(((((.....)))))...((((...))))....... ( -6.10)
+AAUUUCUACUAAGUGUAGAUAUAAUAAAGAACUGACUUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAUAAUAAAGAACUGACUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUCAGACAUAAAAACAUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUUCAGACAUAAAAACAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAAGGUCAGUCUCAGUCCA
+....(((((.....))))).....((.(.......).)). ( -5.60)
+AAUUUCUACUAAGUGUAGAUACUAGCAUUGUAUGUUGAGA
+....(((((.....)))))...((((((...))))))... ( -6.60)
+AAUUUCUACUAAGUGUAGAUCGAUAUCAUCUACAAAACAG
+.............(((((((.(....))))))))...... ( -5.70)
+AAUUUCUACUAAGUGUAGAUACGAUAUCAUCUACAAAACA
+.............(((((((........)))))))..... ( -6.30)
+AAUUUCUACUAAGUGUAGAUUACGAUAUCAUCUACAAAAC
+.............(((((((.........))))))).... ( -5.20)
+AAUUUCUACUAAGUGUAGAUGUAAGUGGGUAAGCAUCUAU
+....(((((.....))))).....((((((....)))))) ( -6.60)
+AAUUUCUACUAAGUGUAGAUUUAUGUAUUGUAAGUACAAA
+....(((((.....)))))....((((((...)))))).. ( -6.70)
+AAUUUCUACUAAGUGUAGAUCAACAUAAGAAUGGUCUACG
+..............((((((((.........)))))))). ( -8.40)
+AAUUUCUACUAAGUGUAGAUUGUGAUGUUGAUAUGACAUG
+....(((((.....))))).....(((((.....))))). ( -6.70)
+AAUUUCUACUAAGUGUAGAUCAAUAAUAGCUCAUACCUCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUGAUUUACAAUAAUAGCU
+.....((((.....))))((((((...))))))....... ( -5.50)
+AAUUUCUACUAAGUGUAGAUUAUAAACCAAAAACUUGUCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUAUAAACCAAAAACUUGUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUAUAAACCAAAAACUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCCAGUCACAUGUUGCAAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUACAGGUGUUAGCUAAAA
+....(((((.....)))))((((((....))..))))... ( -5.20)
+AAUUUCUACUAAGUGUAGAUUGCUGCAAAAAGCUUGAGUC
+....(((((.....)))))..(((......)))....... ( -7.50)
+AAUUUCUACUAAGUGUAGAUAGCGUUUCUGCUGCAAAAAG
+....(((((.....)))))((((......))))....... ( -7.40)
+AAUUUCUACUAAGUGUAGAUAAUGUCUCCUCAGUAGCUUU
+.....(((((.((.(.((((...))))))).))))).... ( -6.50)
+AAUUUCUACUAAGUGUAGAUCCAACUUCCCAUGAAAGAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUUAAGUGGUGGUCUAGGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUACACGAUAACCAGUAAA
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUAGUUACACGAUAACCAGUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAGUUACACGAUAACCAGUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUGUUUUUAGUUACACGAUA
+.....((((.....))))((((((........))).))). ( -5.60)
+AAUUUCUACUAAGUGUAGAUUACUUUACUGUUUUUAGUUA
+....(((((.....))))).......((((....)))).. ( -5.40)
+AAUUUCUACUAAGUGUAGAUAAAGGUGUACUCUCCUAUUU
+....(((((.....)))))...(((........))).... ( -6.70)
+AAUUUCUACUAAGUGUAGAUCAAAGGUGUACUCUCCUAUU
+....(((((.....)))))....(((........)))... ( -6.70)
+AAUUUCUACUAAGUGUAGAUUCAAAGGUGUACUCUCCUAU
+....(((((.....))))).....(((........))).. ( -6.70)
+AAUUUCUACUAAGUGUAGAUUAAGUUGUUGUACCUCGGUA
+....(((((.....)))))...........(((....))) ( -5.40)
+AAUUUCUACUAAGUGUAGAUAUUUGUAAGUUGUUGUACCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAACAUUGCUAGAAAACUCA
+..((((((...(((((......)))))..))))))..... ( -6.40)
+AAUUUCUACUAAGUGUAGAUAUAAUUUGCAACAUUGCUAG
+....(((((.....)))))........(((....)))... ( -6.30)
+AAUUUCUACUAAGUGUAGAUGAUAAUUUGCAACAUUGCUA
+....(((((.....))))).........(((....))).. ( -6.30)
+AAUUUCUACUAAGUGUAGAUCAUACCAACCUUUUGAUAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCAUACCAACCUUUUGAUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGCCUUCUCACAUAGUGCA
+......(((((.(((.(((.......)))))).))))).. ( -8.20)
+AAUUUCUACUAAGUGUAGAUAAUGCCUUCUCACAUAGUGC
+......(((((.(((.(((........)))))).))))). ( -8.70)
+AAUUUCUACUAAGUGUAGAUUCUAUAGGCAAAUAUUUUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAAAACACUCUACACGAGC
+............(((((((..........))))))).... ( -7.50)
+AAUUUCUACUAAGUGUAGAUAAUUUAUCAAAACACUCUAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAGUACAAAAGACAUACUGU
+....(((((.....))))).(((((.........))))). ( -6.80)
+AAUUUCUACUAAGUGUAGAUAUCAAAGACAACUAUAUCUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGGCCAUUGAAAUUUCAUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUAAGUCUACACACUGAAUU
+............((((((((....))))))))........ (-10.10)
+AAUUUCUACUAAGUGUAGAUCAUAAGUCUACACACUGAAU
+............((((((((.....))))))))....... ( -9.70)
+AAUUUCUACUAAGUGUAGAUAGCAGGACAACGCCGACAAG
+....(((((.....)))))..(..((......))..)... ( -5.80)
+AAUUUCUACUAAGUGUAGAUAGCUUAUUAUCAUAAACCAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUGCUUUAAGCUUAUUAUC
+....(((((.....)))))....(((...)))........ ( -5.50)
+AAUUUCUACUAAGUGUAGAUUCUUUAUGUGCUUUAAGCUU
+....(((((.....)))))..........(((...))).. ( -5.50)
+AAUUUCUACUAAGUGUAGAUAAGCAUUGAGCUGAUUUGUC
+....(((((.....)))))..(((.....)))........ ( -6.60)
+AAUUUCUACUAAGUGUAGAUAAAGCAUUGAGCUGAUUUGU
+....(((((.....)))))...(((.....)))....... ( -6.60)
+AAUUUCUACUAAGUGUAGAUUGGCCUGUUAAUUGCAGAUG
+....(((((.....))))).....((((.....))))... ( -8.10)
+AAUUUCUACUAAGUGUAGAUUCCAAGCAGGGUUACGUGUA
+....(((((.....)))))......(((.(....).))). ( -8.10)
+AAUUUCUACUAAGUGUAGAUCUCCAAGCAGGGUUACGUGU
+....(((((.....))))).......(((.(....).))) ( -7.40)
+AAUUUCUACUAAGUGUAGAUAGGCUACAGCAUUCUGUGAA
+....(((((.....))))).....(((((....))))).. ( -7.50)
+AAUUUCUACUAAGUGUAGAUAGUUGGUAGUCCCAAAAUCU
+....(((((.....)))))...((((.....))))..... ( -6.60)
+AAUUUCUACUAAGUGUAGAUAGUGAAUAUGACAUAGUCAU
+....(((((.....)))))........(((((...))))) ( -6.80)
+AAUUUCUACUAAGUGUAGAUAGUGGUUUGAGUGAAUAUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUUACAAGAGUGAGCUGUU
+....(((((.....)))))(((((.....)))))...... ( -6.30)
+AAUUUCUACUAAGUGUAGAUCUCUGGUAAUAGCAACAUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUCUGGUAAUAGCAACAUU
+....(((((.....)))))((((........))))..... ( -7.10)
+AAUUUCUACUAAGUGUAGAUAAGACUUGUAAAUUGCAACU
+....(((((.....)))))......(((((...))))).. ( -5.50)
+AAUUUCUACUAAGUGUAGAUAGCUUGUAAAGUUGCCACAU
+....(((((.....)))))((((((...))))))...... ( -6.00)
+AAUUUCUACUAAGUGUAGAUCAGCUUGUAAAGUUGCCACA
+....(((((.....))))).((((((...))))))..... ( -7.50)
+AAUUUCUACUAAGUGUAGAUAAGAGUCCUGUUACAUUUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGUCAACACUGAGGUGUGU
+.((.(((((.....))))).))....((((......)))) ( -7.80)
+AAUUUCUACUAAGUGUAGAUAAUUUAGUGUCAACACUGAG
+....(((((.....)))))....((((((....)))))). ( -9.40)
+AAUUUCUACUAAGUGUAGAUGAAUUUAGUGUCAACACUGA
+....(((((.....))))).....((((((....)))))) ( -8.60)
+AAUUUCUACUAAGUGUAGAUAAACCCAUCAUAGAGAUGAG
+....(((((.....)))))......((((.....)))).. ( -7.60)
+AAUUUCUACUAAGUGUAGAUAAAACCCAUCAUAGAGAUGA
+....(((((.....))))).......((((.....)))). ( -7.60)
+AAUUUCUACUAAGUGUAGAUGCACUAACUCUGGAAAAAUC
+..((((((...(((((....))))).....)))))).... ( -6.30)
+AAUUUCUACUAAGUGUAGAUAAUUGAUCUCCAGGCGGUGG
+.....(((((...((.((((.....)))).))...))))) ( -6.40)
+AAUUUCUACUAAGUGUAGAUUACAUAAGUGGUAUGAGGUG
+.((((((((((.(((((...)))))...))))).))))). ( -7.80)
+AAUUUCUACUAAGUGUAGAUUACGCACUACAUUCCAAGGA
+....(((....(((((((........)))))))....))) ( -5.80)
+AAUUUCUACUAAGUGUAGAUUACAAUCUUUAUACGCACUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUGUGUCACUUAACAUUUG
+....(((((.....))))).(((((........))))).. ( -7.00)
+AAUUUCUACUAAGUGUAGAUAAGUGUGUCACUUAACAUUU
+....(((((.....)))))((((((...))))))...... ( -8.20)
+AAUUUCUACUAAGUGUAGAUUAAGUGUGUCACUUAACAUU
+....(((((.....)))))(((((((...))))))).... ( -8.90)
+AAUUUCUACUAAGUGUAGAUACAAAAUACUUCAUAGAUGU
+....((((..((((((.........))))))..))))... ( -5.60)
+AAUUUCUACUAAGUGUAGAUCACAAAAUACUUCAUAGAUG
+....((((..((((((..........))))))..)))).. ( -5.50)
+AAUUUCUACUAAGUGUAGAUUAGGUUACCUGUAAAACCCC
+....(((((.....)))))...((((........)))).. ( -7.10)
+AAUUUCUACUAAGUGUAGAUUACAAGCCGCAUUAAUCUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAACCAUGUGUUGAACCUU
+....(((((.....)))))..((((.....))))...... ( -6.10)
+AAUUUCUACUAAGUGUAGAUUCUGCUAAUAAUGCAGCUUU
+....(((((.....)))))..((((.......)))).... ( -8.90)
+AAUUUCUACUAAGUGUAGAUGGGUUACCAAUGUCGUGAAG
+....(((((.....)))))(((....)))........... ( -7.30)
+AAUUUCUACUAAGUGUAGAUUCACUACAAGGCUGUGCAUC
+....(((((.....)))))..(((.........))).... ( -5.20)
+AAUUUCUACUAAGUGUAGAUUAAGCUUUGUCACUACAAGG
+....(((((.....))))).....((((((....)))))) ( -7.20)
+AAUUUCUACUAAGUGUAGAUAUAAGCUUUGUCACUACAAG
+....(((((.....)))))........((((....)))). ( -4.80)
+AAUUUCUACUAAGUGUAGAUUCAGAAUGUGUGGCAUAAGA
+....(((((.....)))))......((((...)))).... ( -5.00)
+AAUUUCUACUAAGUGUAGAUCAUACAAACUGCCACCAUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUACAUACAAACUGCCACC
+((..(((((.....)))))..))................. ( -4.90)
+AAUUUCUACUAAGUGUAGAUUCAAAAGCUGGUGUGUGGAA
+....(((((.....)))))((((...((....)).)))). ( -5.20)
+AAUUUCUACUAAGUGUAGAUAUCAAAAGCUGGUGUGUGGA
+.....((((.....))))((((((.....))))))..... ( -6.40)
+AAUUUCUACUAAGUGUAGAUAAUUAACAAAAGCACUUUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAUUAACAAAAGCACUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUGAGACUCACAUGGACUG
+....(((((.....))))).((((.......))))..... ( -6.60)
+AAUUUCUACUAAGUGUAGAUCCAUGAGACUCACAUGGACU
+....(((((.....)))))((((((.......)))))).. (-10.90)
+AAUUUCUACUAAGUGUAGAUGUGGUACAUAAUCUAUAUCU
+................((((((((........)))))))) ( -6.90)
+AAUUUCUACUAAGUGUAGAUUAAACCCACAAGCUAAAGCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAACUCUGAAGUCUUGUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAAACUCUGAAGUCUUGUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAACAUUAAAAGCCACAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUAAACAGUGUUAUUAAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGUAAACAGUGUUAUUAAU
+....(((((.....)))))(((....)))........... ( -5.20)
+AAUUUCUACUAAGUGUAGAUAAACAAUUCUACAUCAACAC
+............(((((((........)))))))...... ( -7.40)
+AAUUUCUACUAAGUGUAGAUCAAACAAUUCUACAUCAACA
+............(((((((.........)))))))..... ( -6.50)
+AAUUUCUACUAAGUGUAGAUUUUUCAAACAAUUCUACAUC
+............(((((((.............))))))). ( -6.10)
+AAUUUCUACUAAGUGUAGAUAUUUUCAAACAAUUCUACAU
+............(((((((..............))))))) ( -5.60)
+AAUUUCUACUAAGUGUAGAUAUGUUGCGCUUAGCCCAAAG
+........((((((((((.....))))))))))....... (-10.10)
+AAUUUCUACUAAGUGUAGAUACCUCUGGUACUGGUUUAAU
+....(((((.....)))))((((...)))).......... ( -6.20)
+AAUUUCUACUAAGUGUAGAUCACCUCUGGUACUGGUUUAA
+....(((((.....)))))..(((.........))).... ( -6.00)
+AAUUUCUACUAAGUGUAGAUUAGUCCCAGAUCACAGUAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAGUCCCAGAUCACAGUAU
+....(((((.....)))))(((.(((...))).))).... ( -5.80)
+AAUUUCUACUAAGUGUAGAUUUGGCUAUGUCAGUCAUAGA
+....(((((.....))))).....(((((.....))))). ( -8.50)
+AAUUUCUACUAAGUGUAGAUAGUUGGUUUCUUGGCUAUGU
+.....((((.....))))((((((((....)))))))).. ( -6.60)
+AAUUUCUACUAAGUGUAGAUUAAAUAAGUCUACUUGACCA
+....(((((.....)))))........(((.....))).. ( -6.70)
+AAUUUCUACUAAGUGUAGAUACACUACCUUCUGUAAUAAG
+....(((((.....)))))((((........))))..... ( -5.30)
+AAUUUCUACUAAGUGUAGAUGGACCUACAGAUGGUUGUAA
+.......((((..(((((......)))))..))))..... ( -8.10)
+AAUUUCUACUAAGUGUAGAUCGGCUUCUCCAAUUAAUGUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACGGCUUCUCCAAUUAAUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACGGCUUCUCCAAUUAAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAUAAUAAUUGAACUGUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGGUAAUUGUUGGACAACAC
+....(((((.....)))))........((((....)))). ( -4.80)
+AAUUUCUACUAAGUGUAGAUUACUCUGAGUAAAGUAAGUU
+....(((((.....)))))(((((........)))))... ( -6.20)
+AAUUUCUACUAAGUGUAGAUAAUUCUUGUAAAUUUCUACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACUCCUGGGUUUAAAUUCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUUUGACUCCUGGGUUUAA
+....(((((.....)))))......((((....))))... ( -4.90)
+AAUUUCUACUAAGUGUAGAUUACCGUUCAAUGAAUUCAUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUAGUCCAAUCAGUAGAUG
+....((((((...((..(((....)))))...)))))).. ( -6.20)
+AAUUUCUACUAAGUGUAGAUACUGUACUGUCCAUAGGAAU
+.(((((((...(((((((...))))))).....))))))) ( -5.80)
+AAUUUCUACUAAGUGUAGAUAACUGUACUGUCCAUAGGAA
+..((((((...(((((((....))))))).....)))))) ( -5.60)
+AAUUUCUACUAAGUGUAGAUUAACUGUACUGUCCAUAGGA
+....(((((.....)))))....((((.......)))).. ( -5.10)
+AAUUUCUACUAAGUGUAGAUCGCAUCUGUUAUGAAAUAGU
+....(((((.....)))))......(((((....))))). ( -5.70)
+AAUUUCUACUAAGUGUAGAUAACAAAAUCAUCAAGUAAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAUUUCAACAAAAUCAUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUAUUUCAACAAAAUCAUC
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUACAACCUUAGAAACUACAGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUAUAGUCAAUAGUCACUU
+..........(((((...((((......))))...))))) ( -6.00)
+AAUUUCUACUAAGUGUAGAUCACCAAAGCAUAAAUGAAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACAUGGCCAUCUUUACACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUAAAAUGUUUCUACAUGG
+....(((((.....))))).......((((....)))).. ( -6.00)
+AAUUUCUACUAAGUGUAGAUGGGUAAAAUGUUUCUACAUG
+............(((((((.(.((...)).).))))))). ( -6.10)
+AAUUUCUACUAAGUGUAGAUUAAAGAUUAGGCAUAGCAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAAAGAUUAGGCAUAGCAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUUUUGUAAAGAUUAGGCA
+(((((.(((.(((((.....))))).))).)))))..... ( -5.40)
+AAUUUCUACUAAGUGUAGAUUAAUAGCAUUCUUUGCAUUU
+....(((((.....)))))......(((.....))).... ( -7.20)
+AAUUUCUACUAAGUGUAGAUCUAAUAGCAUUCUUUGCAUU
+....(((((.....))))).......(((.....)))... ( -7.20)
+AAUUUCUACUAAGUGUAGAUAAGGUCACACUUUUCUAAUA
+..........((((((.(((...)))))))))........ ( -5.70)
+AAUUUCUACUAAGUGUAGAUGAAGGUCACACUUUUCUAAU
+..........((((((.(((....)))))))))....... ( -7.10)
+AAUUUCUACUAAGUGUAGAUGGUAAUGUUGCACUAUCACC
+....(((((.....)))))(((((.((...)).))))).. ( -5.90)
+AAUUUCUACUAAGUGUAGAUCGACAUUCAUCAUUAUGCCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCGACAUUCAUCAUUAUGCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUAUUGACACAGUUGAGUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAGAACCAGCACCAAAAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAGCUGUAUGUACAGUUGC
+....(((((.....)))))..(((((((....))))))). (-10.10)
+AAUUUCUACUAAGUGUAGAUGUCUUAGGGUCGUACAUAUC
+............((((((((........))).)))))... ( -5.20)
+AAUUUCUACUAAGUGUAGAUAGUCUUAGGGUCGUACAUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAGUCUUAGGGUCGUACAUA
+............(((((((((........)))).))))). ( -5.20)
+AAUUUCUACUAAGUGUAGAUUAACAUUUUUAGUCUUAGGG
+........(((((..((((........))))..))))).. ( -6.20)
+AAUUUCUACUAAGUGUAGAUGUAACAUUUUUAGUCUUAGG
+........(((((..((((.........))))..))))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUUUUUGUAACAUUUUUAGUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUUUGUAACAUUUUUAGUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAGUCAUUUUCUUUUGUAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGUAUAAACCCACAAAUGU
+.....((((.....))))((((((........)))))).. ( -6.20)
+AAUUUCUACUAAGUGUAGAUGUUGUAUAAACCCACAAAUG
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUUAGCCACGGAACCUCCAAGA
+....(((((.....)))))........(((...))).... ( -6.00)
+AAUUUCUACUAAGUGUAGAUCCAAGAUAAUUACAUCCAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUCGCGUGGUUUGCCAAGAU
+....(((((.....)))))....(((.....)))...... ( -5.90)
+AAUUUCUACUAAGUGUAGAUCAUGCAUGACAUAACCAUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUUCCUCCAAAAUAUGUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUCAUGUCAAAUAAAGAAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGGGGAAAUUUACUCAUGUC
+....(((((.....)))))..(((........)))..... ( -6.80)
+AAUUUCUACUAAGUGUAGAUAAGACAUAACAGCAGUACCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAGACAUAACAGCAGUACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCUUCUUUUAAAGACAUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAAGAAGAGAUAAAAUCAU
+.....((((.....))))((((......))))........ ( -4.80)
+AAUUUCUACUAAGUGUAGAUUCUAAUUAUAAGUCUACCUU
+..........(((.(((((((.........)))))))))) ( -6.00)
+AAUUUCUACUAAGUGUAGAUCUCUAAUUAUAAGUCUACCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUGUUAACAAGAACAUCAC
+....(((((.....)))))((.((((......)))).)). ( -6.40)
+AAUUUCUACUAAGUGUAGAUUCAGGGUAAUAAACACCACG
+....(((((.....)))))....((((.....)).))... ( -6.00)
+AAUUUCUACUAAGUGUAGAUAUAACAACAUUAGUAGCGUU
+.....(((((((.(((.(......).)))))))))).... ( -6.50)
+AAUUUCUACUAAGUGUAGAUUGGUAAUAAACACCCAAAAA
+....(((((.....)))))((((..........))))... ( -5.80)
+AAUUUCUACUAAGUGUAGAUGUGGUAAUAAACACCCAAAA
+....(((((.....))))).(((........)))...... ( -6.80)
+AAUUUCUACUAAGUGUAGAUUGUGGUAAUAAACACCCAAA
+....(((((.....)))))(((.(((.......)))))). ( -7.30)
+AAUUUCUACUAAGUGUAGAUUUGUUUUUGUGGUAAUAAAC
+....(((((.....)))))((((((........)))))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUGUUGUUUUUGUGGUAAUAAA
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUCAUCCAACUUUUGUUGUUUU
+....(((((.....))))).....((((....)))).... ( -7.40)
+AAUUUCUACUAAGUGUAGAUCUUCAAGGUCCAUAAGAAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUUCAAGGUCCAUAAGAAA
+....(((((.....))))).(((...)))........... ( -4.90)
+AAUUUCUACUAAGUGUAGAUAAAUUACCCUGUUUUCCUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAAAUUACCCUGUUUUCCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGAAAUUACCCUGUUUUCCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAUAACCAUCAAUAUUCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAAUAACCAUCAAUAUUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAACCUAGUGAUGUUAAUAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUAGAAAAGUCCUAGGUUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUAGAAAAGUCCUAGGUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUAUAUUUUAAUAGAAAAG
+..((((((..(((((((.....)))))))...)))))).. ( -5.60)
+AAUUUCUACUAAGUGUAGAUCAUUAUAUUUUAAUAGAAAA
+..((((((..(((((((......)))))))...)))))). ( -5.90)
+AAUUUCUACUAAGUGUAGAUUGAGAGAGGGUCAAGUGCAC
+............(((((..((((.......)))).))))) ( -5.90)
+AAUUUCUACUAAGUGUAGAUUUUCUGAGAGAGGGUCAAGU
+......(((.....)))((((((((...)))))))).... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAACGUACACUUUGUUUCUGA
+.......((.(((((((.......))))))).))...... ( -6.90)
+AAUUUCUACUAAGUGUAGAUUACAGUGAAGGAUUUCAACG
+....(((((.....)))))......((((....))))... ( -5.30)
+AAUUUCUACUAAGUGUAGAUCUACAGUGAAGGAUUUCAAC
+....(((((.....))))).......((((....)))).. ( -5.30)
+AAUUUCUACUAAGUGUAGAUUCUACAGUGAAGGAUUUCAA
+....(((((.....)))))........((((....)))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUAUAGAUUCCUUUUUCUACAG
+....(((((.....)))))..((((........))))... ( -6.30)
+AAUUUCUACUAAGUGUAGAUUAAUAUUAGGAAAUCUAACA
+....(((((.....)))))......((((.....)))).. ( -4.90)
+AAUUUCUACUAAGUGUAGAUGUAGGAGACACUCCAUAACA
+....(((((.....)))))....((((...))))...... ( -8.60)
+AAUUUCUACUAAGUGUAGAUAUUUAGUAGGAGACACUCCA
+...((((((((((((....))))))))))))......... (-10.70)
+AAUUUCUACUAAGUGUAGAUUCUGACUUCAUCACCUCUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCCUGGAGCGAUUUGUCUGA
+....(((((.....))))).....(((........))).. ( -5.10)
+AAUUUCUACUAAGUGUAGAUCAGUUUGCCCUGGAGCGAUU
+....(((((.....))))).....((((......)))).. ( -6.70)
+AAUUUCUACUAAGUGUAGAUUAAUUAUAAUCAGCAAUCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGAUUAGACUUCCUAAACAA
+....(((((.....)))))....((((.....)))).... ( -5.10)
+AAUUUCUACUAAGUGUAGAUAGUUGAAAUAUCUCUCUCAA
+.(((((.((((........)))).)))))........... ( -5.00)
+AAUUUCUACUAAGUGUAGAUGGUCCACAAACAGUUGCUGG
+....(((((.....)))))....((((((....))).))) ( -6.30)
+AAUUUCUACUAAGUGUAGAUAGGUCCACAAACAGUUGCUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAGGUCCACAAACAGUUGCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCAAAUUAGUAGACUUUUU
+....((((((((.((.......))..))))))))...... ( -7.00)
+AAUUUCUACUAAGUGUAGAUAACCAAAUUAGUAGACUUUU
+....((((((((.((........))..))))))))..... ( -7.50)
+AAUUUCUACUAAGUGUAGAUUAACCAAAUUAGUAGACUUU
+....((((((((..((......))....)))))))).... ( -6.90)
+AAUUUCUACUAAGUGUAGAUUUUUUAACCAAAUUAGUAGA
+....((((((((..((.((....)).))....)))))))) ( -6.30)
+AAUUUCUACUAAGUGUAGAUUUAGACUCAGUAAGAACACC
+...(((((((.(((.((....)).))).))).)))).... ( -6.70)
+AAUUUCUACUAAGUGUAGAUGUUAGACUCAGUAAGAACAC
+...(((((((.(((.((.....)).))).))).))))... ( -6.60)
+AAUUUCUACUAAGUGUAGAUUGUUAGACUCAGUAAGAACA
+...(((((((.(((.(((....))).))).))).)))).. ( -7.10)
+AAUUUCUACUAAGUGUAGAUUUCCUGGUGUUAUAACACUG
+....(((((.....)))))......(((((....))))). ( -8.20)
+AAUUUCUACUAAGUGUAGAUAAAAACAUUAGAACCUGUAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGCACCAAGUGACAUAGUGU
+......((((..(((((...)))))..))))......... ( -5.80)
+AAUUUCUACUAAGUGUAGAUCUGCACCAAGUGACAUAGUG
+......((((..(((((....)))))..))))........ ( -6.60)
+AAUUUCUACUAAGUGUAGAUUGGGUAUGGCAAUAGAGUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUGGUAACACUAAUAGUAA
+....(((((.....)))))..(((....)))......... ( -7.10)
+AAUUUCUACUAAGUGUAGAUAUUGUGUACAAAAACUGCCA
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUUCUUGUUCAACAGCUAUUCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUCUUGUUCAACAGCUAUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUCUUGUUCAACAGCUAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACUUGUGCAAAAACUUCUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUGACUUGUGCAAAAACUU
+....(((((.....)))))(((((.(....)))))).... ( -5.90)
+AAUUUCUACUAAGUGUAGAUUAAAUUUGUUUGACUUGUGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAAAUUUGUUUGACUUGUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUGGUGGUGUUUUGUAAAU
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUUGAAAAAUUAAAACCACCAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGGAUCUGGUAAUAUUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAUGGAUCUGGUAAUAUUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGAAAAGUAGAUCUUCAAU
+....(((((.....))))).(((((.........))))). ( -5.40)
+AAUUUCUACUAAGUGUAGAUAUGAAGCCAGCAUCUGCAAG
+.............(((((((.((....))..))))))).. ( -6.90)
+AAUUUCUACUAAGUGUAGAUUGCACAAAUGAGGUCUCUAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGCACAAAUGAGGUCUCUA
+.(((((......(((((....)))))....)))))..... ( -5.30)
+AAUUUCUACUAAGUGUAGAUAUCUGUGAGCAAAGGUGGCA
+....(((((.....)))))(((((........)))))... ( -6.80)
+AAUUUCUACUAAGUGUAGAUUAAUGCAGCACCUGCACCAA
+....(((((.....)))))....(((((...))))).... ( -9.10)
+AAUUUCUACUAAGUGUAGAUCAUAGCAAAUGGUAUUUGUA
+....(((((.....))))).....((((((...)))))). ( -6.80)
+AAUUUCUACUAAGUGUAGAUGUUCUCAUAGAGAACAUUCU
+....(((((.....)))))(((((((...))))))).... (-11.50)
+AAUUUCUACUAAGUGUAGAUGGUUCUCAUAGAGAACAUUC
+....(((((.....)))))..((((((...)))))).... (-10.70)
+AAUUUCUACUAAGUGUAGAUUGGUUCUCAUAGAGAACAUU
+....(((((.....)))))...((((((...))))))... (-10.70)
+AAUUUCUACUAAGUGUAGAUCCAAUAGCACUAUUAAAUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCCAAUAGCACUAUUAAAUU
+....(((((.....)))))(((.....))).......... ( -5.60)
+AAUUUCUACUAAGUGUAGAUCAAGUGCACUUGCUGUGGAA
+...((((((((((((((.......))))))))..)))))) (-11.90)
+AAUUUCUACUAAGUGUAGAUCCAAGUGCACUUGCUGUGGA
+....(((((((((((((........))))))))..))))) (-11.50)
+AAUUUCUACUAAGUGUAGAUGUUGACCACAUCUUGAAGUU
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUGGUUGACCACAUCUUGAAGU
+....(((((.....)))))(((....)))........... ( -5.70)
+AAUUUCUACUAAGUGUAGAUAAGCUUGUGCAUUUUGGUUG
+.......((((((((((.(......).)))).)))))).. ( -6.50)
+AAUUUCUACUAAGUGUAGAUACAAGCGUGUUUAAAGCUUG
+....(((((.....)))))..(((((.........))))) ( -9.60)
+AAUUUCUACUAAGUGUAGAUAAACACUUGAAAUUGCACCA
+((((((....((((((......))))))))))))...... ( -6.90)
+AAUUUCUACUAAGUGUAGAUUCAAGACGUGAAAGGAUAUC
+....(((((.....)))))((((.....))))........ ( -5.00)
+AAUUUCUACUAAGUGUAGAUCACUUCAGCCUCAACUUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAGUCUGCCUGUGAUCAACC
+........(..((.(((((....)))))))..)....... ( -5.10)
+AAUUUCUACUAAGUGUAGAUUGCAGCUCUAAUUAAUUGUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAGCAGCAAGAUUAGCAGA
+....(((((.....))))).......((.......))... ( -5.10)
+AAUUUCUACUAAGUGUAGAUAGUAGCAGCAAGAUUAGCAG
+....(((((.....)))))........((.......)).. ( -5.10)
+AAUUUCUACUAAGUGUAGAUAUUGUCCAAGUACACACUCU
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUGAUUGUCCAAGUACACACUC
+............(((((..((......))..))))).... ( -6.50)
+AAUUUCUACUAAGUGUAGAUUGAUUGUCCAAGUACACACU
+............(((((..(((......))).)))))... ( -5.80)
+AAUUUCUACUAAGUGUAGAUCACAAAAAUCAACUCUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGUGCAGGGACAUAAGUCA
+......(((.....)))((((((((......)))))))). ( -7.40)
+AAUUUCUACUAAGUGUAGAUCUUGUGCAGGGACAUAAGUC
+....(((((.....))))).((((((......)))))).. ( -8.60)
+AAUUUCUACUAAGUGUAGAUCAUCAUGACAAAUGGCAGGA
+....(((((.....)))))...((((.....))))..... ( -5.30)
+AAUUUCUACUAAGUGUAGAUCCAUCAUGACAAAUGGCAGG
+....(((((.....))))).((((........)))).... ( -6.40)
+AAUUUCUACUAAGUGUAGAUAAACAAAGACACCUUCACGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUUACAAACCAGUGUGUGC
+....(((((.....)))))....((((......))))... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUGGUUCAUAAAAAUUCCUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUAACUCCUCCUUGAAUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAACUGAAGCAUUAAUGCCA
+....(((((.....))))).........(((....))).. ( -5.70)
+AAUUUCUACUAAGUGUAGAUAAUGUUUACAACUGAAGCAU
+....(((((.....)))))..((((((.......)))))) ( -6.20)
+AAUUUCUACUAAGUGUAGAUGAAUGUUUACAACUGAAGCA
+....(((((.....)))))....(((((.......))))) ( -5.10)
+AAUUUCUACUAAGUGUAGAUUGAAUGUUUACAACUGAAGC
+...........(((((((((.....)))))).)))..... ( -5.20)
+AAUUUCUACUAAGUGUAGAUUUUUUGAAUGUUUACAACUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUUCUUGGCAACCUCAUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAGUUCUUGGAGAUCGAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUACUGCUCAUACUUUCCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUAUACUGCUCAUACUUUCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAGCAGGAUCCACAAGAACA
+.............(((.((((.....)))).)))...... ( -5.00)
+AAUUUCUACUAAGUGUAGAUAGCACUGGCUCAGAGUCGUC
+....(((((.....)))))......(((((...))))).. ( -6.60)
+AAUUUCUACUAAGUGUAGAUACUCCUUUGAGCACUGGCUC
+....(((((.....))))).........((((....)))) ( -8.40)
+AAUUUCUACUAAGUGUAGAUUGUGUAAUGUAAUUUGACUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCUUGCUUCAAAGUUACAG
+....(((((.....)))))...(((......)))...... ( -4.80)
+AAUUUCUACUAAGUGUAGAUGAAGCGCUCUGAAAAACAGC
+....(((((.....))))).........(((.....))). ( -4.80)
+AAUUUCUACUAAGUGUAGAUGGAAGCGCUCUGAAAAACAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGGGUUAUGAUUUUGGAAGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAGGGUUAUGAUUUUGGAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGAGGGUUAUGAUUUUGGAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACUCUGCAAGAAGUAGACU
+....((((((...((((((....))))))...)))))).. (-12.50)
+AAUUUCUACUAAGUGUAGAUCAGCAAAGCCAAAGCCUCAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAACGGCAUUUCCAGCAAAG
+....(((((.....)))))......((.......)).... ( -5.00)
+AAUUUCUACUAAGUGUAGAUGGAACGGCAUUUCCAGCAAA
+....(((((.....)))))(((((......)))))..... ( -8.50)
+AAUUUCUACUAAGUGUAGAUUGGAACGGCAUUUCCAGCAA
+....(((((.....)))))((((((......))))))... ( -8.90)
+AAUUUCUACUAAGUGUAGAUAGUAUAACCACCAAUCUGGU
+....(((((.....))))).......((((......)))) ( -6.90)
+AAUUUCUACUAAGUGUAGAUCAGUAUAACCACCAAUCUGG
+....(((((.....))))).........(((......))) ( -5.40)
+AAUUUCUACUAAGUGUAGAUUCAGUAUAACCACCAAUCUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUCCAGAUUCCCAUUUUUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACUCCAGAUUCCCAUUUUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGUAGAUGAAGAAGGUAAC
+....(((((.((((....)))))))))............. ( -5.40)
+AAUUUCUACUAAGUGUAGAUAUUGUAGAUGAAGAAGGUAA
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUGACAUGUUCUUCAGGCUCAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAGACUCACGUUAACAAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAAGACUCACGUUAACAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACACGAGAGUAAACGUAAAA
+......((((..((((....))))...))))......... ( -5.60)
+AAUUUCUACUAAGUGUAGAUAACACGAGAGUAAACGUAAA
+......((((..((((.....))))...))))........ ( -5.70)
+AAUUUCUACUAAGUGUAGAUUAACACGAGAGUAAACGUAA
+......((((..((((......))))...))))....... ( -6.00)
+AAUUUCUACUAAGUGUAGAUGACCAGAAGAUCAGGAACUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUCGUUUAGACCAGAAGAU
+....(((((.....)))))((.((.....)).))...... ( -4.90)
+AAUUUCUACUAAGUGUAGAUAGCUCUUCAACGGUAAUAGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAGCUCUUCAACGGUAAUAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAGCUCUUCAACGGUAAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUCUGUAAACAGCAGCAAGC
+....(((((.....)))))...((((.....))))..... ( -6.70)
+AAUUUCUACUAAGUGUAGAUUGGAUUGAAUGACCACAUGG
+....(((((.....))))).(((.........)))..... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUAGAAGCGGUCUGGUCAGAA
+......(((.....)))(((((((.....))))))).... ( -6.30)
+AAUUUCUACUAAGUGUAGAUGGCAGGUCCUUGAUGUCACA
+....(((((.....)))))(((((.........))))).. ( -7.80)
+AAUUUCUACUAAGUGUAGAUUUUAGGCAGGUCCUUGAUGU
+....(((((.....)))))..(((((......)))))... ( -5.30)
+AAUUUCUACUAAGUGUAGAUUAAUAAGAAAGCGUUCGUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAGUUGCCAAUCCUGUAGCG
+....(((((.....)))))...(((((.......))))). ( -7.50)
+AAUUUCUACUAAGUGUAGAUAUUUAUAGUUGCCAAUCCUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAGUCCUCAUAAUAAUUAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGAUGUAAUCAAGAUUCCAA
+....(((((.....)))))(((((...)))))........ ( -5.60)
+AAUUUCUACUAAGUGUAGAUAUUAUGAGGUUUAUGAUGUA
+.....((((.....))))(((((((((...))))))))). ( -7.40)
+AAUUUCUACUAAGUGUAGAUAAUUAUGAGGUUUAUGAUGU
+....(((((.....)))))..(((((((...))))))).. ( -6.20)
+AAUUUCUACUAAGUGUAGAUUAAUUAUGAGGUUUAUGAUG
+....(((((.....)))))...(((((((...))))))). ( -6.20)
+AAUUUCUACUAAGUGUAGAUUUCUCAGUUAGUGACUUAGA
+......((((((.((.((....)))).))))))....... ( -7.40)
+AAUUUCUACUAAGUGUAGAUAUCAAUCUCCAUUGGUUGCU
+....(((((.....)))))...(((((......))))).. ( -7.80)
+AAUUUCUACUAAGUGUAGAUAUGUUCGUUUAAUCAAUCUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUGUUCGUUUAAUCAAUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAGUACUGUUGUACCUCUA
+....(((((.....)))))....((((....))))..... ( -7.90)
+AAUUUCUACUAAGUGUAGAUAAAAGUACUGUUGUACCUCU
+....(((((.....))))).....((((....)))).... ( -7.90)
+AAUUUCUACUAAGUGUAGAUUUAUCAGCUAGAGGAUGAAA
+....(((((.....)))))((((((........)))))). ( -7.60)
+AAUUUCUACUAAGUGUAGAUCGCCGUCAGGACAAGCAAAA
+....(((((.....)))))...((....)).......... ( -6.00)
+AAUUUCUACUAAGUGUAGAUACGCCGUCAGGACAAGCAAA
+....(((((.....)))))....((....))......... ( -6.00)
+AAUUUCUACUAAGUGUAGAUGGUGAAACUGAUCUGGCACG
+............(((((((((((...))).)))).)))). ( -6.60)
+AAUUUCUACUAAGUGUAGAUAGUGUGAAGCAAAGUGUUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAGUGUGAAGCAAAGUGUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUGAGUGUGAAGCAAAGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUAUGAUCUUGCAGUUCAA
+(((.(((((.....))))).))).(((.((...)).))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUGGCGUGACAAGUUUCAUUAU
+....(((((.....)))))....((((......))))... ( -5.50)
+AAUUUCUACUAAGUGUAGAUAUGUUCGUUUAGGCGUGACA
+....(((((.....)))))..(((((((....))).)))) ( -7.30)
+AAUUUCUACUAAGUGUAGAUGAAUAGAAGUGAAUAGGACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAGCUCCUACUCUAAUAUAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAGCUCCUACUCUAAUAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAACCAGCCUCAUCCACGCA
+............((((.(((((.......))))).)))). ( -8.90)
+AAUUUCUACUAAGUGUAGAUGGUUCCUGGCAAUUAAUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAUGAAAUCUAAAACAACAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUCGUUUAGAUGAAAUCUAA
+...............((((((((((....)))))))))). ( -8.80)
+AAUUUCUACUAAGUGUAGAUGUUUGUUCGUUUAGAUGAAA
+....(((((.....)))))......(((((....))))). ( -5.70)
+AAUUUCUACUAAGUGUAGAUAGUUUGUUCGUUUAGAUGAA
+....(((((.....))))).......(((((....))))) ( -5.10)
+AAUUUCUACUAAGUGUAGAUGGGUCCAUUAUCAGACAUUU
+....(((((.....)))))...(((........))).... ( -6.20)
+AAUUUCUACUAAGUGUAGAUGGGGUCCAUUAUCAGACAUU
+....(((((.....)))))....(((........)))... ( -6.20)
+AAUUUCUACUAAGUGUAGAUGCUGAUUUUGGGGUCCAUUA
+....(((((.....))))).........(((...)))... ( -5.00)
+AAUUUCUACUAAGUGUAGAUAUCGCGCCCCACUGCGUUCU
+....(((((.....)))))....((((......))))... ( -8.50)
+AAUUUCUACUAAGUGUAGAUGAUCGCGCCCCACUGCGUUC
+....(((((.....))))).....((((......)))).. ( -8.50)
+AAUUUCUACUAAGUGUAGAUAGGUCUUCCUUGCCAUGUUG
+....(((((.....))))).(((....))).......... ( -6.10)
+AAUUUCUACUAAGUGUAGAUGUCAUCUGGACUGCUAUUGG
+...........(((.(((((...))))).)))........ ( -6.30)
+AAUUUCUACUAAGUGUAGAUCCGUCACCACCACGAAUUCG
+....(((((.....)))))..(((.......)))...... ( -4.90)
+AAUUUCUACUAAGUGUAGAUACCGUCACCACCACGAAUUC
+....(((((.....)))))...(((.......)))..... ( -4.90)
+AAUUUCUACUAAGUGUAGAUAUUUUACCGUCACCACCACG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAGCACCAUAGGGAAGUCC
+.((((((.(((.((((.......))))..))))))))).. ( -7.00)
+AAUUUCUACUAAGUGUAGAUGUGUAUUCAAGGCUCCCUCA
+.((.(((((.....))))).)).......(((...))).. ( -5.00)
+AAUUUCUACUAAGUGUAGAUGGUGUAUUCAAGGCUCCCUC
+....(((((.....))))).((.((.......)).))... ( -6.00)
+AAUUUCUACUAAGUGUAGAUGCAAUGUUGUUCCUUGAGGA
+....(((((.....)))))...........(((....))) ( -5.50)
+AAUUUCUACUAAGUGUAGAUGGCAAUGUUGUUCCUUGAGG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGAACUGUUGCGACUACGU
+....(((((.....)))))...........(((....))) ( -4.80)
+AAUUUCUACUAAGUGUAGAUCUCUCAAGCUGGUUCAAUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUCUCAAGCUGGUUCAAUC
+....(((((.....))))).(((....))).......... ( -6.00)
+AAUUUCUACUAAGUGUAGAUCCAGACAUUUUGCUCUCAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCCUUGUUGUUGUUGGCCUU
+....(((((.....))))).(((...........)))... ( -7.70)
+AAUUUCUACUAAGUGUAGAUUUAGUGACAGUUUGGCCUUG
+......((((((((....)))))))).............. ( -5.90)
+AAUUUCUACUAAGUGUAGAUCCGAGGCUUCUUAGAAGCCU
+....(((((.....)))))....(((((((...))))))) (-13.40)
+AAUUUCUACUAAGUGUAGAUGCCGAGGCUUCUUAGAAGCC
+....(((((.....)))))......((((((...)))))) (-11.60)
+AAUUUCUACUAAGUGUAGAUUGCCGAGGCUUCUUAGAAGC
+....(((((.....)))))........(((((...))))) ( -8.10)
+AAUUUCUACUAAGUGUAGAUGUGGCAGUACGUUUUUGCCG
+.((.(((((.....))))).))(((((.......))))). (-10.70)
+AAUUUCUACUAAGUGUAGAUUUCUGGACCACGUCUGCCGA
+....(((((.....))))).....((((...))))..... ( -6.30)
+AAUUUCUACUAAGUGUAGAUCUUGGGUUUGUUCUGGACCA
+....(((((.....))))).....(((((.....))))). ( -8.00)
+AAUUUCUACUAAGUGUAGAUUAAUCAGUUCCUUGUCUGAU
+....(((((.....)))))...(((((........))))) ( -8.30)
+AAUUUCUACUAAGUGUAGAUCGGCCAAUGUUUGUAAUCAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGGCACCUGUGUAGGUCAA
+....(((((.....)))))......((((....))))... ( -7.10)
+AAUUUCUACUAAGUGUAGAUUCAUCCAAUUUGAUGGCACC
+....(((((.....))))).(((((......))))).... ( -7.40)
+AAUUUCUACUAAGUGUAGAUGAUCUUUGUCAUCCAAUUUG
+......(((.....)))((((((....))))))....... ( -5.20)
+AAUUUCUACUAAGUGUAGAUAAAUUUGGAUCUUUGUCAUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUGCGUCAAUAUGCUUAUU
+....(((((.....)))))....((((....))))..... ( -6.50)
+AAUUUCUACUAAGUGUAGAUGUAUGCGUCAAUAUGCUUAU
+.........((((((((((((....))))..)))))))). ( -6.90)
+AAUUUCUACUAAGUGUAGAUGGCUCUGUUGGUGGGAAUGU
+.(((((((((((...((((....))))))))))))))).. (-10.70)
+AAUUUCUACUAAGUGUAGAUAGGCUCUGUUGGUGGGAAUG
+.(((((((((((...((((.....))))))))))))))). (-10.60)
+AAUUUCUACUAAGUGUAGAUUAGGCUCUGUUGGUGGGAAU
+.(((((((((((...((((......))))))))))))))) (-10.10)
+AAUUUCUACUAAGUGUAGAUUCCUUUUUAGGCUCUGUUGG
+.....(.((..(((.((((......)))).)))..)).). ( -6.10)
+AAUUUCUACUAAGUGUAGAUGUCCUUUUUAGGCUCUGUUG
+....(((((.....))))).(.(((....))))....... ( -6.20)
+AAUUUCUACUAAGUGUAGAUUGUCCUUUUUAGGCUCUGUU
+....(((((.....)))))..(.(((....))))...... ( -6.20)
+AAUUUCUACUAAGUGUAGAUAUCAGCCUUCUUCUUUUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUCUGUCUCUGCGGUAAGGC
+........((.(.((((((........)))))).).)).. ( -6.70)
+AAUUUCUACUAAGUGUAGAUCUGUUUCUUCUGUCUCUGCG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAGAAAUCAUCCAAAUCUGC
+......(((.....)))(((((....)))))......... ( -5.00)
+AAUUUCUACUAAGUGUAGAUGGCCUGAGUUGAGUCAGCAC
+....(((((.....)))))..((.(((......))))).. ( -8.00)
+AAUUUCUACUAAGUGUAGAUUAUAGCCCAUCUGCCUUGUG
+.........((((.((((((........)))))))))).. ( -7.50)
+AAUUUCUACUAAGUGUAGAUAAGUCCUCCCUAAUGUUACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCACAUUAGGGCUCUUCCAUA
+....(((((.....)))))........((......))... ( -5.60)
+AAUUUCUACUAAGUGUAGAUACACAUUAGGGCUCUUCCAU
+....(((((.....))))).........((......)).. ( -5.60)
+AAUUUCUACUAAGUGUAGAUUCAUUCUCCUAAGAAGCUAU
+....(((((.....)))))....((((....))))..... ( -5.00)
+AAUUUCUACUAAGUGUAGAUGUCAUUCUCCUAAGAAGCUA
+....(((((.....))))).....((((....)))).... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUGUCAUUCUCCUAAGAAGCU
+....(((((.....)))))......((((....))))... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUUGUCAUUCUCCUAAGAAGC
+....(((((.....))))).......((((....)))).. ( -5.00)
+AAUUUCUACUAAGUGUAGAUUUUGUCAUUCUCCUAAGAAG
+((..(((((.....)))))..))....((((....)))). ( -5.20)
+AAUUUCUACUAAGUGUAGAUUUUUGUCAUUCUCCUAAGAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUGUCAUUCUCCUAAGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUGUCAUUCUCCUAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUGUCAUUCUCCUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUGUCAUUCUCCUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUGUCAUUCUCCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUGUCAUUCUCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUGUCAUUCUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUGUCAUUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUGUCAUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUGUCAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUGUCAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUGUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUGUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUUUUUUUUUUUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACCUUCCCAGGUAACAAAC
+....(((((.....)))))((((((....))))))..... ( -9.10)
+AAUUUCUACUAAGUGUAGAUGAUCUCUUGUAGAUCUGUUC
+....(((((.....))))).(((((.....)))))..... ( -8.20)
+AAUUUCUACUAAGUGUAGAUAAAUCUGUGUGGCUGUCACU
+....(((((.....))))).........(((.....))). ( -6.00)
+AAUUUCUACUAAGUGUAGAUGUCCGUGUUGCAGCCGAUCA
+....(((((.....))))).(((.((......)).))).. ( -6.00)
+AAUUUCUACUAAGUGUAGAUGUCCGGGUGUGACCGAAAGG
+....(((((.....)))))....(((......)))..... ( -9.00)
+AAUUUCUACUAAGUGUAGAUAACGAGAAAACACACGUCCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUGUUUUACAGGUUCGCGA
+....(((((.....))))).(((((...)))))....... ( -9.20)
+AAUUUCUACUAAGUGUAGAUACAGGUUCGCGACGUGCUCG
+....(((((.....)))))..((.(((...))).)).... ( -6.90)
+AAUUUCUACUAAGUGUAGAUCAGGUUCGCGACGUGCUCGU
+....(((((.....))))).((.(((...))).))..... ( -6.30)
+AAUUUCUACUAAGUGUAGAUGAGACUCCGUGGAGGAGGUC
+....(((((.....))))).....((((.....))))... (-10.70)
+AAUUUCUACUAAGUGUAGAUGCCUCAACUUGAACAGCCCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUCAACUUGAACAGCCCUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACUUAGGCGACGAGCUUGGC
+....(((((.....)))))...((((((.....)))))). ( -9.10)
+AAUUUCUACUAAGUGUAGAUCAAGAAAACUGGAACACUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAGAAAACUGGAACACUAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCCGAACAACUGGACUUUAU
+....(((((.....))))).((((......))))...... ( -7.10)
+AAUUUCUACUAAGUGUAGAUUUGACACUAAGAGGGGUGUA
+....(((((.....)))))....(((((......))))). ( -9.10)
+AAUUUCUACUAAGUGUAGAUGAAAUUAAAUUGGCAAAGAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAUUAAAUUGGCAAAGAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACACCUUCAAUGGGGAAUGU
+....(((((.....)))))....(((.....)))...... ( -6.90)
+AAUUUCUACUAAGUGUAGAUGUAUUUCCCUUAAAUUCCAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUUUCCCUUAAAUUCCAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUUAAAUUCCAUAAUCAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGGGUAGAAUUCGAUCUGUC
+...(((((((.(((....))).)))))))........... ( -7.30)
+AAUUUCUACUAAGUGUAGAUAACUCUCAUGAAGUGUGAUC
+....((((((..(((.(((....))))))..)))).)).. ( -6.20)
+AAUUUCUACUAAGUGUAGAUGUUAAAGCCACUUGCGAAUU
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUUUAAAGCCACUUGCGAAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGGCACUGAGAAUUUGACU
+.((.(((((.....))))).)).................. ( -4.80)
+AAUUUCUACUAAGUGUAGAUUGGCACUGAGAAUUUGACUA
+........((.(((((......))))).)).......... ( -5.40)
+AAUUUCUACUAAGUGUAGAUACUAAAGAAGGUGCCACUAC
+....(((((.....)))))((((......))))....... ( -5.20)
+AAUUUCUACUAAGUGUAGAUUUGUCCAGCAUGUCACAAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAGGCUGUGUGUUCUCUUAU
+....(((((.....))))).(((((.....).)))).... ( -7.00)
+AAUUUCUACUAAGUGUAGAUAACUUAAUGAAGAGAUCGCC
+.((((((.((((((.......)))))..).)))))).... ( -5.20)
+AAUUUCUACUAAGUGUAGAUGGCAUCUUUUUCUGCUUCCA
+....(((((.....))))).((((........)))).... ( -7.10)
+AAUUUCUACUAAGUGUAGAUGCAUCUUUUUCUGCUUCCAC
+....(((((.....))))).(((........)))...... ( -6.20)
+AAUUUCUACUAAGUGUAGAUUCUGCUUCCACAAGUGCUUU
+....(((((.....)))))....((((....))))..... ( -5.00)
+AAUUUCUACUAAGUGUAGAUCUGCUUCCACAAGUGCUUUU
+....(((((.....)))))...((((....))))...... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUGCUUCCACAAGUGCUUUUG
+....(((((.....)))))..((((....))))....... ( -5.00)
+AAUUUCUACUAAGUGUAGAUGUGGAAACUGUGAAAGGUUU
+.((.(((((.....))))).))..(((((......))))) ( -6.30)
+AAUUUCUACUAAGUGUAGAUUGGAAACUGUGAAAGGUUUG
+....(((((.....)))))....(((((......))))). ( -7.00)
+AAUUUCUACUAAGUGUAGAUGAUUAUAAAGCAUUCAAACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAGUUACAAAAGGAAAAGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAGUUACAAAAGGAAAAGCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGCAUUUGCAUCAGAGGCUG
+....(((((.....)))))..((.((((...)))).)).. ( -6.70)
+AAUUUCUACUAAGUGUAGAUCAUCAGAGGCUGCUCGUGUU
+....(((((.....)))))......(((....)))..... ( -7.20)
+AAUUUCUACUAAGUGUAGAUCUCCCGCACUCUUGAAACUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCCCGCACUCUUGAAACUGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAGAAGGCCGCUAUAACAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAGAAGGCCGCUAUAACAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAGUAUUCACUGAGACUCA
+....(((((.....)))))..((((....))))....... ( -6.90)
+AAUUUCUACUAAGUGUAGAUGCUACUAACAAUCUAGUUGU
+....(((((.....))))).((.((((......)))).)) ( -6.40)
+AAUUUCUACUAAGUGUAGAUGCACUGUUUAUGAAAAACUC
+..((((.....(((((....)))))......))))..... ( -5.80)
+AAUUUCUACUAAGUGUAGAUUGAAAAACUCAAACCCGUCC
+....(((((.....)))))((((.....))))........ ( -5.20)
+AAUUUCUACUAAGUGUAGAUAGGAAGGUGUAGAGUUUCUU
+....(((((.....))))).((((((.(....).)))))) ( -7.60)
+AAUUUCUACUAAGUGUAGAUUUAGAGACGGUUGGGAAAUU
+....(((.((((((....)))))))))............. ( -5.50)
+AAUUUCUACUAAGUGUAGAUUCUCAACCUGUGCUUGUGAA
+....(((((.....)))))(((.(((.......))).))) ( -5.10)
+AAUUUCUACUAAGUGUAGAUAGCUUGUAAAUAAAUUUUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGGCUUUGUGUGCUGACUCU
+....(((((.....)))))(((((.......))))).... ( -7.40)
+AAUUUCUACUAAGUGUAGAUGGCUUUGUGUGCUGACUCUA
+....(((((.....))))).(((.......)))....... ( -6.60)
+AAUUUCUACUAAGUGUAGAUGCUUUGUGUGCUGACUCUAU
+....(((((.....))))).((.......))......... ( -5.40)
+AAUUUCUACUAAGUGUAGAUUGUGCUGACUCUAUCAUUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUGAAACAUUUGUCACGCA
+....(((((.....)))))..((((........))))... ( -7.80)
+AAUUUCUACUAAGUGUAGAUUCACGCACUCAAAGGGAUUG
+(((((((....(((((........)))))...))))))). ( -7.20)
+AAUUUCUACUAAGUGUAGAUCAACCAUUAGAACAACCUAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUUAACGGGCUUAUGUUGC
+....(((((.....)))))....(((((......))))). ( -6.00)
+AAUUUCUACUAAGUGUAGAUGGUGAUGACACUGUGAUAGA
+.....((((.....))))((((((....))))))...... ( -7.20)
+AAUUUCUACUAAGUGUAGAUGUGAUGACACUGUGAUAGAA
+...((((((..(((((..........)))))..).))))) ( -7.30)
+AAUUUCUACUAAGUGUAGAUGAACUUGAUGAAAGGAUUGA
+....(((((.....)))))....(((.....)))...... ( -5.10)
+AAUUUCUACUAAGUGUAGAUAACUUGAUGAAAGGAUUGAU
+....(((((.....)))))...(((.....)))....... ( -5.10)
+AAUUUCUACUAAGUGUAGAUCAACCAGUAUCUGAAUUACU
+....(((((.....)))))......((((.......)))) ( -5.30)
+AAUUUCUACUAAGUGUAGAUGAUGAGUGGAGUAUGGCUAC
+....(((((.....))))).....(((........))).. ( -5.50)
+AAUUUCUACUAAGUGUAGAUAUGAGUCUGGUGAGUUUAAA
+....(((((.....)))))...((.((....)).)).... ( -5.60)
+AAUUUCUACUAAGUGUAGAUAAUUGGCUUCACAUAUGUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACCCUCCAGAUGAGGAUGA
+....(((((.....)))))....((((.....)))).... ( -9.10)
+AAUUUCUACUAAGUGUAGAUAGCCAUCAACUCAAUAUGAG
+....(((((.....)))))..........((((...)))) ( -5.90)
+AAUUUCUACUAAGUGUAGAUGAAUUUGGUGCCACUUCUGC
+......((((((((........)))))))).......... ( -5.40)
+AAUUUCUACUAAGUGUAGAUGUGCCACUUCUGCUGCUCUU
+...........((((((((.((...)).))))).)))... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAGUGGUUAUUUAAAACUUAC
+....(((((.....)))))....((((......))))... ( -5.00)
+AAUUUCUACUAAGUGUAGAUGUGGUUAUUUAAAACUUACU
+....(((((.....))))).((((((......))).))). ( -5.60)
+AAUUUCUACUAAGUGUAGAUAAACUUACUGACAAUGUAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUUAAACAUGGAGGAGGUG
+....(((((.....)))))(((((.......))))).... ( -8.70)
+AAUUUCUACUAAGUGUAGAUAAGCGGACACAAUCUUGCUA
+....(((((.....)))))..(((((........))))). ( -7.60)
+AAUUUCUACUAAGUGUAGAUAGCGGACACAAUCUUGCUAA
+....(((((.....)))))((((((........)))))). ( -8.70)
+AAUUUCUACUAAGUGUAGAUAAUCAGCACGAAGUUCUACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUCAGCACGAAGUUCUACUU
+.......(((..((((........))))..)))....... ( -5.10)
+AAUUUCUACUAAGUGUAGAUUGGUGCUGACCCUAUACAUU
+............((((((...(((....)))))))))... ( -7.70)
+AAUUUCUACUAAGUGUAGAUGGUGCUGACCCUAUACAUUC
+............((((((..(((....))))))))).... ( -8.10)
+AAUUUCUACUAAGUGUAGAUGUGCUGACCCUAUACAUUCU
+............((((((..((....)).))))))..... ( -5.30)
+AAUUUCUACUAAGUGUAGAUAGAGUUUGUGUAGAUACUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUAGAUACUGUUCGCACAA
+....(((((.....)))))((((.((......))..)))) ( -6.00)
+AAUUUCUACUAAGUGUAGAUAUAAAAAUCUCUAUGACAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAGCUUUUUGGAAAUGAAGA
+.(((((((..((((........))))..)))))))..... ( -8.20)
+AAUUUCUACUAAGUGUAGAUUGGAAAUGAAGAGUGAAAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGAAAUGAAGAGUGAAAAGC
+.((((((((((....))).))))))).............. ( -5.50)
+AAUUUCUACUAAGUGUAGAUGAAAUGAAGAGUGAAAAGCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAACUGAAAGUAAACCUUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUUGACAUUAAUGGCAAUC
+....(((((.....)))))..((((.((....)).)))). ( -4.90)
+AAUUUCUACUAAGUGUAGAUUUAAAGAAAGAUGCUCCAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAACUGCUGUGGUUAUACCUA
+.....((((.....))))((((((.....))))))..... ( -6.30)
+AAUUUCUACUAAGUGUAGAUACUGCUGUGGUUAUACCUAC
+....(((((.....))))).......((((......)))) ( -5.60)
+AAUUUCUACUAAGUGUAGAUAGAAAAGUGCCAACAGACAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUGGUUACACUGUAGAGGA
+...((((((..(((((((.......))))))))))))).. (-10.60)
+AAUUUCUACUAAGUGUAGAUACAUUCUACCAUCUAUUAUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUUCUACCAUCUAUUAUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGGAAUUUGCGAGAAAUGC
+.((((((......((((((((...)))))))))))))).. ( -5.50)
+AAUUUCUACUAAGUGUAGAUCGAGAAAUGCUUGCACAUGC
+....(((((.....))))).((((.....))))....... ( -5.60)
+AAUUUCUACUAAGUGUAGAUAACUAUACAGCGUAAAUAUA
+......(((...((((((....))))))...)))...... ( -5.50)
+AAUUUCUACUAAGUGUAGAUACUUUUACACCAGUAAAACA
+......((((..(((((((....))))))).))))..... ( -8.40)
+AAUUUCUACUAAGUGUAGAUCUUUUACACCAGUAAAACAA
+....(((((.....)))))..((((((....))))))... ( -7.00)
+AAUUUCUACUAAGUGUAGAUACACCAGUAAAACAACUGUA
+....(((((.....))))).....((((......)))).. ( -7.20)
+AAUUUCUACUAAGUGUAGAUCACCAGUAAAACAACUGUAG
+....(((((.....)))))....((((......))))... ( -7.20)
+AAUUUCUACUAAGUGUAGAUGAAGAAGCUGCUCGGUAUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUUUCUUCACCUGAUGCUG
+....(((((.....)))))..((.((.......)).)).. ( -5.30)
+AAUUUCUACUAAGUGUAGAUUUCACCUGAUGCUGUUACAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUGAAACCAUCUCACUUGC
+.........((((((.((((.........)))))))))). ( -6.60)
+AAUUUCUACUAAGUGUAGAUUUGAAACCAUCUCACUUGCU
+.........((((((.((((........)))))))))).. ( -7.30)
+AAUUUCUACUAAGUGUAGAUUUAAGAGAGGUGAUAAAAGU
+.((((((..(((((....)))))..))))))......... ( -6.00)
+AAUUUCUACUAAGUGUAGAUACAAUCUUAAGACACUUCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUGAGAGAAGUGAGGACUA
+((..(((((.....)))))..))......(((....))). ( -5.60)
+AAUUUCUACUAAGUGUAGAUAGAGAAGUGAGGACUAUUAA
+....(((((.....)))))......(((....)))..... ( -5.40)
+AAUUUCUACUAAGUGUAGAUCAACAGUAGACAACAUUAAC
+....((((((..((........)))))))).......... ( -5.20)
+AAUUUCUACUAAGUGUAGAUGUCCAACUUAUUUGGAUGGA
+....(((((.....))))).((((((.....))))))... ( -9.60)
+AAUUUCUACUAAGUGUAGAUGAUGGAGCUGAUGUUACUAA
+....(((((.....)))))...((((((....))).))). ( -6.30)
+AAUUUCUACUAAGUGUAGAUAUGUUUUACCUAAUGAUGAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUUUUACCUAAUGAUGACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCUAAUGAUGACACUCUAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUAAUGAUGACACUCUACG
+...........(((((..(((.....))).)))))..... ( -4.80)
+AAUUUCUACUAAGUGUAGAUGAGUACUACCACACAACUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUACUACCACACAACUGAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUGGGUAGGUACAUGUCAGC
+....(((((.....))))).((((...........)))). ( -5.40)
+AAUUUCUACUAAGUGUAGAUUGGGUAGGUACAUGUCAGCA
+....((((((.(((....))).))))))............ ( -5.30)
+AAUUUCUACUAAGUGUAGAUACUUCUAUUAAAUGGGCAGA
+....(((((.....)))))..(((((((...))))).)). ( -5.20)
+AAUUUCUACUAAGUGUAGAUAUCCACCUGCUCUACAAGAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGCACUUAUCUUAGCCUAC
+.........((((((((....))))))))........... ( -7.90)
+AAUUUCUACUAAGUGUAGAUUGCACUUAUCUUAGCCUACU
+.........((((((((...))))))))............ ( -6.50)
+AAUUUCUACUAAGUGUAGAUAACAUGCCAAUUUAGAUUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAUUCUUGCAAAAGAGUCUU
+....(((((.....))))).(((((((....))))))).. (-11.60)
+AAUUUCUACUAAGUGUAGAUUUAUGAACAAUUUAAGAAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGAAAGGUGUUCAGAUACCU
+....(((((.....))))).....((((((....)))))) ( -9.10)
+AAUUUCUACUAAGUGUAGAUGUUAUGAUGUCAGCACCACC
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUUUAUGAUGUCAGCACCACCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUGUGCUAGUGAGUACACU
+....(((((.....)))))...((((((....)))))).. ( -9.70)
+AAUUUCUACUAAGUGUAGAUUAUUGCAUAGACGGUGCUUU
+....(((((.....))))).....((((.....))))... ( -7.70)
+AAUUUCUACUAAGUGUAGAUCUUACAAAGUCCUCAGAAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUACAAAGAAAACAGUUACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACAAAGAAAACAGUUACAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACAGAAAUUGACCCUAAGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAGAGCAACCAAUUGAUCU
+....(((((.....)))))...(((.(((....))).))) ( -5.30)
+AAUUUCUACUAAGUGUAGAUAAGUUUGUAUGUGAUAAUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUUUGUAUGUGAUAAUAUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUGUGAUAAUAUCAAAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUGAUGAUUUAAACCAGUUA
+.......(((..((.((((((....)))))).)).))).. ( -4.80)
+AAUUUCUACUAAGUGUAGAUAACCAGUUAACUGGUUAUAA
+.....((((.....))))((((((((....)))))))).. (-12.60)
+AAUUUCUACUAAGUGUAGAUUCCCUGACUUAAAUGGUGAU
+....(((((.....))))).((((..........)).)). ( -5.80)
+AAUUUCUACUAAGUGUAGAUCCCUGACUUAAAUGGUGAUG
+.....((((.....))))(((((..........)).))). ( -6.10)
+AAUUUCUACUAAGUGUAGAUCCUGACUUAAAUGGUGAUGU
+....(((((.....)))))...(.(((.....))).)... ( -5.20)
+AAUUUCUACUAAGUGUAGAUAAGAAAGGAGCUAAAUUGUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGAAAGGAGCUAAAUUGUUA
+....(((((.....)))))........(((......))). ( -5.10)
+AAUUUCUACUAAGUGUAGAUGCAUGUUAACAAUGCAACUA
+....(((((.....)))))(((((.......))))).... ( -9.20)
+AAUUUCUACUAAGUGUAGAUGAGCACAAAACCAGUUGAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGUACUGAAGUCAGAGGAC
+....(((((.....)))))......(((....)))..... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAAAAUUACAGAAGAGGUUGG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAACCCUUGCUACUCAUGG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUGCUGUUAAUAGUGUCCC
+....(((((.....)))))....((((....))))..... ( -5.10)
+AAUUUCUACUAAGUGUAGAUCUUAACAAAGUUGUUAGUAC
+....(((((.....)))))..((((((....))))))... ( -7.00)
+AAUUUCUACUAAGUGUAGAUUUAACAAAGUUGUUAGUACA
+....(((((.....))))).((((((....)))))).... ( -6.80)
+AAUUUCUACUAAGUGUAGAUAACCGUGUUUGUACUAAUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACUAAUUAUAUGCCUUAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUACUUUAUUGCUACAAUU
+((..(((((.....)))))..))................. ( -4.90)
+AAUUUCUACUAAGUGUAGAUCUUUAUUGCUACAAUUGUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGCUACAAUUGUGUACUUU
+......((((((.(((((.....))))).))).))).... ( -5.30)
+AAUUUCUACUAAGUGUAGAUACUAGAAGUACAAAUUCUAG
+....(((((.....)))))..((((((.......)))))) ( -9.20)
+AAUUUCUACUAAGUGUAGAUCUAGAAGUACAAAUUCUAGA
+....(((((.....)))))(((((((.......))))))) (-10.90)
+AAUUUCUACUAAGUGUAGAUGUCUAGAGGCUUCAUUUAAU
+....(((((.....))))).(((....))).......... ( -5.30)
+AAUUUCUACUAAGUGUAGAUUCUAGAGGCUUCAUUUAAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUAUUUGAAGUCACCUAAU
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUAAGUCACCUAAUUUUUCUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUAAACUGAUAAAUAUUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAAACUGAUAAAUAUUAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAACUGAUAAAUAUUAUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUUUUACUAUUAAGUGUUU
+....(((((.....)))))......((((....))))... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUACUAUUAAGUGUUUGCCUA
+...........((.((((((.(((....))))))))))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUACUAUUAAGUGUUUGCCUAG
+...........((.(((((((((....))))))))))).. ( -9.10)
+AAUUUCUACUAAGUGUAGAUCUAUUAAGUGUUUGCCUAGG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUAGGUUCUUUAAUCUACU
+....(((((.....)))))...((((((....)))))).. ( -6.50)
+AAUUUCUACUAAGUGUAGAUAUCUACUCAACCGCUGCUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUGUUUUAAUGUCUAAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUGUCUAAUUUAGGCAUGC
+....(((((.....)))))..(((((((...))))))).. (-10.00)
+AAUUUCUACUAAGUGUAGAUAUGUCUAAUUUAGGCAUGCC
+....(((((.....)))))((((((((...)))))))).. (-10.50)
+AAUUUCUACUAAGUGUAGAUGGCAUGCCUUCUUACUGUAC
+...........((((.(((.((....)).))))))).... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAACUCUACUAAUGUCACUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUUAGUGGUUUAGAUUCUU
+.....((((((((........))))))))........... ( -8.50)
+AAUUUCUACUAAGUGUAGAUGAUUCUUUAGACACCUAUCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGACACCUAUCCUUCUUUAGA
+....(((((.....)))))......(((........))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUGAAACUAUACAAAUUACCAU
+............((((((......)))))).......... ( -5.20)
+AAUUUCUACUAAGUGUAGAUAUCUUUUAAAUGGGAUUUAA
+....(((((.....))))).(((((......))))).... ( -6.30)
+AAUUUCUACUAAGUGUAGAUAAAUGGGAUUUAACUGCUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUGGGAUUUAACUGCUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACUGCUUUUGGCUUAGUUGC
+.......(((((((((((...)))).....)))))))... ( -6.80)
+AAUUUCUACUAAGUGUAGAUGGCUUAGUUGCAGAGUGGUU
+...(((((((((((.......)))))))...))))..... ( -7.20)
+AAUUUCUACUAAGUGUAGAUGCUUAGUUGCAGAGUGGUUU
+....(((((.....)))))(((......)))......... ( -7.20)
+AAUUUCUACUAAGUGUAGAUUGGCAUAUAUUCUUUUCACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGCAUAUAUUCUUUUCACUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCAUAUAUUCUUUUCACUAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCACUAGGUUUUUCUAUGUAC
+....(((((.....)))))..((((((....)))).)).. ( -5.80)
+AAUUUCUACUAAGUGUAGAUACUAGGUUUUUCUAUGUACU
+....(((((.....)))))(((((((....)))).))).. ( -6.90)
+AAUUUCUACUAAGUGUAGAUUCUAUGUACUUGGAUUGGCU
+....(((((.....))))).((((......))))...... ( -6.30)
+AAUUUCUACUAAGUGUAGAUCUAUGUACUUGGAUUGGCUG
+....(((((.....)))))((((......))))....... ( -6.10)
+AAUUUCUACUAAGUGUAGAUUAUGUACUUGGAUUGGCUGC
+........(((((((((.....)))))))))......... ( -5.60)
+AAUUUCUACUAAGUGUAGAUUCAGCUAUUUUGCAGUACAU
+....(((((.....)))))....((......))....... ( -6.30)
+AAUUUCUACUAAGUGUAGAUCAGCUAUUUUGCAGUACAUU
+....(((((.....)))))...((......))........ ( -6.30)
+AAUUUCUACUAAGUGUAGAUAGCUAUUUUGCAGUACAUUU
+....(((((.....)))))..((......))......... ( -6.30)
+AAUUUCUACUAAGUGUAGAUGCAGUACAUUUUAUUAGUAA
+......(((((((((((.......)))))....)))))). ( -5.80)
+AAUUUCUACUAAGUGUAGAUCAGUACAUUUUAUUAGUAAU
+......(((((((((((......)))))....)))))).. ( -6.40)
+AAUUUCUACUAAGUGUAGAUAUUAGUAAUUCUUGGCUUAU
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUUUAGUAAUUCUUGGCUUAUG
+......((((((((....)))))))).............. ( -6.20)
+AAUUUCUACUAAGUGUAGAUAGCUAUGGUUAGAAUGUACA
+........((((.(((((....))))).))))........ ( -6.30)
+AAUUUCUACUAAGUGUAGAUCAUCAUUUUAUUAUGUAUGG
+....(((((.....))))).((((((......))).))). ( -6.70)
+AAUUUCUACUAAGUGUAGAUAUUAUGUAUGGAAAAGUUAU
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUUUAUGUAUGGAAAAGUUAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGUCUAUGCUAAUGGAGGU
+.(((((((...((((((((....))))))))..))))))) ( -9.80)
+AAUUUCUACUAAGUGUAGAUUGUCUAUGCUAAUGGAGGUA
+.(((((((...((((((((...))))))))..))))))). (-10.10)
+AAUUUCUACUAAGUGUAGAUGCAAACUACACAAUUGGAAU
+...(((((....((((((.......))))))...))))). ( -8.30)
+AAUUUCUACUAAGUGUAGAUCAAACUACACAAUUGGAAUU
+...(((((....((((((......))))))...))))).. ( -8.90)
+AAUUUCUACUAAGUGUAGAUUUAGUGAUGAAGUUGCGAGA
+((((((((((((((....))))))))..))))))...... ( -8.50)
+AAUUUCUACUAAGUGUAGAUAAAGACCAAUAAAUCCUACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUUGAUAAAGCUGGUCAAA
+....(((((.....)))))...(((((.......))))). ( -6.60)
+AAUUUCUACUAAGUGUAGAUAUAAAGCUGGUCAAAAGACU
+....(((((.....))))).........((((....)))) ( -7.00)
+AAUUUCUACUAAGUGUAGAUGUUAACUUAGACAACCUGAG
+(((.(((((.....))))).)))..(((((.....))))) ( -8.10)
+AAUUUCUACUAAGUGUAGAUUUAACUUAGACAACCUGAGA
+....(((((.....))))).....(((((.....))))). ( -8.10)
+AAUUUCUACUAAGUGUAGAUUGAUGGUAAAUCAAAAUGUG
+....(((((.....)))))(((((.....)))))...... ( -7.30)
+AAUUUCUACUAAGUGUAGAUGAUGGUAAAUCAAAAUGUGA
+....(((((.....)))))((((.....))))........ ( -6.40)
+AAUUUCUACUAAGUGUAGAUAUGGUAAAUCAAAAUGUGAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUACAGUCAGCUUAUGUGUC
+....(((((.....)))))..((((.........)))).. ( -5.10)
+AAUUUCUACUAAGUGUAGAUAUGCUUACGUUAAUACGUUU
+....(((((.....))))).......((((....)))).. ( -6.80)
+AAUUUCUACUAAGUGUAGAUCAUCAACUUUUAACGUACCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUCAACUUUUAACGUACCAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAACGUACCAAUGGAAAAACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACGUACCAAUGGAAAAACUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUUCAGCAGCUCGGCAAGG
+....(((((.....))))).......((......)).... ( -5.60)
+AAUUUCUACUAAGUGUAGAUUUUCAGCAGCUCGGCAAGGG
+....(((((.....)))))......((......))..... ( -5.60)
+AAUUUCUACUAAGUGUAGAUAGCAGCUCGGCAAGGGUUUG
+....(((((.....)))))....(((((.....))))).. ( -8.10)
+AAUUUCUACUAAGUGUAGAUUUGAUUCAGAUGUAGAAACU
+..(((((((....((...........))...))))))).. ( -5.20)
+AAUUUCUACUAAGUGUAGAUAUAUGGAACGUUAAAGAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGUCAUUGUCUGAACAACU
+............((.((((((......)))))).)).... ( -5.50)
+AAUUUCUACUAAGUGUAGAUAAGUUGACAUGUGCAACUAC
+....(((((.....)))))..(((((.(....)))))).. ( -8.00)
+AAUUUCUACUAAGUGUAGAUAGUUGACAUGUGCAACUACU
+....(((((.....)))))((((((.(....))))))).. ( -8.90)
+AAUUUCUACUAAGUGUAGAUUGUUGCUGCUAUUUUCUAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUGCUGCUAUUUUCUAUUU
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUUUGCUGCUAUUUUCUAUUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAUUUAAUAACACCUGUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUUUAAUAACACCUGUUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUAACACCUGUUCAUGUCAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAGUGAAAUCAUAGGAUAC
+.....((((.....))))(((..(((....)))..))).. ( -6.30)
+AAUUUCUACUAAGUGUAGAUAAGUGAAAUCAUAGGAUACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUAACAAACAUGCUGAUUU
+....(((((.....))))).((..........))...... ( -4.90)
+AAUUUCUACUAAGUGUAGAUCUAACAAACAUGCUGAUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGACACAUGGUUUAGCCAGCG
+....(((((.....))))).......((((...))))... ( -7.00)
+AAUUUCUACUAAGUGUAGAUACACAUGGUUUAGCCAGCGU
+....(((((.....))))).((.(.((((...))))).)) ( -7.30)
+AAUUUCUACUAAGUGUAGAUGCCAGCGUGGUGGUAGUUAU
+....(((((.....)))))(((((......)))))..... ( -9.60)
+AAUUUCUACUAAGUGUAGAUGUCGUGCCUGGUUUGCCUGG
+....(((((.....))))).......((.((....)).)) ( -6.60)
+AAUUUCUACUAAGUGUAGAUUCGUGCCUGGUUUGCCUGGC
+....(((((.....))))).....(((.((....)).))) ( -9.80)
+AAUUUCUACUAAGUGUAGAUCCUGGCACGAUAUUACGCAC
+............(((((((((.......))).)))))).. ( -5.60)
+AAUUUCUACUAAGUGUAGAUUGCAUUUCUUACCUAGAGUU
+....(((((.....)))))......((((.....)))).. ( -5.10)
+AAUUUCUACUAAGUGUAGAUGCAUUUCUUACCUAGAGUUU
+....(((((.....))))).....((((.....))))... ( -5.10)
+AAUUUCUACUAAGUGUAGAUCAUUUCUUACCUAGAGUUUU
+....(((((.....)))))....((((.....)))).... ( -5.10)
+AAUUUCUACUAAGUGUAGAUUUACCUAGAGUUUUUAGUGC
+....(((((.....))))).....(((((...)))))... ( -5.10)
+AAUUUCUACUAAGUGUAGAUUAGUGCAGUUGGUAACAUCU
+......((((((.((((......)))).))))))...... (-10.00)
+AAUUUCUACUAAGUGUAGAUAGUGCAGUUGGUAACAUCUG
+......((((((.((((.....)))).))))))....... ( -9.70)
+AAUUUCUACUAAGUGUAGAUGUGCAGUUGGUAACAUCUGU
+......((((((.((((....)))).))))))........ ( -9.80)
+AAUUUCUACUAAGUGUAGAUCAACAUCAGCUUGUGUUUUG
+....(((((.....)))))..(((((......)))))... ( -6.00)
+AAUUUCUACUAAGUGUAGAUGGCUGCUGAAUGUACAAUUU
+....(((((.....)))))....(((.....)))...... ( -4.80)
+AAUUUCUACUAAGUGUAGAUGCUGCUGAAUGUACAAUUUU
+....(((((.....)))))((.(((.....)))))..... ( -5.40)
+AAUUUCUACUAAGUGUAGAUUAAAGAUGCUUCUGGUAAGC
+....(((((.....)))))....(((....)))....... ( -5.40)
+AAUUUCUACUAAGUGUAGAUAAAGAUGCUUCUGGUAAGCC
+....(((((.....))))).......((((.....)))). ( -6.20)
+AAUUUCUACUAAGUGUAGAUAAGAUGCUUCUGGUAAGCCA
+....(((((.....)))))......((((.....)))).. ( -6.20)
+AAUUUCUACUAAGUGUAGAUCGCCCUGACACACGUUAUGU
+....(((((.....)))))......((((....))))... ( -5.40)
+AAUUUCUACUAAGUGUAGAUCUAACACCUACCUUGAAGGU
+....(((((.....)))))......((((.......)))) ( -6.60)
+AAUUUCUACUAAGUGUAGAUGAUUCUGAGUACUGUAGGCA
+....(((((..((((((((....))))..))))))))).. ( -6.60)
+AAUUUCUACUAAGUGUAGAUAUUCUGAGUACUGUAGGCAC
+....(((((..((((((((...))))..)))))))))... ( -5.10)
+AAUUUCUACUAAGUGUAGAUUGUAUCUACUAGUGGUAGAU
+....(((((((...((((((...))))))...))))))). (-13.30)
+AAUUUCUACUAAGUGUAGAUCCAGGAGUUUUCUGUGGUGU
+.....((((.....))))((((((((...))))).))).. ( -7.70)
+AAUUUCUACUAAGUGUAGAUCUGUGGUGUAGAUGCUGUAA
+.....((((.....))))(((((.....)))))....... ( -5.20)
+AAUUUCUACUAAGUGUAGAUUGUGGUGUAGAUGCUGUAAA
+....(((((.....)))))(((((((......))))))). ( -4.80)
+AAUUUCUACUAAGUGUAGAUCUUACUAAUAUGUUUACACC
+............((((((((...........)))))))). ( -5.50)
+AAUUUCUACUAAGUGUAGAUCACCACUAAUUCAACCUAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGACAUAUCAGCAUCUAUAGU
+...........(.((((((((.(......))))))))).) ( -7.60)
+AAUUUCUACUAAGUGUAGAUAUGAGGUUUAGAAGAGCUUU
+....(((((.....)))))...(((((((....))))))) ( -7.70)
+AAUUUCUACUAAGUGUAGAUUGAGGUUUAGAAGAGCUUUU
+....(((((.....)))))..(((((((....))))))). ( -8.00)
+AAUUUCUACUAAGUGUAGAUGAAGAGCUUUUGGUGAAUAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUGAAUACAGUCAUGUAGU
+....(((((.....))))).......((((....)))).. ( -6.20)
+AAUUUCUACUAAGUGUAGAUGUGAAUACAGUCAUGUAGUU
+.((.(((((.....))))).))...((((....))))... ( -6.30)
+AAUUUCUACUAAGUGUAGAUAUACUUUACUAUUCCUUAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAUUCCUUAUGUCAUUCAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACACCAGUUUACUCAUUCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUCAUUCUUACCUGGUGUUU
+......(((((.(((.(((......)))))).)))))... ( -6.40)
+AAUUUCUACUAAGUGUAGAUUUCUGUUAUUUACUUGUACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUGUACUUGACAUUUUAUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUCUUACUAAUGAUGUUUCU
+.....((((.....))))(((((........))))).... ( -6.20)
+AAUUUCUACUAAGUGUAGAUUCUUACUAAUGAUGUUUCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUUAGCACAUAUUCAGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAGCACAUAUUCAGUGGAU
+....((((((.(((((.(........)))))).)))))). ( -6.50)
+AAUUUCUACUAAGUGUAGAUUAGCACAUAUUCAGUGGAUG
+....((((((((((((......))))...)).)))))).. ( -6.70)
+AAUUUCUACUAAGUGUAGAUAGCACAUAUUCAGUGGAUGG
+....((((((.(((((.(......)))))).))))))... ( -6.60)
+AAUUUCUACUAAGUGUAGAUGCACAUAUUCAGUGGAUGGU
+....((((((.(((((........))))).)))))).... ( -7.40)
+AAUUUCUACUAAGUGUAGAUGUACCUUUCUGGAUAACAAU
+....(((((.....)))))(((.((.....))...))).. ( -6.00)
+AAUUUCUACUAAGUGUAGAUUGGAUAACAAUUGCUUAUAU
+.........(((((...(((((.....))))))))))... ( -5.10)
+AAUUUCUACUAAGUGUAGAUUAUUUCCACAAAGCAUUUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCACAAAGCAUUUCUAUUGGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUUGGUUCUUUAGUAAUUA
+....(((((.....)))))(((((((....)))))))... ( -5.90)
+AAUUUCUACUAAGUGUAGAUGUAAUUACCUAAAGAGACGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGGUGUUUCCUUUAGUACU
+....(((((.....)))))...((.....))......... ( -5.10)
+AAUUUCUACUAAGUGUAGAUCUUUAGUACUUUUGAAGAAG
+....(((((.....)))))(((((((.....))))))).. ( -8.60)
+AAUUUCUACUAAGUGUAGAUGUACUUUUGAAGAAGCUGCG
+....(((((.....))))).(((((((....)))).))). ( -7.00)
+AAUUUCUACUAAGUGUAGAUGAAGAAGCUGCGCUGUGCAC
+........(..(((((((.........)))))))..)... ( -7.50)
+AAUUUCUACUAAGUGUAGAUAAGAAGCUGCGCUGUGCACC
+........(..(((((((........)))))))..).... ( -8.40)
+AAUUUCUACUAAGUGUAGAUUGUUAAAUAAAGAAAUGUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUAAAUAAAGAAAUGUAUC
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUUUAAAUAAAGAAAUGUAUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAUAAGUACAAGUAUUUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUGGAGCAAUGGAUACAAC
+...((((((((........))))))))............. ( -6.70)
+AAUUUCUACUAAGUGUAGAUGUGGAGCAAUGGAUACAACU
+.((.(((((.....))))).)).................. ( -4.80)
+AAUUUCUACUAAGUGUAGAUCCAACCACCACAAACCUCUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCAGAGUGGUUUUAGAAAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAGAGUGGUUUUAGAAAAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGAAAAAUGGCAUUCCCAUC
+....(((((.....))))).......((((.....)))). ( -6.40)
+AAUUUCUACUAAGUGUAGAUGAAAAAUGGCAUUCCCAUCU
+....(((((.....)))))......((((.....)))).. ( -6.40)
+AAUUUCUACUAAGUGUAGAUGCUUGAUGACGUAGUUUACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUGUCCAAGACAUGUGAUCU
+....(((((.....)))))..((((...))))........ ( -6.30)
+AAUUUCUACUAAGUGUAGAUCUCAUUCGUAAGUCUAAUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGGUACAGGCUGGUAAUGU
+......((((((((....)))))))).............. ( -5.60)
+AAUUUCUACUAAGUGUAGAUUUCGCAUUCAACCAGGACAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAGUGUUAGCUUGUUACAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAGUGUUAGCUUGUUACAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUGUUAGCUUGUUACAAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCAAUGUGCUAUGAGGCCCA
+....(((((.....))))).....((.(((....))).)) ( -6.40)
+AAUUUCUACUAAGUGUAGAUACUAUUAAGGGUUCAUUCCU
+....(((((.....)))))........((((.....)))) ( -6.70)
+AAUUUCUACUAAGUGUAGAUAACAUAGAUUAUGACUGUGU
+....(((((.....)))))..((((((.......)))))) ( -8.40)
+AAUUUCUACUAAGUGUAGAUACAUAGAUUAUGACUGUGUC
+....(((((.....))))).((((((.......)))))). ( -8.60)
+AAUUUCUACUAAGUGUAGAUUGUUACAUGCACCAUAUGGA
+....(((((.....)))))............((....)). ( -5.00)
+AAUUUCUACUAAGUGUAGAUGUUACAUGCACCAUAUGGAA
+...(((((....(((((.........)))))....))))) ( -5.70)
+AAUUUCUACUAAGUGUAGAUUUACAUGCACCAUAUGGAAU
+...(((((....(((((........)))))....))))). ( -7.20)
+AAUUUCUACUAAGUGUAGAUAUGGACCUUUUGUUGACAGG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGGACCUUUUGUUGACAGGC
+....(((((.....))))).....(((.........))). ( -4.90)
+AAUUUCUACUAAGUGUAGAUGUUGACAGGCAAACAGCACA
+....(((((.....)))))(((((.........))))).. ( -6.80)
+AAUUUCUACUAAGUGUAGAUUUGACAGGCAAACAGCACAA
+....(((((.....)))))........((.....)).... ( -5.30)
+AAUUUCUACUAAGUGUAGAUAGCUUGGUUGUACGCUGCUG
+....(((((.....)))))((((.((......))..)))) ( -7.30)
+AAUUUCUACUAAGUGUAGAUGCUUGGUUGUACGCUGCUGU
+...........((((((.(........).))))))..... ( -6.50)
+AAUUUCUACUAAGUGUAGAUUCAAUCGAUUUACCACAACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCACAACUCUUAAUGACUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCUUGUGGCUAUGAAGUAC
+....(((((.....)))))..((....))........... ( -5.60)
+AAUUUCUACUAAGUGUAGAUUGCUCAAACUGGAAUUGCCG
+....(((((.....)))))...........((.....)). ( -5.10)
+AAUUUCUACUAAGUGUAGAUAGAUAUGUGUGCUUCAUUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAUAUGUGUGCUUCAUUAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAGAAGAUGAAUUUACACC
+............(((((((((((.....))))))))))). (-10.50)
+AAUUUCUACUAAGUGUAGAUCACCUUUUGAUGUUGUUAGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAUGUUGUUAGACAAUGCUC
+....(((((.....)))))...((((....))))...... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAUGUUGUUAGACAAUGCUCA
+....(((((.....)))))..((((....))))....... ( -5.90)
+AAUUUCUACUAAGUGUAGAUCAAAGUGCAGUGAAAAGAAC
+...((((....(.((((........)))).)....)))). ( -4.80)
+AAUUUCUACUAAGUGUAGAUGACUUCACUUUUAGUUUUAG
+....(((((.....))))).((((........)))).... ( -5.70)
+AAUUUCUACUAAGUGUAGAUACUUCACUUUUAGUUUUAGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUUUUAGUCCAGAGUACUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUUUAGUCCAGAGUACUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUCCAGAGUACUCAAUGGU
+....(((((.....)))))....(((..(....)..))). ( -6.10)
+AAUUUCUACUAAGUGUAGAUGUCCAGAGUACUCAAUGGUC
+....(((((.....)))))...(((..(....)..))).. ( -6.10)
+AAUUUCUACUAAGUGUAGAUUUCUUUUUUUUGUAUGAAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUGUAUGAAAAUGCCUUU
+....(((((.....))))).....((((....)))).... ( -6.00)
+AAUUUCUACUAAGUGUAGAUUUUGUAUGAAAAUGCCUUUU
+((..(((((.....)))))..))((((....))))..... ( -6.20)
+AAUUUCUACUAAGUGUAGAUUUGUAUGAAAAUGCCUUUUU
+....(((((.....)))))...((((....))))...... ( -6.00)
+AAUUUCUACUAAGUGUAGAUUGUAUGAAAAUGCCUUUUUA
+....(((((.....)))))..((((....))))....... ( -6.00)
+AAUUUCUACUAAGUGUAGAUGUAUGAAAAUGCCUUUUUAC
+....(((((.....))))).((((....))))........ ( -6.00)
+AAUUUCUACUAAGUGUAGAUUAUGAAAAUGCCUUUUUACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACCUUUUGCUAUGGGUAUU
+....(((((.....))))).(((((........))))).. ( -9.30)
+AAUUUCUACUAAGUGUAGAUACCUUUUGCUAUGGGUAUUA
+....(((((.....)))))(((((........)))))... ( -9.10)
+AAUUUCUACUAAGUGUAGAUCCUUUUGCUAUGGGUAUUAU
+....(((((.....))))).(((........)))...... ( -6.20)
+AAUUUCUACUAAGUGUAGAUGCUAUGGGUAUUAUUGCUAU
+....(((((.....))))).......((((....)))).. ( -6.50)
+AAUUUCUACUAAGUGUAGAUCUAUGGGUAUUAUUGCUAUG
+....(((((.....)))))......((((....))))... ( -6.50)
+AAUUUCUACUAAGUGUAGAUGCAAUGAUGUUUGUCAAACA
+....(((((.....))))).((((......))))...... ( -6.00)
+AAUUUCUACUAAGUGUAGAUCAAUGAUGUUUGUCAAACAU
+....(((((.....)))))......((((((...)))))) ( -5.90)
+AAUUUCUACUAAGUGUAGAUUCAAACAUAAGCAUGCAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUGUUUGUUUUUGUUACCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUGUUACCUUCUCUUGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUUACCUUCUCUUGCCACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUACCUUCUCUUGCCACUG
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUUUACCUUCUCUUGCCACUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUAUGGUCUAUAUGCCUGC
+....(((((.....)))))......(((......)))... ( -6.30)
+AAUUUCUACUAAGUGUAGAUAUAUGGUCUAUAUGCCUGCU
+....(((((.....))))).....(((......))).... ( -6.30)
+AAUUUCUACUAAGUGUAGAUUCUGGUUUUAAGCUAAAAGA
+....(((((.....)))))...(((((...)))))..... ( -5.50)
+AAUUUCUACUAAGUGUAGAUAAGCUAAAAGACUGUGUUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGCUAAAAGACUGUGUUAUG
+.....((((.....))))(((((...........))))). ( -5.20)
+AAUUUCUACUAAGUGUAGAUUAAAGUUUAUUAUGGUAAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAUGGUAAUGCUUUAGAUC
+....(((((.....)))))((((.(((...))).)))).. ( -5.10)
+AAUUUCUACUAAGUGUAGAUGAUCAAGCCAUUUCCAUGUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUGUGGGCUCUUAUAAUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGGCCAGAGGUAUUGUUUUU
+....(((((.....)))))...(((...)))......... ( -5.70)
+AAUUUCUACUAAGUGUAGAUGGCCAGAGGUAUUGUUUUUA
+....(((((.....)))))..(((...))).......... ( -5.70)
+AAUUUCUACUAAGUGUAGAUGCCAGAGGUAUUGUUUUUAU
+....(((((.....)))))((((...)))).......... ( -6.20)
+AAUUUCUACUAAGUGUAGAUUAUGUGUGUUGAGUAUUGCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGUGUGUUGAGUAUUGCCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUGUGUUGAGUAUUGCCCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUCAUAACUGGUAAUACAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUCAUAACUGGUAAUACACU
+...........((((((....(((....)))...)))))) ( -5.50)
+AAUUUCUACUAAGUGUAGAUUUGUUUCUUAGGCUAUUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAGGCUAUUUUUGUACUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUACUUGUUACUUUGGCCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUACUUGUUACUUUGGCCUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACUUGUUACUUUGGCCUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCCUCUUUUGUUUACUCAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUUACUCAACCGCUACUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUACUCAACCGCUACUUUA
+((..(((((.....)))))..))................. ( -4.90)
+AAUUUCUACUAAGUGUAGAUCUCAACCGCUACUUUAGACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGACUGACUCUUGGUGUUUAU
+......(((((((.((((....)).)).)))))))..... ( -7.00)
+AAUUUCUACUAAGUGUAGAUUGAUUACUUAGUUUCUACAC
+............(((((((..............))))))) ( -6.80)
+AAUUUCUACUAAGUGUAGAUUACACAGGAGUUUAGAUAUA
+.((((..(((..(((((...)))))...)))..))))... ( -5.30)
+AAUUUCUACUAAGUGUAGAUGAUAUAUGAAUUCACAGGGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCAACAACUCAGAGUAGAAU
+...(((((((..(.((.(......).)).)..))))))). ( -7.10)
+AAUUUCUACUAAGUGUAGAUCAACAACUCAGAGUAGAAUC
+...(((((((.(((((......)).)))...))))))).. ( -7.50)
+AAUUUCUACUAAGUGUAGAUAAAAAAUGGUUUCACUACUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACUACUUUCUGUUUUGCUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUUUUGCUUUCCAUGCAGG
+....(((((.....))))).....((((.......)))). ( -7.40)
+AAUUUCUACUAAGUGUAGAUGCUUUCCAUGCAGGGUGCUG
+....(((((.....))))).((..(((.....))).)).. ( -7.70)
+AAUUUCUACUAAGUGUAGAUCUUUCCAUGCAGGGUGCUGU
+....(((((.....))))).........((((....)))) ( -7.70)
+AAUUUCUACUAAGUGUAGAUCAUGCAGGGUGCUGUAGACA
+....(((((.....)))))((.(((((....))))))).. ( -9.80)
+AAUUUCUACUAAGUGUAGAUUGAAGAAAUGCUGGACAACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUCCCUUCCAUCAUAUGCA
+............(((((((((........)))).))))). ( -5.80)
+AAUUUCUACUAAGUGUAGAUGCUACUGCUCAAGAAGCUUA
+....(((((.....))))).(((.((.....)).)))... ( -8.10)
+AAUUUCUACUAAGUGUAGAUCUACUGCUCAAGAAGCUUAU
+....(((((.....)))))......(((.....))).... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAAUGUGGCUAAAUCUGAAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCGUGAUGCAGCCAUGCAA
+....(((((.....)))))........((((....)))). ( -8.20)
+AAUUUCUACUAAGUGUAGAUCACUAUGCUUAGAAAGUUGG
+........((((((((((....))))))))))........ (-10.00)
+AAUUUCUACUAAGUGUAGAUACUAUGCUUAGAAAGUUGGA
+........((((((((((...))))))))))......... ( -9.10)
+AAUUUCUACUAAGUGUAGAUCUUAUGCAUCAGCAUUGUGG
+....(((((.....)))))....((((....))))..... ( -7.20)
+AAUUUCUACUAAGUGUAGAUGCAUGGCCUCUUAUUGUAAC
+....(((((.....)))))((((...........)))).. ( -5.20)
+AAUUUCUACUAAGUGUAGAUAGGGCCAAUUCUGCUGUCAA
+....(((((.....))))).(.(((.......))).)... ( -5.70)
+AAUUUCUACUAAGUGUAGAUUACUUGCACUGUUAUCCGAU
+...........(((((((.....))))))).......... ( -5.90)
+AAUUUCUACUAAGUGUAGAUCAGGAUUUGAAAUGGGCUAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAUGGGCUAGAUUCCCUAA
+....(((((.....))))).....(((.......)))... ( -7.00)
+AAUUUCUACUAAGUGUAGAUUUACAGACACACCUAAAGGU
+....(((((.....)))))...........(((....))) ( -5.40)
+AAUUUCUACUAAGUGUAGAUUACUUUAUUAAAGGAUUAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAAAGGAUUAAACAACCUA
+....(((((.....))))).....(((.........))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUGCUGCCACAGUACGUCUACA
+.............((((((((.(((....))))))))))) ( -9.90)
+AAUUUCUACUAAGUGUAGAUUGUGCUUUUGCUGUAGAUGC
+....(((((.....)))))....((....))......... ( -5.80)
+AAUUUCUACUAAGUGUAGAUGCUGUAGAUGCUGCUAAAGC
+....(((((.....))))).(((.(((......))).))) ( -7.60)
+AAUUUCUACUAAGUGUAGAUCUGUAGAUGCUGCUAAAGCU
+....(((((.....))))).........(((.....))). ( -7.20)
+AAUUUCUACUAAGUGUAGAUGUGGUGCAUCGUGUUGUCUG
+.((.(((((.....))))).))((.(((......))))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUGUGACUUAAAAGGUAAGUAU
+.((.(((((.....))))).)).(((((.....))))).. ( -6.50)
+AAUUUCUACUAAGUGUAGAUUGACUUAAAAGGUAAGUAUG
+....(((((.....)))))...(((((.....)))))... ( -6.40)
+AAUUUCUACUAAGUGUAGAUACACUUAAAAACACAGUCUG
+.........(((((((....)))))))............. ( -6.00)
+AAUUUCUACUAAGUGUAGAUCACUUAAAAACACAGUCUGU
+.........((((((.....)))))).............. ( -5.00)
+AAUUUCUACUAAGUGUAGAUUAAACGGGUUUGCGGUGUAA
+....(((((.....))))).....((......))...... ( -5.50)
+AAUUUCUACUAAGUGUAGAUAAACGGGUUUGCGGUGUAAG
+....(((((.....)))))....((......))....... ( -5.50)
+AAUUUCUACUAAGUGUAGAUAACGGGUUUGCGGUGUAAGU
+....(((((.....)))))...((......))........ ( -5.50)
+AAUUUCUACUAAGUGUAGAUCGGUGUAAGUGCAGCCCGUC
+....(((((.....))))).(((.((.......))))).. ( -7.60)
+AAUUUCUACUAAGUGUAGAUGACAUCUACAAUGAUAAAGU
+.............(((((((...))))))).......... ( -5.60)
+AAUUUCUACUAAGUGUAGAUACAUCUACAAUGAUAAAGUA
+....(((((.....)))))...(((......)))...... ( -5.20)
+AAUUUCUACUAAGUGUAGAUGCUAAAUUCCUAAAAACUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAAAUUCCUAAAAACUAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUGAUUCUUACUUUGUAGU
+.....((((.(((((.(((.......)))))))).)))). ( -8.50)
+AAUUUCUACUAAGUGUAGAUUAGUUAAGAGACACACUUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUAACUACCAACAUGAAGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAUUUACUUAAGGAUUGUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUAAGGAUUGUCCAGCUGU
+....(((((.....)))))......(((...)))...... ( -6.00)
+AAUUUCUACUAAGUGUAGAUAGUUUAGAAUAGACGGUGAC
+....(((((.....)))))..(((((...)))))...... ( -5.60)
+AAUUUCUACUAAGUGUAGAUGAAUAGACGGUGACAUGGUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGGCAUUUUGAUGAAGGUAA
+..((((....((((((......))))))....)))).... ( -4.90)
+AAUUUCUACUAAGUGUAGAUGAUGAAGGUAAUUGUGACAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGAAGGUAAUUGUGACACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUAAAAAGGACUGGUAUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAGAAAACCCAGAUAUAUU
+..(((((((...........)))))))............. ( -5.60)
+AAUUUCUACUAAGUGUAGAUUAGAAAACCCAGAUAUAUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAAAAACAGUACAAUUCUG
+....(((((.....)))))........(((.......))) ( -5.00)
+AAUUUCUACUAAGUGUAGAUGGUGAUUUCAUACAAACCAC
+....(((((.....)))))((((............)))). ( -7.20)
+AAUUUCUACUAAGUGUAGAUAUACAAACCACGCCAGGUAG
+....(((((.....))))).......(((......))).. ( -6.80)
+AAUUUCUACUAAGUGUAGAUACUGCAGAGUCACAUGUUGA
+....(((((.....)))))....(((........)))... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUUAAAAUAUGACUUCACGGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCGUUAUUUUAAAUAUUGG
+....(((((.....)))))..(((.((((...)))).))) ( -6.10)
+AAUUUCUACUAAGUGUAGAUAAAUAUUGGGAUCAGACAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUAUUGGGAUCAGACAUAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAUGACAGAUGCAUUCUGCA
+....(((((.....)))))...((.((((.....)))))) ( -8.30)
+AAUUUCUACUAAGUGUAGAUAUGUUUUAUUCUCUACAGUG
+...........(.((((((.(........).)))))).). ( -5.20)
+AAUUUCUACUAAGUGUAGAUAUUCUCUACAGUGUUCCCAC
+...........(.((((((.....)))))).)........ ( -6.00)
+AAUUUCUACUAAGUGUAGAUUUCUCUACAGUGUUCCCACC
+...........(.((((((....)))))).)......... ( -6.10)
+AAUUUCUACUAAGUGUAGAUGGACCACUAGUGAGAAAAAU
+..(((((((((.(((.........))))))).)))))... ( -6.90)
+AAUUUCUACUAAGUGUAGAUGACCACUAGUGAGAAAAAUA
+..(((((((((.(((........))))))).))))).... ( -7.80)
+AAUUUCUACUAAGUGUAGAUUUGAUGGUGUUCCAUUUGUA
+....(((((.....)))))...(((((....))))).... ( -8.50)
+AAUUUCUACUAAGUGUAGAUUAGUUUCAACUGGAUACCAC
+....(((((.....))))).((((....))))........ ( -5.10)
+AAUUUCUACUAAGUGUAGAUAACUGGAUACCACUUCAGAG
+....(((((.....)))))...(((((......))))).. ( -7.70)
+AAUUUCUACUAAGUGUAGAUAAGGAAUUACUUGUGUAUGC
+............(((((.(((((......))))).))))) ( -8.30)
+AAUUUCUACUAAGUGUAGAUAGGAAUUACUUGUGUAUGCU
+...........((((((.(((((.....))))).)))))) ( -8.00)
+AAUUUCUACUAAGUGUAGAUCAGUAGCUGCACUUACUAAC
+.........(((((((((........)))))))))..... (-10.20)
+AAUUUCUACUAAGUGUAGAUAGUAGCUGCACUUACUAACA
+.........(((((((((.......)))))))))...... ( -9.70)
+AAUUUCUACUAAGUGUAGAUCAAACUGUCAAACCCGGUAA
+....(((((.....)))))....((((.......)))).. ( -5.90)
+AAUUUCUACUAAGUGUAGAUAAACUGUCAAACCCGGUAAU
+....(((((.....)))))...((((.......))))... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAACAAAGACUUCUAUGACUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAAAGACUUCUAUGACUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUGUGUCUAAGGGUUUCUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUAAGGAAGGAAGUUCUGU
+((..(((((.....)))))..))..((((.....)))).. ( -5.70)
+AAUUUCUACUAAGUGUAGAUAGGAAGGAAGUUCUGUUGAA
+.....((((.....))))((((((......)))))).... ( -5.90)
+AAUUUCUACUAAGUGUAGAUCUCAGGAUGGUAAUGCUGCU
+....(((((.....)))))...(((.((....)).))).. ( -7.80)
+AAUUUCUACUAAGUGUAGAUUAGUUGAAGUUGUUGAUAAG
+((((((.(((((.......))))).))))))......... ( -6.90)
+AAUUUCUACUAAGUGUAGAUAUUGUUACGAUGGUGGCUGU
+(((.(((((.....))))).)))(((((....)))))... ( -9.30)
+AAUUUCUACUAAGUGUAGAUCCAUUUAAUAAAUGGGGUAA
+....(((((.....)))))(((((((...))))))).... ( -8.70)
+AAUUUCUACUAAGUGUAGAUCAUUUAAUAAAUGGGGUAAG
+....(((((.....)))))((((((...))))))...... ( -5.40)
+AAUUUCUACUAAGUGUAGAUAUAAAUGGGGUAAGGCUAGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAUGAUUCAAUGAGUUAUG
+....(((((.....)))))..((((((((...)))))))) ( -7.80)
+AAUUUCUACUAAGUGUAGAUCGCAUAUACAAAACGUAAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCAUAUACAAAACGUAAUGU
+....(((((.....))))).((((.(((.....))))))) ( -6.50)
+AAUUUCUACUAAGUGUAGAUAUCAAAAAUUAUUGAAAUCA
+....(((((.....)))))..((((......))))..... ( -5.30)
+AAUUUCUACUAAGUGUAGAUUAGUGAUGUAGAAAACCCUC
+..(((((((..(.((.....)).)...)))))))...... ( -5.20)
+AAUUUCUACUAAGUGUAGAUUAUAGAUUAGCUAAUGAGUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAACAUUUGUCAAGCUGUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAACAUUUGUCAAGCUGUCAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAUUUGUCAAGCUGUCACG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAAGCUGUCACGGCCAAUG
+....(((((.....))))).....((((...))))..... ( -7.20)
+AAUUUCUACUAAGUGUAGAUAUCUACUGAUGGUAACAAAA
+......(((((...((((....))))...)))))...... ( -6.50)
+AAUUUCUACUAAGUGUAGAUUCUACUGAUGGUAACAAAAU
+......(((((...((((...))))...)))))....... ( -5.20)
+AAUUUCUACUAAGUGUAGAUCAACACAGACUUUAUGAGUG
+....(((((.....))))).........((((...)))). ( -5.10)
+AAUUUCUACUAAGUGUAGAUUGAGUGUCUCUAUAGAAAUA
+....(((((.....)))))..(((...))).......... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUGAAUGAGUUUUACGCAUAU
+............(((((((..........))))))).... ( -5.50)
+AAUUUCUACUAAGUGUAGAUACGCAUAUUUGCGUAAACAU
+....(((((.....)))))((((((....))))))..... (-12.00)
+AAUUUCUACUAAGUGUAGAUCGCAUAUUUGCGUAAACAUU
+....(((((.....))))).((((....))))........ ( -8.90)
+AAUUUCUACUAAGUGUAGAUCGUAAACAUUUCUCAAUGAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAAUGAUGAUACUCUCUGA
+....(((((.....))))).(((..((......))..))) ( -5.20)
+AAUUUCUACUAAGUGUAGAUAAUAGCACUUAUGCAUCUCA
+.........(((((((........)))))))......... ( -6.40)
+AAUUUCUACUAAGUGUAGAUAGUCAGUUCUUUAUUAUCAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAUCAAAACAAUGUUUUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUGUCUGAAGCAAAAUGUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGUCUGAAGCAAAAUGUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUCUGAAGCAAAAUGUUGG
+....(((((.....)))))((((.....))))........ ( -5.00)
+AAUUUCUACUAAGUGUAGAUGCUCUCAACAUACAAUGCUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUCUCAACAUACAAUGCUAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAGAUGAUAUCGUAAAAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAGAUGAUAUCGUAAAAACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUAUAGAUGCUUACCCACU
+....(((((.....))))).((.......))......... ( -5.40)
+AAUUUCUACUAAGUGUAGAUAUUUGUACUUACAAUACAUA
+....(((((.....)))))...((((....))))...... ( -4.90)
+AAUUUCUACUAAGUGUAGAUUACUUACAAUACAUAAGAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGAGGCUAUGUACACACCG
+............(((((.(((......))).))))).... ( -7.30)
+AAUUUCUACUAAGUGUAGAUUGAGGCUAUGUACACACCGC
+............(((((.((.......)).)))))..... ( -6.00)
+AAUUUCUACUAAGUGUAGAUCAAUUCACAGACUUCAUUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAUGCUCCAGGUUGUGAUG
+.....((((.....))))((((..(((...)))..)))). ( -6.30)
+AAUUUCUACUAAGUGUAGAUCUUAGGAGGUAUGAGCUAUU
+....(((((.....))))).((((.......))))..... ( -4.80)
+AAUUUCUACUAAGUGUAGAUCCAUUGUGUGCUAAUGGACA
+....(((((.....)))))(((((((.....))))))).. (-10.20)
+AAUUUCUACUAAGUGUAGAUCAUUGUGUGCUAAUGGACAA
+....(((((.....)))))......(((.(....).))). ( -7.20)
+AAUUUCUACUAAGUGUAGAUUGGUUUAUAUAAAAAUACAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUUUAUAUAAAAAUACAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUUAUAUAAAAAUACAUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUAAAAAUACAUGUGUUGG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGCAAUUGCAACAUGUGAC
+....(((((.....)))))..(((....)))......... ( -6.40)
+AAUUUCUACUAAGUGUAGAUAGCUAACACCUGUACUGAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUAACACCUGUACUGAAAG
+....(((((.....)))))(((........)))....... ( -4.90)
+AAUUUCUACUAAGUGUAGAUUGCAGCAGAAACGCUCAAAG
+....(((((.....)))))(((.(((......)))))).. ( -8.20)
+AAUUUCUACUAAGUGUAGAUGCAGCAGAAACGCUCAAAGC
+....(((((.....)))))((.(((......))))).... ( -7.30)
+AAUUUCUACUAAGUGUAGAUCAGCAGAAACGCUCAAAGCU
+....(((((.....)))))..(((......)))....... ( -6.40)
+AAUUUCUACUAAGUGUAGAUAACUGUCUUAUGGUAUUGCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGGGAAGUUGGUAAACCUA
+....(((((.....)))))..((((...........)))) ( -5.40)
+AAUUUCUACUAAGUGUAGAUCUGGUUAUCGUGUAACUAAA
+....(((((.....)))))..(((((((...))))))).. ( -8.20)
+AAUUUCUACUAAGUGUAGAUAAAAAGGUGACUAUGGUGAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCGAGGUACAACAACUUACA
+....(((((.....)))))....((((......))))... ( -5.30)
+AAUUUCUACUAAGUGUAGAUGUGCUGACAUCACAUACAGU
+.......(((..((((.(((((....)))))))))..))) ( -9.30)
+AAUUUCUACUAAGUGUAGAUUGCUGACAUCACAUACAGUA
+....(((((.....))))).(((((..........))))) ( -6.70)
+AAUUUCUACUAAGUGUAGAUCUAGCAAUGUUGCAAAUUAU
+....(((((.....)))))....(((....)))....... ( -6.60)
+AAUUUCUACUAAGUGUAGAUUAGCAAUGUUGCAAAUUAUC
+....(((((.....)))))...(((....)))........ ( -6.60)
+AAUUUCUACUAAGUGUAGAUGCUAUUGGCCUAGCUCUCUA
+....(((((.....))))).((((......))))...... ( -7.60)
+AAUUUCUACUAAGUGUAGAUCUAUUGGCCUAGCUCUCUAC
+....(((((.....)))))......(((...)))...... ( -4.80)
+AAUUUCUACUAAGUGUAGAUCCUAUAGAUAAAUGUAGUAG
+....(((((.....)))))..(((((......)))))... ( -7.30)
+AAUUUCUACUAAGUGUAGAUGAUAAAUUCAAAGUGAAUUC
+....(((((.....))))).....((((((...)))))). ( -6.40)
+AAUUUCUACUAAGUGUAGAUAUAAAUUCAAAGUGAAUUCA
+....(((((.....)))))....((((((...)))))).. ( -6.40)
+AAUUUCUACUAAGUGUAGAUGUACUGUAAAUGCAUUGCCU
+....(((((.....))))).(((.(((....))).))).. ( -6.40)
+AAUUUCUACUAAGUGUAGAUUACUGUAAAUGCAUUGCCUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGAAAUUUCAAUGGCCACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUGGCCACAAAUUAUGAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUGUUGUCAAUGCCAGAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUUCAGUGUGUAGACUUAU
+.........(((((.((.(((......))).)).))))). ( -6.80)
+AAUUUCUACUAAGUGUAGAUGUUUAUGAUAAUAAGCUUAA
+....(((((.....))))).((((((....)))))).... ( -8.20)
+AAUUUCUACUAAGUGUAGAUUGAUAAUAAGCUUAAAGCAC
+....(((((.....)))))..........(((...))).. ( -5.80)
+AAUUUCUACUAAGUGUAGAUAAAUGUUUUAUAAGGGUGUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUAAGGGUGUUAUCACGCAU
+....(((((.....))))).....(.(((....))).).. ( -8.70)
+AAUUUCUACUAAGUGUAGAUUAAGGGUGUUAUCACGCAUG
+....(((((.....)))))....(.(((....))).)... ( -8.70)
+AAUUUCUACUAAGUGUAGAUAUCUGCAAUUAACAGGCCAC
+....(((((.....)))))..((((.......)))).... ( -5.60)
+AAUUUCUACUAAGUGUAGAUUUUCACCUUAUAAUUCACAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCUUAUAAUUCACAGAAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGGACUACCAACUCAAACUG
+....(((((.....)))))(((.....))).......... ( -7.20)
+AAUUUCUACUAAGUGUAGAUGGACUACCAACUCAAACUGU
+....(((((.....)))))(((....)))........... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAUGUUGCUAUUACCAGAGCA
+....(((((.....))))).....((((........)))) ( -7.00)
+AAUUUCUACUAAGUGUAGAUCAUAAUGUCUGAUAGAGACC
+....(((((.....))))).......((((.....)))). ( -8.00)
+AAUUUCUACUAAGUGUAGAUUGACAAGUUGCAAUUUACAA
+.............(((((((((........))))))))). ( -7.70)
+AAUUUCUACUAAGUGUAGAUCAAGUCUUGAAAUUCCACGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAGCUGAAAAUGUAACAGG
+....(((((.....))))).....(((.........))). ( -5.00)
+AAUUUCUACUAAGUGUAGAUAAGAUUGUAGUAAGGUAAUC
+....(((((.....)))))...(((((........))))) ( -4.90)
+AAUUUCUACUAAGUGUAGAUUGUGUUGACAUACCUGGCAU
+....(((((.....))))).(((....))).......... ( -5.20)
+AAUUUCUACUAAGUGUAGAUAAAAUGAAUUAUCAAGUUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAUGAAUUAUCAAGUUAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCACCCGCGAAGAAGCUAUA
+....(((((.....))))).......((......)).... ( -6.40)
+AAUUUCUACUAAGUGUAGAUCCUUUACAGCUAGGUUUUUC
+....(((((.....))))).(((........)))...... ( -6.20)
+AAUUUCUACUAAGUGUAGAUCAGCUAGGUUUUUCUACAGG
+.............((((((..(((...)))..)))))).. ( -6.40)
+AAUUUCUACUAAGUGUAGAUUCUACAGGUGUUAACCUAGU
+....(((((.....)))))......((((....))))... ( -8.50)
+AAUUUCUACUAAGUGUAGAUCUACAGGUGUUAACCUAGUU
+....(((((.....)))))...((((((....)))).)). ( -8.70)
+AAUUUCUACUAAGUGUAGAUUACAGGUGUUAACCUAGUUG
+....(((((.....)))))..((((((....)))).)).. ( -8.70)
+AAUUUCUACUAAGUGUAGAUUCCAGAGUUAGUGCUAAACC
+....(((((.....)))))......(((....)))..... ( -5.20)
+AAUUUCUACUAAGUGUAGAUCCAGAGUUAGUGCUAAACCA
+....(((((.....))))).....(((....)))...... ( -5.20)
+AAUUUCUACUAAGUGUAGAUCAGAGUUAGUGCUAAACCAC
+....(((((.....)))))....(((....)))....... ( -5.20)
+AAUUUCUACUAAGUGUAGAUAACACCUCAUACCACUUAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUUAUGGGCACAUGGCUUU
+....(((((.....)))))...(((((....))))).... ( -6.50)
+AAUUUCUACUAAGUGUAGAUAGUUGACAUCUAUGAAGUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGAAAAUAGGACCUGAGCG
+.((.(((((.....))))).)).................. ( -4.80)
+AAUUUCUACUAAGUGUAGAUUGAAAAUAGGACCUGAGCGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCACUGCUUCAGACACUUAU
+.........(((((((.((.........))..))))))). ( -6.40)
+AAUUUCUACUAAGUGUAGAUCACUGCUUCAGACACUUAUG
+.........(((((((.((........))..))))))).. ( -7.30)
+AAUUUCUACUAAGUGUAGAUAUUACGUCUAUAAUCCGUUU
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUUGAUUGAUGUUCAACAAUGG
+.....((((.....))))((((.((((...)))))))).. ( -6.20)
+AAUUUCUACUAAGUGUAGAUACAGGUAACCUACAAAGCAA
+....(((((.....)))))...(((...)))......... ( -5.00)
+AAUUUCUACUAAGUGUAGAUCAGGUAACCUACAAAGCAAC
+....(((((.....)))))..(((...))).......... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUUAAGCGUGUUGACUGGACU
+....(((((.....))))).........(((.....))). ( -4.80)
+AAUUUCUACUAAGUGUAGAUGGAAUUGCAAUGUCGAUAGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAAUUGCAAUGUCGAUAGAU
+....(((((.....)))))...........(((....))) ( -4.90)
+AAUUUCUACUAAGUGUAGAUUAGAUUUGACACUAGAGUGC
+......((((.(((((.((......)).)))))..)))). ( -6.70)
+AAUUUCUACUAAGUGUAGAUACACUAGAGUGCUAUCUAAC
+....(((((.....))))).....((((......)))).. ( -6.80)
+AAUUUCUACUAAGUGUAGAUUAUGUAAAUAAACAUGCAUU
+....(((((.....))))).(((((......))))).... ( -6.40)
+AAUUUCUACUAAGUGUAGAUGAUAAAAGUGCUUUUGUUAA
+....(((((.....)))))((((((((....)))))))). ( -7.30)
+AAUUUCUACUAAGUGUAGAUAUAAAAGUGCUUUUGUUAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUAAUUUAAAACAAUUACC
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUUUAAUUUAAAACAAUUACCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAACAAUUACCAUUUUUCUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUAUUACUCUGACAGUCCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAUUACUCUGACAGUCCAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUUACUCUGACAGUCCAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUGGUGCUGUCUGUAGACA
+....(((((.......(((((((...)))))))))))).. ( -7.40)
+AAUUUCUACUAAGUGUAGAUGCUUGUGGGUUUACAAACAA
+.............(((((((.(....).)))))))..... ( -7.10)
+AAUUUCUACUAAGUGUAGAUCAAACAAUUUGAUACUUAUA
+.....((((.....))))((((((...))))))....... ( -5.60)
+AAUUUCUACUAAGUGUAGAUAUACUUAUAACCUCUGGAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAAGACUUCAGAGUUUAGA
+....(((((.....)))))....(((((....)))))... ( -6.00)
+AAUUUCUACUAAGUGUAGAUCAAGACUUCAGAGUUUAGAA
+....(((((.....)))))((.(((((....))))).)). ( -7.00)
+AAUUUCUACUAAGUGUAGAUGAAAAUGUGGCUUUUAAUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUGUUGUAAAUAAGGGACA
+....(((((.....)))))...((((.(......).)))) ( -5.90)
+AAUUUCUACUAAGUGUAGAUAUGUUGUAAAUAAGGGACAC
+....(((((.....)))))..((((.(......).)))). ( -6.20)
+AAUUUCUACUAAGUGUAGAUAUGGACAACAGGGUGAAGUA
+.(((((.(((...(((........)))....)))))))). ( -5.20)
+AAUUUCUACUAAGUGUAGAUUAUCAUUAAUAACACUGUUU
+...........(((((..((((....)))).))))).... ( -5.50)
+AAUUUCUACUAAGUGUAGAUCACAAAAGUUGAUGGUGUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAAUAAAACAACAUUACCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGCUUUGGGCUAAGCGCAAC
+....(((((.....))))).....(((.((...)).))). ( -8.10)
+AAUUUCUACUAAGUGUAGAUGGCUAAGCGCAACAUUAAAC
+....(((((.....)))))..((.....)).......... ( -5.20)
+AAUUUCUACUAAGUGUAGAUGGUGUGGACAUUGCUGCUAA
+....(((((.....)))))....((((......))))... ( -6.10)
+AAUUUCUACUAAGUGUAGAUUUCUAUGACUGACAUAGCCA
+....(((((.....)))))...(((((.....)))))... ( -7.20)
+AAUUUCUACUAAGUGUAGAUUGCACCACUCACUGUCUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGAUGGUAGAGUUGAUGGU
+...(((((((((((....)))...))))))))........ ( -5.50)
+AAUUUCUACUAAGUGUAGAUUGAUGGUAGAGUUGAUGGUC
+...(((((((((((....)))..))))))))......... ( -5.90)
+AAUUUCUACUAAGUGUAGAUGAUGGUAGAGUUGAUGGUCA
+....(((((.....)))))((((.((.......)).)))) ( -7.00)
+AAUUUCUACUAAGUGUAGAUAUGGUAGAGUUGAUGGUCAA
+...((((((((.((....)).))))))))........... ( -7.20)
+AAUUUCUACUAAGUGUAGAUGAAAUGCCCGUAAUGGUGUU
+....(((((.....)))))...((((((......)))))) ( -7.70)
+AAUUUCUACUAAGUGUAGAUCAACCAUCUGUAGGUCCCAA
+....(((((.....)))))...(((.......)))..... ( -5.90)
+AAUUUCUACUAAGUGUAGAUCUCAGAGUAGAAAUUUACAA
+((((((((((..(.(.....).)..))))))))))..... ( -8.50)
+AAUUUCUACUAAGUGUAGAUCAAGAAUUUAAACCCAGGAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAACCCAGGAGUCAAAUGGAA
+....(((((.....)))))....(((.........))).. ( -6.40)
+AAUUUCUACUAAGUGUAGAUUUAGAAUUAGCUAUGGAUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGGAGAUUUUAGUCAUAGUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGUCAUAGUCAGUUAGGUGG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUCAUAGUCAGUUAGGUGGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUCUACUGAUUGGACUAGC
+........((((..(((((...)))))...))))...... ( -5.30)
+AAUUUCUACUAAGUGUAGAUAAGGAAUCACCUUUUGAAUU
+....(((((.....))))).((((.....))))....... ( -6.40)
+AAUUUCUACUAAGUGUAGAUAGGAAUCACCUUUUGAAUUA
+....(((((.....))))).(((.....)))......... ( -5.50)
+AAUUUCUACUAAGUGUAGAUGAAUUAGAAGAUUUUAUUCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUUAGAAGAUUUUAUUCCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUCCUAUGGACAGUACAGU
+....(((((.....)))))...(((...)))......... ( -5.20)
+AAUUUCUACUAAGUGUAGAUUUCCUAUGGACAGUACAGUU
+....(((((.....)))))..(((...))).......... ( -5.20)
+AAUUUCUACUAAGUGUAGAUAUAACAGAUGCGCAAACAGG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUACUUGAUGAUUUUGUUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUGAAAUAAUAAAAUCCCA
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUUUGAAAUAAUAAAAUCCCAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUGUAGUUUCUAAGGUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAGGUUGUCAAAGUGACUA
+....(((((.....)))))........((((...)))).. ( -6.70)
+AAUUUCUACUAAGUGUAGAUAUUUAUGCUUUGGUGUAAAG
+....(((((.....)))))..(((((((....))))))). ( -8.00)
+AAUUUCUACUAAGUGUAGAUUGCUUUGGUGUAAAGAUGGC
+....(((((.....)))))((((......))))....... ( -6.10)
+AAUUUCUACUAAGUGUAGAUGUGUAAAGAUGGCCAUGUAG
+.((.(((((.....))))).)).................. ( -4.80)
+AAUUUCUACUAAGUGUAGAUACCCAAAAUUACAAUCUAGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCCAAAAUUACAAUCUAGUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAAAUGCAAAGAAUGCUAU
+....(((((.....))))).......(((.....)))... ( -6.00)
+AAUUUCUACUAAGUGUAGAUAACACAUUAACAUUAGCUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUGCUGGUUCUGAUAAAGG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGCUGGUUCUGAUAAAGGA
+.((.(((((.....))))).)).....((((.....)))) ( -5.20)
+AAUUUCUACUAAGUGUAGAUAAGACAGUGGUUGCCUACGG
+....(((((.....))))).......((((....)))).. ( -6.80)
+AAUUUCUACUAAGUGUAGAUAGACAGUGGUUGCCUACGGG
+....(((((.....)))))......((((....))))... ( -6.80)
+AAUUUCUACUAAGUGUAGAUUCUCUGAUGCAGAUUCAACU
+....(((((.....)))))...((((...))))....... ( -6.20)
+AAUUUCUACUAAGUGUAGAUAUUGGUGAUUGUGCAACUGU
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUUUCACUUACAUUUGUGGGUU
+....(((((.((((((((.......))))))))))))).. ( -8.80)
+AAUUUCUACUAAGUGUAGAUUCACUUACAUUUGUGGGUUU
+....(((((.((((((((......)))))))))))))... ( -9.40)
+AAUUUCUACUAAGUGUAGAUCACUUACAUUUGUGGGUUUA
+....(((((.((((((((.....))))))))))))).... ( -9.10)
+AAUUUCUACUAAGUGUAGAUACUUACAUUUGUGGGUUUAU
+....(((((.((((((((....)))))))))))))..... ( -9.20)
+AAUUUCUACUAAGUGUAGAUUGGGUUUAUACAACAAAAGC
+............((((((((...))))))))......... ( -4.80)
+AAUUUCUACUAAGUGUAGAUUACAACAAAAGCUAGCUCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAGCUCAUGGGACACUUCG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUACUAAUGUGAAUGCGUCA
+.....((((.....))))((((((....))))))...... ( -7.20)
+AAUUUCUACUAAGUGUAGAUUAAUUGGAUGUAAUUAUCUU
+....(((((.....)))))......(((((....))))). ( -6.70)
+AAUUUCUACUAAGUGUAGAUAAUUGGAUGUAAUUAUCUUG
+....(((((.....))))).....(((((....))))).. ( -6.70)
+AAUUUCUACUAAGUGUAGAUAUUGGAUGUAAUUAUCUUGG
+(((.(((((.....))))).)))(((((....)))))... ( -7.10)
+AAUUUCUACUAAGUGUAGAUGGAGGAAUACAAAUCCAAUU
+....(((((.....)))))((((..........))))... ( -7.50)
+AAUUUCUACUAAGUGUAGAUGAGGAAUACAAAUCCAAUUC
+....(((((.....)))))...(((.......)))..... ( -6.20)
+AAUUUCUACUAAGUGUAGAUUUUGACAUGAGUAAAUUUCC
+((..(((((.....)))))..))................. ( -4.90)
+AAUUUCUACUAAGUGUAGAUACAUGAGUAAAUUUCCCCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCCUUAAAUUAAGGGGUACU
+.....((((.....))))((((((((...))))))))... (-12.00)
+AAUUUCUACUAAGUGUAGAUAAAGAAGGUCAAAUCAAUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUCUCUUCUUAGUAAAGGUA
+.((((.(((((((...(((....))).))))))).)))). ( -7.20)
+AAUUUCUACUAAGUGUAGAUUCUCUUCUUAGUAAAGGUAG
+.((((.(((((((...(((...))).))))))).)))).. ( -6.60)
+AAUUUCUACUAAGUGUAGAUUAGUGAUGUUCUUGUUAACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUUCUUGUUUUAUUGCCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUUGUUUUAUUGCCACUAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUGUUUUAUUGCCACUAGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGUUUUAUUGCCACUAGUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUGCCACUAGUCUCUAGUC
+(((.(((((.....))))).)))...(((((...))))). ( -7.50)
+AAUUUCUACUAAGUGUAGAUUUGCCACUAGUCUCUAGUCA
+....(((((.....)))))......(((((...))))).. ( -7.10)
+AAUUUCUACUAAGUGUAGAUACACGUGGUGUUUAUUACCC
+....(((((.....))))).......((((.....)))). ( -7.30)
+AAUUUCUACUAAGUGUAGAUUUACCCUGACAAAGUUUUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAGAUCCUCAGUUUUACAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGAUCCUCAGUUUUACAUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAUUCAACUCAGGACUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAUUCAACUCAGGACUUGUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUCCAAUGUUACUUGGUU
+....(((((.....))))).....((((......)))).. ( -6.60)
+AAUUUCUACUAAGUGUAGAUCCAAUGUUACUUGGUUCCAU
+....(((((.....))))).((((......))))...... ( -6.60)
+AAUUUCUACUAAGUGUAGAUCAAUGUUACUUGGUUCCAUG
+.......((((((((...........))))))))...... ( -5.90)
+AAUUUCUACUAAGUGUAGAUAUAACCCUGUCCUACCAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUGAUGGUGUUUAUUUUGCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUUGCUUCCACUGAGAAGU
+....(((((.....))))).....(((((......))))) ( -7.90)
+AAUUUCUACUAAGUGUAGAUGCUUCCACUGAGAAGUCUAA
+....(((((.....))))).(((((......))))).... ( -8.20)
+AAUUUCUACUAAGUGUAGAUCUUCCACUGAGAAGUCUAAC
+....(((((.....))))).((((......))))...... ( -6.40)
+AAUUUCUACUAAGUGUAGAUUGGUACUACUUUAGAUUCGA
+........(((((.((((.......)))))))))...... ( -5.00)
+AAUUUCUACUAAGUGUAGAUGGUACUACUUUAGAUUCGAA
+........(((((.((((......)))))))))....... ( -5.60)
+AAUUUCUACUAAGUGUAGAUGUACUACUUUAGAUUCGAAG
+........(((((.((((.....)))))))))........ ( -5.30)
+AAUUUCUACUAAGUGUAGAUGAUUCGAAGACCCAGUCCCU
+....(((((.....))))).........(((...)))... ( -4.90)
+AAUUUCUACUAAGUGUAGAUAAUUUUGUAAUGAUCCAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAAUGAUCCAUUUUUGGGU
+....(((((.....))))).......(((((....))))) ( -8.50)
+AAUUUCUACUAAGUGUAGAUUAAUGAUCCAUUUUUGGGUG
+....(((((.....)))))......(((((....))))). ( -9.30)
+AAUUUCUACUAAGUGUAGAUUGGGUGUUUAUUACCACAAA
+....(((((.....)))))(((((((.....)))).))). ( -9.30)
+AAUUUCUACUAAGUGUAGAUGGGUGUUUAUUACCACAAAA
+....(((((.....)))))((((((.....)))).))... ( -8.40)
+AAUUUCUACUAAGUGUAGAUGGUGUUUAUUACCACAAAAA
+....(((((.....)))))(((((.....)))))...... ( -8.70)
+AAUUUCUACUAAGUGUAGAUUUACCACAAAAACAACAAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUCUAGUGCGAAUAAUUGCA
+....(((((.....))))).......(((((....))))) ( -7.30)
+AAUUUCUACUAAGUGUAGAUGAAUAUGUCUCUCAGCCUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUAUGUCUCUCAGCCUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUAUGGACCUUGAAGGAAA
+....(((((.....))))).........(((...)))... ( -5.30)
+AAUUUCUACUAAGUGUAGAUUUAUGGACCUUGAAGGAAAA
+....(((((.....)))))........(((...))).... ( -5.30)
+AAUUUCUACUAAGUGUAGAUAAAAAUCUUAGGGAAUUUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUUUAAGAAUAUUGAUGGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGAAUAUUGAUGGUUAUUUU
+....(((((.....))))).((((((........)))))) ( -5.30)
+AAUUUCUACUAAGUGUAGAUAAAAUAUAUUCUAAGCACAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAUAUAUUCUAAGCACACG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGCGUGAUCUCCCUCAGGG
+.((.(((((.....))))).)).(.(((......))).). ( -7.00)
+AAUUUCUACUAAGUGUAGAUUCGGCUUUAGAACCAUUGGU
+....(((((.....)))))...((........))...... ( -5.10)
+AAUUUCUACUAAGUGUAGAUCGGCUUUAGAACCAUUGGUA
+....(((((.....)))))...........(((...))). ( -5.30)
+AAUUUCUACUAAGUGUAGAUGGCUUUAGAACCAUUGGUAG
+....(((((.....)))))(((........)))....... ( -5.80)
+AAUUUCUACUAAGUGUAGAUGAACCAUUGGUAGAUUUGCC
+....((((((((..((......))..))))))))...... ( -8.20)
+AAUUUCUACUAAGUGUAGAUCCAAUAGGUAUUAACAUCAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAACUUUACUUGCUUUACAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUGCUUUACAUAGAAGUUA
+(((((((.....(((((((......)))))))))))))). ( -7.30)
+AAUUUCUACUAAGUGUAGAUCAUAGAAGUUAUUUGACUCC
+....(((((.....))))).......((((....)))).. ( -5.20)
+AAUUUCUACUAAGUGUAGAUACUCCUGGUGAUUCUUCUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAUUAAAAUAUAAUGAAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUUAAAAUAUAAUGAAAAU
+....(((((.....)))))((((((.....)))))).... ( -5.20)
+AAUUUCUACUAAGUGUAGAUGAGUCCAACCAACAGAAUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUAAUAUUACAAACUUGUGC
+....(((((.....)))))........((((....)))). ( -5.10)
+AAUUUCUACUAAGUGUAGAUGGUGAAGUUUUUAACGCCAC
+....(((((.....)))))(((((..........))))). ( -8.70)
+AAUUUCUACUAAGUGUAGAUGUGAAGUUUUUAACGCCACC
+....(((((.....))))).(((..(((...)))..))). ( -6.30)
+AAUUUCUACUAAGUGUAGAUUAACGCCACCAGAUUUGCAU
+............(((((((((..........))))))))) ( -5.10)
+AAUUUCUACUAAGUGUAGAUAACGCCACCAGAUUUGCAUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACGCCACCAGAUUUGCAUCU
+............((((((((.(.......))))))))).. ( -5.10)
+AAUUUCUACUAAGUGUAGAUCAUCUGUUUAUGCUUGGAAC
+........((((((((((((.....))))))))))))... ( -9.70)
+AAUUUCUACUAAGUGUAGAUUGCUUGGAACAGGAAGAGAA
+..(((((.(((((((.....)))))))...)))))..... ( -6.70)
+AAUUUCUACUAAGUGUAGAUCCACUUUUAAGUGUUAUGGA
+....(((((.....)))))..((((....))))....... ( -6.70)
+AAUUUCUACUAAGUGUAGAUCACUUUUAAGUGUUAUGGAG
+....(((((.....))))).((((....))))........ ( -6.40)
+AAUUUCUACUAAGUGUAGAUAAGUGUUAUGGAGUGUCUCC
+....(((((.....)))))..........((((...)))) ( -7.10)
+AAUUUCUACUAAGUGUAGAUAGUGUUAUGGAGUGUCUCCU
+....(((((.....))))).........((((...)))). ( -8.30)
+AAUUUCUACUAAGUGUAGAUCUAAUGUCUAUGCAGAUUCA
+............((((((((.....))))))))....... ( -6.60)
+AAUUUCUACUAAGUGUAGAUUAAUUAGAGGUGAUGAAGUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAGGCUGCGUUAUAGCUUG
+....(((((.....)))))..(((((((.....))))))) (-10.90)
+AAUUUCUACUAAGUGUAGAUCAGGCUGCGUUAUAGCUUGG
+....(((((.....))))).(((((((.....))))))). (-11.90)
+AAUUUCUACUAAGUGUAGAUGGAAGUCUAAUCUCAAACCU
+.((((((((((....))).))))))).............. ( -5.10)
+AAUUUCUACUAAGUGUAGAUGAGAGAGAUAUUUCAACUGA
+....(((((.....)))))(((((......)))))..... ( -7.20)
+AAUUUCUACUAAGUGUAGAUAGAGAGAUAUUUCAACUGAA
+....(((((.....)))))..((((....))))....... ( -6.10)
+AAUUUCUACUAAGUGUAGAUAACUGAAAUCUAUCAGGCCG
+....(((((.....)))))...((((......)))).... ( -7.80)
+AAUUUCUACUAAGUGUAGAUAAUUGUUACUUUCCUUUACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUGUUACUUUCCUUUACAA
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUCUUUACAAUCAUAUGGUUUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAUCAUAUGGUUUCCAACC
+....(((((.....)))))..........((((...)))) ( -5.20)
+AAUUUCUACUAAGUGUAGAUCAACCCACUAAUGGUGUUGG
+....(((((.....))))).(((((((....))).)))). (-10.80)
+AAUUUCUACUAAGUGUAGAUUUUUGAACUUCUACAUGCAC
+............(((((((..........))))))).... ( -6.20)
+AAUUUCUACUAAGUGUAGAUGAACUUCUACAUGCACCAGC
+............(((((((......)))))))........ ( -7.30)
+AAUUUCUACUAAGUGUAGAUAACUUCUACAUGCACCAGCA
+............(((((((.....)))))))((....)). ( -7.80)
+AAUUUCUACUAAGUGUAGAUUGGACCUAAAAAGUCUACUA
+....(((((.....))))).(((((.......)))))... ( -7.60)
+AAUUUCUACUAAGUGUAGAUGUUAAAAACAAAUGUGUCAA
+(((.(((((.....))))).)))................. ( -5.30)
+AAUUUCUACUAAGUGUAGAUAACUUCAAUGGUUUAACAGG
+....(((((.....))))).((((.....))))....... ( -5.10)
+AAUUUCUACUAAGUGUAGAUACAGGCACAGGUGUUCUUAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGCCUUUCCAACAAUUUGGC
+....(((((.....)))))..(((.............))) ( -6.70)
+AAUUUCUACUAAGUGUAGAUCAACAAUUUGGCAGAGACAU
+..(((((.((((((((......)).)))))).)))))... ( -6.90)
+AAUUUCUACUAAGUGUAGAUGCAGAGACAUUGCUGACACU
+....(((((.....)))))(((((........))).)).. ( -6.50)
+AAUUUCUACUAAGUGUAGAUGGUGGUGUCAGUGUUAUAAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGGUGUCAGUGUUAUAACA
+.((.(((((.....))))).)).................. ( -4.80)
+AAUUUCUACUAAGUGUAGAUUCAGGAUGUUAACUGCACAG
+....(((((.....)))))..(((........)))..... ( -6.40)
+AAUUUCUACUAAGUGUAGAUUUCUACAGGUUCUAAUGUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAAACACGUGCAGGCUGUU
+....(((((.....)))))....((((.((....)))))) ( -6.00)
+AAUUUCUACUAAGUGUAGAUCAAACACGUGCAGGCUGUUU
+....(((((.....)))))..(((((.((....))))))) ( -6.90)
+AAUUUCUACUAAGUGUAGAUAAACACGUGCAGGCUGUUUA
+....(((((.....)))))((((((.((....)))))))) ( -8.20)
+AAUUUCUACUAAGUGUAGAUAUAGGGGCUGAACAUGUCAA
+....(((((.....)))))......(((.......))).. ( -6.20)
+AAUUUCUACUAAGUGUAGAUACUAUUAGUGUUACCACAGA
+............(((..((((((...))))))..)))... ( -6.40)
+AAUUUCUACUAAGUGUAGAUCUAUUAGUGUUACCACAGAA
+....(((((.....))))).......(((....))).... ( -5.90)
+AAUUUCUACUAAGUGUAGAUUGGUGAUUCAACUGAAUGCA
+....(((((.....)))))(((((......)))))..... ( -6.40)
+AAUUUCUACUAAGUGUAGAUGUUGCAAUAUGGCAGUUUUU
+....(((((.....)))))..((((......))))..... ( -6.90)
+AAUUUCUACUAAGUGUAGAUUUGCAAUAUGGCAGUUUUUG
+....(((((.....))))).((((......))))...... ( -6.90)
+AAUUUCUACUAAGUGUAGAUUGUACACAAUUAAACCGUGC
+....(((((.....)))))..((((...........)))) ( -5.30)
+AAUUUCUACUAAGUGUAGAUGUACACAAUUAAACCGUGCU
+....(((((.....))))).((((...........)))). ( -6.50)
+AAUUUCUACUAAGUGUAGAUUACACAAUUAAACCGUGCUU
+....(((((.....)))))...(((.........)))... ( -5.20)
+AAUUUCUACUAAGUGUAGAUACUGGAAUAGCUGUUGAACA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGCACAAGUCAAACAAAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCACAAGUCAAACAAAUUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCACAAGUCAAACAAAUUUAC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAAACACCACCAAUUAAAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUGGUUUUAAUUUUUCACA
+....(((((.....)))))..((((..........)))). ( -6.40)
+AAUUUCUACUAAGUGUAGAUGUGGUUUUAAUUUUUCACAA
+....(((((.....)))))(((((..........))))). ( -7.40)
+AAUUUCUACUAAGUGUAGAUAAUUUUUCACAAAUAUUACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUUUUCACAAAUAUUACCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCACAAAUAUUACCAGAUCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCACAAAUAUUACCAGAUCCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAAAUAUUACCAGAUCCAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUGAAGAUCUACUUUUCAAC
+....(((((.....))))).(((((((.....))))))). ( -7.70)
+AAUUUCUACUAAGUGUAGAUCAACAAAGUGACACUUGCAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAACAAAGUGACACUUGCAGA
+....(((..(((((((..((......)).))))))).))) ( -4.90)
+AAUUUCUACUAAGUGUAGAUUGCACAAAAGUUUAACGGCC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACGGCCUUACUGUUUUGCCA
+....(((((.....)))))...(((...........))). ( -7.10)
+AAUUUCUACUAAGUGUAGAUGCCACCUUUGCUCACAGAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCACCUUUGCUCACAGAUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUCACAGAUGAAAUGAUUGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGCAGGUGCUGCAUUACAA
+....(((((.....))))).((((((...))))))..... (-10.40)
+AAUUUCUACUAAGUGUAGAUCUAUGCAAAUGGCUUAUAGG
+....(((((.....))))).((((((.....))..)))). ( -6.50)
+AAUUUCUACUAAGUGUAGAUAUGGUAUUGGAGUUACACAG
+....(((((.....)))))..(((((.......))).)). ( -5.30)
+AAUUUCUACUAAGUGUAGAUAUAGUGCUAUUGGCAAAAUU
+....(((((.....))))).....((((...))))..... ( -6.70)
+AAUUUCUACUAAGUGUAGAUUUCCACAGCAAGUGCACUUG
+.........((((((((...............)))))))) ( -5.60)
+AAUUUCUACUAAGUGUAGAUAACACGCUUGUUAAACAACU
+....(((((.....)))))(((((....)))))....... ( -6.10)
+AAUUUCUACUAAGUGUAGAUGGUGCAAUUUCAAGUGUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGCAAUUUCAAGUGUUUUA
+.((.(((((.....))))).)).................. ( -4.80)
+AAUUUCUACUAAGUGUAGAUAAGUGUUUUAAAUGAUAUCC
+....(((((.....)))))...(((((......))))).. ( -5.50)
+AAUUUCUACUAAGUGUAGAUAAAUGAUAUCCUUUCACGUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUGAUAUCCUUUCACGUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACGUCUUGACAAAGUUGAGG
+....(((((.....))))).....((((((...)))))). ( -7.40)
+AAUUUCUACUAAGUGUAGAUCAGACAUAUGUGACUCAACA
+....(((((.....)))))(((........)))....... ( -4.90)
+AAUUUCUACUAAGUGUAGAUUGUGGAAAGGGCUAUCAUCU
+..(((((((............)))))))............ ( -5.20)
+AAUUUCUACUAAGUGUAGAUGUGGAAAGGGCUAUCAUCUU
+..(((((((...........)))))))............. ( -5.30)
+AAUUUCUACUAAGUGUAGAUUGGAAAGGGCUAUCAUCUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCAUGAUGGAAAAGCACACU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUCGUGAAGGUGUCUUUGUU
+....(((((.....)))))......((((....))))... ( -5.20)
+AAUUUCUACUAAGUGUAGAUUUUCAAAUGGCACACACUGG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAAUGGCACACACUGGUUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAACACAAAGGAAUUUUUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUGAACCACAAAUCAUUAC
+....(((((.....)))))..((((........))))... ( -5.10)
+AAUUUCUACUAAGUGUAGAUAUGAACCACAAAUCAUUACU
+....(((((.....))))).((((........)))).... ( -5.10)
+AAUUUCUACUAAGUGUAGAUUGAACCACAAAUCAUUACUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUCUGGUAACUGUGAUGUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGAUCCUUUGCAACCUGAAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAACCUGAAUUAGACUCAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAGAAUCAUACAUCACCAGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGAAUCAUACAUCACCAGAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGGUGACAUCUCUGGCAUUAA
+...........((((((((((....)))))...))))).. ( -7.50)
+AAUUUCUACUAAGUGUAGAUAAUGAAUCUCUCAUCGAUCU
+....(((((.....)))))..((((.....))))...... ( -5.30)
+AAUUUCUACUAAGUGUAGAUGCUAGGUUUUAUAGCUGGCU
+....(((((.....))))).(((((.(.....).))))). (-11.10)
+AAUUUCUACUAAGUGUAGAUAUAGCUGGCUUGAUUGCCAU
+....(((((.....)))))......((((......)))). (-10.50)
+AAUUUCUACUAAGUGUAGAUUAGCUGGCUUGAUUGCCAUA
+....(((((.....))))).....((((......)))).. (-10.50)
+AAUUUCUACUAAGUGUAGAUCUGUAUGACCAGUUGCUGUA
+....(((((.....))))).(((......)))........ ( -5.20)
+AAUUUCUACUAAGUGUAGAUAUGAAGACGACUCUGAGCCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUAUGAGAAUCUUCACAAU
+............(((.(((((((...))))))).)))... ( -7.10)
+AAUUUCUACUAAGUGUAGAUUGAGAAUCUUCACAAUUGGA
+........(((((((.(((((...))))).)))..)))). ( -5.50)
+AAUUUCUACUAAGUGUAGAUAAGCAAGGUGAAAUCAAGGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUUCGCGCUACUGCAACGAU
+....(((((.....)))))...(((.((....))..))). ( -7.40)
+AAUUUCUACUAAGUGUAGAUUUCGCGCUACUGCAACGAUA
+....(((((.....)))))..(((.((....))..))).. ( -7.40)
+AAUUUCUACUAAGUGUAGAUGGAUGGCUUAUUGUUGGCGU
+....(((((.....)))))......(((.......))).. ( -6.70)
+AAUUUCUACUAAGUGUAGAUUCAGAGCGCUUCCAAAAUCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAGAGCGCUUCCAAAAUCAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGAGCGCUUCCAAAAUCAUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUGCAACUUGCUGUUGUUG
+((..(((((.....)))))..))(((((.....))))).. ( -9.00)
+AAUUUCUACUAAGUGUAGAUCAACUUGCUGUUGUUGUUUG
+....(((((.....))))).((((........)))).... ( -7.20)
+AAUUUCUACUAAGUGUAGAUUAACAGUUUACUCACACCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUCACACCUUUUGCUCGUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUCGUUGCUGCUGGCCUUG
+....(((((.....))))).(((.((....)).))).... ( -7.60)
+AAUUUCUACUAAGUGUAGAUCUCGUUGCUGCUGGCCUUGA
+....(((((.....)))))..(((..(((...)))..))) ( -5.30)
+AAUUUCUACUAAGUGUAGAUCUCUAUCUUUAUGCUUUAGU
+.......((((((((((((........))))))).))))) ( -6.10)
+AAUUUCUACUAAGUGUAGAUUCUAUCUUUAUGCUUUAGUC
+.......((((((((((((.......))))))).))))). ( -5.90)
+AAUUUCUACUAAGUGUAGAUUGCUUUAGUCUACUUCUUGC
+.........((((.((((((((...))))))))..)))). ( -7.80)
+AAUUUCUACUAAGUGUAGAUGUCUACUUCUUGCAGAGUAU
+....(((((.....)))))....(((((......))))). ( -6.70)
+AAUUUCUACUAAGUGUAGAUUAAGAAUAAUAAUGAGGCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUUUGCUGGAAAUGCCGUU
+.((((((((.((((......)))).).)))))))...... ( -6.60)
+AAUUUCUACUAAGUGUAGAUCUGGAAAUGCCGUUCCAAAA
+....(((((.....)))))..(((((......)))))... ( -8.80)
+AAUUUCUACUAAGUGUAGAUUGAUGCCAACUAUUUUCUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUUGCUGGCAUACUAAUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUUGCUGGCAUACUAAUUGU
+((..(((((.....)))))..))................. ( -4.90)
+AAUUUCUACUAAGUGUAGAUCUGGCAUACUAAUUGUUACG
+....(((((.....)))))..(((((.......))))).. ( -6.20)
+AAUUUCUACUAAGUGUAGAUUGAACAUGACUACCAGAUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGAUGAACCGACGACGACUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAAGCACAAGCUGAUGAGUA
+....(((((.....)))))...(((....)))........ ( -6.70)
+AAUUUCUACUAAGUGUAGAUGGAAGAGACAGGUACGUUAA
+....(((((.....))))).......(((......))).. ( -4.80)
+AAUUUCUACUAAGUGUAGAUUCUUGCUUUCGUGGUAUUCU
+....(((((.....)))))....((((.....)))).... ( -5.80)
+AAUUUCUACUAAGUGUAGAUCUUGCUUUCGUGGUAUUCUU
+....(((((.....)))))...((((.....))))..... ( -5.80)
+AAUUUCUACUAAGUGUAGAUUUGCUUUCGUGGUAUUCUUG
+....(((((.....)))))..((((.....))))...... ( -5.80)
+AAUUUCUACUAAGUGUAGAUGUGGUAUUCUUGCUAGUUAC
+....(((((.....)))))..(((((....)))))..... ( -7.20)
+AAUUUCUACUAAGUGUAGAUUACGUUUACUCUCGUGUUAA
+....(((((.....))))).((((........)))).... ( -6.50)
+AAUUUCUACUAAGUGUAGAUACGUUUACUCUCGUGUUAAA
+.....((((.....))))(((((........))))).... ( -6.80)
+AAUUUCUACUAAGUGUAGAUCGUUUACUCUCGUGUUAAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUCUCGUGUUAAAAAUCUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUGUUUGGAACUUUAAUUU
+....(((((.....)))))((((....))))......... ( -4.90)
+AAUUUCUACUAAGUGUAGAUCUGUUUGGAACUUUAAUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUGUUUGGAACUUUAAUUUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAACUUUAAUUUUAGCCAUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUUUAGCCAUGGCAGAUUC
+....(((((.....))))).......((....))...... ( -5.00)
+AAUUUCUACUAAGUGUAGAUAGCCAUGGCAGAUUCCAACG
+....(((((.....)))))......(((......)))... ( -5.50)
+AAUUUCUACUAAGUGUAGAUGCCAUGGCAGAUUCCAACGG
+....(((((.....)))))(((....)))........... ( -5.90)
+AAUUUCUACUAAGUGUAGAUCUAUUCCUUACAUGGAUUUG
+....(((((.....))))).....(((......))).... ( -7.40)
+AAUUUCUACUAAGUGUAGAUUCUUCUACAAUUUGCCUAUG
+.............((((((....))))))........... ( -6.00)
+AAUUUCUACUAAGUGUAGAUCCUAUGCCAACAGGAAUAGG
+....(((((.....))))).(((((.((....)).))))) (-10.60)
+AAUUUCUACUAAGUGUAGAUUGUAUAUAAUUAAGUUAAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUAUAUAAUUAAGUUAAUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAUAUAAUUAAGUUAAUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUCUGGCUGUUAUGGCCAG
+....(((((.....)))))....((((((.....)))))) (-12.40)
+AAUUUCUACUAAGUGUAGAUCUCUGGCUGUUAUGGCCAGU
+....(((((.....)))))...((((((.....)))))). (-13.00)
+AAUUUCUACUAAGUGUAGAUGCUUGUUUUGUGCUUGCUGC
+....(((((.....))))).((..((.....))..))... ( -7.40)
+AAUUUCUACUAAGUGUAGAUGUGCUUGCUGCUGUUUACAG
+.............((((((((.((.....)))))))))). ( -7.00)
+AAUUUCUACUAAGUGUAGAUUGCUUGCUGCUGUUUACAGA
+.............(((((((.((.....)).))))))).. ( -7.90)
+AAUUUCUACUAAGUGUAGAUCAGAAUAAAUUGGAUCACCG
+....(((((.....)))))............((....)). ( -5.00)
+AAUUUCUACUAAGUGUAGAUAGACUGUUUGCGCGUACGCG
+....(((((.....)))))..........(((....))). ( -7.50)
+AAUUUCUACUAAGUGUAGAUCGCGUACGCGUUCCAUGUGG
+....(((((.....))))).(((....))).......... ( -7.10)
+AAUUUCUACUAAGUGUAGAUUUAUUACAAAUUGGGAGCUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUGCAUACAGUCGCUACAG
+.............(((((..((((....))))..))))). ( -8.90)
+AAUUUCUACUAAGUGUAGAUCUGCAUACAGUCGCUACAGG
+.............(((((..(((....)))...))))).. ( -5.40)
+AAUUUCUACUAAGUGUAGAUCUUGUACAGUAAGUGACAAC
+....(((((.....)))))..((((.((.....)))))). ( -6.20)
+AAUUUCUACUAAGUGUAGAUAUCUCGUUGACUUUCAGGUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGGUUACUAUAGCAGAGAUA
+.((((((.(((((((.........)))).))).)))))). ( -7.20)
+AAUUUCUACUAAGUGUAGAUAAAGUUUCCAUUUGGAAUCU
+....(((((.....)))))...((.((((....)))).)) ( -8.30)
+AAUUUCUACUAAGUGUAGAUAAGUUUCCAUUUGGAAUCUU
+....(((((.....))))).(((.((((....)))).))) ( -9.10)
+AAUUUCUACUAAGUGUAGAUCAUUUGGAAUCUUGAUUACA
+........(((((((.....)))))))............. ( -5.10)
+AAUUUCUACUAAGUGUAGAUGAAUCUUGAUUACAUCAUAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUAAGUCACUAACUGAGAA
+....(((((.....)))))((((.(((.....))).)))) ( -6.80)
+AAUUUCUACUAAGUGUAGAUCUUGGCACUGAUAACACUCG
+...........(((((..(((........))).))))).. ( -6.30)
+AAUUUCUACUAAGUGUAGAUUUGGCACUGAUAACACUCGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCACUACCAAGAGUGUGUUA
+....(((((.....)))))..((((......))))..... ( -6.90)
+AAUUUCUACUAAGUGUAGAUAAAAGAACCUUGCUCUUCUG
+....(((((.....)))))....((((........)))). ( -5.40)
+AAUUUCUACUAAGUGUAGAUAAAGAACCUUGCUCUUCUGG
+....(((((.....)))))...((((........)))).. ( -5.40)
+AAUUUCUACUAAGUGUAGAUAUCCUCUAGCUGAUAACAAA
+....(((((.....)))))((((........))))..... ( -5.10)
+AAUUUCUACUAAGUGUAGAUCACUGACUUGCUUUAGCACU
+....(((((.....))))).........(((....))).. ( -5.80)
+AAUUUCUACUAAGUGUAGAUGCACUCAAUUUGCUUUUGCU
+....(((((.....)))))............((....)). ( -5.80)
+AAUUUCUACUAAGUGUAGAUCUUUUGCUUGUCCUGACGGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUUGUCCUGACGGCGUAAA
+.....((((.....))))(((((.((....)))))))... ( -6.80)
+AAUUUCUACUAAGUGUAGAUCUUGUCCUGACGGCGUAAAA
+....(((((.....)))))....(((.....)))...... ( -5.60)
+AAUUUCUACUAAGUGUAGAUACCUAAACUGUUCAUCAGAC
+....(((((.....)))))........(((.....))).. ( -5.90)
+AAUUUCUACUAAGUGUAGAUCUCUCCAAUUUUUCUUAUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCUUAUUGUUGCGGCAAUAG
+....(((((.....)))))....((((((....)))))). ( -7.70)
+AAUUUCUACUAAGUGUAGAUCUUAUUGUUGCGGCAAUAGU
+....(((((.....)))))..(((((((....))))))). ( -8.10)
+AAUUUCUACUAAGUGUAGAUUUAUUGUUGCGGCAAUAGUG
+....(((((.....))))).(((((((....))))))).. ( -7.90)
+AAUUUCUACUAAGUGUAGAUUAACACUUUGCUUCACACUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCUUCACACUCAAAAGAAAGA
+..(((((....(((((........)))))....))))).. ( -6.30)
+AAUUUCUACUAAGUGUAGAUAUUAAUUGACUUCUAUUUGU
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUUGCUUUUUAGCCUUUCUGCU
+..............(((((..(((....)))...))))). ( -7.00)
+AAUUUCUACUAAGUGUAGAUUAGCCUUUCUGCUAUUCCUU
+....(((((.....))))).((((......))))...... ( -7.20)
+AAUUUCUACUAAGUGUAGAUAGCCUUUCUGCUAUUCCUUG
+....(((((.....)))))((((......))))....... ( -7.00)
+AAUUUCUACUAAGUGUAGAUGCCUUUCUGCUAUUCCUUGU
+..............(((((......))))).......... ( -5.00)
+AAUUUCUACUAAGUGUAGAUUGCUAUUCCUUGUUUUAAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUUAUGCUUAUUAUCUUUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUUAUGCUUAUUAUCUUUUG
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUGGUUCUCACUUGAACUGCAA
+....(((((.....))))).(((((......))))).... ( -9.30)
+AAUUUCUACUAAGUGUAGAUGUUCUCACUUGAACUGCAAG
+....(((((.....))))).((((......))))...... ( -8.10)
+AAUUUCUACUAAGUGUAGAUUUGUUUUCUUAGGAAUCAUC
+....(((((.....)))))......(((....)))..... ( -4.80)
+AAUUUCUACUAAGUGUAGAUCUUAGGAAUCAUCACAACUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUUAGGAAUCAUCACAACUGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACCAAGAAUGUAGUUUACAG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAGUCAUGUACUCAACAUCA
+....(((((.....)))))......((((.....)))).. ( -5.00)
+AAUUUCUACUAAGUGUAGAUAUUGAAUUGUGCGUGGAUGA
+(((.(((((.....))))).)))................. ( -5.10)
+AAUUUCUACUAAGUGUAGAUCUGUUUACCUUUUACAAUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCUUUUACAAUUAAUUGCCA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUACAAUUAAUUGCCAGGAACC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCAAUUAAUUGCCAGGAACCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUAGAGUAUCAUGACGUUCGU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAGAGUAUCAUGACGUUCGUG
+....(((((.....)))))........(((((...))))) ( -6.20)
+AAUUUCUACUAAGUGUAGAUGAGUAUCAUGACGUUCGUGU
+....(((((.....))))).......(((((...))))). ( -6.80)
+AAUUUCUACUAAGUGUAGAUAGAUUUCAUCUAAACGAACA
+....(((((.....)))))(((((...)))))........ ( -6.00)
+AAUUUCUACUAAGUGUAGAUGAUUUCAUCUAAACGAACAA
+............((.((((((....)))))).))...... ( -6.60)
+AAUUUCUACUAAGUGUAGAUAUCUAAACGAACAAACUAAA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGUGGACCCUCAGAUUCAACU
+.((.(((((.....))))).)).................. ( -4.80)
+AAUUUCUACUAAGUGUAGAUCCCAAUAAUACUGCGUCUUG
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUACUACCUAGGAACUGGGCC
+....(((((.....)))))......(((((...))))).. ( -8.90)
+AAUUUCUACUAAGUGUAGAUCUGCUGCUUGACAGAUUGAA
+....(((((.....)))))(((((.....).))))..... ( -7.40)
+AAUUUCUACUAAGUGUAGAUGGCAGACGUGGUCCAGAACA
+....(((((.....)))))((((.......).)))..... ( -5.40)
+AAUUUCUACUAAGUGUAGAUGGGGACCAGGAACUAAUCAG
+....(((((.....)))))(((...)))............ ( -5.00)
+AAUUUCUACUAAGUGUAGAUGGGACCAGGAACUAAUCAGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCCCCCAGCGCUUCAGCGUUC
+....(((((.....)))))......(((((....))))). ( -9.10)
+AAUUUCUACUAAGUGUAGAUAAAGAUCAAGUCAUUUUGCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUGAAUAAGCAUAUUGACG
+.....((((.....))))(((((.....)))))....... ( -8.60)
+AAUUUCUACUAAGUGUAGAUCUGAAUAAGCAUAUUGACGC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGAUGAUUUCUCCAAACAAUU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUUCCAAACAAUUGCAACAAUC
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCGCUUUUCCGUUUACGAUAU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUGCUUUUCCGUUUACGAUAUA
+.............((((((((......))))))))..... ( -5.20)
+AAUUUCUACUAAGUGUAGAUCCGUUUACGAUAUAUAGUCU
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUCGUUUACGAUAUAUAGUCUA
+.....((((.....))))((((....)))).......... ( -5.50)
+AAUUUCUACUAAGUGUAGAUCGAUAUAUAGUCUACUCUUG
+.........((((.((((((.........)))))).)))) ( -6.90)
+AAUUUCUACUAAGUGUAGAUAUCUCACAUAGCAAUCUUUA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAUCAGUGUGUAACAUUAGGG
+....(((((.....)))))....(((((...))))).... ( -5.40)
+AAUUUCUACUAAGUGUAGAUCACCGAGGCCACGCGGAGUA
+....(((((.....)))))...(((.(....).))).... ( -8.50)
+AAUUUCUACUAAGUGUAGAUACCGAGGCCACGCGGAGUAC
+....(((((.....)))))..(((.(....).)))..... ( -8.50)
+AAUUUCUACUAAGUGUAGAUAGUAGUGCUAUCCCCAUGUG
+............(((..((((((...))))))..)))... ( -6.00)
+AAUUUCUACUAAGUGUAGAUGUAGUGCUAUCCCCAUGUGA
+....(((((.....)))))..................... ( -4.70)
+AAUUUCUACUAAGUGUAGAUAAUAGCUUCUUAGGAGAAUG
+...((((.(((((.((........))..))))).)))).. ( -6.90)
+AAUUUCUACUAAGUGUAGAUAUAGCUUCUUAGGAGAAUGA
+...((((.(((((.((.......))..))))).))))... ( -6.40)

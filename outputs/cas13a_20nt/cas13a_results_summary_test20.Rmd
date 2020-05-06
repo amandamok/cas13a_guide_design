@@ -1,0 +1,229 @@
+---
+title: "COVID-19 guide design (Cas13a): Test 20 candidate guides"
+author: "Amanda Mok"
+date: "Last compiled on `r format(Sys.Date(), '%B %d, %Y')`"
+output: html_document
+---
+
+```{r setup, echo=F}
+knitr::opts_chunk$set(echo=F, fig.width=12, fig.height=8, warning=F)
+
+library(ggplot2)
+library(patchwork)
+library(prodlim)
+
+source("~/covid-19/scripts/helper.R")
+```
+
+```{r load_data}
+num_covid19_strains <- as.numeric(strsplit(system("wc -l ~/covid-19/ref_data/gisaid_cov2020_alignment.txt", intern=T),
+                                           split=" ")[[1]][1])
+num_human_CoV <- as.numeric(system(paste("grep ^'>' ~/covid-19/ref_data/human_CoV.fa | wc -l"), intern=T))
+
+coverage_id <- "PRJNA616446"
+abundance_binSize <- 300
+abundance <- load_coverage(coverage_id, abundance_binSize)
+
+windows <- read.table("cas13a_results_summary.txt", header=T, stringsAsFactors=F)
+```
+
+# Design
+
+AIM: 10-20 candidate spacers, 20 nt length
+
++---------------------------+-------------------------------------+----------------------------------------------------+------+
+| Criteria                  | Details                             | Evaluation                                         | Done |
++===========================+=====================================+====================================================+:====:+
+| Sensitivity               | Activity against SARS-CoV-2,        | Compute %detected, allow for 0 or 1 mismatches     | x    |
+|                           | accounting for genomic diversity    |                                                    |      |
++---------------------------+-------------------------------------+----------------------------------------------------+------+
+| Specificity               | Low activity against other          | Compute %missed, allow 2 mismatches                | x    |
+|                           | human coronaviruses                 |                                                    |      |
++---------------------------+-------------------------------------+----------------------------------------------------+------+
+|                           | Low activity against off-targets    | Align to transcriptomes, allow 2 mismatches        | !    |
+|                           | (human, cow, co-occuring pathogens) | (FDA requirement: <80% homology [≥4 mismatches])   |      |
++---------------------------+-------------------------------------+----------------------------------------------------+------+
+| Good Cas13a guide         | Tag/antitag sequence constraint     | Filter out target windows that follow with GUUU ;  | x    |
+|                           |                                     | flag if follow with GUUN/GUNN/GNNN                 |      |
++---------------------------+-------------------------------------+----------------------------------------------------+------+
+|                           | RNA secondary structure             | High minimum folding energy of spacer ;            | x    |
+|                           |                                     | low base-pairing with crRNA hairpin ;              |      |
+|                           |                                     | low base-pairing in spacer seed                    |      |
++---------------------------+-------------------------------------+----------------------------------------------------+------+
+|                           | GC content                          | Flag if GC content not between 20-50%              | x    |
++---------------------------+-------------------------------------+----------------------------------------------------+------+
+| Good viral target         | RNA abundance                       | Prioritize highly abundant subgenomic regions      | x    |
++---------------------------+-------------------------------------+----------------------------------------------------+------+
+|                           | RNA secondary structure             | Evaluate folding of sliding windows along viral    | x    |
+|                           |                                     | genome, compute individual base propensity to form |      |
+|                           |                                     | secondary structure                                |      |
++---------------------------+-------------------------------------+----------------------------------------------------+------+
+|                           | Target different genomic regions    | Pick target windows that span viral genome         | x    | 
++---------------------------+-------------------------------------+----------------------------------------------------+------+
+
+x : done
+
+! : still in progress
+
+# Selection of target window
+
+- Number of SARS-CoV-2 genomes: `r num_covid19_strains`
+- Number of human coronavirus genomes (list from FDA): `r num_human_CoV`
+    + NC_004718.3 : SARS CoV
+    + NC_019843.3 : MERS
+    + NC_006213.1 : Human CoV OC43
+    + NC_006577.2 : Human CoV
+    + NC_002645.1 : Human CoV 229E
+    + NC_005831.2 : Human CoV NL63
+- Viral abundance data set: throat swab samples from `r coverage_id`
+
+```{r sensitivity}
+sensitivity_values <- rev(c(0.99, 0.995, 0.999, 0.9992, 0.9993, 0.9995, 0.9997, 1))
+sensitivity <- data.frame(sensitivity_values,
+                          floor((1-sensitivity_values)*num_covid19_strains),
+                          sapply(sensitivity_values,
+                                 function(x) {
+                                   sum(windows$covid19_mismatch_0 >= x*num_covid19_strains)
+                                 }),
+                          sapply(sensitivity_values,
+                                 function(x) {
+                                   sum((windows$covid19_mismatch_0+windows$covid19_mismatch_1) 
+                                       >= x*num_covid19_strains)
+                                 }))
+
+knitr::kable(sensitivity,
+             col.names=c("Sensitivity",
+                         "Number of missed genomes",
+                         "Number of spacers with 0 mismatches",
+                         "Number of spacers with 0 or 1 mismatches"))
+```
+
+### 1. Filter out tag/antitag containing GUUU
+
+```{r diagnostic_all}
+windows <- subset(windows, antitag != "GUUU")
+plot_diagnostic(windows, abundance, 
+                alpha=0.2, jitter_x=0.01, jitter_y=0.05,
+                var1="sensitivity_0", var1_name="Sensitivity", var1_desc="% SARS-CoV-2 genomes captured",
+                var2="specificity", var2_name="Specificity", var2_desc="% human coronaviruses missed",
+                var3="crRNA_spacer_basepairs", var3_name="crRNA structure", var3_desc="# internal spacer basepairs")
+```
+
+### 1. Select spacers that capture 100% of SARS-CoV-2 genomes with 0 mismatches
+
+```{r subset_1}
+subset_1 <- subset(windows, windows$covid19_mismatch_0 == num_covid19_strains)
+filter_1 <- "100% sensitivity"
+plot_diagnostic(subset_1, abundance, filter=filter_1, 
+                alpha=0.5, jitter_x=0.5, jitter_y=0.05,
+                var1="match_against_hg38", var1_name="Reactivity: hg38", var1_desc="# alignments against human transcriptome",
+                var2="specificity", var2_name="Specificity", var2_desc="% human coronaviruses missed",
+                var3="crRNA_spacer_basepairs", var3_name="crRNA structure", var3_desc="# internal spacer basepairs")
+```
+
+### 2. Select spacers that don't interfere with crRNA hairpin
+
+```{r subset_2}
+subset_2 <- subset(subset_1, has_crRNA_hairpin)
+filter_2 <- paste(filter_1, "crRNA hairpin intact", sep=", ")
+plot_diagnostic(subset_2, abundance, filter=filter_2, 
+                alpha=0.5, jitter_x=0.5, jitter_y=0.05, 
+                var1="match_against_hg38", var1_name="Reactivity: hg38", var1_desc="# alignments against human transcriptome",
+                var2="specificity", var2_name="Specificity", var2_desc="% human coronaviruses missed", 
+                var3="crRNA_spacer_basepairs", var3_name="crRNA structure", var3_desc="# internal spacer basepairs")
+```
+
+### 3. Select spacers that have no reactivity to human coronaviruses
+```{r subset_3}
+subset_3 <- subset(subset_2, specificity>0.9)
+filter_3 <- paste(filter_2, "100% specificity", sep=", ")
+plot_diagnostic(subset_3, abundance, filter=filter_3,
+                alpha=0.5, jitter_x=0.5, jitter_y=0.5,
+                var1="match_against_hg38", var1_name="Reactivity: hg38", var1_desc="# alignments against human transcriptome",
+                var2="match_against_bosTau9", var2_name="Reactivity: bosTau9", var2_desc="# alignments against cow transcriptome",
+                var3="crRNA_spacer_basepairs", var3_name="crRNA structure", var3_desc="# internal spacer basepairs")
+```
+
+### 4. Select spacers with low reactivity to human and cow transcriptomes
+
+- No alignments to human transcriptome
+- ≤1 alignment to cow transcriptome
+
+```{r subset_4}
+subset_4 <- subset(subset_3, match_against_hg38==0 & match_against_bosTau9<=1)
+filter_4 <- paste(filter_3, "\nno alignments to hg38, ≤1 alignment to bosTau9", sep=", ")
+plot_diagnostic(subset_4, abundance, filter=filter_4,
+                alpha=1, jitter_x=0.05, jitter_y=0.1,
+                var1="target_basepairing_prob", var1_name="Protospacer folding", var1_desc="Propensity for protospacer to fold",
+                var2="GC_content", var2_name="% GC", var2_desc="spacer %GC",
+                var3="match_against_bosTau9", var3_name="Reactivity: bosTau9", var3_desc="# alignments against cow transcriptome")
+```
+
+### 5. Select spacers that don't have internal base-pairing
+
+```{r subset_5}
+knitr::kable(subset(subset_4, crRNA_spacer_basepairs>0)[, c("spacer", "start", "crRNA_spacer_basepairs")],
+             row.names=F, col.names=c("Spacer sequence", "Genomic position", "# base pairs in spacer"))
+
+subset_5 <- subset(subset_4, crRNA_spacer_basepairs==0)
+filter_5 <- paste(filter_4, "\nno spacer base-pairing", sep=", ")
+plot_diagnostic(subset_5, abundance, filter=filter_5,
+                alpha=0.5, jitter_x=0.01, jitter_y=0.1,
+                var1="target_basepairing_prob", var1_name="Protospacer folding", var1_desc="Propensity for protospacer to fold",
+                var2="GC_content", var2_name="% GC", var2_desc="spacer %GC",
+                var3="match_against_bosTau9", var3_name="Reactivity: bosTau9", var3_desc="# alignments against cow transcriptome")
+```
+
+# Candidate spacers: subset #5
+
+```{r output_subset_5}
+output_columns <- c("target", "spacer", "start", "antitag", "target_basepairing_prob", "match_against_bosTau9")
+output_5 <- subset_5[, output_columns]
+rownames(output_5) <- seq.int(nrow(output_5))
+# output_5$gene <- c(rep("Orf1ab", 3), 
+#                    rep("Orf1ab", 4), 
+#                    "Orf1ab", 
+#                    rep("Orf1ab", 3),
+#                    rep("Orf1ab", 3),
+#                    "Orf1ab",
+#                    "Orf1ab",
+#                    "Orf1ab",
+#                    rep(" ", 3))
+# output_5$protein <- c(rep("pp1ab, pp1a, nsp3", 3), 
+#                       rep("pp1ab, pp1a, nsp8", 4),
+#                       "pp1ab, pp1a, nsp8, nsp9",
+#                       rep("pp1ab, pp1am nsp9", 3),
+#                       rep("pp1ab, pp1a, nsp10", 3),
+#                       "pp1ab, Pol",
+#                       "pp1ab, Hel",
+#                       "pp1ab, ExoN",
+#                       rep("S glycoprotein, Spike protein S2", 3))
+knitr::kable(output_5,
+             row.names=T,
+             col.names=c("Viral target window",
+                         "Spacer sequence",
+                         "Genomic position",
+                         "Antitag",
+                         "Protospacer folding propensity",
+                         "# alignments to cow transcriptome"))
+```
+
+```{r ivt_window}
+genome_seq <- readLines("~/covid-19/ref_data/NC_045512v2.fa")
+genome_seq <- genome_seq[!grepl(">", genome_seq)]
+genome_seq <- paste0(genome_seq, collapse="")
+
+output_5$viral_genome_5prime <- sapply(output_5$start,
+                                       function(x) {
+                                         substr(genome_seq, start=x-20, stop=x-1)
+                                       })
+output_5$viral_genome_3prime <- sapply(output_5$start,
+                                       function(x) {
+                                         substr(genome_seq, start=x+20, stop=x+20+20-1)
+                                       })
+output_5$IVT_window <- sapply(output_5$start,
+                              function(x) {
+                                substr(genome_seq, start=x-20, stop=x+20+20-1)
+                              })
+write.csv(output_5, paste0("guide_summary_", format(Sys.time(), "%Y%m%d"), ".csv"))
+```

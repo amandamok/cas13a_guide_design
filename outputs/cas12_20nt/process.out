@@ -1,0 +1,39 @@
+Breaking genome into windows
+
+Calculating sensitivity to SARS-CoV-2 strains
+- pulling window positions from windows.txt
+
+Calculating specificity against other human coronaviruses
+- aligning windows to human_CoV 
+
+RNAfold score: crRNA structure
+- computing folding energies (crRNAs)
+
+RNAfold score: viral target structure
+- computing folding structures
+- calculating base-pairing propensity
+- pulling window positions from windows.txt
+
+Aligning against off-target: hg38 (bowtie) 
+- aligning windows to hg38 
+- counting alignments
+- number of alignments:
+  number.of.alignments count
+1                    0    12
+2                    1    21
+3                    2    40
+4                    3    32
+5                    4    39
+6                    5    32
+
+Aligning against off-target: bosTau9 (bowtie) 
+- aligning windows to bosTau9 
+- counting alignments
+- number of alignments:
+  number.of.alignments count
+1                    0    17
+2                    1    29
+3                    2    36
+4                    3    35
+5                    4    42
+6                    5    43

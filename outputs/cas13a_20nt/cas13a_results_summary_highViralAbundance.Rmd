@@ -1,0 +1,139 @@
+---
+title: "COVID-19 guide design (Cas13a): Prioritize viral abundance"
+author: "Amanda Mok"
+date: "Last compiled on `r format(Sys.Date(), '%B %d, %Y')`"
+output: html_document
+---
+
+```{r setup, echo=F}
+knitr::opts_chunk$set(echo=F, fig.width=12, fig.height=8, warning=F)
+
+library(ggplot2)
+library(patchwork)
+library(prodlim)
+
+source("~/covid-19/scripts/helper.R")
+```
+
+```{r load_data}
+num_covid19_strains <- as.numeric(strsplit(system("wc -l ~/covid-19/ref_data/gisaid_cov2020_alignment.txt", intern=T),
+                                           split=" ")[[1]][1])
+num_human_CoV <- as.numeric(system(paste("grep ^'>' ~/covid-19/ref_data/human_CoV.fa | wc -l"), intern=T))
+
+coverage_id <- "PRJNA616446"
+abundance_binSize <- 300
+abundance <- load_coverage(coverage_id, abundance_binSize)
+
+windows <- read.table("cas13a_results_summary.txt", header=T, stringsAsFactors=F)
+output_columns <- c("target", "spacer", "start", "antitag", "target_basepairing_prob", "match_against_bosTau9")
+```
+
+# Design
+
+AIM: 96 spacers for high-throughput testing, 20 nt length
+
+### 1. Pre-processing
+
+- Remove spacers with GUUU antitags
+- Remove spacers that interfere with crRNA hairpin
+- Remove spacers with ≥4 internal base-pairs
+
+```{r subset_1}
+subset_1 <- subset(windows, antitag != "GUUU")
+subset_1 <- subset(subset_1, has_crRNA_hairpin)
+subset_1 <- subset(subset_1, crRNA_spacer_basepairs <= 4)
+previous_order <- readLines("~/covid-19/outputs/spacers_20200427.txt")
+filter_1 <- "Preprocessed"
+plot_diagnostic(subset_1, abundance, filter=filter_1,
+                alpha=0.2, jitter_x=0.01, jitter_y=0.05,
+                var1="sensitivity_0", var1_name="Sensitivity", var1_desc="% SARS-CoV-2 genomes captured",
+                var2="specificity", var2_name="Specificity", var2_desc="% human coronaviruses missed",
+                var3="match_against_hg38", var3_name="Reactivity: hg38", var3_desc="# alignments to human transcriptome")
+```
+
+### 2. Prioritize spacers in high-abundance regions
+
+```{r subset_2}
+abundance_threshold <- 750
+abundance_regions <- which(abundance$coverage >= abundance_threshold)
+subset_2 <- lapply(abundance_regions,
+                   function(x) {
+                     subset(subset_1, (start >= abundance$bin[x]-abundance_binSize/2) & 
+                              (start <= abundance$bin[x]+abundance_binSize/2))
+                   })
+subset_2 <- do.call(rbind, subset_2)
+filter_2 <- paste(filter_1, paste0("viral abundance ≥ ", abundance_threshold), sep=", ")
+plot_diagnostic(subset_2, abundance, filter=filter_2,
+                alpha=0.2, jitter_x=0.01, jitter_y=0.05,
+                var1="sensitivity_0", var1_name="Sensitivity", var1_desc="% SARS-CoV-2 genomes captured",
+                var2="specificity", var2_name="Specificity", var2_desc="% human coronaviruses missed",
+                var3="match_against_hg38", var3_name="Reactivity: hg38", var3_desc="# alignments to human transcriptome")
+```
+
+### 3. Select spacers with 100% specificity
+
+```{r subset_3}
+subset_3 <- subset(subset_2, specificity==1)
+filter_3 <- paste(filter_2, "100% specificity", sep=", ")
+plot_diagnostic(subset_3, abundance, filter=filter_3,
+                alpha=0.5, jitter_x=0.005, jitter_y=0.1,
+                var1="sensitivity_0", var1_name="Sensitivity", var1_desc="% SARS-CoV-2 genomes captured",
+                var2="match_against_hg38", var2_name="Reactivity: hg38", var2_desc="# alignments to human transcriptome",
+                var3="GC_content", var3_name="% GC", var3_desc="Spacer GC content")
+```
+
+### 4. Select spacers with ≤10 alignments to human transcriptome
+
+```{r subset_4}
+subset_4 <- subset(subset_3, match_against_hg38<=10)
+filter_4 <- paste(filter_3, "≤10 alignments to human transcriptome", sep=",\n")
+plot_diagnostic(subset_4, abundance, filter=filter_4,
+                alpha=0.5, jitter_x=0.005, jitter_y=0.05,
+                var1="sensitivity_0", var1_name="Sensitivity", var1_desc="% SARS-CoV-2 genomes captured",
+                var2="match_against_hg38", var2_name="Reactivity: hg38", var2_desc="# alignments to human transcriptome",
+                var3="GC_content", var3_name="% GC", var3_desc="Spacer GC content")
+```
+
+### 5. Select spacers in 3' end of genome
+
+- Do not allow more than 10nt overlap between selected guides
+
+```{r subset_5}
+subset_5 <- subset(subset_4, start>25000)
+subset_5$region <- NA
+for(x in seq.int(nrow(subset_5))) {
+  if(x == 1) {
+    region <- 1
+  } else {
+    if(subset_5$start[x] >= (subset_5$start[x-1]+10)) {
+      region <- region+1
+    }
+  }
+  subset_5$region[x] <- region
+}
+
+write.table(subset_5, quote=F, row.names=F, sep="\t",
+            file=paste0("~/covid-19/outputs/cas13a_20nt/guides_3prime_", format(Sys.time(), "%Y%m%d"), ".txt"))
+```
+
+### 6. Select spacers in 5' end of genome
+
+- Do not allow more than 10nt overlap between selected guides
+
+```{r subset_6}
+subset_6 <- subset(subset_4, start < 5000)
+subset_6$region <- NA
+for(x in seq.int(nrow(subset_6))) {
+  if(x == 1) {
+    region <- 1
+  } else {
+    if(subset_6$start[x] >= (subset_6$start[x-1]+10)) {
+      region <- region+1
+    }
+  }
+  subset_6$region[x] <- region
+}
+
+write.table(subset_6, quote=F, row.names=F, sep="\t",
+            file=paste0("~/covid-19/outputs/cas13a_20nt/guides_5prime_", format(Sys.time(), "%Y%m%d"), ".txt"))
+```
