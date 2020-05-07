@@ -11,6 +11,8 @@ option_list <- list(make_option(c("-i", "--input"), type="character",
                                 help="window size", metavar="integer"),
                     make_option(c("-e", "--enzyme"), type="character", default=NULL, # "Cas13a" or "Cas12"
                                 help="Cas enzyme type", metavar="character"),
+                    make_option(c("-s", "--strand", type="character", default="+",
+                                  help="strand to target", metavar="character")),
                     make_option(c("-o", "--out"), type="character", default=".", 
                                 help="output directory", metavar="character")) 
 opt_parser <- OptionParser(option_list=option_list)
@@ -35,9 +37,16 @@ windows <- data.frame(start=seq.int(nchar(genome_seq)-opt$window-3),
                                       substr(genome_seq, start=x, stop=x+opt$window-1)
                                     }),
                       stringsAsFactors=F)
-windows$spacer <- gsub("T", "U", as.character(reverseComplement(DNAStringSet(windows$target))))
-windows$strand <- "+"
-if(opt$enzyme == "Cas12") { # also target minus strand of dsDNA
+if(opt$enzyme == "Cas13a") {
+  if(opt$strand == "+") {
+    windows$spacer <- gsub("T", "U", as.character(reverseComplement(DNAStringSet(windows$target))))
+    windows$strand <- opt$strand
+  } else {
+    windows$spacer <- gsub("T", "U", windows$target)
+    windows$target <- as.character(reverseComplement(DNAStringSet(windows$target)))
+    windows$strand <- opt$strand
+  }
+} else { # Cas12, add spacers that target minus strand
   windows_minusStrand <- windows
   windows_minusStrand$target <- gsub("T", "U", windows$spacer)
   windows_minusStrand$spacer <- gsub("T", "U", windows$target)
@@ -52,7 +61,6 @@ if(opt$enzyme == "Cas13a") {
                                              substr(genome_seq, start=x+opt$window, stop=x+opt$window+3)
                                            })
   windows$antitag <- gsub("T", "U", windows$antitag)
-  # windows <- subset(windows, !(windows$antitag=="GTTT"))
 } else {
   if(opt$enzyme == "Cas12") {
     windows$PAM <- NA
