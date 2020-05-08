@@ -15,5 +15,6 @@ ref_data/RNA_expression/*bowtiestats
 ref_data/RNA_expression/*pdf
 ref_data/RNA_expression/*genome
 ref_data/other_pathogens/*fa
-ref_data/other_pathogens/*csv
-ref_data/other_pathogens/*txt
+ref_data/other_pathogens/*fai
+ref_data/other_pathogens/*bed
+ref_data/other_pathogens/*gff
