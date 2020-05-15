@@ -10,17 +10,17 @@ option_list <- list(make_option(c("-g", "--genome"), type="character", default=N
                     make_option(c("-e", "--enzyme"), type="character", default=NULL, # "Cas13a" or "Cas12"
                                 help="Cas enzyme type", metavar="character"),
                     make_option(c("-o", "--out"), type="character", default=".", 
-                                help="output directory", metavar="character")) 
+                                help="output directory", metavar="character"))
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
 if(is.null(opt$genome)) {
   cat("\nERROR: no reference genome specified")
-  q()
+  q(save="no")
 } else {
   if(!("enzyme" %in% names(opt))) {
-    cat("\nNO ENZYME SPECIFIED\n")
-    q()
+    cat("\nERROR: no enzyme specified\n")
+    q(save="no")
   } else {
     cat(paste("\nAligning against off-target:", opt$genome, "(bowtie) \n"))
   }

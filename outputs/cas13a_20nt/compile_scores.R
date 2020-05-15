@@ -30,7 +30,10 @@ windows <- add_column(windows, "alignment_cts_GRCh38_latest_rna.txt", "match_aga
 windows <- add_column(windows, "alignment_cts_ARS-UCD1_rna.txt", "match_against_bosTau9", "ct")
 
 # read in alignments to: cross-reactive (co-occuring pathogens)
-# windows <- add_column(windows, "alignment_cts_cross_reactive.txt", "match_against_pathogens", "ct")
+windows <- add_column(windows, "score_crossreactive_DNA.txt", "offtarget_rate", "DNA_offtarget_rate")
+windows <- add_column(windows, "score_crossreactive_DNA.txt", "offtargets", "DNA_offtargets")
+windows <- add_column(windows, "score_crossreactive_RNA.txt", "offtarget_rate", "RNA_offtarget_rate")
+windows <- add_column(windows, "score_crossreactive_RNA.txt", "offtargets", "RNA_offtargets")
 
 # write output
 write.table(windows, file="cas13a_results_summary.txt", quote=F, col.names=T, sep="\t")

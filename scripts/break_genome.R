@@ -11,8 +11,8 @@ option_list <- list(make_option(c("-i", "--input"), type="character",
                                 help="window size", metavar="integer"),
                     make_option(c("-e", "--enzyme"), type="character", default=NULL, # "Cas13a" or "Cas12"
                                 help="Cas enzyme type", metavar="character"),
-                    make_option(c("-s", "--strand", type="character", default="+",
-                                  help="strand to target", metavar="character")),
+                    make_option(c("-s", "--strand"), type="character", default="+",
+                                  help="strand to target", metavar="character"),
                     make_option(c("-o", "--out"), type="character", default=".", 
                                 help="output directory", metavar="character")) 
 opt_parser <- OptionParser(option_list=option_list)

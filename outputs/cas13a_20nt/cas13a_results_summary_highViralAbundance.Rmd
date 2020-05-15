@@ -98,7 +98,7 @@ plot_diagnostic(subset_4, abundance, filter=filter_4,
 
 - Do not allow more than 10nt overlap between selected guides
 
-```{r subset_5}
+```{r subset_5, eval=F}
 subset_5 <- subset(subset_4, start>25000)
 subset_5$region <- NA
 for(x in seq.int(nrow(subset_5))) {
@@ -120,7 +120,7 @@ write.table(subset_5, quote=F, row.names=F, sep="\t",
 
 - Do not allow more than 10nt overlap between selected guides
 
-```{r subset_6}
+```{r subset_6, eval=F}
 subset_6 <- subset(subset_4, start < 5000)
 subset_6$region <- NA
 for(x in seq.int(nrow(subset_6))) {

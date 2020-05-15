@@ -10,7 +10,7 @@ rm *html
 Rscript ~/covid-19/scripts/break_genome.R -w 20 -e Cas13a -s -
 
 # score sensitivity to SARS-CoV-2 genomes
-Rscript ~/covid-19/scripts/score_SARS-CoV-2_sensitivity.R -w 20 -e Cas13a
+Rscript ~/covid-19/scripts/score_SARS-CoV-2_sensitivity.R -w 20
 
 # score specificity against other human coronaviruses
 Rscript ~/covid-19/scripts/score_human_CoV_specificity.R -m 2
@@ -27,8 +27,9 @@ Rscript ~/covid-19/scripts/align_bowtie.R -g GRCh38_latest_rna -m 2 -e Cas13a
 # off-target: align against bosTau9 (cow)
 Rscript ~/covid-19/scripts/align_bowtie.R -g ARS-UCD1_rna -m 2 -e Cas13a
 
-# off-target: align against co-occuring pathogens
-# Rscript ~/covid-19/scripts/align_bowtie.R -g cross_reactive
+# evaluate cross-reactivity against co-occuring pathogens
+Rscript ~/covid-19/scripts/evaluate_crossreactive.R -t DNA
+Rscript ~/covid-19/scripts/evaluate_crossreactive.R -t RNA
 
 # compile results
 Rscript compile_scores.R

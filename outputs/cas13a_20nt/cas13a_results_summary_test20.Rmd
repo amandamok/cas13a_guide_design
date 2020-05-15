@@ -208,7 +208,7 @@ knitr::kable(output_5,
                          "# alignments to cow transcriptome"))
 ```
 
-```{r ivt_window}
+```{r ivt_window, eval=F}
 genome_seq <- readLines("~/covid-19/ref_data/NC_045512v2.fa")
 genome_seq <- genome_seq[!grepl(">", genome_seq)]
 genome_seq <- paste0(genome_seq, collapse="")

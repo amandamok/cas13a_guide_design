@@ -37,4 +37,7 @@ Aligning against off-target: ARS-UCD1_rna (bowtie)
 4                    3   607
 5                    4   525
 6                    5   360
-Fatal error: cannot open file 'compile_scores.R': No such file or directory
+
+Evaluating cross-reactivity
+
+Evaluating cross-reactivity
