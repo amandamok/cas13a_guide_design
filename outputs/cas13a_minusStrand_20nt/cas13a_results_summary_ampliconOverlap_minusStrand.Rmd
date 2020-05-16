@@ -104,9 +104,9 @@ subset_3 <- lapply(seq.int(nrow(amplicons)),
 subset_3 <- do.call(rbind, subset_3)
 
 # output spacers
-write.table(subset_3, quote=F, row.names=F, sep="\t",
-            file=paste0("~/covid-19/isothermal_amplification/guides_amplicon_overlap_minusStrand", 
-                        format(Sys.time(), "%Y%m%d"), ".txt"))
+# write.table(subset_3, quote=F, row.names=F, sep="\t",
+#             file=paste0("~/covid-19/isothermal_amplification/guides_amplicon_overlap_minusStrand", 
+#                         format(Sys.time(), "%Y%m%d"), ".txt"))
 
 # diagnostic plot
 subset_3$amplicon_label <- gsub(":.*", "", subset_3$amplicon) 

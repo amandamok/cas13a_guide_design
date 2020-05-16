@@ -130,7 +130,7 @@ crossreactive_plot <- ggplot(alignment_summary, aes(target, offtarget_rate)) +
   ggtitle(paste0("off-target cross-reactivity: ", opt$target), 
           subtitle=paste0("all spacers (n=", nrow(alignment_cts), ")")) + 
   xlab("") + ylab("% spacers aligned with ≤4 mismatches")
-ggsave(filename=file.path(opt$out, paste0("crossreactive_offtargets_", opt$target, ".txt")),
+ggsave(filename=file.path(opt$out, paste0("crossreactive_offtargets_", opt$target, ".pdf")),
        crossreactive_plot, device="pdf", width=6, height=4, units="in")
 
 # ordered <- readLines("~/covid-19/outputs/spacers_20200504.txt")
