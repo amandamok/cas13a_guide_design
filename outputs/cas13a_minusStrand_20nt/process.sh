@@ -35,3 +35,4 @@ Rscript ~/covid-19/scripts/evaluate_crossreactive.R -t RNA
 Rscript compile_scores.R
 
 # summarize results
+Rscript -e 'rmarkdown::render("cas13a_results_summary_ampliconOverlap_minusStrand.Rmd", quiet=T)'

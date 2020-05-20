@@ -119,8 +119,8 @@ plot_position <- ggplot() +
   theme_bw() + ggtitle("Genomic position", subtitle=paste(length(unique(subset_3$start)), "spacers")) + 
   xlab("position") + ylab("# spacers") +
   theme(axis.title.y=element_text(color=1), axis.title.y.left = element_text(color=2))
-plot_sensitivity <- ggplot(subset_3, aes(x=amplicon_label, y=sensitivity_0, col=amplicon_label)) + theme_bw() + 
-  geom_jitter(alpha=0.5, size=2, height=0.005, width=0.4) + ggtitle("Sensitivity") + 
+plot_sensitivity <- ggplot(subset_3, aes(x=amplicon_label, y=sensitivity_01, col=amplicon_label)) + theme_bw() + 
+  geom_jitter(alpha=0.5, size=2, height=0.005, width=0.4) + ggtitle("Sensitivity (allowing 1 mismatch)") + 
   xlab("") + ylab("") + theme(legend.position="none") + scale_x_discrete(labels=summary(as.factor(subset_3$amplicon_label)))
 plot_count <- ggplot(subset_3, aes(amplicon_label, fill=amplicon_label)) + theme_bw() + geom_bar() +
   theme(axis.text.x=element_text(angle=90), legend.position="none") + xlab("")
@@ -145,6 +145,20 @@ for(x in seq.int(nrow(subset_4))) {
 
 ```{r RPA_extra_window}
 subset_5 <- subset(subset_3, grepl("RPA", amplicon_label))
+
+# assign to regions of overlapping guides (≥10 nt)
+subset_5 <- subset_5[order(subset_5$start),]
+for(x in seq.int(nrow(subset_5))) {
+  if(x == 1) {
+    region <- 1
+  } else {
+    if(subset_5$start[x] >= (subset_5$start[x-1]+10)) {
+      region <- region+1
+    }
+  }
+  subset_5$region[x] <- region
+}
+knitr::kable(subset_5[,c("start", "target", "spacer", "amplicon_label", "region")], row.names=F)
 
 # read in genome sequence, process into continuous string
 genome_seq <- readLines("~/covid-19/ref_data/NC_045512v2.fa")
