@@ -1,0 +1,52 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM	
+651580	Human adenovirus 54	11040993	0	live	HAdV-54_gp12	HAdV-54_gp12	pVII	pVII			NC_012959.1	15019	15609	plus	0		
+651580	Human adenovirus 54	11040992	0	live	HAdV-54_gp11	HAdV-54_gp11	penton	penton			NC_012959.1	13465	15015	plus	0		
+651580	Human adenovirus 54	11040991	0	live	HAdV-54_gp10	HAdV-54_gp10	pIIIa	pIIIa			NC_012959.1	11715	13409	plus	0		
+651580	Human adenovirus 54	11040990	0	live	HAdV-54_gp09	HAdV-54_gp09	52/55K	52/55K			NC_012959.1	10574	11692	plus	0		
+651580	Human adenovirus 54	11040989	0	live	HAdV-54_gp08	HAdV-54_gp08	pTP	pTP			NC_012959.1	8328	13438	minus	0		
+651580	Human adenovirus 54	11040988	0	live	HAdV-54_gp07	HAdV-54_gp07	polymerase	polymerase			NC_012959.1	5008	8283	minus	0		
+651580	Human adenovirus 54	11040987	0	live	HAdV-54_gp06	HAdV-54_gp06	pIVa2	pIVa2			NC_012959.1	3905	5529	minus	0		
+651580	Human adenovirus 54	11040986	0	live	HAdV-54_gp05	HAdV-54_gp05	pIX	pIX			NC_012959.1	3454	3861	plus	0		
+651580	Human adenovirus 54	11040985	0	live	HAdV-54_gp04	HAdV-54_gp04	E1B 55 kDa protein	E1B 55 kDa protein			NC_012959.1	1882	3369	plus	0		
+651580	Human adenovirus 54	11040984	0	live	HAdV-54_gp03	HAdV-54_gp03	E1B 21.1 kDa protein	E1B 21.1 kDa protein			NC_012959.1	1577	2125	plus	0		
+651580	Human adenovirus 54	11040983	0	live	HAdV-54_gp01	HAdV-54_gp01	Early E1A 12s;early E1A 13s	Early E1A 12s;early E1A 13s			NC_012959.1	569	1425	plus	0		
+651580	Human adenovirus 54	11040982	0	live	HAdV-54_gp36	HAdV-54_gp36	7.3 kDa protein	7.3 kDa protein			NC_012959.1	34031	34408	minus	0		
+651580	Human adenovirus 54	11040981	0	live	HAdV-54_gp35	HAdV-54_gp35	14.5 kDa protein	14.5 kDa protein			NC_012959.1	33598	33990	minus	0		
+651580	Human adenovirus 54	11040980	0	live	HAdV-54_gp34	HAdV-54_gp34	13.6 kDa protein	13.6 kDa protein			NC_012959.1	33248	33601	minus	0		
+651580	Human adenovirus 54	11040979	0	live	HAdV-54_gp33	HAdV-54_gp33	14.1 kDa protein	14.1 kDa protein			NC_012959.1	32883	33245	minus	0		
+651580	Human adenovirus 54	11040978	0	live	HAdV-54_gp32	HAdV-54_gp32	8.5 kDa protein	8.5 kDa protein			NC_012959.1	32547	32786	minus	0		
+651580	Human adenovirus 54	11040977	0	live	HAdV-54_gp31	HAdV-54_gp31	34 kDa protein	34 kDa protein			NC_012959.1	32075	32953	minus	0		
+651580	Human adenovirus 54	11040976	0	live	HAdV-54_gp30	HAdV-54_gp30	fiber	fiber			NC_012959.1	30714	31799	plus	0		
+651580	Human adenovirus 54	11040975	0	live	HAdV-54_gp29	HAdV-54_gp29	14.7 kDa protein	14.7 kDa protein			NC_012959.1	30069	30461	plus	0		
+651580	Human adenovirus 54	11040974	0	live	HAdV-54_gp28	HAdV-54_gp28	14.2 kDa protein	14.2 kDa protein			NC_012959.1	29693	30076	plus	0		
+651580	Human adenovirus 54	11040973	0	live	HAdV-54_gp27	HAdV-54_gp27	10.5 kDa protein	10.5 kDa protein			NC_012959.1	29421	29696	plus	0		
+651580	Human adenovirus 54	11040972	0	live	HAdV-54_gp26	HAdV-54_gp26	29.3 kDa protein	29.3 kDa protein			NC_012959.1	28629	29414	plus	0		
+651580	Human adenovirus 54	11040971	0	live	HAdV-54_gp25	HAdV-54_gp25	44.5 kDa protein	44.5 kDa protein			NC_012959.1	27355	28602	plus	0		
+651580	Human adenovirus 54	11040970	0	live	HAdV-54_gp24	HAdV-54_gp24	17.6 kDa protein	17.6 kDa protein			NC_012959.1	26913	27386	plus	0		
+651580	Human adenovirus 54	11040969	0	live	HAdV-54_gp23	HAdV-54_gp23	20.9 kDa protein	20.9 kDa protein			NC_012959.1	26328	26894	plus	0		
+651580	Human adenovirus 54	11040968	0	live	HAdV-54_gp22	HAdV-54_gp22	12.2 kDa protein	12.2 kDa protein			NC_012959.1	26054	26374	plus	0		
+651580	Human adenovirus 54	11040967	0	live	HAdV-54_gp21	HAdV-54_gp21	pVIII	pVIII			NC_012959.1	25370	26053	plus	0		
+651580	Human adenovirus 54	11040966	0	live	HAdV-54_gp20	HAdV-54_gp20	14.5 kDa protein	14.5 kDa protein			NC_012959.1	24667	25041	plus	0		
+651580	Human adenovirus 54	11040965	0	live	HAdV-54_gp19	HAdV-54_gp19	80.2 kDa protein	80.2 kDa protein			NC_012959.1	22707	24845	plus	0		
+651580	Human adenovirus 54	11040964	0	live	HAdV-54_gp18	HAdV-54_gp18	DNA binding protein	DNA binding protein			NC_012959.1	21218	22690	minus	0		
+651580	Human adenovirus 54	11040963	0	live	HAdV-54_gp17	HAdV-54_gp17	protease	protease			NC_012959.1	20542	21165	plus	0		
+651580	Human adenovirus 54	11040962	0	live	HAdV-54_gp16	HAdV-54_gp16	hexon	hexon			NC_012959.1	17678	20539	plus	0		
+651580	Human adenovirus 54	11040961	0	live	HAdV-54_gp15	HAdV-54_gp15	pVI	pVI			NC_012959.1	16938	17639	plus	0		
+651580	Human adenovirus 54	11040960	0	live	HAdV-54_gp14	HAdV-54_gp14	pX	pX			NC_012959.1	16658	16882	plus	0		
+651580	Human adenovirus 54	11040959	0	live	HAdV-54_gp13	HAdV-54_gp13	pV	pV			NC_012959.1	15642	16628	plus	0		
+130310	Human mastadenovirus D	6386285	0	live	L2	HuAdVD_gp09	core protein V;core protein precursor pVII;core protein precursor pX;penton base	core protein V;core protein precursor pVII;core protein precursor pX;penton base			NC_010956.1	5823	16967	plus	0		
+130310	Human mastadenovirus D	6386284	0	live	VAII	HuAdVD_gp12					NC_010956.1	10468	10621	plus	0		
+130310	Human mastadenovirus D	6386283	0	live	L3	HuAdVD_gp08	capsid protein precursor pVI;hexon;protease	capsid protein precursor pVI;hexon;protease			NC_010956.1	5823	21254	plus	0		
+130310	Human mastadenovirus D	6386282	0	live	E4	HuAdVD_gp17	control protein E4 34K;control protein E4orf1;control protein E4orf2;control protein E4orf3;control protein E4orf4;control protein E4orf6/7	control protein E4 34K;control protein E4orf1;control protein E4orf2;control protein E4orf3;control protein E4orf4;control protein E4orf6/7			NC_010956.1	32037	34702	minus	0		
+130310	Human mastadenovirus D	6386280	0	live	U	HuAdVD_gp16	protein U	protein U			NC_010956.1	30753	30898	minus	0		
+130310	Human mastadenovirus D	6386279	0	live	VAI	HuAdVD_gp11					NC_010956.1	10249	10411	plus	0		
+130310	Human mastadenovirus D	6386278	0	live	E1A	HuAdVD_gp01	control protein E1A	control protein E1A			NC_010956.1	481	1462	plus	0		
+130310	Human mastadenovirus D	6386277	0	live	L4	HuAdVD_gp07	capsid protein precursor pVIII;encapsidation protein 22K;hexon assembly protein 100K;protein 33K	capsid protein precursor pVIII;encapsidation protein 22K;hexon assembly protein 100K;protein 33K			NC_010956.1	5823	26498	plus	0		
+130310	Human mastadenovirus D	6386276	0	live	L1	HuAdVD_gp10	capsid protein precursor pIIIa;encapsidation protein 52K;protein 13.6K	capsid protein precursor pIIIa;encapsidation protein 52K;protein 13.6K			NC_010956.1	5823	13474	plus	0		
+130310	Human mastadenovirus D	6386275	0	live	E1B	HuAdVD_gp02	control protein E1B 19K;control protein E1B 55K	control protein E1B 19K;control protein E1B 55K			NC_010956.1	1518	3864	plus	0		
+130310	Human mastadenovirus D	6386274	0	live	E2A-L	HuAdVD_gp14					NC_010956.1	21262	24549	minus	0		
+130310	Human mastadenovirus D	6386273	0	live	E3	HuAdVD_gp15	control protein E3 12.5K;control protein E3 14.7K;membrane glycoprotein E3 CR1-alpha;membrane glycoprotein E3 CR1-beta;membrane glycoprotein E3 CR1-gamma;membrane glycoprotein E3 gp19K;membrane protein E3 RID-alpha;membrane protein E3 RID-beta	control protein E3 12.5K;control protein E3 14.7K;membrane glycoprotein E3 CR1-alpha;membrane glycoprotein E3 CR1-beta;membrane glycoprotein E3 CR1-gamma;membrane glycoprotein E3 gp19K;membrane protein E3 RID-alpha;membrane protein E3 RID-beta			NC_010956.1	25865	30742	plus	0		
+130310	Human mastadenovirus D	6386272	0	live	IX	HuAdVD_gp03	capsid protein IX	capsid protein IX			NC_010956.1	3402	3864	plus	0		
+130310	Human mastadenovirus D	6386271	0	live	E2B	HuAdVD_gp04	DNA polymerase;terminal protein precursor pTP	DNA polymerase;terminal protein precursor pTP			NC_010956.1	3895	25454	minus	0		
+130310	Human mastadenovirus D	6386270	0	live	IVa2	HuAdVD_gp05	encapsidation protein IVa2	encapsidation protein IVa2			NC_010956.1	3895	5523	minus	0		
+130310	Human mastadenovirus D	6386269	0	live	L5	HuAdVD_gp06	fiber	fiber			NC_010956.1	5823	32014	plus	0		

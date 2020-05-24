@@ -1,0 +1,18 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM	
+129951	Human mastadenovirus C	5739977	0	live	E2A-L	HAdVC_gp12	single-stranded DNA-binding protein	single-stranded DNA-binding protein			NC_001405.1	22420	25985	minus	0		
+129951	Human mastadenovirus C	5739975	0	live	VAI	HAdVC_gs01					NC_001405.1	10610	10766	plus	0		
+129951	Human mastadenovirus C	5739974	0	live	IVa2	HAdVC_gp05	encapsidation protein IVa2	encapsidation protein IVa2			NC_001405.1	4050	5826	minus	0		
+129951	Human mastadenovirus C	2653012	0	live	IX	HAdVC_gp03, HAdVCgp03	capsid protein IX	capsid protein IX			NC_001405.1	3545	4061	plus	0		
+129951	Human mastadenovirus C	2653006	0	live	U	HAdVC_gp15, HAdVCgp30	protein U	protein U			NC_001405.1	30856	31019	minus	0		
+129951	Human mastadenovirus C	2653005	0	live	L4	HAdVC_gp07	capsid protein precursor pVIII;encapsidation protein 22K;hexon assembly protein 100K;protein 33K	capsid protein precursor pVIII;encapsidation protein 22K;hexon assembly protein 100K;protein 33K			NC_001405.1	6008	28223	plus	0		
+129951	Human mastadenovirus C	2653002	0	live	VAII	HAdVC_gs02, HAdVCgs02					NC_001405.1	10866	11023	plus	0		
+129951	Human mastadenovirus C	2652999	0	live	L5	HAdVC_gp06, HAdVCgp09	fiber	fiber			NC_001405.1	6008	32798	plus	0		
+129951	Human mastadenovirus C	2652998	0	live	L3	HAdVC_gp08	capsid protein precursor pVI;hexon;protease	capsid protein precursor pVI;hexon;protease			NC_001405.1	6008	22443	plus	0		
+129951	Human mastadenovirus C	2652996	0	live	L2	HAdVC_gp09	core protein V;core protein precursor pVII;core protein precursor pX;penton base	core protein V;core protein precursor pVII;core protein precursor pX;penton base			NC_001405.1	6008	17969	plus	0		
+129951	Human mastadenovirus C	2652993	0	live	L1	HAdVC_gp10, HAdVCgp12	capsid protein precursor pIIIa;encapsidation protein 52K;protein 13.6K	capsid protein precursor pIIIa;encapsidation protein 52K;protein 13.6K			NC_001405.1	6008	14113	plus	0		
+129951	Human mastadenovirus C	2652989	0	live	E4	HAdVC_gp16, HAdVCgp31	control protein E4 34K;control protein E4orf1;control protein E4orf2;control protein E4orf3;control protein E4orf4;control protein E4orf6/7	control protein E4 34K;control protein E4orf1;control protein E4orf2;control protein E4orf3;control protein E4orf4;control protein E4orf6/7			NC_001405.1	32802	35641	minus	0		
+129951	Human mastadenovirus C	2652988	0	live	E3B	HAdVC_gp13, HAdVCgp27	control protein E3 14.7K;membrane protein E3 RID-alpha;membrane protein E3 RID-beta	control protein E3 14.7K;membrane protein E3 RID-alpha;membrane protein E3 RID-beta			NC_001405.1	27580	30864	plus	0		
+129951	Human mastadenovirus C	2652987	0	live	E3A	HAdVC_gp14, HAdVCgp28	control protein E3 12.5K;membrane glycoprotein E3 CR1-alpha;membrane glycoprotein E3 CR1-beta;membrane glycoprotein E3 gp19K	control protein E3 12.5K;membrane glycoprotein E3 CR1-alpha;membrane glycoprotein E3 CR1-beta;membrane glycoprotein E3 gp19K			NC_001405.1	27580	29804	plus	0		
+129951	Human mastadenovirus C	2652985	0	live	E2B	HAdVC_gp04, HAdVCgp06	DNA polymerase;terminal protein precursor pTP	DNA polymerase;terminal protein precursor pTP			NC_001405.1	4050	27121	minus	0		
+129951	Human mastadenovirus C	2652981	0	live	E1B	HAdVC_gp02	control protein E1B 19K;control protein E1B 55K	control protein E1B 19K;control protein E1B 55K			NC_001405.1	1669	4061	plus	0		
+129951	Human mastadenovirus C	2652980	0	live	E1A	HAdVC_gp01, HAdVCgp01	control protein E1A;control protein E1A 243R	control protein E1A;control protein E1A 243R			NC_001405.1	467	1630	plus	0		

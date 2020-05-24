@@ -1,0 +1,175 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM	
+10359	Human betaherpesvirus 5	3077517	0	live	UL97	HHV5wtgp090	tegument serine/threonine protein kinase	tegument serine/threonine protein kinase			NC_006273.2	141798	143921	plus	0		
+10359	Human betaherpesvirus 5	3077513	0	live	UL123	HHV5wtgp108	regulatory protein IE1	regulatory protein IE1			NC_006273.2	172329	174090	minus	0		
+10359	Human betaherpesvirus 5	3077536	0	live	US28	HHV5wtgp158	envelope protein US28	envelope protein US28			NC_006273.2	225435	226529	plus	0		
+10359	Human betaherpesvirus 5	3077579	0	live	UL83	HHV5wtgp077	tegument protein pp65	tegument protein pp65			NC_006273.2	120656	122341	minus	0		
+10359	Human betaherpesvirus 5	3077460	0	live	UL44	HHV5wtgp048	DNA polymerase processivity subunit	DNA polymerase processivity subunit			NC_006273.2	56501	57802	minus	0		
+10359	Human betaherpesvirus 5	3077563	0	live	UL122	HHV5wtgp107	regulatory protein IE2	regulatory protein IE2			NC_006273.2	170689	174090	minus	0		
+10359	Human betaherpesvirus 5	3077501	0	live	UL54	HHV5wtgp059	DNA polymerase catalytic subunit	DNA polymerase catalytic subunit			NC_006273.2	78194	81922	minus	0		
+10359	Human betaherpesvirus 5	3077450	0	live	UL75	HHV5wtgp069	envelope glycoprotein H	envelope glycoprotein H			NC_006273.2	109224	111452	minus	0		
+10359	Human betaherpesvirus 5	3077530	0	live	UL82	HHV5wtgp076	tegument protein pp71	tegument protein pp71			NC_006273.2	118788	120467	minus	0		
+10359	Human betaherpesvirus 5	3077420	0	live	UL138	HHV5wtgp124	protein UL138	protein UL138			NC_006273.2	187441	187950	minus	0		
+10359	Human betaherpesvirus 5	3077424	0	live	UL55	HHV5wtgp060	envelope glycoprotein B	envelope glycoprotein B			NC_006273.2	82066	84789	minus	0		
+10359	Human betaherpesvirus 5	3077525	0	live	UL84	HHV5wtgp078	protein UL84	protein UL84			NC_006273.2	122613	124376	minus	0		
+10359	Human betaherpesvirus 5	3077462	0	live	UL37	HHV5wtgp042	envelope glycoprotein UL37	envelope glycoprotein UL37			NC_006273.2	50262	53060	minus	0		
+10359	Human betaherpesvirus 5	3077416	0	live	UL115	HHV5wtgp101	envelope glycoprotein L	envelope glycoprotein L			NC_006273.2	165022	165858	minus	0		
+10359	Human betaherpesvirus 5	3077553	0	live	UL89	HHV5wtgp083	DNA packaging terminase subunit 1	DNA packaging terminase subunit 1			NC_006273.2	133770	139697	minus	0		
+10359	Human betaherpesvirus 5	3077572	0	live	UL74	HHV5wtgp068	envelope glycoprotein O	envelope glycoprotein O			NC_006273.2	107430	108848	minus	0		
+10359	Human betaherpesvirus 5	3077557	0	live	US27	HHV5wtgp157	envelope glycoprotein US27	envelope glycoprotein US27			NC_006273.2	223800	226529	plus	0		
+10359	Human betaherpesvirus 5	3077523	0	live	TRS1	HHV5wtgp165	tegument protein TRS1	tegument protein TRS1			NC_006273.2	232393	234759	minus	0		
+10359	Human betaherpesvirus 5	3077568	0	live	UL136	HHV5wtgp125	protein UL136	protein UL136			NC_006273.2	188033	188755	minus	0		
+10359	Human betaherpesvirus 5	3077495	0	live	UL112	HHV5wtgp099	protein UL112	protein UL112			NC_006273.2	161917	164128	plus	0		
+10359	Human betaherpesvirus 5	3077493	0	live	UL131A	HHV5wtgp112	envelope protein UL131A	envelope protein UL131A			NC_006273.2	177649	178146	minus	0		
+10359	Human betaherpesvirus 5	3077554	0	live	UL69	HHV5wtgp063	multifunctional expression regulator	multifunctional expression regulator			NC_006273.2	99519	101747	minus	0		
+10359	Human betaherpesvirus 5	3077542	0	live	US2	HHV5wtgp135	membrane glycoprotein US2	membrane glycoprotein US2			NC_006273.2	199331	199930	minus	0		
+10359	Human betaherpesvirus 5	3077537	0	live	UL71	HHV5wtgp065	tegument protein UL51	tegument protein UL51			NC_006273.2	104703	105788	plus	0		
+10359	Human betaherpesvirus 5	3077504	0	live	UL48	HHV5wtgp052	large tegument protein	large tegument protein			NC_006273.2	64625	71350	plus	0		
+10359	Human betaherpesvirus 5	3077471	0	live	UL144	HHV5wtgp119	membrane glycoprotein UL144	membrane glycoprotein UL144			NC_006273.2	182206	182736	minus	0		
+10359	Human betaherpesvirus 5	3077445	0	live	UL26	HHV5wtgp031	tegument protein UL26	tegument protein UL26			NC_006273.2	32560	33126	minus	0		
+10359	Human betaherpesvirus 5	3077500	0	live	UL34	HHV5wtgp039	protein UL34	protein UL34			NC_006273.2	45141	46364	plus	0		
+10359	Human betaherpesvirus 5	3077457	0	live	UL56	HHV5wtgp061	DNA packaging terminase subunit 2	DNA packaging terminase subunit 2			NC_006273.2	84752	87304	minus	0		
+10359	Human betaherpesvirus 5	3077422	0	live	UL32	HHV5wtgp037	tegument protein pp150	tegument protein pp150			NC_006273.2	40195	43344	minus	0		
+10359	Human betaherpesvirus 5	3077481	0	live	UL130	HHV5wtgp111	envelope glycoprotein UL130	envelope glycoprotein UL130			NC_006273.2	176984	177628	minus	0		
+10359	Human betaherpesvirus 5	3077448	0	live	UL21A	HHV5wtgp026	protein UL21A	protein UL21A			NC_006273.2	26803	27174	minus	0		
+10359	Human betaherpesvirus 5	3077549	0	live	UL78	HHV5wtgp072	envelope protein UL78	envelope protein UL78			NC_006273.2	114226	115521	plus	0		
+10359	Human betaherpesvirus 5	3077482	0	live	UL51	HHV5wtgp056	DNA packaging protein UL33	DNA packaging protein UL33			NC_006273.2	74576	75049	minus	0		
+10359	Human betaherpesvirus 5	3077439	0	live	UL50	HHV5wtgp055	nuclear egress membrane protein	nuclear egress membrane protein			NC_006273.2	73358	74554	minus	0		
+10359	Human betaherpesvirus 5	3077539	0	live	UL114	HHV5wtgp100	uracil-DNA glycosylase	uracil-DNA glycosylase			NC_006273.2	164298	165050	minus	0		
+10359	Human betaherpesvirus 5	3077496	0	live	UL94	HHV5wtgp087	tegument protein UL16	tegument protein UL16			NC_006273.2	137660	138697	plus	0		
+10359	Human betaherpesvirus 5	3077480	0	live	UL7	HHV5wtgp013	membrane glycoprotein UL7	membrane glycoprotein UL7			NC_006273.2	15865	16533	plus	0		
+10359	Human betaherpesvirus 5	3077415	0	live	UL145	HHV5wtgp118	protein UL145	protein UL145			NC_006273.2	181573	181965	minus	0		
+10359	Human betaherpesvirus 5	3077435	0	live	UL76	HHV5wtgp070	nuclear protein UL24	nuclear protein UL24			NC_006273.2	111647	112624	plus	0		
+10359	Human betaherpesvirus 5	3077506	0	live	UL111A	HHV5wtgp098	interleukin-10	interleukin-10			NC_006273.2	161003	161692	plus	0		
+10359	Human betaherpesvirus 5	3077474	0	live	UL79	HHV5wtgp073	protein UL79	protein UL79			NC_006273.2	115576	116463	minus	0		
+10359	Human betaherpesvirus 5	3077458	0	live	UL135	HHV5wtgp126	protein UL135	protein UL135			NC_006273.2	188846	189772	minus	0		
+10359	Human betaherpesvirus 5	3077575	0	live	UL53	HHV5wtgp058	nuclear egress lamina protein	nuclear egress lamina protein			NC_006273.2	77086	79337	plus	0		
+10359	Human betaherpesvirus 5	3077442	0	live	UL36	HHV5wtgp041	tegument protein vICA	tegument protein vICA			NC_006273.2	48595	50128	minus	0		
+10359	Human betaherpesvirus 5	3077490	0	live	US11	HHV5wtgp142	membrane glycoprotein US11	membrane glycoprotein US11			NC_006273.2	205929	206576	minus	0		
+10359	Human betaherpesvirus 5	3077486	0	live	UL93	HHV5wtgp086	DNA packaging tegument protein UL17	DNA packaging tegument protein UL17			NC_006273.2	136018	137802	plus	0		
+10359	Human betaherpesvirus 5	3077559	0	live	UL103	HHV5wtgp095	tegument protein UL7	tegument protein UL7			NC_006273.2	150615	151364	minus	0		
+10359	Human betaherpesvirus 5	3077558	0	live	US16	HHV5wtgp147	membrane protein US16	membrane protein US16			NC_006273.2	210366	211295	minus	0		
+10359	Human betaherpesvirus 5	3077550	0	live	UL150	HHV5wtgp132	protein UL150	protein UL150			NC_006273.2	192341	194260	minus	0		
+10359	Human betaherpesvirus 5	3077510	0	live	UL49	HHV5wtgp054	protein UL49	protein UL49			NC_006273.2	71689	73401	minus	0		
+10359	Human betaherpesvirus 5	3077540	0	live	UL40	HHV5wtgp044	membrane glycoprotein UL40	membrane glycoprotein UL40			NC_006273.2	53498	54344	minus	0		
+10359	Human betaherpesvirus 5	3077531	0	live	UL38	HHV5wtgp043	protein UL38	protein UL38			NC_006273.2	51482	52477	minus	0		
+10359	Human betaherpesvirus 5	3077466	0	live	UL18	HHV5wtgp023	membrane glycoprotein UL18	membrane glycoprotein UL18			NC_006273.2	23977	25083	plus	0		
+10359	Human betaherpesvirus 5	3077418	0	live	UL141	HHV5wtgp121	membrane glycoprotein UL141	membrane glycoprotein UL141			NC_006273.2	184396	185412	minus	0		
+10359	Human betaherpesvirus 5	3077451	0	live	UL77	HHV5wtgp071	DNA packaging tegument protein UL25	DNA packaging tegument protein UL25			NC_006273.2	112227	114137	plus	0		
+10359	Human betaherpesvirus 5	3077533	0	live	UL99	HHV5wtgp092	myristylated tegument protein	myristylated tegument protein			NC_006273.2	145706	146278	plus	0		
+10359	Human betaherpesvirus 5	3077492	0	live	RL13	HHV5wtgp007	membrane protein RL13	membrane protein RL13			NC_006273.2	11189	12070	plus	0		
+10359	Human betaherpesvirus 5	3077464	0	live	UL16	HHV5wtgp021	membrane glycoprotein UL16	membrane glycoprotein UL16			NC_006273.2	22754	23446	plus	0		
+10359	Human betaherpesvirus 5	3077574	0	live	IRS1	HHV5wtgp133	tegument protein IRS1	tegument protein IRS1			NC_006273.2	195976	198519	plus	0		
+10359	Human betaherpesvirus 5	3077561	0	live	US20	HHV5wtgp151	membrane protein US20	membrane protein US20			NC_006273.2	214320	215084	minus	0		
+10359	Human betaherpesvirus 5	3077508	0	live	UL31	HHV5wtgp036	protein UL31	protein UL31			NC_006273.2	38327	40114	plus	0		
+10359	Human betaherpesvirus 5	3077479	0	live	UL148	HHV5wtgp114	membrane protein UL148	membrane protein UL148			NC_006273.2	179141	180091	minus	0		
+10359	Human betaherpesvirus 5	3077566	0	live	UL146	HHV5wtgp117	chemokine vCXCL1	chemokine vCXCL1			NC_006273.2	180930	181292	minus	0		
+10359	Human betaherpesvirus 5	3077552	0	live	UL142	HHV5wtgp120	membrane glycoprotein UL142	membrane glycoprotein UL142			NC_006273.2	183406	184323	minus	0		
+10359	Human betaherpesvirus 5	3077521	0	live	UL47	HHV5wtgp051	tegument protein UL37	tegument protein UL37			NC_006273.2	61677	64628	plus	0		
+10359	Human betaherpesvirus 5	3077419	0	live	UL147	HHV5wtgp116	chemokine vCXCL2	chemokine vCXCL2			NC_006273.2	180390	180869	minus	0		
+10359	Human betaherpesvirus 5	3077560	0	live	UL11	HHV5wtgp017	membrane glycoprotein UL11	membrane glycoprotein UL11			NC_006273.2	18642	19460	plus	0		
+10359	Human betaherpesvirus 5	3077567	0	live	US17	HHV5wtgp148	membrane protein US17	membrane protein US17			NC_006273.2	211440	212321	minus	0		
+10359	Human betaherpesvirus 5	3077556	0	live	UL116	HHV5wtgp102	protein UL116	protein UL116			NC_006273.2	165858	166799	minus	0		
+10359	Human betaherpesvirus 5	3077551	0	live	US10	HHV5wtgp141	membrane glycoprotein US10	membrane glycoprotein US10			NC_006273.2	205296	205853	minus	0		
+10359	Human betaherpesvirus 5	3077547	0	live	UL104	HHV5wtgp096	capsid portal protein	capsid portal protein			NC_006273.2	151312	153405	minus	0		
+10359	Human betaherpesvirus 5	3077535	0	live	US7	HHV5wtgp138	membrane glycoprotein US7	membrane glycoprotein US7			NC_006273.2	202589	203266	minus	0		
+10359	Human betaherpesvirus 5	3077527	0	live	UL98	HHV5wtgp091	deoxyribonuclease	deoxyribonuclease			NC_006273.2	144015	145769	plus	0		
+10359	Human betaherpesvirus 5	3077514	0	live	UL119	HHV5wtgp104	membrane glycoprotein UL119	membrane glycoprotein UL119			NC_006273.2	168186	169311	minus	0		
+10359	Human betaherpesvirus 5	3077494	0	live	UL91	HHV5wtgp084	protein UL91	protein UL91			NC_006273.2	135142	135477	plus	0		
+10359	Human betaherpesvirus 5	3077485	0	live	UL80	HHV5wtgp074	capsid maturation protease	capsid maturation protease			NC_006273.2	116500	118626	plus	0		
+10359	Human betaherpesvirus 5	3077441	0	live	UL132	HHV5wtgp113	envelope glycoprotein UL132	envelope glycoprotein UL132			NC_006273.2	178252	179064	minus	0		
+10359	Human betaherpesvirus 5	3077440	0	live	UL42	HHV5wtgp046	protein UL42	protein UL42			NC_006273.2	54742	55119	minus	0		
+10359	Human betaherpesvirus 5	3077429	0	live	UL35	HHV5wtgp040	tegument protein UL35	tegument protein UL35			NC_006273.2	46443	48368	plus	0		
+10359	Human betaherpesvirus 5	3077449	0	live	UL27	HHV5wtgp032	protein UL27	protein UL27			NC_006273.2	33182	35008	minus	0		
+10359	Human betaherpesvirus 5	3077465	0	live	UL87	HHV5wtgp081	protein UL87	protein UL87			NC_006273.2	129662	132487	plus	0		
+10359	Human betaherpesvirus 5	3077573	0	live	US31	HHV5wtgp161	protein US31	protein US31			NC_006273.2	229018	229503	plus	0		
+10359	Human betaherpesvirus 5	3077498	0	live	UL96	HHV5wtgp089	tegument protein UL14	tegument protein UL14			NC_006273.2	141294	141677	plus	0		
+10359	Human betaherpesvirus 5	3077484	0	live	UL70	HHV5wtgp064	helicase-primase primase subunit	helicase-primase primase subunit			NC_006273.2	101847	104687	minus	0		
+10359	Human betaherpesvirus 5	3077463	0	live	US22	HHV5wtgp153	tegument protein US22	tegument protein US22			NC_006273.2	216099	217829	minus	0		
+10359	Human betaherpesvirus 5	3077461	0	live	UL148A	HHV5wtgp128	protein UL148A	protein UL148A			NC_006273.2	190818	191060	minus	0		
+10359	Human betaherpesvirus 5	3077454	0	live	UL72	HHV5wtgp066	deoxyuridine triphosphatase	deoxyuridine triphosphatase			NC_006273.2	105869	107035	minus	0		
+10359	Human betaherpesvirus 5	3077577	0	live	UL133	HHV5wtgp127	protein UL133	protein UL133			NC_006273.2	189949	190722	minus	0		
+10359	Human betaherpesvirus 5	3077511	0	live	UL117	HHV5wtgp103	protein UL117	protein UL117			NC_006273.2	166796	168073	minus	0		
+10359	Human betaherpesvirus 5	3077502	0	live	UL95	HHV5wtgp088	protein UL95	protein UL95			NC_006273.2	139696	141297	plus	0		
+10359	Human betaherpesvirus 5	3077473	0	live	UL25	HHV5wtgp030	tegument protein UL25	tegument protein UL25			NC_006273.2	30402	32372	plus	0		
+10359	Human betaherpesvirus 5	3077472	0	live	US18	HHV5wtgp149	membrane protein US18	membrane protein US18			NC_006273.2	212589	213413	minus	0		
+10359	Human betaherpesvirus 5	3077455	0	live	US9	HHV5wtgp140	membrane glycoprotein US9	membrane glycoprotein US9			NC_006273.2	204167	204910	minus	0		
+10359	Human betaherpesvirus 5	3077468	0	live	UL33	HHV5wtgp038	envelope glycoprotein UL33	envelope glycoprotein UL33			NC_006273.2	43415	44773	plus	0		
+10359	Human betaherpesvirus 5	3077444	0	live	UL45	HHV5wtgp049	ribonucleotide reductase subunit 1	ribonucleotide reductase subunit 1			NC_006273.2	57943	60663	minus	0		
+10359	Human betaherpesvirus 5	3077532	0	live	US3	HHV5wtgp136	membrane glycoprotein US3	membrane glycoprotein US3			NC_006273.2	200345	200905	minus	0		
+10359	Human betaherpesvirus 5	13229472	0	live	US33A	HHV5wtgr006	protein US33A;protein US34	protein US33A;protein US34			NC_006273.2	230319	231527	plus	0		
+10359	Human betaherpesvirus 5	3077578	0	live	US24	HHV5wtgp155	tegument protein US24	tegument protein US24			NC_006273.2	219817	221322	minus	0		
+10359	Human betaherpesvirus 5	3077576	0	live	US13	HHV5wtgp144	membrane protein US13	membrane protein US13			NC_006273.2	207687	208472	minus	0		
+10359	Human betaherpesvirus 5	3077571	0	live	UL22A	HHV5wtgp027	glycoprotein UL22A	glycoprotein UL22A			NC_006273.2	27443	27843	plus	0		
+10359	Human betaherpesvirus 5	3077569	0	live	UL147A	HHV5wtgp115	membrane protein UL147A	membrane protein UL147A			NC_006273.2	180160	180387	minus	0		
+10359	Human betaherpesvirus 5	3077565	0	live	US15	HHV5wtgp146	membrane protein US15	membrane protein US15			NC_006273.2	209518	210306	minus	0		
+10359	Human betaherpesvirus 5	3077564	0	live	UL92	HHV5wtgp085	protein UL92	protein UL92			NC_006273.2	135447	136052	plus	0		
+10359	Human betaherpesvirus 5	3077562	0	live	US12	HHV5wtgp143	membrane protein US12	membrane protein US12			NC_006273.2	206762	207607	minus	0		
+10359	Human betaherpesvirus 5	3077555	0	live	US6	HHV5wtgp137	membrane glycoprotein US6	membrane glycoprotein US6			NC_006273.2	201615	202163	minus	0		
+10359	Human betaherpesvirus 5	3077548	0	live	UL102	HHV5wtgp094	helicase-primase subunit	helicase-primase subunit			NC_006273.2	147831	150452	plus	0		
+10359	Human betaherpesvirus 5	3077546	0	live	UL105	HHV5wtgp097	helicase-primase helicase subunit	helicase-primase helicase subunit			NC_006273.2	153233	156103	plus	0		
+10359	Human betaherpesvirus 5	3077545	0	live	US26	HHV5wtgp156	protein US26	protein US26			NC_006273.2	221956	223767	minus	0		
+10359	Human betaherpesvirus 5	3077544	0	live	RL6	HHV5wtgp003	protein RL6	protein RL6			NC_006273.2	5959	6504	minus	0		
+10359	Human betaherpesvirus 5	3077543	0	live	UL14	HHV5wtgp019	membrane protein UL14	membrane protein UL14			NC_006273.2	21229	22212	plus	0		
+10359	Human betaherpesvirus 5	3077541	0	live	UL48A	HHV5wtgp053	small capsid protein	small capsid protein			NC_006273.2	70422	71796	minus	0		
+10359	Human betaherpesvirus 5	3077538	0	live	UL86	HHV5wtgp080	major capsid protein	major capsid protein			NC_006273.2	125490	129602	minus	0		
+10359	Human betaherpesvirus 5	3077534	0	live	UL100	HHV5wtgp093	envelope glycoprotein M	envelope glycoprotein M			NC_006273.2	146538	147653	minus	0		
+10359	Human betaherpesvirus 5	3077529	0	live	UL121	HHV5wtgp106	membrane protein UL121	membrane protein UL121			NC_006273.2	170022	170564	minus	0		
+10359	Human betaherpesvirus 5	3077528	0	live	UL57	HHV5wtgp062	single-stranded DNA-binding protein	single-stranded DNA-binding protein			NC_006273.2	87871	91578	minus	0		
+10359	Human betaherpesvirus 5	3077526	0	live	US30	HHV5wtgp160	membrane protein US30	membrane protein US30			NC_006273.2	227854	228903	plus	0		
+10359	Human betaherpesvirus 5	3077524	0	live	UL23	HHV5wtgp028	tegument protein UL23	tegument protein UL23			NC_006273.2	28208	29062	minus	0		
+10359	Human betaherpesvirus 5	3077522	0	live	US19	HHV5wtgp150	membrane protein US19	membrane protein US19			NC_006273.2	213551	214273	minus	0		
+10359	Human betaherpesvirus 5	3077520	0	live	UL120	HHV5wtgp105	membrane protein UL120	membrane protein UL120			NC_006273.2	169366	169971	minus	0		
+10359	Human betaherpesvirus 5	3077518	0	live	RL10	HHV5wtgp004	envelope glycoprotein RL10	envelope glycoprotein RL10			NC_006273.2	8601	9113	plus	0		
+10359	Human betaherpesvirus 5	3077516	0	live	UL85	HHV5wtgp079	capsid triplex subunit 2	capsid triplex subunit 2			NC_006273.2	124408	125328	minus	0		
+10359	Human betaherpesvirus 5	3077515	0	live	RL11	HHV5wtgp005	membrane glycoprotein RL11	membrane glycoprotein RL11			NC_006273.2	9142	9846	plus	0		
+10359	Human betaherpesvirus 5	3077512	0	live	UL43	HHV5wtgp047	tegument protein UL43	tegument protein UL43			NC_006273.2	55183	56454	minus	0		
+10359	Human betaherpesvirus 5	3077509	0	live	UL88	HHV5wtgp082	tegument protein UL88	tegument protein UL88			NC_006273.2	132484	133773	plus	0		
+10359	Human betaherpesvirus 5	3077507	0	live	UL6	HHV5wtgp012	membrane protein UL6	membrane protein UL6			NC_006273.2	14965	15807	plus	0		
+10359	Human betaherpesvirus 5	3077503	0	live	UL124	HHV5wtgp109	membrane protein UL124	membrane protein UL124			NC_006273.2	171704	174649	plus	0		
+10359	Human betaherpesvirus 5	3077497	0	live	UL17	HHV5wtgp022	protein UL17	protein UL17			NC_006273.2	23554	23868	plus	0		
+10359	Human betaherpesvirus 5	3077491	0	live	US1	HHV5wtgp134	protein US1	protein US1			NC_006273.2	198543	199013	minus	0		
+10359	Human betaherpesvirus 5	3077488	0	live	RL12	HHV5wtgp006	membrane protein RL12	membrane protein RL12			NC_006273.2	9850	11094	plus	0		
+10359	Human betaherpesvirus 5	3077487	0	live	US32	HHV5wtgp162	protein US32	protein US32			NC_006273.2	229621	230172	plus	0		
+10359	Human betaherpesvirus 5	3077483	0	live	US29	HHV5wtgp159	membrane protein US29	membrane protein US29			NC_006273.2	226662	228050	plus	0		
+10359	Human betaherpesvirus 5	3077478	0	live	UL19	HHV5wtgp024	protein UL19	protein UL19			NC_006273.2	25080	25376	plus	0		
+10359	Human betaherpesvirus 5	3077476	0	live	UL10	HHV5wtgp016	membrane protein UL10	membrane protein UL10			NC_006273.2	17776	18540	plus	0		
+10359	Human betaherpesvirus 5	3077475	0	live	UL41A	HHV5wtgp045	protein UL41A	protein UL41A			NC_006273.2	53498	54838	minus	0		
+10359	Human betaherpesvirus 5	3077470	0	live	UL30	HHV5wtgp035	protein UL30	protein UL30			NC_006273.2	37483	37848	minus	0		
+10359	Human betaherpesvirus 5	3077469	0	live	RL5A	HHV5wtgp002	protein RL5A	protein RL5A			NC_006273.2	2489	5852	minus	0		
+10359	Human betaherpesvirus 5	3077467	0	live	UL140	HHV5wtgp122	protein UL140	protein UL140			NC_006273.2	185705	186280	minus	0		
+10359	Human betaherpesvirus 5	3077459	0	live	UL9	HHV5wtgp015	membrane glycoprotein UL9	membrane glycoprotein UL9			NC_006273.2	16947	17648	plus	0		
+10359	Human betaherpesvirus 5	3077456	0	live	US14	HHV5wtgp145	membrane protein US14	membrane protein US14			NC_006273.2	208541	209473	minus	0		
+10359	Human betaherpesvirus 5	3077453	0	live	UL148B	HHV5wtgp129	protein UL148B	protein UL148B			NC_006273.2	191190	191432	minus	0		
+10359	Human betaherpesvirus 5	3077452	0	live	UL2	HHV5wtgp009	protein UL2	protein UL2			NC_006273.2	13211	13390	minus	0		
+10359	Human betaherpesvirus 5	3077447	0	live	US34A	HHV5wtgp164	protein US34A	protein US34A			NC_006273.2	231201	231527	plus	0		
+10359	Human betaherpesvirus 5	3077446	0	live	US23	HHV5wtgp154	protein US23	protein US23			NC_006273.2	217943	219721	minus	0		
+10359	Human betaherpesvirus 5	3077437	0	live	US21	HHV5wtgp152	membrane protein US21	membrane protein US21			NC_006273.2	215191	215922	minus	0		
+10359	Human betaherpesvirus 5	3077436	0	live	UL148D	HHV5wtgp131	protein UL148D	protein UL148D			NC_006273.2	191980	194348	plus	0		
+10359	Human betaherpesvirus 5	3077434	0	live	UL20	HHV5wtgp025	membrane protein UL20	membrane protein UL20			NC_006273.2	25640	26656	plus	0		
+10359	Human betaherpesvirus 5	3077432	0	live	UL52	HHV5wtgp057	DNA packaging protein UL32	DNA packaging protein UL32			NC_006273.2	75087	77093	plus	0		
+10359	Human betaherpesvirus 5	3077431	0	live	UL46	HHV5wtgp050	capsid triplex subunit 1	capsid triplex subunit 1			NC_006273.2	60806	61678	minus	0		
+10359	Human betaherpesvirus 5	3077430	0	live	RL1	HHV5wtgp001	protein RL1	protein RL1			NC_006273.2	1324	2386	plus	0		
+10359	Human betaherpesvirus 5	3077428	0	live	UL13	HHV5wtgp018	protein UL13	protein UL13			NC_006273.2	19658	21079	plus	0		
+10359	Human betaherpesvirus 5	3077427	0	live	UL148C	HHV5wtgp130	protein UL148C	protein UL148C			NC_006273.2	191522	191755	plus	0		
+10359	Human betaherpesvirus 5	3077426	0	live	US8	HHV5wtgp139	membrane glycoprotein US8	membrane glycoprotein US8			NC_006273.2	203469	204152	minus	0		
+10359	Human betaherpesvirus 5	3077425	0	live	UL5	HHV5wtgp011	protein UL5	protein UL5			NC_006273.2	14358	14858	plus	0		
+10359	Human betaherpesvirus 5	3077423	0	live	UL15A	HHV5wtgp020	protein UL15A	protein UL15A			NC_006273.2	22225	22533	plus	0		
+10359	Human betaherpesvirus 5	3077417	0	live	UL73	HHV5wtgp067	envelope glycoprotein N	envelope glycoprotein N			NC_006273.2	106937	109088	plus	0		
+10359	Human betaherpesvirus 5	3077519	0	live	UL29	HHV5wtgp034	protein UL29	protein UL29			NC_006273.2	35105	37353	minus	0		
+10359	Human betaherpesvirus 5	15463999	0	live	UL30A	HHV5wtgp035a	protein UL30A	protein UL30A			NC_006273.2	37605	38174	minus	0		
+10359	Human betaherpesvirus 5	13229473	0	live	RL9A	HHV5wtgr002	protein RL8A;protein RL9A	protein RL8A;protein RL9A			NC_006273.2	6759	8458	minus	0		
+10359	Human betaherpesvirus 5	13229471	0	live	UL150A	HHV5wtgr005	protein UL150A	protein UL150A			NC_006273.2	182854	194348	plus	0		
+10359	Human betaherpesvirus 5	13229469	0	live	RL8A	HHV5wtgr003					NC_006273.2	6759	13155	minus	0		
+10359	Human betaherpesvirus 5	7755302	0	live	UL74A	HHV5wtgp167	envelope glycoprotein 24	envelope glycoprotein 24			NC_006273.2	107708	109088	plus	0		
+10359	Human betaherpesvirus 5	3077570	0	live	UL139	HHV5wtgp123	membrane glycoprotein UL139	membrane glycoprotein UL139			NC_006273.2	186462	186878	minus	0		
+10359	Human betaherpesvirus 5	3077499	0	live	UL8	HHV5wtgp014	membrane glycoprotein UL8	membrane glycoprotein UL8			NC_006273.2	15865	16941	plus	0		
+10359	Human betaherpesvirus 5	3077489	0	live	UL24	HHV5wtgp029	tegument protein UL24	tegument protein UL24			NC_006273.2	29278	30354	minus	0		
+10359	Human betaherpesvirus 5	3077477	0	live	UL1	HHV5wtgp008	membrane protein UL1	membrane protein UL1			NC_006273.2	12174	12830	plus	0		
+10359	Human betaherpesvirus 5	3077443	0	live	UL80.5	HHV5wtgp075	capsid scaffold protein	capsid scaffold protein			NC_006273.2	117505	118626	plus	0		
+10359	Human betaherpesvirus 5	3077421	0	live	UL4	HHV5wtgp010	envelope glycoprotein UL4	envelope glycoprotein UL4			NC_006273.2	13821	14270	plus	0		
+10359	Human betaherpesvirus 5	13229474	0	live	RNA1.2	HHV5wtgr001					NC_006273.2	6759	7811	minus	0		
+10359	Human betaherpesvirus 5	13229470	0	live	RNA4.9	HHV5wtgr004					NC_006273.2	94297	99218	plus	0		
+10359	Human betaherpesvirus 5	7755303	0	live	RNA5.0	HHV5wtgp168					NC_006273.2	156102	161821	minus	0		
+10359	Human betaherpesvirus 5	7755301	0	live	RNA2.7	HHV5wtgp166					NC_006273.2	2489	5000	minus	0		
+10359	Human betaherpesvirus 5	3077433	0	live	US34	HHV5wtgp163					NC_006273.2	230716	231527	plus	0		
+10359	Human betaherpesvirus 5	5495302	0	live	NEWENTRY		Record to support submission of GeneRIFs for a gene not in Gene (Human cytomegalovirus; Human herpesvirus 5; human herpesvirus type 5).										
