@@ -2,6 +2,7 @@
 ### score specificity against other human coronaviruses
 
 library(optparse)
+library(here)
 
 option_list <- list(make_option(c("-g", "--genome"), type="character", default="human_CoV", 
                                 help="bowtie index prefix", metavar="character"),
@@ -26,7 +27,7 @@ if(!file.exists(cts_fname)) {
                "-v", opt$mismatch, # up to opt$mismatch mismatches allowed
                "-S", # output as .sam alignment file
                "--un", file.path(opt$out, paste0("bowtie_", opt$genome, "_unmapped.fa")), # fasta file of unmapped windows
-               "-f", file.path("~/covid-19/ref_data", opt$genome),  # path to bowtie index
+               "-f", file.path(here(), "ref_data", opt$genome),  # path to bowtie index
                file.path(opt$out, "targets.fa"), # fname of targets fasta file
                ">", file.path(opt$out, paste0("bowtie_", opt$genome, "_mapped.sam")), # sam alignment file of mapped windows
                "2>", file.path(opt$out, paste0("bowtie_", opt$genome, "_mapped.bowtiestats")))) # fname of bowtie output
@@ -58,7 +59,7 @@ if(length(alignment)==0) {
                               }
                             })
 }
-num_human_CoV <- as.numeric(system(paste("grep ^'>'", file.path("~/covid-19/ref_data", paste0(opt$genome, ".fa")), 
+num_human_CoV <- as.numeric(system(paste("grep ^'>'", file.path(here(), "ref_data", paste0(opt$genome, ".fa")), 
                                          "| wc -l"), intern=T))
 specificity <- (num_human_CoV - num_CoV_aligned) / num_human_CoV
 

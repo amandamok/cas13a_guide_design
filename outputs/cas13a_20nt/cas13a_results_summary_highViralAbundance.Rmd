@@ -11,14 +11,17 @@ knitr::opts_chunk$set(echo=F, fig.width=12, fig.height=8, warning=F)
 library(ggplot2)
 library(patchwork)
 library(prodlim)
+library(here)
 
-source("~/covid-19/scripts/helper.R")
+source(file.path(here(), "scripts/helper.R"))
 ```
 
 ```{r load_data}
-num_covid19_strains <- as.numeric(strsplit(system("wc -l ~/covid-19/ref_data/gisaid_cov2020_alignment.txt", intern=T),
+num_covid19_strains <- as.numeric(strsplit(system(paste("wc -l", file.path(here(),
+                                                                           "ref_data/gisaid_cov2020_alignment.txt")),
+                                                  intern=T),
                                            split=" ")[[1]][1])
-num_human_CoV <- as.numeric(system(paste("grep ^'>' ~/covid-19/ref_data/human_CoV.fa | wc -l"), intern=T))
+num_human_CoV <- as.numeric(system(paste("grep ^'>'", file.path(here(), "ref_data/human_CoV.fa"), "| wc -l"), intern=T))
 
 coverage_id <- "PRJNA616446"
 abundance_binSize <- 300
@@ -42,7 +45,7 @@ AIM: 96 spacers for high-throughput testing, 20 nt length
 subset_1 <- subset(windows, antitag != "GUUU")
 subset_1 <- subset(subset_1, has_crRNA_hairpin)
 subset_1 <- subset(subset_1, crRNA_spacer_basepairs <= 4)
-previous_order <- readLines("~/covid-19/outputs/spacers_20200427.txt")
+previous_order <- readLines(file.path(here(), "outputs/spacers_20200427.txt"))
 filter_1 <- "Preprocessed"
 plot_diagnostic(subset_1, abundance, filter=filter_1,
                 alpha=0.2, jitter_x=0.01, jitter_y=0.05,
@@ -113,7 +116,7 @@ for(x in seq.int(nrow(subset_5))) {
 }
 
 write.table(subset_5, quote=F, row.names=F, sep="\t",
-            file=paste0("~/covid-19/outputs/cas13a_20nt/guides_3prime_", format(Sys.time(), "%Y%m%d"), ".txt"))
+            file=paste0(file.path(here(), "outputs/cas13a_20nt/guides_3prime_"), format(Sys.time(), "%Y%m%d"), ".txt"))
 ```
 
 ### 6. Select spacers in 5' end of genome
@@ -135,5 +138,5 @@ for(x in seq.int(nrow(subset_6))) {
 }
 
 write.table(subset_6, quote=F, row.names=F, sep="\t",
-            file=paste0("~/covid-19/outputs/cas13a_20nt/guides_5prime_", format(Sys.time(), "%Y%m%d"), ".txt"))
+            file=paste0(file.path(here(), "outputs/cas13a_20nt/guides_5prime_"), format(Sys.time(), "%Y%m%d"), ".txt"))
 ```

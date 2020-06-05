@@ -3,8 +3,9 @@
 
 library(shiny)
 library(ggplot2)
+library(here)
 
-source("~/covid-19/scripts/helper.R")
+source(file.path(here(), "scripts/helper.R"))
 
 coverage_id <- "PRJNA616446"
 abundance_binSize <- 300
@@ -12,8 +13,8 @@ abundance <- load_coverage(coverage_id, abundance_binSize)
 
 # import data -------------------------------------------------------------
 
-plusStrand <- read.table("~/covid-19/outputs/cas13a_20nt/cas13a_results_summary.txt", stringsAsFactors=F)
-minusStrand <- read.table("~/covid-19/outputs/cas13a_minusStrand_20nt/cas13a_minusStrand_results_summary.txt", stringsAsFactors=F)
+plusStrand <- read.table(file.path(here(), "outputs/cas13a_20nt/cas13a_results_summary.txt"), stringsAsFactors=F)
+minusStrand <- read.table(file.path(here(), "outputs/cas13a_minusStrand_20nt/cas13a_minusStrand_results_summary.txt"), stringsAsFactors=F)
 dat <- rbind(plusStrand, minusStrand)
 
 # filter candidate guides

@@ -1,4 +1,8 @@
-setwd("~/covid-19/outputs/")
+library(here)
+
+bowtie_path <- "/mnt/ingolialab/linux-x86_64/bin/bowtie"
+
+setwd(file.path(here(), "outputs"))
 
 guides <- readLines("guides_20200427.txt")
 spacers <- sapply(guides,
@@ -8,7 +12,7 @@ spacers <- sapply(guides,
 spacers <- gsub("U", "T", spacers)
 writeLines(spacers, con="spacers_20200427.txt")
 
-spacers_align <- system("/mnt/ingolialab/linux-x86_64/bin/bowtie -S -r ~/covid-19/ref_data/wuhCor1 spacers_20200427.txt", intern=T)
+spacers_align <- system(paste(bowtie_path, "-S -r ~/covid-19/ref_data/wuhCor1 spacers_20200427.txt"), intern=T)
 spacers_align <- spacers_align[!grepl("@", spacers_align)]
 spacers_align <- data.frame(matrix(unlist(strsplit(spacers_align, split="\t")), 
                                    nrow=length(spacers_align), byrow=T), 

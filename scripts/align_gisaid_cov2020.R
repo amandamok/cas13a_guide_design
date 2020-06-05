@@ -4,15 +4,16 @@
 library(optparse)
 library(Biostrings)
 library(foreach)
+library(here)
 
 option_list <- list(make_option(c("-g", "--genome"), type="character", 
-                                default="~/covid-19/ref_data/NC_045512v2.fa", 
+                                default=file.path(here(), "ref_data/NC_045512v2.fa"), 
                                 help="genome .fa file name", metavar="character"),
                     make_option(c("-i", "--input"), type="character",
-                                default="~/covid-19/ref_data/gisaid_cov2020_sequences.fasta",
+                                default=file.path(here(), "ref_data/gisaid_cov2020_sequences.fasta"),
                                 help="SARS-CoV-2 .fasta sequences", metavar="character"),
                     make_option(c("-o", "--out"), type="character",
-                                default="~/covid-19/ref_data",
+                                default=file.path(here(), "ref_data"),
                                 help="output directory", metavar="character"))
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)

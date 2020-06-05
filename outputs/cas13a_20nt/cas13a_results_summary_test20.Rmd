@@ -11,14 +11,17 @@ knitr::opts_chunk$set(echo=F, fig.width=12, fig.height=8, warning=F)
 library(ggplot2)
 library(patchwork)
 library(prodlim)
+library(here)
 
-source("~/covid-19/scripts/helper.R")
+source(file.path(here(), "scripts/helper.R"))
 ```
 
 ```{r load_data}
-num_covid19_strains <- as.numeric(strsplit(system("wc -l ~/covid-19/ref_data/gisaid_cov2020_alignment.txt", intern=T),
+num_covid19_strains <- as.numeric(strsplit(system(paste("wc -l", file.path(here(),
+                                                                           "ref_data/gisaid_cov2020_alignment.txt")),
+                                                  intern=T),
                                            split=" ")[[1]][1])
-num_human_CoV <- as.numeric(system(paste("grep ^'>' ~/covid-19/ref_data/human_CoV.fa | wc -l"), intern=T))
+num_human_CoV <- as.numeric(system(paste("grep ^'>'", file.path(here(), "ref_data/human_CoV.fa"), "| wc -l"), intern=T))
 
 coverage_id <- "PRJNA616446"
 abundance_binSize <- 300
@@ -209,7 +212,7 @@ knitr::kable(output_5,
 ```
 
 ```{r ivt_window, eval=F}
-genome_seq <- readLines("~/covid-19/ref_data/NC_045512v2.fa")
+genome_seq <- readLines(file.path(here(), "ref_data/NC_045512v2.fa"))
 genome_seq <- genome_seq[!grepl(">", genome_seq)]
 genome_seq <- paste0(genome_seq, collapse="")
 

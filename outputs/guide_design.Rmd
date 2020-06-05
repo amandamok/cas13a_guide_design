@@ -13,14 +13,17 @@ knitr::opts_chunk$set(echo=F, fig.width=12, fig.height=8, warning=F)
 library(ggplot2)
 library(patchwork)
 library(prodlim)
+library(here)
 
-source("~/covid-19/scripts/helper.R")
+source(file.path(here(), "scripts/helper.R"))
 ```
 
 ```{r load_data}
-num_covid19_strains <- as.numeric(strsplit(system("wc -l ~/covid-19/ref_data/gisaid_cov2020_alignment.txt", intern=T),
+num_covid19_strains <- as.numeric(strsplit(system(paste("wc -l", file.path(here(),
+                                                                           "ref_data/gisaid_cov2020_alignment.txt")),
+                                                  intern=T),
                                            split=" ")[[1]][1])
-num_human_CoV <- as.numeric(system(paste("grep ^'>' ~/covid-19/ref_data/human_CoV.fa | wc -l"), intern=T))
+num_human_CoV <- as.numeric(system(paste("grep ^'>'", file.path(here(), "ref_data/human_CoV.fa"), "| wc -l"), intern=T))
 
 coverage_id <- "PRJNA616446"
 abundance_binSize <- 300
@@ -69,12 +72,12 @@ x : done
 
 - Number of SARS-CoV-2 strains: `r num_covid19_strains`
 - Number of human coronavirus genomes (list from FDA): `r num_human_CoV`
-    + NC_004718.3 : SARS CoV
-    + NC_019843.3 : MERS
-    + NC_006213.1 : Human CoV OC43
-    + NC_006577.2 : Human CoV
-    + NC_002645.1 : Human CoV 229E
-    + NC_005831.2 : Human CoV NL63
++ NC_004718.3 : SARS CoV
++ NC_019843.3 : MERS
++ NC_006213.1 : Human CoV OC43
++ NC_006577.2 : Human CoV
++ NC_002645.1 : Human CoV 229E
++ NC_005831.2 : Human CoV NL63
 - Viral abundance data set: throat swab samples from `r coverage_id`
 
 ```{r sensitivity}

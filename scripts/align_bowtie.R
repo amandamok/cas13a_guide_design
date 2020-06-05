@@ -14,6 +14,8 @@ option_list <- list(make_option(c("-g", "--genome"), type="character", default=N
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
+bowtie_path <- "/mnt/ingolialab/linux-x86_64/bin/bowtie"
+
 if(is.null(opt$genome)) {
   cat("\nERROR: no reference genome specified")
   q(save="no")
@@ -30,7 +32,7 @@ if(is.null(opt$genome)) {
 cts_fname <- file.path(opt$out, paste0("bowtie_", opt$genome, "_mapped.sam"))
 if(!file.exists(cts_fname)) {
   cat(paste("- aligning windows to", opt$genome, "\n"))
-  system(paste("/mnt/ingolialab/linux-x86_64/bin/bowtie", 
+  system(paste(bowtie_path, 
                ifelse(opt$enzyme=="Cas13a", "--norc", ""), # for Cas13a, do not align to reverse complement
                "-k 50", # report up to 50 alignments
                "-v", opt$mismatch, # up to opt$mismatch mismatches allowed

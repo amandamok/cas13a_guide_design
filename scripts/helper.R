@@ -1,6 +1,8 @@
 ##################################################
 ### helper scripts for compiling results
 
+library(here)
+
 add_column <- function(dat, fname, dat_column, fname_column) {
   # add score from fname to dat
   ## dat: data.frame; contains columns called "start" and "strand
@@ -21,7 +23,7 @@ load_abundance <- function(accession="PRJNA616446") {
   # assumes align_viral_abundance.R has already been run on default parameters
   ## accession: character ; SRR accession id
   aligned_reads <- system(paste("grep NC_045512v2", 
-                                file.path("~/covid-19/ref_data/RNA_expression", paste0(accession, "_mapped.sam")),
+                                file.path(here(), "ref_data/RNA_expression", paste0(accession, "_mapped.sam")),
                                 "| grep -v ^@ | cut -f1,3,4"), intern=T)
   aligned_reads <- data.frame(matrix(unlist(strsplit(aligned_reads, split="\t")), ncol=3, byrow=T), stringsAsFactors=F)
   colnames(aligned_reads) <- c("seqID", "rname", "pos")
@@ -34,7 +36,7 @@ load_coverage <- function(id="PRJNA616446", binSize=300) {
   ## id: character ; header for coverage file
   ## binSize: integer ; bin size to take median coverage over
   # read in data
-  id_cov <- read.table(file.path("~/covid-19/ref_data/RNA_expression", paste0(id, "_mapped.cov")),
+  id_cov <- read.table(file.path(here(), "ref_data/RNA_expression", paste0(id, "_mapped.cov")),
                        header=F, stringsAsFactors=F, col.names=c("genome", "pos", "coverage"))
   # break into bins
   id_cov$bin <- cut(id_cov$pos, breaks=ceiling(max(id_cov$pos)/binSize), labels=F)

@@ -3,9 +3,10 @@
 
 library(optparse)
 library(Biostrings, quietly=T)
+library(here)
 
 option_list <- list(make_option(c("-i", "--input"), type="character", 
-                                default="~/covid-19/ref_data/NC_045512v2.fa", 
+                                default=file.path(here(), "ref_data/NC_045512v2.fa"), 
                                 help="genome .fa file name", metavar="character"),
                     make_option(c("-w", "--window"), type="integer", default=20,
                                 help="window size", metavar="integer"),

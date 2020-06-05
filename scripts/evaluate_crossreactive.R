@@ -38,6 +38,7 @@
 library(optparse)
 library(Biostrings)
 library(ggplot2)
+library(here)
 
 option_list <- list(make_option(c("-m", "--mismatch"), type="integer", default=4,
                                 help="number of mismatches allowed", metavar="integer"),
@@ -60,9 +61,9 @@ windows <- read.table(file.path(opt$out, "windows.txt"), header=T, stringsAsFact
 targets <- suppressWarnings(PDict(windows$target, max.mismatch=opt$mismatch))
 
 # read in off-target genomes
-human_CoV_dir <- "~/covid-19/ref_data/human_CoV/"
+human_CoV_dir <- file.path(here(), "ref_data/human_CoV/")
 human_CoVs <- c("huCoV_229E", "SARS", "huCoV_NL63", "huCoV_OC43", "huCoV_HKU1", "MERS")
-other_pathogens_dir <- "~/covid-19/ref_data/other_pathogens/"
+other_pathogens_dir <- file.path(here(), "ref_data/other_pathogens/")
 offtarget_ssRNA_plusStrand <- c("enterovirus", "rhinovirus", "parechovirus")
 offtarget_ssRNA_minusStrand <- c("hMPV", paste0("parainfluenza_", 1:4), paste0("influenza_", c("A", "B")), "resp_syncytial_A")
 offtarget_dsDNA <- c("adenovirus", "c_pneumoniae", "h_influenzae", "l_pneumophila", "m_tuberculosis", "s_pneumoniae", "s_pyogenes",

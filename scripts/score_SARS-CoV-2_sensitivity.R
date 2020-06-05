@@ -2,12 +2,13 @@
 ### calculating sensitivity to SARS-CoV-2 strains
 
 library(optparse)
+library(here)
 
 option_list <- list(make_option(c("-g", "--genome"), type="character", 
-                                default="~/covid-19/ref_data/NC_045512v2.fa", 
+                                default=file.path(here(), "ref_data/NC_045512v2.fa"), 
                                 help="genome .fa file name", metavar="character"),
                     make_option(c("-i", "--input"), type="character",
-                                default="~/covid-19/ref_data/gisaid_cov2020_alignment.txt",
+                                default=file.path(here(), "ref_data/gisaid_cov2020_alignment.txt"),
                                 help="SARS-CoV-2 .fasta sequences", metavar="character"),
                     make_option(c("-w", "--window"), type="integer", default=20,
                                 help="window size", metavar="integer"),
@@ -26,7 +27,7 @@ genome_seq <- strsplit(genome_seq, split="")[[1]]
 
 # align SARS-CoV-2 genomes to wuhCor1
 if(!file.exists(opt$input)) {
-  system("Rscript ~/covid-19/scripts/align_gisaid_cov2020.R")
+  system(paste("Rscript", file.path(here(), "scripts/align_gisaid_cov2020.R")))
 } else {
   strains <- matrix(unlist(strsplit(readLines(opt$input), split=" ")), ncol=length(genome_seq)+1, byrow=T)
   rownames(strains) <- strains[,1]

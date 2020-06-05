@@ -11,14 +11,17 @@ knitr::opts_chunk$set(echo=F, fig.width=12, fig.height=8, warning=F)
 library(ggplot2)
 library(patchwork)
 library(prodlim)
+library(here)
 
-source("~/covid-19/scripts/helper.R")
+source(file.path(here(), "scripts/helper.R"))
 ```
 
 ```{r load_data}
-num_covid19_strains <- as.numeric(strsplit(system("wc -l ~/covid-19/ref_data/gisaid_cov2020_alignment.txt", intern=T),
+num_covid19_strains <- as.numeric(strsplit(system(paste("wc -l", file.path(here(),
+                                                                           "ref_data/gisaid_cov2020_alignment.txt")),
+                                                  intern=T),
                                            split=" ")[[1]][1])
-num_human_CoV <- as.numeric(system(paste("grep ^'>' ~/covid-19/ref_data/human_CoV.fa | wc -l"), intern=T))
+num_human_CoV <- as.numeric(system(paste("grep ^'>'", file.path(here(), "ref_data/human_CoV.fa"), "| wc -l"), intern=T))
 
 coverage_id <- "PRJNA616446"
 abundance_binSize <- 300
@@ -70,7 +73,8 @@ plot_diagnostic(subset_2, abundance, filter=filter_2,
 
 ```{r subset_3}
 # read in alignments
-amplicons <- system("grep -v @ ~/covid-19/isothermal_amplification/amplicons_mapped.sam | cut -f 1,2,4,10", intern=T)
+amplicons <- system(paste("grep -v @", file.path(here(), "isothermal_amplification/amplicons_mapped.sam"), 
+                          "| cut -f 1,2,4,10", intern=T))
 amplicons <- data.frame(matrix(unlist(strsplit(amplicons, split="\t")), byrow=T, ncol=4), stringsAsFactors=F)
 colnames(amplicons) <- c("name", "flag", "position", "sequence")
 
@@ -161,7 +165,7 @@ for(x in seq.int(nrow(subset_5))) {
 knitr::kable(subset_5[,c("start", "target", "spacer", "amplicon_label", "region")], row.names=F)
 
 # read in genome sequence, process into continuous string
-genome_seq <- readLines("~/covid-19/ref_data/NC_045512v2.fa")
+genome_seq <- readLines(file.path(here(), "ref_data/NC_045512v2.fa"))
 genome_seq <- genome_seq[!grepl(">", genome_seq)]
 genome_seq <- paste0(genome_seq, collapse="")
 

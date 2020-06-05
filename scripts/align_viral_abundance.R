@@ -3,9 +3,10 @@
 
 library(optparse)
 library(ggplot2)
+library(here)
 
 option_list <- list(make_option(c("-g", "--genome"), type="character", 
-                                default="~/covid-19/ref_data/wuhCor1", 
+                                default=file.path(here(), "ref_data/wuhCor1"), 
                                 help="genome index prefix", metavar="character"),
                     make_option(c("-a", "--accession"), type="character",
                                 default=NULL,
@@ -13,10 +14,12 @@ option_list <- list(make_option(c("-g", "--genome"), type="character",
                     make_option(c("-p", "--paired"), action="store_true", default=F,
                                 help="data is paired-end"),
                     make_option(c("-o", "--out"), type="character",
-                                default="~/covid-19/ref_data/RNA_expression",
+                                default=file.path(here(), "ref_data/RNA_expression"),
                                 help="output directory", metavar="character"))
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
+
+bowtie_path <- "/mnt/ingolialab/linux-x86_64/bin/bowtie"
 
 if(!("accession" %in% names(opt))) {
   cat("\nNO DATASET SPECIFIED\n")
@@ -38,7 +41,7 @@ if(!file.exists(alignment_fname)) {
       system(paste("fastq-dump", "-O", opt$out, file.path("~/ncbi/public/sra", paste0(opt$accession, ".sra"))))
     }
   }
-  system(paste("/mnt/ingolialab/linux-x86_64/bin/bowtie -S -q ~/covid-19/ref_data/wuhCor1", 
+  system(paste(bowtie_path, "-S -q", file.path(here(), "ref_data/wuhCor1"), 
                file.path(opt$out, paste0(opt$accession, ".fastq")),
                ">", file.path(opt$out, paste0(opt$accession, "_mapped.sam")),
                "2>", file.path(opt$out, paste0(opt$accession, "_mapped.bowtiestats"))))

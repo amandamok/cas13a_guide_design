@@ -3,9 +3,10 @@
 
 library(optparse)
 library(Biostrings, quietly=T)
+library(here)
 
 option_list <- list(make_option(c("-i", "--input"), type="character", 
-                                default="~/covid-19/ref_data/NC_045512v2.fa", 
+                                default=file.path(here(), "ref_data/NC_045512v2.fa"), 
                                 help="genome .fa file name", metavar="character"),
                     make_option(c("-w", "--window"), type="integer", default=20,
                                 help="window size", metavar="integer"),
@@ -15,6 +16,8 @@ option_list <- list(make_option(c("-i", "--input"), type="character",
                                 help="output directory", metavar="character")) 
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
+
+RNAfold_path <- "/usr/bin/RNAfold"
 
 cat("\nRNAfold score: viral target structure\n")
 
@@ -34,7 +37,7 @@ if(!file.exists(paste0("wuhCor1_windows_", opt$folding, "_RNAfold.txt"))) {
   
   # fold windows
   cat("- computing folding structures\n")
-  system(paste0("/usr/bin/RNAfold -i ", file.path(opt$out, paste0("wuhCor1_windows_", opt$folding, ".txt")), 
+  system(paste0(RNAfold_path, " -i ", file.path(opt$out, paste0("wuhCor1_windows_", opt$folding, ".txt")), 
                 " --noPS --outfile=wuhCor1_windows_", opt$folding, "_RNAfold.txt"))
 }
 RNAfold <- data.frame(matrix(readLines(paste0("wuhCor1_windows_", opt$folding, "_RNAfold.txt")), 
