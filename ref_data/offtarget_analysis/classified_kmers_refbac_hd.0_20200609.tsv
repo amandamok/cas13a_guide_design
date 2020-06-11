@@ -1,0 +1,303 @@
+target_kmer	start_position	strand	kmer_name	kmer_seq	hamming_dist	taxid	seqid	parent_taxid	taxName
+sp.383_strand.0_hd.4	383	-	225205_hd0	AGATGTTGACGTGCCTCTGA	0	1000045655	NZ_LR588407.1	1000045654	NZ_LR588407.1 Brevundimonas vancanneytii strain NCTC9239 chromosome 1
+sp.418_strand.1_hd.4	418	+	138115_hd0	TGGCTTAGTAGAAGTTGAAA	0	1000015938	NZ_LT906448.1	1000015937	NZ_LT906448.1 Pasteurella dagmatis strain NCTC11617 chromosome 1
+sp.419_strand.1_hd.4	419	+	107995_hd0	GGCTTAGTAGAAGTTGAAAA	0	1000015938	NZ_LT906448.1	1000015937	NZ_LT906448.1 Pasteurella dagmatis strain NCTC11617 chromosome 1
+sp.712_strand.0_hd.4	712	-	168400_hd0	CTTCATAAGGATCAGTGCCA	0	1000042653	NC_014216.1	1000042652	NC_014216.1 Desulfurivibrio alkaliphilus AHT 2, complete sequence
+sp.713_strand.0_hd.4	713	-	209068_hd0	TCTTCATAAGGATCAGTGCC	0	1000042653	NC_014216.1	1000042652	NC_014216.1 Desulfurivibrio alkaliphilus AHT 2, complete sequence
+sp.896_strand.0_hd.4	896	-	166660_hd0	TCGGACAAAGTGCATGAAGC	0	1000051533	NZ_CP046566.1	1000051532	NZ_CP046566.1 Flavihumibacter sp. SB-02 chromosome, complete genome
+sp.1035_strand.1_hd.4	1035	+	241243_hd0	TTAAATTGGCAAAGAAATTT	0	423349	genus	84566	Mucilaginibacter
+sp.1097_strand.0_hd.4	1097	-	263145_hd0	ATAGTCTTGATTATGGAATT	0	1000032960	NC_013171.1	1000032959	NC_013171.1 Anaerococcus prevotii DSM 20548, complete sequence
+sp.1099_strand.0_hd.4	1099	-	181466_hd0	GAATAGTCTTGATTATGGAA	0	1000022664	NC_014628.2	1000022662	NC_014628.2 Paenibacillus polymyxa SC2 plasmid pSC2, complete sequence
+sp.1141_strand.1_hd.4	1141	+	257665_hd0	GCTTGATGGCTTTATGGGTA	0	1000051088	NZ_CP041253.1	1000051087	NZ_CP041253.1 Echinicola sp. LN3S3 chromosome, complete genome
+sp.1357_strand.1_hd.4	1357	+	289867_hd0	TGTTGTTAAAATTTATTGTC	0	1000047467	NZ_AP018341.1	1000047466	NZ_AP018341.1 Cyanobacterium endosymbiont of Rhopalodia gibberula isolate cyanobacterium endosymbiont of Rhopalodia gibberula isolate RgSB Namiki Park
+sp.1428_strand.0_hd.4	1428	-	258542_hd0	TTTCAAGCCAGATTCATTAT	0	1000003226	NZ_CP038273.1	1000003225	NZ_CP038273.1 Legionella israelensis strain Bercovier 4 chromosome, complete genome
+sp.1439_strand.0_hd.4	1439	-	184916_hd0	CGAAGAATGGTTTTCAAGCC	0	1000050463	NZ_CP036317.1	1000050462	NZ_CP036317.1 Planctomycetes bacterium Pan153 chromosome, complete genome
+sp.1441_strand.0_hd.4	1441	-	215487_hd0	TACGAAGAATGGTTTTCAAG	0	1000045394	NZ_CP014222.1	1000045393	NZ_CP014222.1 Janthinobacterium sp. B9-8, complete genome
+sp.1442_strand.0_hd.4	1442	-	202552_hd0	TTACGAAGAATGGTTTTCAA	0	1000045394	NZ_CP014222.1	1000045393	NZ_CP014222.1 Janthinobacterium sp. B9-8, complete genome
+sp.1443_strand.0_hd.4	1443	-	252605_hd0	CTTACGAAGAATGGTTTTCA	0	1000045394	NZ_CP014222.1	1000045393	NZ_CP014222.1 Janthinobacterium sp. B9-8, complete genome
+sp.1929_strand.0_hd.4	1929	-	251607_hd0	AACACGCACAGAATTTTGAG	0	1000051088	NZ_CP041253.1	1000051087	NZ_CP041253.1 Echinicola sp. LN3S3 chromosome, complete genome
+sp.1929_strand.1_hd.4	1929	+	348054_hd0	CTCAAAATTCTGTGCGTGTT	0	1000051088	NZ_CP041253.1	1000051087	NZ_CP041253.1 Echinicola sp. LN3S3 chromosome, complete genome
+sp.1968_strand.1_hd.4	1968	+	211314_hd0	CAATACTAGATGGAATTTCA	0	194	genus	72294	Campylobacter
+sp.2070_strand.1_hd.4	2070	+	311841_hd0	CAGGTGGTGTTGTTCAGTTG	0	1000002867	NC_015572.1	1000002866	NC_015572.1 Methylomonas methanica MC09, complete sequence
+sp.2072_strand.1_hd.4	2072	+	226665_hd0	GGTGGTGTTGTTCAGTTGAC	0	1000045887	NZ_CP022415.1	1000045886	NZ_CP022415.1 Sulfitobacter pseudonitzschiae strain SMR1 chromosome, complete genome
+sp.2173_strand.1_hd.4	2173	+	274206_hd0	GGAAGGTGTAGAGTTTCTTA	0	1000042986	NZ_CP008852.1	1000042985	NZ_CP008852.1 Pelosinus sp. UFO1 chromosome, complete genome
+sp.2202_strand.1_hd.4	2202	+	246855_hd0	GGGAAATTGTTAAATTTATC	0	1000028110	NC_015672.1	1000028109	NC_015672.1 Flexistipes sinusarabici DSM 4947, complete sequence
+sp.2206_strand.0_hd.4	2206	-	215120_hd0	TTGAGATAAATTTAACAATT	0	1000049285	NZ_CP032416.1	1000049284	NZ_CP032416.1 Clostridium sp. JN500901 chromosome, complete genome
+sp.2206_strand.1_hd.4	2206	+	163222_hd0	AATTGTTAAATTTATCTCAA	0	1000049285	NZ_CP032416.1	1000049284	NZ_CP032416.1 Clostridium sp. JN500901 chromosome, complete genome
+sp.2266_strand.0_hd.4	2266	-	235760_hd0	TCTCCTTAATTTCCTTTGCA	0	1502	species	1485	Clostridium perfringens
+sp.2267_strand.0_hd.4	2267	-	293340_hd0	CTCTCCTTAATTTCCTTTGC	0	1502	species	1485	Clostridium perfringens
+sp.2287_strand.0_hd.4	2287	-	133817_hd0	GCTTAAAGAATGTCTGAACA	0	1386	genus	186817	Bacillus
+sp.2305_strand.1_hd.4	2305	+	316977_hd0	GCTTGTAAATAAATTTTTGG	0	1965231	species	194	Campylobacter pinnipediorum
+sp.2360_strand.1_hd.4	2360	+	294682_hd0	AAACTTAAAGCCTTGAATTT	0	1000035912	NC_019779.1	1000035911	NC_019779.1 Halothece sp. PCC 7418, complete sequence
+sp.2861_strand.1_hd.4	2861	+	237361_hd0	ACAGAAGTAAATGAGTTCGC	0	1000024154	NZ_CP015109.1	1000024153	NZ_CP015109.1 Sporosarcina ureae strain P17a chromosome, complete genome
+sp.2890_strand.1_hd.4	2890	+	75364_hd0	GGCAGATGCTGTCATAAAAA	0	1000035653	NC_002936.3	1000035652	NC_002936.3 Dehalococcoides mccartyi 195, complete sequence
+sp.2900_strand.0_hd.4	2900	-	225150_hd0	GGTTGCAAAGTTTTTATGAC	0	1000035212	NC_016001.1	1000035211	NC_016001.1 Flavobacterium branchiophilum FL-15, complete genome
+sp.2950_strand.1_hd.4	2950	+	215510_hd0	TGATTTAGATGAGTGGAGTA	0	1000023854	NC_014393.1	1000023853	NC_014393.1 Clostridium cellulovorans 743B, complete genome
+sp.2951_strand.1_hd.4	2951	+	255437_hd0	GATTTAGATGAGTGGAGTAT	0	1000023854	NC_014393.1	1000023853	NC_014393.1 Clostridium cellulovorans 743B, complete genome
+sp.2952_strand.1_hd.4	2952	+	261635_hd0	ATTTAGATGAGTGGAGTATG	0	1000023854	NC_014393.1	1000023853	NC_014393.1 Clostridium cellulovorans 743B, complete genome
+sp.2977_strand.1_hd.4	2977	+	275285_hd0	ATACTACTTATTTGATGAGT	0	1000034774	NZ_CP039701.1	1000034772	NZ_CP039701.1 Vibrio cyclitrophicus strain ECSMB14105 chromosome 2, complete sequence
+sp.2978_strand.1_hd.4	2978	+	249165_hd0	TACTACTTATTTGATGAGTC	0	1000034774	NZ_CP039701.1	1000034772	NZ_CP039701.1 Vibrio cyclitrophicus strain ECSMB14105 chromosome 2, complete sequence
+sp.2998_strand.1_hd.4	2998	+	308488_hd0	TGGTGAGTTTAAATTGGCTT	0	731	species	214906	Histophilus somni
+sp.3108_strand.1_hd.4	3108	+	222484_hd0	AGTATGGTACTGAAGATGAT	0	1000049285	NZ_CP032416.1	1000049284	NZ_CP032416.1 Clostridium sp. JN500901 chromosome, complete genome
+sp.3195_strand.1_hd.4	3195	+	246651_hd0	AAGATTGGTTAGATGATGAT	0	1000045639	NZ_CP050995.1	1000045638	NZ_CP050995.1 Chryseobacterium gallinarum strain FDAARGOS_636 chromosome, complete genome
+sp.3197_strand.1_hd.4	3197	+	213278_hd0	GATTGGTTAGATGATGATAG	0	1161	order	1117	Nostocales
+sp.3198_strand.1_hd.4	3198	+	254049_hd0	ATTGGTTAGATGATGATAGT	0	1161	order	1117	Nostocales
+sp.3199_strand.1_hd.4	3199	+	233245_hd0	TTGGTTAGATGATGATAGTC	0	1000034413	NC_019427.1	1000034412	NC_019427.1 Anabaena sp. 90 chromosome chANA01, complete sequence
+sp.3343_strand.1_hd.4	3343	+	225308_hd0	TAGTTTTAGTGGTTATTTAA	0	756892	species	469	Acinetobacter indicus
+sp.3791_strand.0_hd.4	3791	-	131256_hd0	AGATTTTTATCAAAGACAGC	0	1000042178	NC_012968.1	1000042177	NC_012968.1 Methylotenera mobilis JLW8, complete genome
+sp.3797_strand.0_hd.4	3797	-	138285_hd0	TCATAGAGATTTTTATCAAA	0	1000050656	NZ_CP040396.1	1000050655	NZ_CP040396.1 Paenibacillus sp. HB172198 chromosome, complete genome
+sp.3893_strand.0_hd.4	3893	-	241944_hd0	GTTATAAATGGCTTAACTTC	0	1000049108	NZ_CP024202.1	1000049107	NZ_CP024202.1 Methylomicrobium sp. wino1 chromosome, complete genome
+sp.3962_strand.1_hd.4	3962	+	212314_hd0	AAAGCTTGTGTTGAAGAAGT	0	1000048511	NZ_CP019781.1	1000048510	NZ_CP019781.1 Bartonella sp. WD16.2, complete genome
+sp.4032_strand.0_hd.4	4032	-	215938_hd0	ATTGCCATTAATGTCAATAT	0	1000050038	NZ_CP033076.1	1000050037	NZ_CP033076.1 Buttiauxella sp. 3AFRM03 chromosome, complete genome
+sp.4135_strand.1_hd.4	4135	+	241492_hd0	TGTTCAAGAGGGTGTTTTAA	0	1000047303	NZ_CP031966.1	1000047302	NZ_CP031966.1 Aquimarina sp. AD1 chromosome, complete genome
+sp.4304_strand.1_hd.4	4304	+	275620_hd0	AAAAAGTGTAAAAGTGCCTT	0	1000015770	NZ_CP038817.1	1000015769	NZ_CP038817.1 Haemophilus parahaemolyticus strain NEB129 chromosome, complete genome
+sp.4327_strand.0_hd.4	4327	-	217854_hd0	AGATAATAGATGGTAGAATG	0	779	species	106178	Ehrlichia ruminantium
+sp.4483_strand.1_hd.4	4483	+	120381_hd0	TAAGGGTATTAAAATACAAG	0	1000045728	NZ_CP017259.1	1000045727	NZ_CP017259.1 Formosa sp. Hel3_A1_48, complete genome
+sp.4486_strand.1_hd.4	4486	+	161806_hd0	GGGTATTAAAATACAAGAGG	0	1000043719	NC_014209.1	1000043718	NC_014209.1 Thermoanaerobacter mathranii subsp. mathranii str. A3, complete genome
+sp.4504_strand.1_hd.4	4504	+	308606_hd0	GGGTGTGGTTGATTATGGTG	0	29486	species	629	Yersinia ruckeri
+sp.4594_strand.1_hd.4	4594	+	146383_hd0	AACTCTTGTTACAATGCCAC	0	1496	species	1870884	Clostridioides difficile
+sp.4641_strand.1_hd.4	4641	+	271880_hd0	TGGAAGAAGCTGCTCGGTAT	0	338	genus	32033	Xanthomonas
+sp.4665_strand.1_hd.4	4665	+	220844_hd0	GATCTCTCAAAGTGCCAGCT	0	1000016675	NC_019567.1	1000016674	NC_019567.1 Bdellovibrio bacteriovorus str. Tiberius, complete sequence
+sp.4666_strand.1_hd.4	4666	+	179343_hd0	ATCTCTCAAAGTGCCAGCTA	0	1000016675	NC_019567.1	1000016674	NC_019567.1 Bdellovibrio bacteriovorus str. Tiberius, complete sequence
+sp.4738_strand.0_hd.4	4738	-	90835_hd0	CAGGTGTTTTAGAAGAAGAA	0	2	superkingdom	131567	Bacteria
+sp.4739_strand.0_hd.4	4739	-	117346_hd0	TCAGGTGTTTTAGAAGAAGA	0	1301	genus	1300	Streptococcus
+sp.4740_strand.0_hd.4	4740	-	149680_hd0	TTCAGGTGTTTTAGAAGAAG	0	1301	genus	1300	Streptococcus
+sp.4914_strand.0_hd.4	4914	-	155930_hd0	AAGATTGTCAAAGGTGATAA	0	1000045665	NZ_CP010401.1	1000045664	NZ_CP010401.1 Bartonella ancashensis strain 20.00 chromosome, complete genome
+sp.4915_strand.0_hd.4	4915	-	194666_hd0	TAAGATTGTCAAAGGTGATA	0	2	superkingdom	131567	Bacteria
+sp.4916_strand.0_hd.4	4916	-	240260_hd0	TTAAGATTGTCAAAGGTGAT	0	1000051713	NZ_CP048113.1	1000051712	NZ_CP048113.1 Chitinophaga sp. H33E-04 chromosome, complete genome
+sp.4953_strand.1_hd.4	4953	+	193830_hd0	GAGAAGTGAGGACTATTAAG	0	1241982	species	59732	Chryseobacterium nakagawai
+sp.5124_strand.0_hd.4	5124	-	110458_hd0	AGTGTCATCATTAGGTAAAA	0	1404	species	1386	Bacillus megaterium
+sp.5350_strand.0_hd.4	5350	-	306814_hd0	CTCTGTAATAAGCATCTTGT	0	1000045280	NZ_CP017786.1	1000045279	NZ_CP017786.1 Bacillus xiamenensis strain VV3 chromosome, complete genome
+sp.5350_strand.1_hd.4	5350	+	178598_hd0	ACAAGATGCTTATTACAGAG	0	1000045280	NZ_CP017786.1	1000045279	NZ_CP017786.1 Bacillus xiamenensis strain VV3 chromosome, complete genome
+sp.5631_strand.1_hd.4	5631	+	57695_hd0	GTGGTAAACAAGCTACAAAA	0	1301	genus	1300	Streptococcus
+sp.5638_strand.0_hd.4	5638	-	331192_hd0	CTAGATATTTTGTAGCTTGT	0	1000016937	NC_008312.1	1000016936	NC_008312.1 Trichodesmium erythraeum IMS101, complete genome
+sp.5788_strand.0_hd.4	5788	-	280777_hd0	TGCAATACAAAGTTTCTTTA	0	1000051080	NZ_CP041185.1	1000051079	NZ_CP041185.1 Janthinobacterium sp. SNU WT3 strain SNU WT1 chromosome, complete genome
+sp.6062_strand.0_hd.4	6062	-	246652_hd0	TCAGCAAATTTGATATTATC	0	1000047128	NZ_LT629973.1	1000047127	NZ_LT629973.1 Akkermansia glycaniphila isolate APytT chromosome I
+sp.6062_strand.1_hd.4	6062	+	232247_hd0	GATAATATCAAATTTGCTGA	0	1000047128	NZ_LT629973.1	1000047127	NZ_LT629973.1 Akkermansia glycaniphila isolate APytT chromosome I
+sp.6063_strand.0_hd.4	6063	-	270741_hd0	ATCAGCAAATTTGATATTAT	0	1000047128	NZ_LT629973.1	1000047127	NZ_LT629973.1 Akkermansia glycaniphila isolate APytT chromosome I
+sp.6127_strand.0_hd.4	6127	-	193465_hd0	GGAAAAATGTAACTTTAAGC	0	1000049938	NZ_CP032382.1	1000049937	NZ_CP032382.1 Chryseolinea soli strain KIS68-18 chromosome, complete genome
+sp.6127_strand.1_hd.4	6127	+	276938_hd0	GCTTAAAGTTACATTTTTCC	0	1000049938	NZ_CP032382.1	1000049937	NZ_CP032382.1 Chryseolinea soli strain KIS68-18 chromosome, complete genome
+sp.6145_strand.1_hd.4	6145	+	266351_hd0	CCCTGACTTAAATGGTGATG	0	1000042442	NZ_LN879502.1	1000042441	NZ_LN879502.1 Candidatus Protochlamydia naegleriophila strain KNic chromosome cPNK, complete sequence
+sp.6159_strand.1_hd.4	6159	+	277565_hd0	GTGATGTGGTGGCTATTGAT	0	1336	species	119603	Streptococcus equi
+sp.6311_strand.0_hd.4	6311	-	363528_hd0	GATGTTTCAACTGGTTTTGT	0	1000049192	NZ_CP025115.1	1000049191	NZ_CP025115.1 Alteromonas sp. MB-3u-76 chromosome, complete genome
+sp.6442_strand.1_hd.4	6442	+	251021_hd0	AGACGTTCTTGAGTGTAATG	0	380	species	663276	Sinorhizobium fredii
+sp.6513_strand.0_hd.4	6513	-	170598_hd0	CTCTTCTGTAATTTTTAAAC	0	1000033581	NZ_LR134509.1	1000033580	NZ_LR134509.1 Helicobacter pullorum strain NCTC13154 chromosome 1
+sp.6514_strand.0_hd.4	6514	-	183120_hd0	CCTCTTCTGTAATTTTTAAA	0	1000001367	NZ_CP033928.1	1000001366	NZ_CP033928.1 Chryseobacterium indoltheticum strain G0211 chromosome, complete genome
+sp.6596_strand.0_hd.4	6596	-	267524_hd0	AATACTCTAGATAATTCATT	0	1000049936	NZ_CP025746.1	1000049935	NZ_CP025746.1 Clostridium sp. CT4 chromosome, complete genome
+sp.6596_strand.1_hd.4	6596	+	278113_hd0	AATGAATTATCTAGAGTATT	0	1000049936	NZ_CP025746.1	1000049935	NZ_CP025746.1 Clostridium sp. CT4 chromosome, complete genome
+sp.6602_strand.1_hd.4	6602	+	336825_hd0	TTATCTAGAGTATTAGGTTT	0	52584	species	29521	Brachyspira pilosicoli
+sp.6606_strand.1_hd.4	6606	+	169100_hd0	CTAGAGTATTAGGTTTGAAA	0	1000046235	NZ_CP047476.1	1000046233	NZ_CP047476.1 Vibrio astriarenae strain HN897 chromosome 2, complete sequence
+sp.6768_strand.1_hd.4	6768	+	292005_hd0	ATATGCCTTATTTCTTTACT	0	1000047455	NZ_CP032050.1	1000047454	NZ_CP032050.1 Euzebyella marina strain RN62 chromosome, complete genome
+sp.6777_strand.0_hd.4	6777	-	134317_hd0	TAGCAATAAAGTAAAGAAAT	0	1000016531	NZ_LR215979.1	1000016530	NZ_LR215979.1 Fusobacterium ulcerans ATCC 49185 isolate Fusobacterium ulcerans 81A6 chromosome 1
+sp.6777_strand.1_hd.4	6777	+	249842_hd0	ATTTCTTTACTTTATTGCTA	0	1000016531	NZ_LR215979.1	1000016530	NZ_LR215979.1 Fusobacterium ulcerans ATCC 49185 isolate Fusobacterium ulcerans 81A6 chromosome 1
+sp.6900_strand.0_hd.4	6900	-	204880_hd0	CAAATAATTAAATGAAGCCT	0	1000045307	NZ_CP007445.1	1000045306	NZ_CP007445.1 Gilliamella apicola strain wkB1 chromosome, complete genome
+sp.6923_strand.0_hd.4	6923	-	212152_hd0	AGTTTAGAAAAATTAGGTGA	0	1000025448	NZ_CP029616.1	1000025447	NZ_CP029616.1 Lactobacillus salivarius strain DJ-sa-01 chromosome, complete genome
+sp.6924_strand.0_hd.4	6924	-	259334_hd0	CAGTTTAGAAAAATTAGGTG	0	1000032869	NZ_CP008748.1	1000032868	NZ_CP008748.1 Mycoplasma hyosynoviae strain M60 chromosome, complete genome
+sp.6927_strand.0_hd.4	6927	-	182311_hd0	TATCAGTTTAGAAAAATTAG	0	1000048937	NZ_CP022742.1	1000048935	NZ_CP022742.1 Vibrio qinghaiensis strain Q67 chromosome 2, complete sequence
+sp.7320_strand.0_hd.4	7320	-	148779_hd0	AAAATGTACTGCAAAATAGC	0	1000001367	NZ_CP033928.1	1000001366	NZ_CP033928.1 Chryseobacterium indoltheticum strain G0211 chromosome, complete genome
+sp.7475_strand.1_hd.4	7475	+	271009_hd0	TGTAATTCATCAACTTGTAT	0	314281	species	53246	Pseudoalteromonas tunicata
+sp.7614_strand.1_hd.4	7614	+	284298_hd0	GGAATTGTGTTAATTGTGAT	0	1000042765	NZ_CP007035.1	1000042764	NZ_CP007035.1 Niabella soli DSM 19437 chromosome, complete genome
+sp.7797_strand.0_hd.4	7797	-	257304_hd0	AGAATGTCTTTCATAAGTCT	0	1000043343	NZ_CP042434.1	1000043342	NZ_CP042434.1 Arachidicoccus ginsenosidivorans strain Gsoil 809 chromosome, complete genome
+sp.7885_strand.1_hd.4	7885	+	208787_hd0	TATAGTTTTTGATGGTAAAT	0	138	genus	1643685	Borrelia
+sp.7895_strand.1_hd.4	7895	+	191354_hd0	GATGGTAAATCAAAATGTGA	0	1000046265	NZ_CP017479.1	1000046264	NZ_CP017479.1 Flavobacterium gilvum strain EM1308 chromosome, complete genome
+sp.7917_strand.0_hd.4	7917	-	274606_hd0	CGCTGATTTTGCAGATGATT	0	1000047305	NZ_CP031965.1	1000047304	NZ_CP031965.1 Aquimarina sp. AD10 chromosome, complete genome
+sp.7986_strand.1_hd.4	7986	+	332090_hd0	AGGCATTAGTGTCTGATGTT	0	106654	species	909768	Acinetobacter nosocomialis
+sp.8018_strand.1_hd.4	8018	+	277238_hd0	GAAGTTGCAGTTAAAATGTT	0	1000041574	NZ_CP027786.1	1000041573	NZ_CP027786.1 Tetragenococcus koreensis strain KCTC 3924 chromosome, complete genome
+sp.8034_strand.1_hd.4	8034	+	238873_hd0	TGTTTGATGCTTACGTTAAT	0	1385	order	91061	Bacillales
+sp.8075_strand.0_hd.4	8075	-	232142_hd0	TTGAGTTTTTCCATTGGTAC	0	1000016338	NZ_CP018937.1	1000016337	NZ_CP018937.1 Bacteroides fragilis strain Q1F2 chromosome, complete genome
+sp.8076_strand.0_hd.4	8076	-	256363_hd0	TTTGAGTTTTTCCATTGGTA	0	1000016338	NZ_CP018937.1	1000016337	NZ_CP018937.1 Bacteroides fragilis strain Q1F2 chromosome, complete genome
+sp.8077_strand.0_hd.4	8077	-	317758_hd0	TTTTGAGTTTTTCCATTGGT	0	1000048328	NZ_CP030280.1	1000048327	NZ_CP030280.1 Blautia sp. N6H1-15 strain KCTC 15426 chromosome, complete genome
+sp.8462_strand.0_hd.4	8462	-	270670_hd0	GGTAAGTTATTCTTTTTAGC	0	1000049117	NZ_CP039456.1	1000049116	NZ_CP039456.1 Changchengzhania lutea strain SM1355 chromosome, complete genome
+sp.8554_strand.1_hd.4	8554	+	296520_hd0	TAAAATTGTTAATAATTGGT	0	1000024002	NZ_CP014170.1	1000024001	NZ_CP014170.1 Clostridium tyrobutyricum strain KCTC 5387 chromosome, complete genome
+sp.8575_strand.1_hd.4	8575	+	206991_hd0	GAAGCAGTTAATTAAAGTTA	0	1000048122	NZ_CP031964.1	1000048121	NZ_CP031964.1 Flavobacteriaceae bacterium strain AU392 chromosome, complete genome
+sp.8618_strand.0_hd.4	8618	-	142978_hd0	GTTATTAAATAGAAAATAGC	0	1000036606	NZ_LN554846.1	1000036605	NZ_LN554846.1 Aliivibrio wodanis genome assembly AWOD1, chromosome : 1
+sp.8619_strand.0_hd.4	8619	-	142059_hd0	TGTTATTAAATAGAAAATAG	0	1000044678	NC_017192.1	1000044677	NC_017192.1 Arcobacter sp. L, complete genome
+sp.8627_strand.0_hd.4	8627	-	168327_hd0	TGAACAGGTGTTATTAAATA	0	145259	no rank	172	Leptospira biflexa serovar Patoc
+sp.8694_strand.1_hd.4	8694	+	303390_hd0	AGGCTATTGATGGTGGTGTC	0	240427	species	1578	Lactobacillus paracollinoides
+sp.8731_strand.1_hd.4	8731	+	272625_hd0	TACAGATACTTGTTTTGCTA	0	1313	species	1301	Streptococcus pneumoniae
+sp.9004_strand.1_hd.4	9004	+	222641_hd0	TGTTTTGGCTGCTGAATGTA	0	1000028214	NZ_LR134365.1	1000028213	NZ_LR134365.1 Cardiobacterium hominis strain NCTC10426 chromosome 1
+sp.9005_strand.1_hd.4	9005	+	205446_hd0	GTTTTGGCTGCTGAATGTAC	0	480	species	475	Moraxella catarrhalis
+sp.9140_strand.1_hd.4	9140	+	241614_hd0	GGCTCTATTATTCAATTTCC	0	1000038536	NZ_LR215041.1	1000038535	NZ_LR215041.1 Mycoplasma columbinum strain NCTC10178 chromosome 1
+sp.9320_strand.1_hd.4	9320	+	155688_hd0	TGTGGTGTAGATGCTGTAAA	0	1000030312	NZ_CP019448.1	1000030311	NZ_CP019448.1 Simonsiella muelleri ATCC 29453 chromosome, complete genome
+sp.9348_strand.0_hd.4	9348	-	212906_hd0	TAGTGGTGTAAACATATTAG	0	1000040317	NC_009633.1	1000040316	NC_009633.1 Alkaliphilus metalliredigens QYMF, complete genome
+sp.9488_strand.1_hd.4	9488	+	217103_hd0	AGTCATGTAGTTGCCTTTAA	0	2	superkingdom	131567	Bacteria
+sp.9489_strand.1_hd.4	9489	+	254783_hd0	GTCATGTAGTTGCCTTTAAT	0	1000036078	NC_022738.1	1000036077	NC_022738.1 Pseudomonas sp. VLB120, complete sequence
+sp.9619_strand.1_hd.4	9619	+	199929_hd0	TGATGTTTCTTTTTTAGCAC	0	1000041874	NC_019676.1	1000041873	NC_019676.1 Nostoc sp. PCC 7107, complete sequence
+sp.9627_strand.1_hd.4	9627	+	204293_hd0	CTTTTTTAGCACATATTCAG	0	1000036552	NZ_CP019985.1	1000036551	NZ_CP019985.1 Bacillus clausii strain DSM 8716 chromosome, complete genome
+sp.9717_strand.1_hd.4	9717	+	367059_hd0	AGCATTTCTATTGGTTCTTT	0	1000046760	NZ_CP043612.1	1000046759	NZ_CP043612.1 Flavobacterium nitrogenifigens strain KACC 18538 chromosome, complete genome
+sp.9720_strand.1_hd.4	9720	+	316964_hd0	ATTTCTATTGGTTCTTTAGT	0	2	superkingdom	131567	Bacteria
+sp.9721_strand.1_hd.4	9721	+	254525_hd0	TTTCTATTGGTTCTTTAGTA	0	2	superkingdom	131567	Bacteria
+sp.9722_strand.1_hd.4	9722	+	201776_hd0	TTCTATTGGTTCTTTAGTAA	0	1338	species	671232	Streptococcus intermedius
+sp.9723_strand.1_hd.4	9723	+	240947_hd0	TCTATTGGTTCTTTAGTAAT	0	1338	species	671232	Streptococcus intermedius
+sp.9724_strand.1_hd.4	9724	+	274898_hd0	CTATTGGTTCTTTAGTAATT	0	1000050767	NZ_CP040093.1	1000050766	NZ_CP040093.1 Caloramator sp. E03 chromosome, complete genome
+sp.9883_strand.1_hd.4	9883	+	187643_hd0	ATACTTAGCTCTTTATAATA	0	1000036108	NZ_CP018776.1	1000036107	NZ_CP018776.1 Staphylococcus condimenti strain StO 2014-01 chromosome, complete genome
+sp.9886_strand.1_hd.4	9886	+	218029_hd0	CTTAGCTCTTTATAATAAGT	0	1301	genus	1300	Streptococcus
+sp.10386_strand.1_hd.4	10386	+	328574_hd0	CTTTTTCAGTGTTAGCTTGT	0	1000037299	NZ_CP020472.1	1000037298	NZ_CP020472.1 Shewanella japonica strain KCTC 22435 chromosome, complete genome
+sp.10640_strand.0_hd.4	10640	-	301228_hd0	ACTGTAATAGTTGTGTCCGT	0	470	species	909768	Acinetobacter baumannii
+sp.10713_strand.0_hd.4	10713	-	214933_hd0	AGTTGTGGTAAATCGATTGA	0	543	family	91347	Enterobacteriaceae
+sp.10854_strand.0_hd.4	10854	-	269732_hd0	TTGCAGTAATTCTTTTAATG	0	1000032663	NZ_CP009787.1	1000032662	NZ_CP009787.1 Yersinia rohdei strain YRA chromosome, complete genome
+sp.10896_strand.1_hd.4	10896	+	265598_hd0	TATTGGGTAGTGCTTTATTA	0	1000036673	NC_019701.1	1000036672	NC_019701.1 Pseudanabaena sp. PCC 7367, complete genome
+sp.10897_strand.1_hd.4	10897	+	267496_hd0	ATTGGGTAGTGCTTTATTAG	0	1000036673	NC_019701.1	1000036672	NC_019701.1 Pseudanabaena sp. PCC 7367, complete genome
+sp.10898_strand.1_hd.4	10898	+	213808_hd0	TTGGGTAGTGCTTTATTAGA	0	1000036673	NC_019701.1	1000036672	NC_019701.1 Pseudanabaena sp. PCC 7367, complete genome
+sp.10981_strand.0_hd.4	10981	-	336066_hd0	TACCCTTGATTGTTCTTTTC	0	1000036582	NZ_CP020880.1	1000036581	NZ_CP020880.1 Bacillus horikoshii strain 20a chromosome, complete genome
+sp.11116_strand.0_hd.4	11116	-	136623_hd0	AAGCAGACATAGCAATAATA	0	1000046649	NZ_CP035130.1	1000046648	NZ_CP035130.1 Gudongella oleilytica strain W6 chromosome, complete genome
+sp.11119_strand.0_hd.4	11119	-	133462_hd0	CAAAAGCAGACATAGCAATA	0	59374	no rank	834	Fibrobacter succinogenes subsp. succinogenes S85
+sp.11120_strand.1_hd.4	11120	+	310872_hd0	ATTGCTATGTCTGCTTTTGC	0	59374	no rank	834	Fibrobacter succinogenes subsp. succinogenes S85
+sp.11417_strand.1_hd.4	11417	+	285569_hd0	GTTTATAAAGTTTATTATGG	0	1000024127	NZ_CP009933.1	1000024126	NZ_CP009933.1 Clostridium scatologenes strain ATCC 25775 chromosome, complete genome
+sp.11421_strand.1_hd.4	11421	+	243012_hd0	ATAAAGTTTATTATGGTAAT	0	29521	genus	143786	Brachyspira
+sp.11526_strand.1_hd.4	11526	+	389156_hd0	TGGCCAGAGGTATTGTTTTT	0	1000043902	NZ_CP022515.1	1000043901	NZ_CP022515.1 Arenibacter algicola strain SMS7 chromosome, complete genome
+sp.11558_strand.1_hd.4	11558	+	281452_hd0	TATTGCCCTATTTTCTTCAT	0	669	species	717610	Vibrio harveyi
+sp.11622_strand.1_hd.4	11622	+	333814_hd0	TAGGCTATTTTTGTACTTGT	0	1000051645	NZ_CP048000.1	1000051644	NZ_CP048000.1 Anaerocolumna sp. CBA3638 chromosome, complete genome
+sp.11640_strand.1_hd.4	11640	+	362331_hd0	GTTACTTTGGCCTCTTTTGT	0	239935	species	239934	Akkermansia muciniphila
+sp.11779_strand.0_hd.4	11779	-	330663_hd0	ACAATTTAATGTTGAGTTTG	0	1496	species	1870884	Clostridioides difficile
+sp.11873_strand.1_hd.4	11873	+	341281_hd0	GTAGTCTTACTCTCAGTTTT	0	1000020767	NZ_CP015410.2	1000020766	NZ_CP015410.2 Enterococcus faecalis strain KB1, complete genome
+sp.11998_strand.1_hd.4	11998	+	367003_hd0	GGTTTCACTACTTTCTGTTT	0	1350	genus	81852	Enterococcus
+sp.12053_strand.1_hd.4	12053	+	203354_hd0	CTTTGTGAAGAAATGCTGGA	0	1513	species	1485	Clostridium tetani
+sp.12058_strand.0_hd.4	12058	-	234065_hd0	TGTTGTCCAGCATTTCTTCA	0	1386	genus	186817	Bacillus
+sp.12090_strand.0_hd.4	12090	-	280524_hd0	AAACTCTGAGGCTATAGCTT	0	1000045591	NZ_CP005973.1	1000045590	NZ_CP005973.1 Photobacterium gaetbulicola Gung47 chromosome 1, complete sequence
+sp.12446_strand.0_hd.4	12446	-	267118_hd0	GCTGTTGTAAGAGGTATTAT	0	698776	genus	186803	Cellulosilyticum
+sp.12567_strand.1_hd.4	12567	+	121316_hd0	TTGTAGATGCAGATAGTAAA	0	1000032242	NZ_CP007601.1	1000032241	NZ_CP007601.1 Staphylococcus capitis subsp. capitis strain AYP1020 chromosome, complete genome
+sp.12617_strand.0_hd.4	12617	-	262732_hd0	CATGCTAAATTAGGTGAATT	0	1000040409	NZ_CP024963.1	1000040408	NZ_CP024963.1 Entomoplasma luminosum strain PIMN-1 chromosome, complete genome
+sp.12678_strand.0_hd.4	12678	-	282655_hd0	AAGCTCATTATTCTGTAATT	0	1000015819	NZ_CP004391.1	1000015818	NZ_CP004391.1 Pasteurella multocida subsp. multocida OH4807, complete genome
+sp.12678_strand.1_hd.4	12678	+	266534_hd0	AATTACAGAATAATGAGCTT	0	1000015819	NZ_CP004391.1	1000015818	NZ_CP004391.1 Pasteurella multocida subsp. multocida OH4807, complete genome
+sp.12873_strand.0_hd.4	12873	-	186293_hd0	CAGTTCTGTATAGATAGTAC	0	1000042946	NZ_AP017422.1	1000042945	NZ_AP017422.1 Filimonas lacunae strain NBRC 104114
+sp.12874_strand.0_hd.4	12874	-	198758_hd0	CCAGTTCTGTATAGATAGTA	0	1000042946	NZ_AP017422.1	1000042945	NZ_AP017422.1 Filimonas lacunae strain NBRC 104114
+sp.13026_strand.1_hd.4	13026	+	203499_hd0	CTGGTAATGCAACAGAAGTG	0	1000034257	NC_012691.1	1000034256	NC_012691.1 Tolumonas auensis DSM 9187, complete sequence
+sp.13096_strand.0_hd.4	13096	-	253574_hd0	GATAATCTTTGTAAGCTTTA	0	59732	genus	49546	Chryseobacterium
+sp.13097_strand.0_hd.4	13097	-	312755_hd0	AGATAATCTTTGTAAGCTTT	0	1000041747	NC_012438.1	1000041746	NC_012438.1 Sulfurihydrogenibium azorense Az-Fu1, complete genome
+sp.13098_strand.1_hd.4	13098	+	209110_hd0	AAGCTTACAAAGATTATCTA	0	1000041747	NC_012438.1	1000041746	NC_012438.1 Sulfurihydrogenibium azorense Az-Fu1, complete genome
+sp.13192_strand.0_hd.4	13192	-	233624_hd0	TATTGGCTTCCGGTGTAACT	0	1000028224	NC_012982.1	1000028223	NC_012982.1 Hirschia baltica ATCC 49814, complete sequence
+sp.13620_strand.0_hd.4	13620	-	274805_hd0	CAATTAAATTGTCATCTTCG	0	1000038678	NZ_AP022557.1	1000038677	NZ_AP022557.1 Geobacillus subterraneus strain E55-1
+sp.13620_strand.1_hd.4	13620	+	269368_hd0	CGAAGATGACAATTTAATTG	0	1000038678	NZ_AP022557.1	1000038677	NZ_AP022557.1 Geobacillus subterraneus strain E55-1
+sp.13621_strand.0_hd.4	13621	-	271830_hd0	TCAATTAAATTGTCATCTTC	0	1000038678	NZ_AP022557.1	1000038677	NZ_AP022557.1 Geobacillus subterraneus strain E55-1
+sp.13691_strand.0_hd.4	13691	-	337063_hd0	AAGTAAATTATAAATTGTTT	0	1349	species	1301	Streptococcus uberis
+sp.13990_strand.0_hd.4	13990	-	245355_hd0	ACTGTTTTTAACAAAGCTTG	0	698776	genus	186803	Cellulosilyticum
+sp.14015_strand.1_hd.4	14015	+	171965_hd0	TCTGTGATGCCATGCGAAAT	0	1000051515	NZ_CP046175.1	1000051514	NZ_CP046175.1 Haloactinobacterium sp. HY164 strain HY044 chromosome, complete genome
+sp.14016_strand.0_hd.4	14016	-	155939_hd0	CATTTCGCATGGCATCACAG	0	1000051515	NZ_CP046175.1	1000051514	NZ_CP046175.1 Haloactinobacterium sp. HY164 strain HY044 chromosome, complete genome
+sp.14029_strand.1_hd.4	14029	+	330709_hd0	CGAAATGCTGGTATTGTTGG	0	59732	genus	49546	Chryseobacterium
+sp.14135_strand.0_hd.4	14135	-	124420_hd0	ATAATAAGAATCTACAACAG	0	1260	species	150022	Finegoldia magna
+sp.14138_strand.0_hd.4	14138	-	106902_hd0	TGAATAATAAGAATCTACAA	0	43662	species	53246	Pseudoalteromonas piscicida
+sp.14138_strand.1_hd.4	14138	+	227007_hd0	TTGTAGATTCTTATTATTCA	0	43662	species	53246	Pseudoalteromonas piscicida
+sp.14265_strand.1_hd.4	14265	+	116379_hd0	CACGGAAGAGAGGTTAAAAC	0	1000047891	NZ_CP022387.1	1000047890	NZ_CP022387.1 Capnocytophaga stomatis strain H2177 chromosome, complete genome
+sp.14266_strand.1_hd.4	14266	+	174299_hd0	ACGGAAGAGAGGTTAAAACT	0	1000047891	NZ_CP022387.1	1000047890	NZ_CP022387.1 Capnocytophaga stomatis strain H2177 chromosome, complete genome
+sp.14281_strand.0_hd.4	14281	-	284770_hd0	AAATAACGGTCAAAGAGTTT	0	1000003949	NZ_CP030241.1	1000003948	NZ_CP030241.1 Moraxella bovis strain Epp63 (300) chromosome, complete genome
+sp.14310_strand.0_hd.4	14310	-	228647_hd0	TTGGGTGGTATGTCTGATCC	0	1000050748	NZ_AP019651.1	1000050747	NZ_AP019651.1 Vibrio taketomensis strain C4III291 chromosome 1, complete sequence
+sp.14312_strand.0_hd.4	14312	-	279342_hd0	ATTTGGGTGGTATGTCTGAT	0	1000046263	NZ_CP011390.1	1000046262	NZ_CP011390.1 Flavisolibacter tropicus strain LCS9 chromosome, complete genome
+sp.14552_strand.1_hd.4	14552	+	214643_hd0	TACTTGTGTATGCTGCTGAC	0	1000041835	NC_020802.1	1000041834	NC_020802.1 Psychromonas sp. CNPT3, complete genome
+sp.16305_strand.1_hd.4	16305	+	252155_hd0	ATTCTTATGTTGTAAATGCT	0	2	superkingdom	131567	Bacteria
+sp.16527_strand.1_hd.4	16527	+	238324_hd0	TGTTGGTAGCGATAATGTTA	0	1000051689	NZ_CP049616.1	1000051688	NZ_CP049616.1 Muricauda sp. 501str8 chromosome, complete genome
+sp.17895_strand.0_hd.4	17895	-	179395_hd0	TGTTTACATTACAAGAGTGA	0	580165	species	86661	Bacillus cytotoxicus
+sp.18054_strand.1_hd.4	18054	+	233899_hd0	AGGACTCTTTAAAGATTGTA	0	1000039947	NZ_CP017830.1	1000039945	NZ_CP017830.1 Butyrivibrio hungatei strain MB2003 chromosome II, complete sequence
+sp.18063_strand.1_hd.4	18063	+	164980_hd0	TAAAGATTGTAGTAAGGTAA	0	1000015553	NZ_LR134169.1	1000015552	NZ_LR134169.1 Actinobacillus lignieresii strain NCTC10568 chromosome 1
+sp.18064_strand.1_hd.4	18064	+	213280_hd0	AAAGATTGTAGTAAGGTAAT	0	1000015553	NZ_LR134169.1	1000015552	NZ_LR134169.1 Actinobacillus lignieresii strain NCTC10568 chromosome 1
+sp.18619_strand.1_hd.4	18619	+	219468_hd0	TCTATGAAGTATTTTGTGAA	0	266	species	265	Paracoccus denitrificans
+sp.18620_strand.1_hd.4	18620	+	173025_hd0	CTATGAAGTATTTTGTGAAA	0	266	species	265	Paracoccus denitrificans
+sp.18730_strand.1_hd.4	18730	+	227377_hd0	ATTGGATTTGATTACGTCTA	0	1348	species	1301	Streptococcus parauberis
+sp.18731_strand.1_hd.4	18731	+	264520_hd0	TTGGATTTGATTACGTCTAT	0	1348	species	1301	Streptococcus parauberis
+sp.18770_strand.1_hd.4	18770	+	210977_hd0	TTCAACAATGGGGTTTTACA	0	1000035465	NZ_CP013145.1	1000035464	NZ_CP013145.1 Colwellia sp. MT41, complete genome
+sp.18917_strand.1_hd.4	18917	+	248324_hd0	CTATTGAATATCCTATAATT	0	1000039926	NZ_CP016786.1	1000039925	NZ_CP016786.1 Clostridium isatidis strain DSM 15098 chromosome, complete genome
+sp.18950_strand.0_hd.4	18950	-	242401_hd0	TCTACAAGCCGCATTAATCT	0	357276	species	816	Bacteroides dorei
+sp.18950_strand.1_hd.4	18950	+	213971_hd0	AGATTAATGCGGCTTGTAGA	0	357276	species	816	Bacteroides dorei
+sp.18986_strand.0_hd.4	18986	-	115525_hd0	TAATAATGCAGCTTTAACAA	0	1000043381	NZ_CP032101.1	1000043380	NZ_CP032101.1 Arcobacter marinus strain JCM 15502 chromosome, complete genome
+sp.18987_strand.1_hd.4	18987	+	245185_hd0	TGTTAAAGCTGCATTATTAG	0	1000043381	NZ_CP032101.1	1000043380	NZ_CP032101.1 Arcobacter marinus strain JCM 15502 chromosome, complete genome
+sp.19722_strand.1_hd.4	19722	+	262129_hd0	AGTTGATGGTGTTGATGTAG	0	1000030370	NC_013720.1	1000030369	NC_013720.1 Pirellula staleyi DSM 6068, complete sequence
+sp.19723_strand.1_hd.4	19723	+	209044_hd0	GTTGATGGTGTTGATGTAGA	0	2	superkingdom	131567	Bacteria
+sp.19823_strand.0_hd.4	19823	-	246322_hd0	ATTATTGAGTATTTTCACCT	0	1000001371	NZ_LR590484.1	1000001370	NZ_LR590484.1 Sphingobacterium thalpophilum strain NCTC11429 chromosome 1
+sp.20034_strand.1_hd.4	20034	+	204313_hd0	TAATGGTGTTCTTATTACAG	0	1000043553	NZ_AP019846.1	1000043552	NZ_AP019846.1 Leptotrichia hongkongensis strain JMUB5056
+sp.20174_strand.0_hd.4	20174	-	144744_hd0	TTCAGGTAATTGTTGGACAA	0	1000025393	NZ_CP018867.1	1000025392	NZ_CP018867.1 Lactobacillus alimentarius DSM 20249 chromosome, complete genome
+sp.20215_strand.0_hd.4	20215	-	255013_hd0	GGTTTAAATTCTTGTAAATT	0	139	species	64895	Borreliella burgdorferi
+sp.20242_strand.1_hd.4	20242	+	335741_hd0	CAAATGGAAATTGATTTCTT	0	1000038503	NZ_CP033926.1	1000038502	NZ_CP033926.1 Chryseobacterium joostei strain DSM 16927 chromosome, complete genome
+sp.20291_strand.1_hd.4	20291	+	230147_hd0	GGTATAAATTAGAAGGCTAT	0	1000050551	NZ_CP037933.1	1000050550	NZ_CP037933.1 Flavobacterium nackdongense strain GS13 chromosome, complete genome
+sp.20515_strand.1_hd.4	20515	+	222348_hd0	CTTGATGATTTTGTTGAAAT	0	49546	family	200644	Flavobacteriaceae
+sp.20619_strand.0_hd.4	20619	-	254253_hd0	TTTCTACATGGCCATCTTTA	0	1000036617	NZ_LN554852.1	1000036616	NZ_LN554852.1 Moritella viscosa genome assembly MVIS1, chromosome : 1
+sp.21264_strand.1_hd.4	21264	+	270360_hd0	TGAAGCATTTTTAATTGGAT	0	1000033583	NC_020291.1	1000033582	NC_020291.1 Clostridium saccharoperbutylacetonicum N1-4(HMT), complete sequence
+sp.21273_strand.1_hd.4	21273	+	236599_hd0	TTTAATTGGATGTAATTATC	0	1000017020	NC_019771.1	1000017019	NC_019771.1 Anabaena cylindrica PCC 7122, complete sequence
+sp.21282_strand.0_hd.4	21282	-	196680_hd0	GTTTGCCAAGATAATTACAT	0	1313	species	1301	Streptococcus pneumoniae
+sp.21282_strand.1_hd.4	21282	+	131331_hd0	ATGTAATTATCTTGGCAAAC	0	1313	species	1301	Streptococcus pneumoniae
+sp.21430_strand.0_hd.4	21430	-	128453_hd0	TCTTTTAAAGACATAACAGC	0	1000034083	NZ_FO818637.1	1000034082	NZ_FO818637.1 Xenorhabdus bovienii strain CS03
+sp.21430_strand.1_hd.4	21430	+	127402_hd0	GCTGTTATGTCTTTAAAAGA	0	1000034083	NZ_FO818637.1	1000034082	NZ_FO818637.1 Xenorhabdus bovienii strain CS03
+sp.21432_strand.0_hd.4	21432	-	89052_hd0	CTTCTTTTAAAGACATAACA	0	1000030213	NZ_CP034873.1	1000030212	NZ_CP034873.1 Buchnera aphidicola (Hyadaphis tataricae) strain Hta chromosome, complete genome
+sp.21443_strand.1_hd.4	21443	+	164942_hd0	TAAAAGAAGGTCAAATCAAT	0	1000040882	NC_018010.1	1000040881	NC_018010.1 Belliella baltica DSM 15883, complete sequence
+sp.21444_strand.1_hd.4	21444	+	189034_hd0	AAAAGAAGGTCAAATCAATG	0	1279	genus	90964	Staphylococcus
+sp.21520_strand.1_hd.4	21520	+	301832_hd0	GTTGTTATTTCTAGTGATGT	0	1000038792	NZ_CP025121.1	1000038791	NZ_CP025121.1 Candidatus Phytoplasma ziziphi isolate Jwb-nky chromosome, complete genome
+sp.21521_strand.1_hd.4	21521	+	326934_hd0	TTGTTATTTCTAGTGATGTT	0	1000038792	NZ_CP025121.1	1000038791	NZ_CP025121.1 Candidatus Phytoplasma ziziphi isolate Jwb-nky chromosome, complete genome
+sp.21875_strand.1_hd.4	21875	+	205637_hd0	ATTTTTGGTACTACTTTAGA	0	1000016937	NC_008312.1	1000016936	NC_008312.1 Trichodesmium erythraeum IMS101, complete genome
+sp.22108_strand.1_hd.4	22108	+	141879_hd0	ACAGGGTAATTTCAAAAATC	0	1000042509	NC_014041.1	1000042508	NC_014041.1 Zunongwangia profunda SM-A87, complete genome
+sp.22273_strand.0_hd.4	22273	-	146407_hd0	AAGCAAGTAAAGTTTGAAAC	0	1000048804	NZ_AP018255.1	1000048803	NZ_AP018255.1 Calothrix sp. NIES-4071 DNA, complete genome
+sp.22584_strand.0_hd.4	22584	-	98742_hd0	AAATCTGGTGGCGTTAAAAA	0	1578	genus	33958	Lactobacillus
+sp.22585_strand.0_hd.4	22585	-	129451_hd0	CAAATCTGGTGGCGTTAAAA	0	1000041728	NZ_CP029476.1	1000041727	NZ_CP029476.1 Lactobacillus apis strain ESL0185 chromosome, complete genome
+sp.22586_strand.0_hd.4	22586	-	166671_hd0	GCAAATCTGGTGGCGTTAAA	0	1000041728	NZ_CP029476.1	1000041727	NZ_CP029476.1 Lactobacillus apis strain ESL0185 chromosome, complete genome
+sp.22609_strand.1_hd.4	22609	+	148433_hd0	TGTTTATGCTTGGAACAGGA	0	1000050356	NZ_AP019400.1	1000050355	NZ_AP019400.1 Cohnella abietis strain KCTC 43028
+sp.22624_strand.0_hd.4	22624	-	291112_hd0	AGTTGCTGATTCTCTTCCTG	0	1000049580	NZ_CP028897.1	1000049579	NZ_CP028897.1 Gammaproteobacteria bacterium DM2 chromosome, complete genome
+sp.22624_strand.1_hd.4	22624	+	168050_hd0	CAGGAAGAGAATCAGCAACT	0	1000049580	NZ_CP028897.1	1000049579	NZ_CP028897.1 Gammaproteobacteria bacterium DM2 chromosome, complete genome
+sp.22628_strand.0_hd.4	22628	-	326357_hd0	ACACAGTTGCTGATTCTCTT	0	1000049074	NZ_CP017482.1	1000049073	NZ_CP017482.1 Pectobacterium polaris strain NIBIO1392 chromosome, complete genome
+sp.22675_strand.0_hd.4	22675	-	222502_hd0	TAAAAGTGGAAAATGATGCG	0	1000042526	NZ_CP007161.1	1000042525	NZ_CP007161.1 Virgibacillus sp. SK37, complete genome
+sp.22675_strand.1_hd.4	22675	+	268769_hd0	CGCATCATTTTCCACTTTTA	0	1000042526	NZ_CP007161.1	1000042525	NZ_CP007161.1 Virgibacillus sp. SK37, complete genome
+sp.22710_strand.0_hd.4	22710	-	213891_hd0	ATCATTTAATTTAGTAGGAG	0	1000003211	NZ_LN681225.1	1000003210	NZ_LN681225.1 Legionella hackeliae strain ATCC 35250 chromosome I, complete sequence
+sp.22728_strand.0_hd.4	22728	-	180060_hd0	GACATTAGTAAAGCAGAGAT	0	1000034290	NC_018002.1	1000034289	NC_018002.1 Sulfurospirillum barnesii SES-3, complete sequence
+sp.22729_strand.0_hd.4	22729	-	121764_hd0	AGACATTAGTAAAGCAGAGA	0	1000034290	NC_018002.1	1000034289	NC_018002.1 Sulfurospirillum barnesii SES-3, complete sequence
+sp.22730_strand.0_hd.4	22730	-	151476_hd0	TAGACATTAGTAAAGCAGAG	0	1000034290	NC_018002.1	1000034289	NC_018002.1 Sulfurospirillum barnesii SES-3, complete sequence
+sp.22837_strand.0_hd.4	22837	-	288543_hd0	AGCCTGTAAAATCATCTGGT	0	1000045309	NZ_CP007446.1	1000045308	NZ_CP007446.1 Snodgrassella alvi wkB2 chromosome, complete genome
+sp.22855_strand.1_hd.4	22855	+	268081_hd0	CTGCGTTATAGCTTGGAATT	0	1000048925	NZ_CP022680.1	1000048924	NZ_CP022680.1 Streptococcus respiraculi strain HTS25 chromosome, complete genome
+sp.22917_strand.1_hd.4	22917	+	197178_hd0	TGTATAGATTGTTTAGGAAG	0	1000036950	NC_014376.1	1000036949	NC_014376.1 [Clostridium] saccharolyticum WM1, complete sequence
+sp.23013_strand.1_hd.4	23013	+	332776_hd0	AAGGTTTTAATTGTTACTTT	0	1583098	species	848	Fusobacterium hwasookii
+sp.23302_strand.0_hd.4	23302	-	247293_hd0	TGTCAAGAATCTCAAGTGTC	0	1184	species	47251	Leptolyngbya boryana
+sp.23302_strand.1_hd.4	23302	+	181944_hd0	GACACTTGAGATTCTTGACA	0	1184	species	47251	Leptolyngbya boryana
+sp.23469_strand.1_hd.4	23469	+	309795_hd0	ATTCTACAGGTTCTAATGTT	0	186826	order	91061	Lactobacillales
+sp.23511_strand.1_hd.4	23511	+	228702_hd0	TAATAGGGGCTGAACATGTC	0	1000047752	NZ_CP015196.1	1000047751	NZ_CP015196.1 Streptococcus marmotae strain HTS5 chromosome, complete genome
+sp.23664_strand.0_hd.4	23664	-	309326_hd0	GTAAGCAACTGAATTTTCTG	0	1000016511	NZ_CP028108.1	1000016510	NZ_CP028108.1 Fusobacterium periodonticum strain 2_1_31 chromosome, complete genome
+sp.23700_strand.0_hd.4	23700	-	291689_hd0	AGTAAAATTTGTGGGTATGG	0	1000016554	NC_011883.1	1000016553	NC_011883.1 Desulfovibrio desulfuricans ATCC 27774, complete sequence
+sp.23804_strand.1_hd.4	23804	+	365525_hd0	GAATGCAGCAATCTTTTGTT	0	22	genus	267890	Shewanella
+sp.23865_strand.1_hd.4	23865	+	115570_hd0	CTGGAATAGCTGTTGAACAA	0	1000046345	NZ_CP020554.1	1000046344	NZ_CP020554.1 Parasaccharibacter apium strain G7_7_3c, complete genome
+sp.23977_strand.0_hd.4	23977	-	240691_hd0	GTTTTGATGGATCTGGTAAT	0	1000040160	NC_013939.1	1000040159	NC_013939.1 Deferribacter desulfuricans SSM1, complete genome
+sp.24071_strand.1_hd.4	24071	+	257527_hd0	TATGGTGATTGCCTTGGTGA	0	1000047175	NZ_CP012364.1	1000047174	NZ_CP012364.1 Oblitimonas alkaliphila strain E1148 chromosome, complete genome
+sp.24072_strand.1_hd.4	24072	+	288520_hd0	ATGGTGATTGCCTTGGTGAT	0	1000047175	NZ_CP012364.1	1000047174	NZ_CP012364.1 Oblitimonas alkaliphila strain E1148 chromosome, complete genome
+sp.24157_strand.0_hd.4	24157	-	303024_hd0	GAGCAATCATTTCATCTGTG	0	1000002164	NZ_CP024085.1	1000002163	NZ_CP024085.1 Pseudomonas putida strain E41 chromosome, complete genome
+sp.24176_strand.0_hd.4	24176	-	293840_hd0	AACAGTGCAGAAGTGTATTG	0	1000011853	NZ_CP021957.1	1000011850	NZ_CP021957.1 Klebsiella pneumoniae strain AR_0107 plasmid unitig_3j2_linear_pilon, complete sequence
+sp.24321_strand.0_hd.4	24321	-	329995_hd0	TTGGTTGGCAATCAATTTTT	0	1000044849	NZ_CP053840.1	1000044848	NZ_CP053840.1 Arcobacter venerupis strain LMG 26156 chromosome, complete genome
+sp.24338_strand.1_hd.4	24338	+	293296_hd0	CAATTTAATAGTGCTATTGG	0	1385	order	91061	Bacillales
+sp.24351_strand.1_hd.4	24351	+	126853_hd0	CTATTGGCAAAATTCAAGAC	0	304207	species	1578	Lactobacillus harbinensis
+sp.24877_strand.1_hd.4	24877	+	181175_hd0	ACAAAGGAATTTTTATGAAC	0	728	species	292486	Avibacterium paragallinarum
+sp.24934_strand.1_hd.4	24934	+	219041_hd0	TAACTGTGATGTTGTAATAG	0	1161	order	1117	Nostocales
+sp.25014_strand.0_hd.4	25014	-	220023_hd0	CTTAAAATATTTATCTAACT	0	1386	genus	186817	Bacillus
+sp.25164_strand.1_hd.4	25164	+	207313_hd0	AAGAACTTGGAAAGTATGAG	0	1000048334	NZ_CP018153.1	1000048333	NZ_CP018153.1 Gramella salexigens strain LPB0144 chromosome, complete genome
+sp.25251_strand.0_hd.4	25251	-	208225_hd0	ACAGCAAAGCATAATTGTCA	0	1000037299	NZ_CP020472.1	1000037298	NZ_CP020472.1 Shewanella japonica strain KCTC 22435 chromosome, complete genome
+sp.25398_strand.1_hd.4	25398	+	200966_hd0	TTTGTTTATGAGAATCTTCA	0	1000033879	NZ_LT907978.1	1000033878	NZ_LT907978.1 Anaerobutyricum hallii isolate EH1 chromosome I
+sp.25436_strand.0_hd.4	25436	-	228196_hd0	CTTGATTTCACCTTGCTTCA	0	1000040846	NZ_CP045729.1	1000040845	NZ_CP045729.1 Lactobacillus gastricus strain LG045 chromosome, complete genome
+sp.25456_strand.1_hd.4	25456	+	296561_hd0	GATGCTACTCCTTCAGATTT	0	1000033392	NZ_CP045530.1	1000033391	NZ_CP045530.1 Lactobacillus pontis strain LP475 chromosome, complete genome
+sp.25482_strand.0_hd.4	25482	-	222399_hd0	TCGGTATCGTTGCAGTAGCG	0	587753	species	136842	Pseudomonas chlororaphis
+sp.25675_strand.1_hd.4	25675	+	274209_hd0	TTGCTCGTTGCTGCTGGCCT	0	1716	genus	1653	Corynebacterium
+sp.25742_strand.0_hd.4	25742	-	202517_hd0	TATTCTTACAAAGTTTATAC	0	1000049022	NZ_CP022985.1	1000049021	NZ_CP022985.1 Mariniflexile sp. TRM1-10 chromosome, complete genome
+sp.25743_strand.0_hd.4	25743	-	217243_hd0	TTATTCTTACAAAGTTTATA	0	1000049022	NZ_CP022985.1	1000049021	NZ_CP022985.1 Mariniflexile sp. TRM1-10 chromosome, complete genome
+sp.25758_strand.0_hd.4	25758	-	303243_hd0	GCCAAAGCCTCATTATTATT	0	1000049915	NZ_CP032869.1	1000049914	NZ_CP032869.1 Mucilaginibacter sp. HYN0043 chromosome, complete genome
+sp.25826_strand.1_hd.4	25826	+	232189_hd0	ATTTTCTTTGCTGGCATACT	0	1463165	species	570	Klebsiella quasipneumoniae
+sp.25883_strand.1_hd.4	25883	+	254824_hd0	CTTCTTCAATTGTCATTACT	0	2113	species	2093	Mycoplasma californicum
+sp.25884_strand.0_hd.4	25884	-	112995_hd0	AAGTAATGACAATTGAAGAA	0	446	species	445	Legionella pneumophila
+sp.25885_strand.1_hd.4	25885	+	261280_hd0	TCTTCAATTGTCATTACTTC	0	446	species	445	Legionella pneumophila
+sp.25886_strand.1_hd.4	25886	+	210289_hd0	CTTCAATTGTCATTACTTCA	0	446	species	445	Legionella pneumophila
+sp.25955_strand.0_hd.4	25955	-	160564_hd0	TTCCCATTTTTCAGTATAAC	0	1386	genus	186817	Bacillus
+sp.25962_strand.1_hd.4	25962	+	222849_hd0	TGAAAAATGGGAATCTGGAG	0	1000028459	NZ_CP028415.1	1000028458	NZ_CP028415.1 Streptococcus mitis strain SK637 chromosome, complete genome
+sp.26094_strand.0_hd.4	26094	-	234591_hd0	CAGGCTCATCAACAATTTTA	0	1000035465	NZ_CP013145.1	1000035464	NZ_CP013145.1 Colwellia sp. MT41, complete genome
+sp.26096_strand.0_hd.4	26096	-	246366_hd0	TTCAGGCTCATCAACAATTT	0	1000050836	NZ_CP040517.1	1000050835	NZ_CP040517.1 Emcibacter sp. MEBiC09520 chromosome, complete genome
+sp.26698_strand.1_hd.4	26698	+	379494_hd0	CAGTAACTTTAGCTTGTTTT	0	1000049572	NZ_CP028924.1	1000049571	NZ_CP028924.1 Colwellia sp. Arc7-D chromosome, complete genome
+sp.26734_strand.1_hd.4	26734	+	165565_hd0	ACAGAATAAATTGGATCACC	0	29519	species	64895	Borreliella garinii
+sp.26745_strand.1_hd.4	26745	+	243846_hd0	TGGATCACCGGTGGAATTGC	0	1000043975	NZ_CP013745.1	1000043974	NZ_CP013745.1 Arthrobacter alpinus strain A3 chromosome, complete genome
+sp.26964_strand.1_hd.4	26964	+	172309_hd0	CATCTTCGTATTGCTGGACA	0	1000022752	NZ_CP027116.1	1000022751	NZ_CP027116.1 Bacillus pumilus strain 145 chromosome, complete genome
+sp.27073_strand.1_hd.4	27073	+	197295_hd0	CGCAGCGTGTAGCAGGTGAC	0	1000015447	NZ_CP027852.1	1000015446	NZ_CP027852.1 Plesiomonas shigelloides strain MS-17-188 chromosome, complete genome
+sp.27311_strand.1_hd.4	27311	+	178495_hd0	TTAAAAATTTATCTAAGTCA	0	1000032255	NZ_CP053957.1	1000032254	NZ_CP053957.1 Staphylococcus capitis strain FDAARGOS_753 chromosome, complete genome
+sp.27317_strand.0_hd.4	27317	-	174030_hd0	AGTTAGTGACTTAGATAAAT	0	1000027697	NC_015431.1	1000027696	NC_015431.1 Mycoplasma mycoides subsp. capri LC str. 95010, complete genome
+sp.27341_strand.0_hd.4	27341	-	272855_hd0	ATCTAATTGAGAATATTTAT	0	1000032164	NZ_CP014176.1	1000032163	NZ_CP014176.1 Clostridium argentinense strain 89G chromosome, complete genome
+sp.27343_strand.0_hd.4	27343	-	287631_hd0	TCATCTAATTGAGAATATTT	0	2	superkingdom	131567	Bacteria
+sp.27727_strand.1_hd.4	27727	+	110167_hd0	CTTTGCTTCACACTCAAAAG	0	1386	genus	186817	Bacillus
+sp.28107_strand.1_hd.4	28107	+	180090_hd0	CAGTACATCGATATCGGTAA	0	1000041912	NC_012914.1	1000041911	NC_012914.1 Paenibacillus sp. JDR-2, complete sequence
+sp.28204_strand.1_hd.4	28204	+	235333_hd0	TCTATGAAGACTTTTTAGAG	0	1000035914	NC_018149.1	1000035913	NC_018149.1 Mycoplasma wenyonii str. Massachusetts, complete sequence
+sp.28249_strand.0_hd.4	28249	-	184149_hd0	TTTGTTCGTTTAGATGAAAT	0	1000047384	NZ_CP041660.1	1000047383	NZ_CP041660.1 Catenovulum sediminis strain WS1-A chromosome 1, complete sequence
+sp.28382_strand.0_hd.4	28382	-	291949_hd0	TGGGGCCGACGTTGTTTTGA	0	1000050565	NZ_CP049028.1	1000050564	NZ_CP049028.1 Fluviibacterium aquatile strain SC52 chromosome, complete genome
+sp.28899_strand.1_hd.4	28899	+	277005_hd0	GAATGGCTGGCAATGGCGGT	0	1000002036	NZ_CP025542.1	1000002035	NZ_CP025542.1 Pseudomonas fluorescens strain 2P24 chromosome, complete genome
+sp.28914_strand.1_hd.4	28914	+	309349_hd0	GCGGTGATGCTGCTCTTGCT	0	672	species	662	Vibrio vulnificus
+sp.29306_strand.1_hd.4	29306	+	206119_hd0	AATTTCAAAGATCAAGTCAT	0	953	genus	952	Wolbachia
+sp.29309_strand.1_hd.4	29309	+	319957_hd0	TTCAAAGATCAAGTCATTTT	0	576611	species	44013	Polynucleobacter asymbioticus
+sp.29390_strand.0_hd.4	29390	-	335245_hd0	GTTTCATCAGCCTTCTTCTT	0	91061	class	1239	Bacilli
+sp.29390_strand.1_hd.4	29390	+	127754_hd0	AAGAAGAAGGCTGATGAAAC	0	91061	class	1239	Bacilli
+sp.29402_strand.0_hd.4	29402	-	248766_hd0	GGTAAGGCTTGAGTTTCATC	0	286	genus	135621	Pseudomonas
+sp.29403_strand.0_hd.4	29403	-	275067_hd0	CGGTAAGGCTTGAGTTTCAT	0	286	genus	135621	Pseudomonas
