@@ -74,7 +74,7 @@ plot_diagnostic(subset_2, abundance, filter=filter_2,
 ```{r subset_3}
 # read in alignments
 amplicons <- system(paste("grep -v @", file.path(here(), "isothermal_amplification/amplicons_mapped.sam"), 
-                          "| cut -f 1,2,4,10", intern=T))
+                          "| cut -f 1,2,4,10"), intern=T)
 amplicons <- data.frame(matrix(unlist(strsplit(amplicons, split="\t")), byrow=T, ncol=4), stringsAsFactors=F)
 colnames(amplicons) <- c("name", "flag", "position", "sequence")
 

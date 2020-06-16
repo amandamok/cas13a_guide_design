@@ -226,3 +226,56 @@ candidates <- candidates[,c("start", "target", "spacer", "strand")]
 write.table(candidates, file="candidate_spacers.txt",
             quote=F, row.names=F, sep="\t")
 ```
+
+# V. Amplicon guides
+
+```{r amplicon_guides}
+# read in alignments
+amplicons <- system(paste("grep -v @", file.path(here(), "isothermal_amplification/winner_amplicons_mapped.sam"), 
+                          "| cut -f 1,2,4,10"), intern=T)
+amplicons <- data.frame(matrix(unlist(strsplit(amplicons, split="\t")), byrow=T, ncol=4), stringsAsFactors=F)
+colnames(amplicons) <- c("name", "flag", "position", "sequence")
+amplicons$position <- as.numeric(amplicons$position)
+
+amplicon_overlap <- lapply(seq.int(amplicons),
+                           function(x) {
+                             amplicon_start <- amplicons$position[x]
+                             amplicon_end <- amplicons$position[x] + nchar(amplicons$sequence[x])
+                             spacer_stop <- amplicon_end - 20 + 1
+                             tmp_subset <- subset(candidates, start >= amplicon_start & start <= spacer_stop)
+                             if(nrow(tmp_subset) > 0) {
+                               return(data.frame(tmp_subset, amplicon=amplicons$name[x]))
+                             } else {
+                               return(NULL)
+                             }
+                           })
+amplicon_overlap <- do.call(rbind, amplicon_overlap)
+# aggregate(start~strand+amplicon, data=amplicon_overlap, FUN=length)
+
+# assign to regions of overlapping guides (≥10 nt)
+amplicon_overlap <- amplicon_overlap[order(amplicon_overlap$start),]
+for(x in seq.int(nrow(amplicon_overlap))) {
+  if(x == 1) {
+    region <- 1
+  } else {
+    if(amplicon_overlap$start[x] >= (amplicon_overlap$start[x-1]+10)) {
+      region <- region+1
+    }
+  }
+  amplicon_overlap$region[x] <- region
+}
+aggregate(start~strand+region+amplicon, data=amplicon_overlap, FUN=length)
+```
+
+# VI. Offtarget analysis: Pollard lab
+
+```{r offtarget}
+viral <- read.delim(file.path(here(), "ref_data", "offtarget_analysis", "classified_kmers_vn_hd_lt_2_20200609.tsv"), 
+                    header=T, stringsAsFactors=F)
+bacterial_0 <- read.delim(file.path(here(), "ref_data", "offtarget_analysis", "classified_kmers_refbac_hd.0_20200609.tsv"),
+                          header=T, stringsAsFactors=F)
+bacterial_1 <- read.delim(file.path(here(), "ref_data", "offtarget_analysis", "classified_kmers_refbac_hd.1_20200609.tsv"),
+                          header=T, stringsAsFactors=F)
+
+
+```
