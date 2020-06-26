@@ -1,0 +1,13 @@
+name: SARS-CoV-2_guide_design
+title: SARS-CoV-2_guide_design
+username:
+account: anmok
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2506698
+bundleId: 3319173
+url: https://anmok.shinyapps.io/SARS-CoV-2_guide_design/
+when: 1593172315.68166
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: www/rstudio.png

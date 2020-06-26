@@ -1,27 +1,24 @@
 ##################################################
 ### GUI to visualize guide screening
 
-library(BiocManager)
-options(repos = BiocManager::repositories())
 library(shiny)
 library(ggplot2)
-library(here)
 library(patchwork)
 library(ggbio)
+library(GenomicRanges)
 
 # import data -------------------------------------------------------------
 
-plusStrand <- read.table(file.path(here(), "outputs/cas13a_20nt/cas13a_results_summary.txt"))
-minusStrand <- read.table(file.path(here(), "outputs/cas13a_minusStrand_20nt/cas13a_minusStrand_results_summary.txt"))
+plusStrand <- read.table("data/cas13a_results_summary.txt")
+minusStrand <- read.table("data/cas13a_minusStrand_results_summary.txt")
 dat <- rbind(plusStrand, minusStrand)
 
-offtarget_dir <- file.path(here(), "ref_data", "offtarget_analysis")
-offtarget_candidates <- read.table(file.path(offtarget_dir, "candidate_spacers.txt"), stringsAsFactors=F, header=T)
-offtarget_vir <- read.csv(file.path(offtarget_dir, "20200615_1056_guides.csv"), stringsAsFactors=F)
-offtarget_bac <- read.table(file.path(offtarget_dir, "mat_refbac_20200609.tsv"), header=T, stringsAsFactors=F)
+offtarget_candidates <- read.table("data/candidate_spacers.txt", stringsAsFactors=F, header=T)
+offtarget_vir <- read.csv("data/20200615_1056_guides.csv", stringsAsFactors=F)
+offtarget_bac <- read.table("data/mat_refbac_20200609.tsv", header=T, stringsAsFactors=F)
 offtarget_bac$hits_01 <- offtarget_bac$X0 + offtarget_bac$X1
 
-amplicons <- readLines(file.path(here(), "isothermal_amplification", "winner_amplicons_mapped.sam"))
+amplicons <- readLines("data/winner_amplicons_mapped.sam")
 amplicons <- amplicons[!grepl("^@", amplicons)]
 amplicons <- data.frame(matrix(unlist(strsplit(amplicons, split="\t")), nrow=length(amplicons), byrow=T), stringsAsFactors=F)
 amplicons <- amplicons[,c(1, 4, 10)]
@@ -53,14 +50,14 @@ qc_dat <- subset(qc_dat, match_against_hg38==0) # n = 7104 (+: 3729; -: 3375)
 qc_dat <- subset(qc_dat, antitag != "GUUU") # n = 7047 (+: 3702; -: 3345)
 qc_dat <- subset(qc_dat, sensitivity_01 >= 0.95) # n = 6969 (+: 3678; -: 3291)
 
-# load viral abundance coverage data
-coverage_id <- "PRJNA616446"
-abundance_binSize <- 300
-id_cov <- read.table(file.path(here(), "ref_data/RNA_expression", paste0(coverage_id, "_mapped.cov")),
-                     header=F, stringsAsFactors=F, col.names=c("genome", "pos", "coverage"))
-id_cov$bin <- cut(id_cov$pos, breaks=ceiling(max(id_cov$pos)/abundance_binSize), labels=F)
-id_cov <- aggregate(coverage~bin, data=id_cov, FUN=median)
-id_cov$bin <- (id_cov$bin-1)*abundance_binSize + abundance_binSize/2
+# # load viral abundance coverage data
+# coverage_id <- "PRJNA616446"
+# abundance_binSize <- 300
+# id_cov <- read.table(file.path(here(), "ref_data/RNA_expression", paste0(coverage_id, "_mapped.cov")),
+#                      header=F, stringsAsFactors=F, col.names=c("genome", "pos", "coverage"))
+# id_cov$bin <- cut(id_cov$pos, breaks=ceiling(max(id_cov$pos)/abundance_binSize), labels=F)
+# id_cov <- aggregate(coverage~bin, data=id_cov, FUN=median)
+# id_cov$bin <- (id_cov$bin-1)*abundance_binSize + abundance_binSize/2
 
 # filter 
 filters <- c("All guides" = "dat",
