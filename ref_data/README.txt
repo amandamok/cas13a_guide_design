@@ -128,3 +128,5 @@ output format: selected fields from primary and related tables
 selected fields: name, chromStarts, variants, sampleCount, samples
 
 MN985325v1.fa: SARS-CoV-2 isolate (USA-WA1)
+bedtools getfasta -fi MN985325v1.fa -bed shape_dms_unstructured.bed -fo shape_dms_unstructured.fa
+bowtie --norc -v 2 -S --un shape_dms_unstructured_unmapped.fa -f wuhCor1 shape_dms_unstructured.fa > shape_dms_unstructured_mapped.sam 2> shape_dms_unstructured_mapped.bowtiestats
