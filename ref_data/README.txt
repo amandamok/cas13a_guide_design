@@ -126,3 +126,5 @@ table: nextstrainClade
 region: genome
 output format: selected fields from primary and related tables
 selected fields: name, chromStarts, variants, sampleCount, samples
+
+MN985325v1.fa: SARS-CoV-2 isolate (USA-WA1)

@@ -279,3 +279,9 @@ bacterial_1 <- read.delim(file.path(here(), "ref_data", "offtarget_analysis", "c
 
 
 ```
+
+# VII. Ott guides
+
+```{r ott_guides}
+
+```

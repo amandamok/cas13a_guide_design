@@ -4,8 +4,8 @@
 library(shiny)
 library(ggplot2)
 library(patchwork)
-library(ggbio)
-library(GenomicRanges)
+# library(ggbio)
+# library(GenomicRanges)
 
 # import data -------------------------------------------------------------
 
@@ -25,6 +25,8 @@ amplicons <- amplicons[,c(1, 4, 10)]
 colnames(amplicons) <- c("amplicon", "pos", "seq")
 amplicons$pos <- as.numeric(as.character(amplicons$pos))
 amplicons$end <- amplicons$pos + nchar(amplicons$seq)
+
+ssRNA_regions <- 
 
 # add offtarget data
 dat$offtarget_vir <- NA
@@ -120,7 +122,7 @@ ui <- fluidPage(
     ),
     
     mainPanel(
-      plotOutput("genome_plot"),
+      # plotOutput("genome_plot"),
       plotOutput("scatter_plot"),
       p(class="text-center", downloadButton('x3', "Download Data"),
         DT::dataTableOutput("print_table"))
@@ -172,77 +174,77 @@ server <- function(input, output) {
     var2_plot <- ggplot(plot_data, aes_string(input$var2)) + theme_bw() + 
       ggtitle(feature_label[input$var2]) + xlab(feature_desc[input$var2])
     if(input$var2 %in% logical_features) { var2_plot <- var2_plot + geom_bar() } 
-    else { var2_plot <- var2_plot + geom_density(kernel="gaussian", fill=2, col=2) }
+    else { var2_plot <- var2_plot + geom_density(kernel="gaussian", fill=3, col=3) }
     var3_plot <- ggplot(plot_data, aes_string(input$var3)) + theme_bw() + 
       ggtitle(feature_label[input$var3]) + xlab(feature_desc[input$var3])
     if(input$var3 %in% logical_features) { var3_plot <- var3_plot + geom_bar() } 
-    else { var3_plot <- var3_plot + geom_density(kernel="gaussian", fill=2, col=2) }
+    else { var3_plot <- var3_plot + geom_density(kernel="gaussian", fill=4, col=4) }
     return(scatter_plot + (var1_plot / var2_plot / var3_plot) + plot_layout(widths=c(2,1)))
   })
   
-  output$genome_plot <- renderPlot({
-    # subset data
-    plot_data <- get(input$data_filter)
-    plot_data <- subset(plot_data, start >= input$genome_range[1])
-    plot_data <- subset(plot_data, start <= input$genome_range[2]-20)
-    plot_data <- switch(input$strand_filter,
-                        "both" = plot_data,
-                        "plus" = subset(plot_data, strand=="+"),
-                        "minus" = subset(plot_data), strand=="-")
-    plus_strand <- subset(plot_data, strand=="+")
-    minus_strand <- subset(plot_data, strand=="-")
-    amplicons_subset <- subset(amplicons, pos >= input$genome_range[1] & end <= input$genome_range[2])
-    # make GRanges objects
-    if(nrow(plus_strand) > 0) {
-      plus_strand_obj <- GRanges(seqnames="SARS-CoV-2",
-                                 ranges=IRanges(start=plus_strand$start, width=20, 
-                                                names=paste("+", plus_strand$start, sep="_")),
-                                 type="target", strand="+")
-    }
-    if(nrow(minus_strand) > 0) {
-      minus_strand_obj <- GRanges(seqnames="SARS-CoV-2",
-                                  ranges=IRanges(start=minus_strand$start, width=20, 
-                                                 names=paste("-", minus_strand$start, sep="_")),
-                                  type="target", strand="-")
-    }
-    if(nrow(amplicons_subset) > 0) {
-      amplicons_obj <- GRanges(seqnames="SARS-CoV-2", 
-                               ranges=IRanges(start=amplicons_subset$pos, end=amplicons_subset$end,
-                                              name=amplicons_subset$amplicon),
-                               type="amplicon")
-    }
-    # generate plot
-    if(nrow(amplicons_subset) > 0) {
-      if(nrow(plus_strand) > 0 & nrow(minus_strand) > 0) {
-        genome_plot <- tracks("+ strand" = autoplot(plus_strand_obj, fill=2),
-                              "- strand" = autoplot(minus_strand_obj, fill=4),
-                              amplicon = autoplot(amplicons_obj),
-                              heights=c(1,1,0.2))
-      } else if(nrow(plus_strand) > 0 & nrow(minus_strand) == 0) {
-        genome_plot <- tracks("+ strand" = autoplot(plus_strand_obj, fill=2),
-                              amplicon = autoplot(amplicons_obj),
-                              heights=c(1,0.2))
-      } else if(nrow(plus_strand) == 0 & nrow(minus_strand) > 0) {
-        genome_plot <- tracks("- strand" = autoplot(minus_strand_obj, fill=4),
-                              amplicon = autoplot(amplicons_obj),
-                              heights=c(1,0.2))
-      } else {
-        genome_plot <- tracks(amplicon = autoplot(amplicons_obj))
-      }
-    } else {
-      if(nrow(plus_strand) > 0 & nrow(minus_strand) > 0) {
-        genome_plot <- tracks("+ strand" = autoplot(plus_strand_obj, fill=2),
-                              "- strand" = autoplot(minus_strand_obj, fill=4))
-      } else if(nrow(plus_strand) > 0 & nrow(minus_strand) == 0) {
-        genome_plot <- tracks("+ strand" = autoplot(plus_strand_obj, fill=2))
-      } else if(nrow(plus_strand) == 0 & nrow(minus_strand) > 0) {
-        genome_plot <- tracks("- strand" = autoplot(minus_strand_obj, fill=4))
-      } else {
-        return(Ideogram(genome="wuhCor1"))
-      }
-    }
-    return(genome_plot + theme_bw() + xlim(input$genome_range[1], input$genome_range[2]))
-  })
+  # output$genome_plot <- renderPlot({
+  #   # subset data
+  #   plot_data <- get(input$data_filter)
+  #   plot_data <- subset(plot_data, start >= input$genome_range[1])
+  #   plot_data <- subset(plot_data, start <= input$genome_range[2]-20)
+  #   plot_data <- switch(input$strand_filter,
+  #                       "both" = plot_data,
+  #                       "plus" = subset(plot_data, strand=="+"),
+  #                       "minus" = subset(plot_data), strand=="-")
+  #   plus_strand <- subset(plot_data, strand=="+")
+  #   minus_strand <- subset(plot_data, strand=="-")
+  #   amplicons_subset <- subset(amplicons, pos >= input$genome_range[1] & end <= input$genome_range[2])
+  #   # make GRanges objects
+  #   if(nrow(plus_strand) > 0) {
+  #     plus_strand_obj <- GRanges(seqnames="SARS-CoV-2",
+  #                                ranges=IRanges(start=plus_strand$start, width=20, 
+  #                                               names=paste("+", plus_strand$start, sep="_")),
+  #                                type="target", strand="+")
+  #   }
+  #   if(nrow(minus_strand) > 0) {
+  #     minus_strand_obj <- GRanges(seqnames="SARS-CoV-2",
+  #                                 ranges=IRanges(start=minus_strand$start, width=20, 
+  #                                                names=paste("-", minus_strand$start, sep="_")),
+  #                                 type="target", strand="-")
+  #   }
+  #   if(nrow(amplicons_subset) > 0) {
+  #     amplicons_obj <- GRanges(seqnames="SARS-CoV-2", 
+  #                              ranges=IRanges(start=amplicons_subset$pos, end=amplicons_subset$end,
+  #                                             name=amplicons_subset$amplicon),
+  #                              type="amplicon")
+  #   }
+  #   # generate plot
+  #   if(nrow(amplicons_subset) > 0) {
+  #     if(nrow(plus_strand) > 0 & nrow(minus_strand) > 0) {
+  #       genome_plot <- tracks("+ strand" = autoplot(plus_strand_obj, fill=2),
+  #                             "- strand" = autoplot(minus_strand_obj, fill=4),
+  #                             amplicon = autoplot(amplicons_obj),
+  #                             heights=c(1,1,0.2))
+  #     } else if(nrow(plus_strand) > 0 & nrow(minus_strand) == 0) {
+  #       genome_plot <- tracks("+ strand" = autoplot(plus_strand_obj, fill=2),
+  #                             amplicon = autoplot(amplicons_obj),
+  #                             heights=c(1,0.2))
+  #     } else if(nrow(plus_strand) == 0 & nrow(minus_strand) > 0) {
+  #       genome_plot <- tracks("- strand" = autoplot(minus_strand_obj, fill=4),
+  #                             amplicon = autoplot(amplicons_obj),
+  #                             heights=c(1,0.2))
+  #     } else {
+  #       genome_plot <- tracks(amplicon = autoplot(amplicons_obj))
+  #     }
+  #   } else {
+  #     if(nrow(plus_strand) > 0 & nrow(minus_strand) > 0) {
+  #       genome_plot <- tracks("+ strand" = autoplot(plus_strand_obj, fill=2),
+  #                             "- strand" = autoplot(minus_strand_obj, fill=4))
+  #     } else if(nrow(plus_strand) > 0 & nrow(minus_strand) == 0) {
+  #       genome_plot <- tracks("+ strand" = autoplot(plus_strand_obj, fill=2))
+  #     } else if(nrow(plus_strand) == 0 & nrow(minus_strand) > 0) {
+  #       genome_plot <- tracks("- strand" = autoplot(minus_strand_obj, fill=4))
+  #     } else {
+  #       return(Ideogram(genome="wuhCor1"))
+  #     }
+  #   }
+  #   return(genome_plot + theme_bw() + xlim(input$genome_range[1], input$genome_range[2]))
+  # })
   
 }
 
