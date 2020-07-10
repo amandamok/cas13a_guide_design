@@ -26,8 +26,6 @@ colnames(amplicons) <- c("amplicon", "pos", "seq")
 amplicons$pos <- as.numeric(as.character(amplicons$pos))
 amplicons$end <- amplicons$pos + nchar(amplicons$seq)
 
-ssRNA_regions <- 
-
 # add offtarget data
 dat$offtarget_vir <- NA
 dat$offtarget_vir[prodlim::row.match(offtarget_candidates[, c("start", "strand")], dat[, c("start", "strand")])] <- T
