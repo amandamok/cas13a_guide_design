@@ -102,3 +102,12 @@ for(x in seq(nrow(selection))) {
 }
 
 write.csv(selection, file="outputs/guide_selection_20200708.csv", quote=F, row.names=F)
+
+# ott guides
+ott_guides <- readLines("ref_data/guides_ott.fa")
+ott_guides <- data.frame(id = sub("> ", "", ott_guides[grepl(">", ott_guides)]),
+                         spacer = ott_guides[!grepl(">", ott_guides)], 
+                         stringsAsFactors=F)
+ott_guides_subset <- subset(dat, spacer %in% ott_guides$spacer & strand == "+")
+ott_guides_subset$id <- ott_guides$id[match(ott_guides$spacer, ott_guides_subset$spacer)]
+write.csv(ott_guides_subset, file="outputs/ott_guides.csv", quote=F, row.names=F)
