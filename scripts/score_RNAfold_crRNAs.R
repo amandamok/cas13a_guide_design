@@ -19,8 +19,9 @@ if(!("enzyme" %in% names(opt))) {
 
 # establish repeat and guide sequences
 if(opt$enzyme == "Cas13a") {
-  cas_repeat <- "UAG ACC AGC CCA AAA AUG AAG GGC ACU AAA AC" # from Gavin
-  cas_repeat <- gsub(" ", "", cas_repeat)
+  # cas_repeat <- "UAG ACC AGC CCA AAA AUG AAG GGC ACU AAA AC" # from Gavin
+  # cas_repeat <- gsub(" ", "", cas_repeat)
+  cas_repeat <- toupper("uagaccaccccaaaaaugaaggggacuaaaac") # from Gavin
   good_spacer <- "GCA GCG CCU CUU GCA ACG AU" # from Gavin
   good_spacer <- gsub(" ", "", good_spacer)
 } else {

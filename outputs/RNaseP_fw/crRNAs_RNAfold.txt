@@ -1,0 +1,22 @@
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGUGUCUUUUCAAUUACUUGG
+.........((((.(((..(((((((........)))))))..)))..)))) ( -8.50)
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAGUGUCUUUUCAAUUACUUG
+................(((((((((((.....))).))))))))........ ( -6.80)
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGAGUGUCUUUUCAAUUACUU
+................(((((((((((......))).))))))))....... ( -7.30)
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGGAGUGUCUUUUCAAUUACU
+................(((((((((((.......))).))))))))...... ( -6.70)
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAGGAGUGUCUUUUCAAUUAC
+................(((((((((((........))).))))))))..... ( -7.20)
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGAGGAGUGUCUUUUCAAUUA
+.......((((.........))))........((((((...))))))..... ( -9.10)
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGGAGGAGUGUCUUUUCAAUU
+.......((((.........)))).........((((((...)))))).... ( -9.00)
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACUGGAGGAGUGUCUUUUCAAU
+.......((((.........))))..........((((((...))))))... ( -9.00)
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGUGGAGGAGUGUCUUUUCAA
+.......((((.........))))...........((((((...)))))).. ( -9.00)
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAGUGGAGGAGUGUCUUUUCA
+.(((((.(((((.......((....)).......))).)).).))))..... ( -9.00)
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAAGUGGAGGAGUGUCUUUUC
+.(((((.(((((.......((....))........))).)).).)))).... ( -8.40)

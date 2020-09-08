@@ -1,0 +1,25 @@
+---
+title: "RNaseP guide design"
+author: "Amanda Mok"
+date: "9/3/2020"
+output: html_document
+---
+
+```{r guide_selection}
+setwd("~/covid-19/outputs/")
+all_guides <- rbind(read.table("RNaseP_fw/RNaseP_fw_summary.txt"),
+                    read.table("RNaseP_rev/RNaseP_rev_summary.txt"))
+
+# remove guides with incompatible antitag
+candidates <- subset(all_guides, antitag!="GUUU")
+# remove guides that interfere with crRNA repeat hairpin
+candidates <- subset(candidates, has_crRNA_hairpin)
+
+# print table
+rownames(candidates) <- seq(1:nrow(candidates))
+table_features <- c("start", "strand", "target", "spacer", "GC_content",
+                    "crRNA_spacer_basepairs", "match_against_hg38")
+knitr::kable(candidates[, c(table_features)], caption="QC filtered guides", row.names=F)
+knitr::kable(subset(candidates, crRNA_spacer_basepairs <= 5 & match_against_hg38==0,
+                    select=table_features), caption="Candidate guides", row.names=F)
+```

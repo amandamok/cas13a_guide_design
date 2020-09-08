@@ -1,0 +1,12 @@
+sequence	structure	MFE	has_hairpin	spacer_basepairs	start	strand
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACCCAAGUAAUUGAAAAGACAC	.......((((.........)))).........(((....))).........	-6.2	TRUE	6	1	-
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACCAAGUAAUUGAAAAGACACU	.......((((.........))))........(((....)))..........	-6.2	TRUE	6	2	-
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAAGUAAUUGAAAAGACACUC	.......((((.........))))............................	-6.1	TRUE	0	3	-
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAGUAAUUGAAAAGACACUCC	.......((((.........))))............................	-6.1	TRUE	0	4	-
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGUAAUUGAAAAGACACUCCU	.......((((.........))))............................	-6.1	TRUE	0	5	-
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACUAAUUGAAAAGACACUCCUC	.......((((.........))))............................	-6.1	TRUE	0	6	-
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAAUUGAAAAGACACUCCUCC	.......((((.........))))............................	-6.1	TRUE	0	7	-
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAUUGAAAAGACACUCCUCCA	.......((((.........))))............................	-6.1	TRUE	0	8	-
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACUUGAAAAGACACUCCUCCAC	.......((((.........))))............................	-6.1	TRUE	0	9	-
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACUGAAAAGACACUCCUCCACU	.......((((.........))))............................	-6.1	TRUE	0	10	-
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGAAAAGACACUCCUCCACUU	.......((((.........))))............................	-6.1	TRUE	0	11	-

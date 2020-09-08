@@ -1,0 +1,12 @@
+sequence	structure	MFE	has_hairpin	spacer_basepairs	start	strand
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGUGUCUUUUCAAUUACUUGG	.........((((.(((..(((((((........)))))))..)))..))))	-8.5	FALSE	14	1	+
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAGUGUCUUUUCAAUUACUUG	................(((((((((((.....))).))))))))........	-6.8	FALSE	11	2	+
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGAGUGUCUUUUCAAUUACUU	................(((((((((((......))).)))))))).......	-7.3	FALSE	11	3	+
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGGAGUGUCUUUUCAAUUACU	................(((((((((((.......))).))))))))......	-6.7	FALSE	11	4	+
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAGGAGUGUCUUUUCAAUUAC	................(((((((((((........))).)))))))).....	-7.2	FALSE	11	5	+
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGAGGAGUGUCUUUUCAAUUA	.......((((.........))))........((((((...)))))).....	-9.1	TRUE	12	6	+
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGGAGGAGUGUCUUUUCAAUU	.......((((.........)))).........((((((...))))))....	-9	TRUE	12	7	+
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACUGGAGGAGUGUCUUUUCAAU	.......((((.........))))..........((((((...))))))...	-9	TRUE	12	8	+
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACGUGGAGGAGUGUCUUUUCAA	.......((((.........))))...........((((((...))))))..	-9	TRUE	12	9	+
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAGUGGAGGAGUGUCUUUUCA	.(((((.(((((.......((....)).......))).)).).)))).....	-9	FALSE	10	10	+
+UAGACCACCCCAAAAAUGAAGGGGACUAAAACAAGUGGAGGAGUGUCUUUUC	.(((((.(((((.......((....))........))).)).).))))....	-8.4	FALSE	10	11	+

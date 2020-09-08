@@ -45,8 +45,13 @@ if(!file.exists(cts_fname)) {
 }
 
 # read in alignments
-unmapped <- read.table(file.path(opt$out, paste0("bowtie_", opt$genome, "_unmapped.fa")), stringsAsFactors=F)$V1
-unmapped <- unmapped[!grepl(">", unmapped)]
+unmapped_fname <- file.path(opt$out, paste0("bowtie_", opt$genome, "_unmapped.fa"))
+if(file.exists(unmapped_fname)) {
+  unmapped <- read.table(unmapped_fname, stringsAsFactors=F)$V1
+  unmapped <- unmapped[!grepl(">", unmapped)]
+} else {
+  unmapped <- c()
+}
 mapped <- system(paste("grep -v ^@", file.path(opt$out, paste0("bowtie_", opt$genome, "_mapped.sam")), 
                           "| cut -f1,2,3,10"), intern=T)
 mapped <- data.frame(matrix(unlist(strsplit(mapped, split="\t")), ncol=4, byrow=T), stringsAsFactors=F)
