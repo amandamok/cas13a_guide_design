@@ -1,0 +1,110 @@
+---
+title: "COVID Primary Screen Analysis"
+author: "Amanda Mok"
+date: "9/18/2020"
+output: html_document
+---
+
+```{r setup, echo=F}
+rm(list=ls())
+
+library(ggplot2)
+library(patchwork)
+suppressMessages(library(here))
+
+knitr::opts_chunk$set(echo=F)
+```
+
+```{r load_data}
+dat <- read.csv(file.path(here(), "outputs", "NCR_Guide_Data - Data.csv"))
+
+# remove guides without screening data
+colnames(dat)[c(16:25)] <- paste("rate", 
+                                 rep(c("no", "1pM", "100fM", "10fM", "1fM"), each=2), 
+                                 "activator",
+                                 rep(c("mean", "sd"), times=4),
+                                 sep="_")
+dat <- subset(dat, rate_no_activator_sd != "")
+
+# clean up error bars
+for(x in grep("mean", colnames(dat))) { dat[,x] <- as.numeric(dat[,x]) }
+for(x in grep("sd", colnames(dat))) { dat[,x] <- as.numeric(gsub("± ", "", dat[,x])) }
+
+# clean up in silico column names
+features <- c("GC_content", "A_content", "spacer_basepairs", "structure",
+              "hg38_alignment", "bosTau9_alignment", "offtarget_alignment")
+colnames(dat)[6:12] <- features
+dat$structure <- factor(dat$structure, levels=c("none", "dms", "shape", "both")) 
+dat$offtarget_alignment[grepl("--", dat$offtarget_alignment)] <- NA
+dat$offtarget_alignment <- factor(dat$offtarget_alignment, levels=c("none", "bacteria", "virus", "both"))
+
+# add distance to gBlock boundary
+gblocks <- read.table("~/Documents/GitHub/SARS-CoV-2_guidedesign/ref_data/gblocks.bed",
+                      col.names=c("chr", "start", "stop", "gblock"))
+dat$gblock_distance <- sapply(seq(nrow(dat)),
+                              function(x) {
+                                which_gblock <- dat$Target.gBlock[x]
+                                gblock_start <- gblocks$start[match(which_gblock, gblocks$gblock)]
+                                gblock_stop <- gblocks$stop[match(which_gblock, gblocks$gblock)]
+                                dist_5prime <- abs(dat$Target.Start[x] - gblock_start)
+                                dist_3prime <- abs(dat$Target.Start[x] + 20 - 1 - gblock_stop)
+                                return(min(dist_5prime, dist_3prime))
+                              })
+
+# convert spacer basepairs to factor
+dat$spacer_basepairs <- as.factor(dat$spacer_basepairs)
+```
+
+##### Fig. 1: Well-performing guides tend to lie within 500nt of a gBlock boundary; this pattern is observed at 10 fM, 100 fM, and 1 pM activator concentrations.
+
+```{r plot_gblock, fig.height=12}
+dat_gblocks <- lapply(grep("mean", colnames(dat), value=T),
+                      function(rate) {
+                        tmp_rate <- ifelse(grepl("no", rate),
+                                           "no activator",
+                                           sub("rate_", "", sub("_activator_mean", "", rate)))
+                        tmp_cor <- round(cor(dat$gblock_distance, dat[, rate], method="spearman"),
+                                         digits=3)
+                        tmp_rate <- paste(tmp_rate, " ; cor = ", tmp_cor)
+                        data.frame(dist = dat$gblock_distance, 
+                                   value = dat[, rate],
+                                   rate = tmp_rate,
+                                   gblock = dat$Target.gBlock)
+                      })
+dat_gblocks <- do.call(rbind, dat_gblocks)
+dat_gblocks$rate <- factor(dat_gblocks$rate, levels=unique(dat_gblocks$rate)[c(1, 5, 4, 3, 2)])
+(ggplot(dat_gblocks, aes(x=dist, y=value)) + geom_point(aes(col=gblock), alpha=0.5, size=2) + 
+    geom_smooth(method="loess", formula=y~x) + facet_wrap(rate~., scales="free_y", ncol=1) + 
+    theme_bw() + xlab("") + ylab("mean rate")) / 
+  (ggplot(dat, aes(gblock_distance)) + geom_density(fill="gray") + theme_bw() + 
+     xlab("distance to nearest gBlock boundary (nt)")) +
+  plot_layout(heights=c(6,1))
+```
+
+##### Fig. 2: Guides with high rates above background (no activator) tend to not have structured spacers [Fig 2a], but do not tend to fall within single-stranded regions as predicted by SHAPE-MaP and/or DMS-MaPseq [Fig 2b]. However, the majority of guides have small rate increases over background; as such, these differences may be due to small sample size [Fig 2c] and are not statistically significant (p>0.4).
+
+No observable correlation between 10fM rates and spacer GC or A content. 
+
+Similar patterns were observed with rates measured at 100fM and 1pM.
+
+```{r plots_10fM, fig.height=8}
+dat$rate_10fM_nobkgd <- sapply(seq(nrow(dat)),
+                               function(x) {
+                                 tmp_rate <- dat$rate_10fM_activator_mean[x]
+                                 if(tmp_rate < 0) {
+                                   return(0)
+                                 } else {
+                                   tmp_bkgd <- dat$rate_no_activator_mean[x]
+                                   if(tmp_bkgd < 0) { tmp_bkgd <- 0 }
+                                   return(tmp_rate - tmp_bkgd)
+                                 }
+                               })
+(ggplot(dat, aes(x=rate_10fM_nobkgd, y=spacer_basepairs)) + 
+     geom_jitter(height=0.1, width=0, alpha=0.5) + theme_bw() + 
+     xlab("") + ylab("# basepairs in spacer") + ggtitle("Figure 2a")) / 
+  (ggplot(dat, aes(x=rate_10fM_nobkgd, y=structure, col=structure)) + geom_jitter(height=0.2) +
+    theme_bw() + theme(legend.position="none") + xlab("") + ylab("predicted single-strandedness") +
+     ggtitle("Figure 2b")) / 
+  (ggplot(dat, aes(rate_10fM_nobkgd)) + geom_density(fill="gray") + theme_bw() +
+     xlab("(10 fM rate) - (no activator rate)") + ggtitle("Figure 2c"))
+```
