@@ -18,3 +18,5 @@ ref_data/other_pathogens/*fa
 ref_data/other_pathogens/*fai
 ref_data/other_pathogens/*bed
 ref_data/other_pathogens/*gff
+crossreactivity/guides/*
+crossreactivity/structures/*
