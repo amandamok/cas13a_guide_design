@@ -76,7 +76,7 @@ for(x in seq(nrow(dat))) {
 
 # plot minimum free energy
 plot_min_energy <- ggplot(dat, aes(x=guide_1, y=guide_2, fill=min_energy)) + geom_tile(col=1) + theme_bw() +
-  scale_fill_gradient2(low="navyblue", mid="indianred1", na.value="white") + xlab("") + ylab("") +
+  scale_fill_gradient(low="navyblue", high="indianred1", na.value="white") + xlab("") + ylab("") +
   ggtitle("Minimum free energy (RNAstructure::DuplexFold)",
           subtitle=paste("min =", min(dat$min_energy, na.rm=T), ", max =", max(dat$min_energy, na.rm=T))) +
   theme(axis.text.x=element_text(angle=90, vjust=0.5), panel.grid.major.y=element_blank())
@@ -85,9 +85,12 @@ ggsave(plot_min_energy, filename=file.path("crossreactivity", "plot_min_energy.p
 
 # plot maximum number base-pairing
 plot_max_bp <- ggplot(dat, aes(x=guide_1, y=guide_2, fill=max_bp)) + geom_tile(col=1) + theme_bw() +
-  scale_fill_gradient2(low="navyblue", mid="greenyellow", na.value="white") + xlab("") + ylab("") +
+  scale_fill_gradient(high="navyblue", low="yellowgreen", na.value="white") + xlab("") + ylab("") +
   ggtitle("Maximum number of base-paired positions (RNAstructure::DuplexFold)",
           subtitle=paste("min =", min(dat$max_bp, na.rm=T), ", max =", max(dat$max_bp, na.rm=T))) +
   theme(axis.text.x=element_text(angle=90, vjust=0.5), panel.grid.major.y=element_blank())
-ggsave(plot_max_bp, filename=file.path("crossreactivity", "plot_min_energy.pdf"),
+ggsave(plot_max_bp, filename=file.path("crossreactivity", "plot_max_bp.pdf"),
        device="pdf", width=12, height=12, units="in", dpi="print")
+
+# write output
+write.table(dat, file=file.path("crossreactivity", "guide_pairs.txt"), quote=F, row.names=F, sep="\t")
