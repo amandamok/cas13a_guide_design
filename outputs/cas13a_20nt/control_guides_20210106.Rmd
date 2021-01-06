@@ -1,0 +1,130 @@
+---
+title: 'COVID-19 guide design (Cas13a): bad guides'
+author: "Amanda Mok"
+date: "1/5/2021"
+output: html_document
+---
+
+```{r setup}
+library(here)
+library(ggplot2)
+library(patchwork)
+library(prodlim)
+
+set.seed(100)
+
+repeat_seq <- "uagaccaccccaaaaaugaaggggacuaaaac"
+
+## load metrics for all guides
+dat <- read.table(file.path(here(), "outputs", "cas13a_20nt", "cas13a_results_summary.txt"))
+
+## load ordered guides
+tested <- read.csv(file.path(here(), "outputs", "NCR_Guide_Data - Data.csv"))
+tested <- tested$Target.Start[tested$Designer=="Amanda Mok"]
+tested <- subset(dat, start %in% tested)
+
+bin_guides <- function(start_indices) {
+  # start_indices: (sorted) integer vector; start indices of guides to bin
+  bins <- rep(NA, length(start_indices))
+  bins[1] <- 1
+  for(x in seq_along(start_indices)) {
+    if(x == 1) { next }
+    if(start_indices[x] - start_indices[x-1] < 20) {
+      bins[x] <- bins[x-1]
+    } else {
+      bins[x] <- bins[x-1] + 1
+    }
+  }
+  return(bins)
+}
+```
+
+# 1. remove guides within 20nt of already-ordered guides
+
+```{r prefilter}
+tested_region <- lapply(tested$start, function(x) c((x-20):(x+20)))
+tested_region <- unique(unlist(tested_region))
+
+prefilter <- subset(dat, !(start %in% tested_region)) # n = 26414
+```
+
+# 2. match remaining guides on ordered sensitivity and specificity
+
+```{r filter}
+## ≥ 95% sensitivity to genomic diversity
+filtered <- subset(prefilter, sensitivity_01 >= 0.95) # n = 29367
+## 100% specificity against other human coronaviruses
+filtered <- subset(filtered, specificity == 1) # n = 19974
+## no alignment to human transcriptome
+filtered <- subset(filtered, match_against_hg38 == 0) # n = 13180
+## no alignment to cow transcriptome
+filtered <- subset(filtered, match_against_bosTau9 == 0) # n = 11231
+## antitag is not GUUU
+filtered <- subset(filtered, antitag != "GUUU") # n = 11139
+
+ggplot(aggregate(start ~ has_crRNA_hairpin + crRNA_spacer_basepairs, data=filtered, FUN=length),
+       aes(x=has_crRNA_hairpin, y=crRNA_spacer_basepairs, fill=start)) + 
+  geom_tile(color="gray") + theme_classic() + geom_text(aes(label=start), col="white") +
+  xlab("hairpin folds correctly") + ylab("number of basepaired spacer nucleotides") + labs(fill="") +
+  ggtitle("Guides targeting SARS-CoV-2", subtitle="filtered guides for QC and within 20nt of ordered guides, n=9392")
+```
+
+# 3. select 48 guides for testing: +/- hairpin folding; 4, 10, or 16 basepaired spacer nucleotides
+
+```{r select}
+selected <- lapply(c(4, 10, 16),
+                   function(x) {
+                     tmp <- lapply(c(T, F),
+                                   function(y) {
+                                     tmp_subset <- subset(filtered, crRNA_spacer_basepairs==x & has_crRNA_hairpin==y)
+                                     tmp_bins <- bin_guides(tmp_subset$start)
+                                     tmp_select <- sort(sample.int(n=max(tmp_bins), size=8))
+                                     tmp_select <- sapply(tmp_select,
+                                                          function(z) {
+                                                            selected_bin <- which(tmp_bins==z)
+                                                            if(length(selected_bin)==1) {
+                                                              return(selected_bin)
+                                                            } else {
+                                                              return(sample(selected_bin, size=1))
+                                                            }
+                                                          })
+                                     tmp_select <- tmp_subset[tmp_select,]
+                                     tmp_select$group <- paste(ifelse(y, "intact hairpin", "misfolded hairpin"), "/",
+                                                               x, "spacer basepairs")
+                                     return(tmp_select)
+                                   })
+                     tmp <- do.call(rbind, tmp)
+                     return(tmp)
+                   })
+selected <- do.call(rbind, selected)
+```
+
+# 4. select 48 guides randomly spaced across genome
+
+```{r random}
+# select guides with good secondary structure
+random <- subset(filtered, has_crRNA_hairpin & crRNA_spacer_basepairs == 0) # n = 2308
+
+# divide genome into 48 regions of equal size, choose one guide per region
+random$bin <- cut(random$start, breaks=48)
+random <- lapply(levels(random$bin),
+                 function(x) {
+                   tmp <- subset(random, bin==x)
+                   return(tmp[sample.int(n=nrow(tmp), size=1),])
+                 })
+random <- do.call(rbind, random)
+random <- random[, -ncol(random)]
+
+random$group <- "random tiling"
+```
+
+# 5. write output
+```{r output}
+to_order <- rbind(selected, random)
+to_order$sequence <- paste0(repeat_seq, to_order$spacer)
+to_order$crRNA_spacer_basepairs <- as.factor(to_order$crRNA_spacer_basepairs)
+write.csv(to_order, file.path(here(), "outputs", "control_guides_20210106.csv"), row.names=F)
+
+ggplot(to_order, aes(x=start, y=group)) + geom_jitter(height=0.2, size=2, alpha=0.75) + theme_classic() +
+  xlab("genomic position") + ylab("")
+```
