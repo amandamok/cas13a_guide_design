@@ -7,6 +7,7 @@ ref_data/wuhCor1*
 ref_data/gisaid*
 ref_data/human_CoV
 ref_data/nextstrain
+ref_data/influenza/*aln
 ref_data/RNA_expression/*bam
 ref_data/RNA_expression/*sam
 ref_data/RNA_expression/*cov
