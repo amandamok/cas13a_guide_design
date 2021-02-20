@@ -6,14 +6,16 @@ library(here)
 add_column <- function(dat, fname, dat_column, fname_column) {
   # add score from fname to dat
   ## dat: data.frame; contains columns called "start" and "strand
-  ## fname: character; file.path to score to be added, file should include columns called "start" and "strand
+  ## fname: character; file.path to score to be added,
+  ### file should include columns: segment, start, strand
   ## dat_column: character; name of column in dat to be added/replaced
   ## fname_column: character; name of column in fname to be pulled
   if(!file.exists(fname)) {
     stop(paste(fname, "does not exist"))
   }
+  column_names <- c("segment", "start", "strand")
   score_dat <- read.table(fname, header=T, stringsAsFactors=F, sep="\t")
-  row_indices <- prodlim::row.match(dat[, c("start", "strand")], score_dat[, c("start", "strand")])
+  row_indices <- prodlim::row.match(dat[, column_names], score_dat[, column_names])
   dat[dat_column] <- score_dat[row_indices, fname_column]
   return(dat)
 }
@@ -22,7 +24,7 @@ load_abundance <- function(accession="PRJNA616446") {
   # load alignment file of viral abundance dataset
   # assumes align_viral_abundance.R has already been run on default parameters
   ## accession: character ; SRR accession id
-  aligned_reads <- system(paste("grep NC_045512v2", 
+  aligned_reads <- system(paste("grep NC_045512v2",
                                 file.path(here(), "ref_data/RNA_expression", paste0(accession, "_mapped.sam")),
                                 "| grep -v ^@ | cut -f1,3,4"), intern=T)
   aligned_reads <- data.frame(matrix(unlist(strsplit(aligned_reads, split="\t")), ncol=3, byrow=T), stringsAsFactors=F)
@@ -67,23 +69,23 @@ plot_diagnostic <- function(dat, abundance_dat, filter=NULL, density=T, jitter_x
   ## var1_name: string; legend label and univariate ggtitle()
   ## var1_desc: string; for univariate xlab()
   # scatterplot
-  plot_scatter <- ggplot(dat, aes_string(x=var1, y=var2, col=var3)) + 
+  plot_scatter <- ggplot(dat, aes_string(x=var1, y=var2, col=var3)) +
     geom_jitter(width=jitter_x, height=jitter_y, alpha=alpha) +
     theme_bw() + xlab(var1_name) + ylab(var2_name) +
-    scale_color_gradient2(high="red", low="blue", mid="grey", 
+    scale_color_gradient2(high="red", low="blue", mid="grey",
                           midpoint=mean(dat[, var3]), name=var3_name)
   if(is.null(filter)) {
     plot_scatter <- plot_scatter + ggtitle(paste("Scores for all spacers, n =", nrow(dat)))
     subtitle="all spacers"
   } else {
-    plot_scatter <- plot_scatter + ggtitle(paste("Scores for filtered spacers, n =", nrow(dat)), 
+    plot_scatter <- plot_scatter + ggtitle(paste("Scores for filtered spacers, n =", nrow(dat)),
                                            subtitle=filter)
     subtitle <- "filtered spacers"
   }
   # univariate plots
-  plot_var1 <- ggplot(dat, aes_string(var1)) + theme_bw() + ggtitle(var1_name, subtitle=subtitle) + xlab(var1_desc) 
+  plot_var1 <- ggplot(dat, aes_string(var1)) + theme_bw() + ggtitle(var1_name, subtitle=subtitle) + xlab(var1_desc)
   plot_var2 <- ggplot(dat, aes_string(var2)) + theme_bw() + ggtitle(var2_name, subtitle=subtitle) + xlab(var2_desc)
-  plot_var3 <- ggplot(dat, aes_string(var3)) + theme_bw() + ggtitle(var3_name, subtitle=subtitle) + xlab(var3_desc) 
+  plot_var3 <- ggplot(dat, aes_string(var3)) + theme_bw() + ggtitle(var3_name, subtitle=subtitle) + xlab(var3_desc)
   if(density) {
     plot_var1 <- plot_var1 + geom_density(kernel="gaussian", fill=3, col=3)
     plot_var2 <- plot_var2 + geom_density(kernel="gaussian", fill=4, col=4)
@@ -95,14 +97,14 @@ plot_diagnostic <- function(dat, abundance_dat, filter=NULL, density=T, jitter_x
   }
   # guide position / viral abundance plot
   genome_breaks <- seq(from=1, to=30000, by=300)
-  # axis_scale <- ceiling(max(summary(cut(abundance_dat$pos, breaks=genome_breaks))) / 
+  # axis_scale <- ceiling(max(summary(cut(abundance_dat$pos, breaks=genome_breaks))) /
   #                         max(summary(cut(dat$start, breaks=genome_breaks))))
   # abundance_summary <- data.frame(bin=genome_breaks, # [-length(genome_breaks)]
   #                                 coverage=summary(cut(abundance_dat$pos, breaks=genome_breaks))/axis_scale)
   axis_scale <- max(abundance_dat$coverage)/max(summary(cut(dat$start, breaks=genome_breaks)))
   abundance_dat$coverage <- abundance_dat$coverage / axis_scale
-  plot_position <- ggplot() + 
-    geom_histogram(data=dat, aes(start), binwidth=300, fill=2, col=2, alpha=0.5) + xlim(0, 30000) + 
+  plot_position <- ggplot() +
+    geom_histogram(data=dat, aes(start), binwidth=300, fill=2, col=2, alpha=0.5) + xlim(0, 30000) +
     geom_area(data=abundance_dat, aes(x=bin, y=coverage), fill=1, col=1, alpha=0.2) +
     scale_y_continuous(name="guide", sec.axis=sec_axis(~(axis_scale)*., name="virus")) +
     theme_bw() + ggtitle("Genomic position", subtitle=subtitle) + xlab("position") + ylab("# spacers") +

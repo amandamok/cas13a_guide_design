@@ -3,13 +3,13 @@
 
 library(optparse)
 
-option_list <- list(make_option(c("-g", "--genome"), type="character", default=NULL, 
+option_list <- list(make_option(c("-g", "--genome"), type="character", default=NULL,
                                 help="bowtie index prefix", metavar="character"),
                     make_option(c("-m", "--mismatch"), type="character", default=1,
                                 help="number of mismatches allowed", metavar="integer"),
                     make_option(c("-e", "--enzyme"), type="character", default=NULL, # "Cas13a" or "Cas12"
                                 help="Cas enzyme type", metavar="character"),
-                    make_option(c("-o", "--out"), type="character", default=".", 
+                    make_option(c("-o", "--out"), type="character", default=".",
                                 help="output directory", metavar="character"))
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
@@ -32,7 +32,7 @@ if(is.null(opt$genome)) {
 cts_fname <- file.path(opt$out, paste0("bowtie_", opt$genome, "_mapped.sam"))
 if(!file.exists(cts_fname)) {
   cat(paste("- aligning windows to", opt$genome, "\n"))
-  system(paste(bowtie_path, 
+  system(paste(bowtie_path,
                ifelse(opt$enzyme=="Cas13a", "--norc", ""), # for Cas13a, do not align to reverse complement
                "-k 50", # report up to 50 alignments
                "-v", opt$mismatch, # up to opt$mismatch mismatches allowed
@@ -52,7 +52,7 @@ if(file.exists(unmapped_fname)) {
 } else {
   unmapped <- c()
 }
-mapped <- system(paste("grep -v ^@", file.path(opt$out, paste0("bowtie_", opt$genome, "_mapped.sam")), 
+mapped <- system(paste("grep -v ^@", file.path(opt$out, paste0("bowtie_", opt$genome, "_mapped.sam")),
                           "| cut -f1,2,3,10"), intern=T)
 mapped <- data.frame(matrix(unlist(strsplit(mapped, split="\t")), ncol=4, byrow=T), stringsAsFactors=F)
 colnames(mapped) <- c("window", "flag", "aligned_to", "template")
@@ -65,6 +65,7 @@ if(opt$enzyme == "Cas13a") {
 cat("- counting alignments\n")
 windows <- read.table(file.path(opt$out, "windows.txt"), header=T, stringsAsFactors=F)
 window_cts <- data.frame(seq=windows$target,
+                         segment=windows$segment,
                          start=windows$start,
                          strand=windows$strand,
                          ct=sapply(windows$target,

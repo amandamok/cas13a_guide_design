@@ -134,8 +134,6 @@ bowtie --norc -v 2 -S --un dms_map_unstructured_unmapped.fa -f wuhCor1 dms_map_u
 SARS-CoV-2_Full_Length_Secondary_Structure_Map.ct: download from Huston (2021)
 https://github.com/pylelab/SARS-CoV-2_SHAPE_MaP_structure
 
-# influenza references from fludb.org
-influenzaA_California_04_2009.fasta : consensus sequences for segments from strain A/California/04/2009
-influenzaB_Brisbane_60_2008_Victoria_504_2000 : consensus sequences for segments from strains B/Brisbane/60/2008 and B/Victoria/504/2000
-influenzaA_H1N1_human_segment1-8.aln : pre-computed alignments for all segments of influenza A, H1N1, human host
-influenzaB_2010-2020_human_segment1-8.aln : pre-computed alignments for all segments of influenza B, dated 2010-2020, human host
+influenza sequences downloaded from fludb.org
+influenzaA: all subtypes, human host
+influenzaB: human host

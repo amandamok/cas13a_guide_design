@@ -5,8 +5,8 @@ library(optparse)
 
 option_list <- list(make_option(c("-e", "--enzyme"), type="character", default=NULL, # "Cas13a" or "Cas12"
                                 help="Cas enzyme type", metavar="character"),
-                    make_option(c("-o", "--out"), type="character", default=".", 
-                                help="output directory", metavar="character")) 
+                    make_option(c("-o", "--out"), type="character", default=".",
+                                help="output directory", metavar="character"))
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
@@ -42,11 +42,11 @@ cat("- computing folding energies (crRNAs)\n")
 spacers <- readLines(file.path(opt$out, "spacers.txt"))
 crRNA_seq <- paste0(cas_repeat, spacers)
 writeLines(crRNA_seq, con=file.path(opt$out, "crRNAs.txt"))
-system(paste0("/usr/bin/RNAfold -i ", file.path(opt$out, "crRNAs.txt"), 
+system(paste0("/usr/bin/RNAfold -i ", file.path(opt$out, "crRNAs.txt"),
               " --noPS --outfile=crRNAs_RNAfold.txt"))
 
 # read in RNAfold output: windows
-RNAfold <- data.frame(matrix(readLines(file.path(opt$out, "crRNAs_RNAfold.txt")), 
+RNAfold <- data.frame(matrix(readLines(file.path(opt$out, "crRNAs_RNAfold.txt")),
                              ncol=2, byrow=T), stringsAsFactors=F)
 colnames(RNAfold) <- c("sequence", "structure")
 RNAfold$MFE <- as.numeric(sub(" ", "", sub("\\)", "", sub(".*\\(", "", RNAfold$structure))))
@@ -64,10 +64,11 @@ RNAfold$spacer_basepairs <- sapply(RNAfold$structure,
                                    })
 
 # add start index and strand
+RNAfold$segment <- read.table(file.path(opt$out, "windows.txt"), header=T)$segment
 RNAfold$start <- read.table(file.path(opt$out, "windows.txt"), header=T)$start
 RNAfold$strand <- read.table(file.path(opt$out, "windows.txt"), header=T)$strand
 
 # output RNAfold scores
-write.table(RNAfold, 
+write.table(RNAfold,
             file=file.path(opt$out, "score_RNAfold_crRNAs.txt"),
             quote=F, sep="\t", row.names=F)

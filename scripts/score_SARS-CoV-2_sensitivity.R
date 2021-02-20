@@ -27,7 +27,7 @@ genome_seq <- strsplit(genome_seq, split="")[[1]]
 
 # align SARS-CoV-2 genomes to wuhCor1
 if(!file.exists(opt$input)) {
-  system(paste("Rscript", file.path(here(), "scripts/align_gisaid_cov2020.R")))
+  system(paste("Rscript", file.path(here(), "scripts/generate_pairwise_alignments.R")))
 } else {
   strains <- matrix(unlist(strsplit(readLines(opt$input), split=" ")), ncol=length(genome_seq)+1, byrow=T)
   rownames(strains) <- strains[,1]
