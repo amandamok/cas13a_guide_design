@@ -20,4 +20,4 @@ windows <- add_column(windows, "alignment_cts_GRCh38_latest_rna.txt", "match_aga
 windows <- add_column(windows, "alignment_cts_ARS-UCD1_rna.txt", "match_against_bosTau9", "ct")
 
 # write output
-write.table(windows, file="influenzaA_cas13a_neg_results_summary.txt", quote=F, col.names=T, sep="\t")
+write.table(windows, file="influenzaA_cas13a_pos_results_summary.txt", quote=F, col.names=T, sep="\t")

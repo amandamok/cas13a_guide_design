@@ -21,3 +21,7 @@ ref_data/other_pathogens/*bed
 ref_data/other_pathogens/*gff
 crossreactivity/guides/*
 crossreactivity/structures/*
+outputs/influenza*/*txt
+outputs/influenza*/*sam
+outputs/influenza*/*fa
+outputs/influenza*/*bowtiestats
