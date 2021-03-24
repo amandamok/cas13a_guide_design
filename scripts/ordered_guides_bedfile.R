@@ -17,7 +17,6 @@ inventory$hairpin <- substr(inventory$Sequence..5..3.., start=1, stop=52-20)
 bed_file <- data.frame(chr="NC_045512v2",
                        start=plusStrand$start[match(inventory$spacer, plusStrand$spacer)],
                        stop=plusStrand$start[match(inventory$spacer, plusStrand$spacer)]+20-1,
-                       strand="+",
                        name=inventory$Oligo.ID)
 write.table(bed_file, "outputs/ordered_guides.bed",
             quote=F, row.names=F, col.names=F, sep="\t")
