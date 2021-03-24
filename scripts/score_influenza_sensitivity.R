@@ -6,8 +6,10 @@ library(here)
 library(seqinr)
 library(foreach)
 
-option_list <- list(make_option(c("-t", "--type"), type="character", default=NULL,
-                                help="virus type", metavar="integer"),
+option_list <- list(make_option(c("-f", "--file"), type="character", default=NULL,
+                                help="filepath header to alignment files", metavar="integer"),
+                    make_option(c("-t", "--type"), type="character", default=NULL,
+                                help="input file"),
                     make_option(c("-m", "--mismatch"), type="character", default=1,
                                 help="number of mismatches allowed", metavar="integer"),
                     make_option(c("-w", "--window"), type="integer", default=20,
@@ -17,8 +19,13 @@ option_list <- list(make_option(c("-t", "--type"), type="character", default=NUL
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
-if(!(opt$type %in% c("influenzaA", "influenzaB"))) {
-  cat("\nERROR: incorrect virus type specified")
+if(is.null(opt$file %in% c("influenzaA", "influenzaB", "influenzaAB"))) {
+  cat("\nERROR: input filepath headers not specified")
+  q(save="no")
+}
+
+if(is.null(opt$type)) {
+  cat("\nERROR: input file type not specified")
   q(save="no")
 }
 
@@ -33,27 +40,54 @@ calculate_sensitivity <- function(alignment, consensus_seq, consensus_indices,
   # window_start: integer vector; start index of target window (relative to consensus)
   # mismatch: integer; number of allowed mismatches
   # window: integer; length of spacer window
-  window_indices <- seq(consensus_indices[window_start],
-                        consensus_indices[window_start + window_size - 1])
-  strain_windows <- as.matrix(alignment)[, window_indices]
+  consensus_window <- consensus_indices[seq(window_start,
+                                            window_start + window_size - 1)]
+  consensus_window <- consensus_seq[consensus_window]
+  aln_window_start <- consensus_indices[window_start]
+  strain_windows <- t(sapply(seq(nrow(alignment)),
+                             function(x) {
+                               tmp_stop <- aln_window_start + window_size - 1
+                               tmp_window <- alignment[x, aln_window_start:tmp_stop]
+                               num_nt <- sum(tmp_window != "-")
+                               while(num_nt != window_size & tmp_stop < ncol(alignment)) {
+                                 tmp_stop <- min(tmp_stop + (window_size - num_nt),
+                                                 ncol(alignment))
+                                 tmp_window <- alignment[x, aln_window_start:tmp_stop]
+                                 num_nt <- sum(tmp_window != "-")
+                               }
+                               tmp_window <- tmp_window[tmp_window != "-"]
+                               if(length(tmp_window) < window_size) {
+                                 tmp_window <- c(tmp_window,
+                                                 rep("-", window_size - length(tmp_window)))
+                               }
+                               return(tmp_window)
+                             }))
   num_mismatches <- sapply(seq(nrow(strain_windows)),
                            function(x) {
-                             sum(strain_windows[x,] != consensus_seq[window_indices])
+                             sum(strain_windows[x,] != consensus_window)
                            })
   num_hits <- sum(num_mismatches <= mismatch)
   return(num_hits / nrow(alignment))
 }
 
 # load alignments
-alignments <- lapply(1:8,
-                     function(x) {
-                       fname <- file.path(here(), "ref_data", "influenza",
-                                          paste0(opt$type, "_human_segment", x, ".aln"))
-                       seqinr::read.alignment(fname, format="clustal")
-                     })
-consensus_seq <- lapply(alignments, consensus)
-consensus_indices <- lapply(consensus_seq, function(x) { which(x != "-") })
+if(opt$type=="clustal") {
+  alignments <- lapply(1:8,
+                       function(x) {
+                         fname <- paste0(opt$file, x, ".aln")
+                         seqinr::read.alignment(fname, format="clustal")
+                       })
+} else {
+  alignments <- lapply(1:8,
+                       function(x) {
+                         fname <- paste0(opt$file, x, ".fasta")
+                         Biostrings::readDNAStringSet(fname)
+                       })
+}
+
 alignment_matrices <- lapply(alignments, as.matrix)
+consensus_seq <- lapply(alignment_matrices, seqinr::consensus)
+consensus_indices <- lapply(consensus_seq, function(x) { which(x != "-") })
 
 # read in windows
 windows <- read.table(file.path(opt$out, "windows.txt"),

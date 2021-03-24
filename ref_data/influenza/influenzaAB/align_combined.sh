@@ -12,3 +12,6 @@ do
   Rscript ../../../scripts/generate_consensus.R -i ${file}.aln \
       -n ${file} -o ${file}_consensus.fa
 done
+
+cat *consensus* >> influenzaAB_human_allSegments.fa
+
