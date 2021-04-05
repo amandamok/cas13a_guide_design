@@ -25,3 +25,5 @@ outputs/influenza*/*txt
 outputs/influenza*/*sam
 outputs/influenza*/*fa
 outputs/influenza*/*bowtiestats
+NCR/analyze_data_cache/*
+NCR/analyze_data_files/*

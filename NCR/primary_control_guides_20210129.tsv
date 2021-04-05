@@ -1,0 +1,97 @@
+start	GC_content	sensitivity_01	has_crRNA_hairpin	crRNA_spacer_basepairs	group	sequence	NCR id
+894	0.45	1	TRUE	4	intact hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGGACAAAGUGCAUGAAGCUU	NCR_1305
+1057	0.5	0.99307036	TRUE	4	intact hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGACAUUCCCCAUUGAAGGUG	NCR_1306
+8854	0.5	0.99911158	TRUE	4	intact hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGCAAACCAGGCACGACAAAA	NCR_1307
+9392	0.35	0.99822317	TRUE	4	intact hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGCUACUAUAGAUGCUGAUAU	NCR_1308
+14027	0.4	0.99946695	TRUE	4	intact hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacAACAAUACCAGCAUUUCGCA	NCR_1309
+25772	0.45	0.99804549	TRUE	4	intact hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGCAUUUCCAGCAAAGCCAAA	NCR_1310
+28480	0.4	0.99946695	TRUE	4	intact hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUGUUAAUUGGAACGCCUUGU	NCR_1311
+28914	0.6	0.99982232	TRUE	4	intact hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacAGCAAGAGCAGCAUCACCGC	NCR_1312
+3121	0.35	0.99964463	FALSE	4	misfolded hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGUUUACCUUGGUAAUCAUCU	NCR_1313
+4583	0.3	0.99822317	FALSE	4	misfolded hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacACAAGAGUUUCAUUUAGAUC	NCR_1314
+6451	0.3	0.99626866	FALSE	4	misfolded hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUAGUUUUCACAUUACACUCA	NCR_1315
+10427	0.4	0.99982232	FALSE	4	misfolded hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacCUCAUAGCACAUUGGUAAAC	NCR_1316
+13618	0.3	0.99946695	FALSE	4	misfolded hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacAUUAAAUUGUCAUCUUCGUC	NCR_1317
+18411	0.25	0.99982232	FALSE	4	misfolded hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUAUUAUUAGGUGUAUCAACA	NCR_1318
+21806	0.4	0.99946695	FALSE	4	misfolded hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUCAUUAAAUGGUAGGACAGG	NCR_1319
+25151	0.45	0.99982232	FALSE	4	misfolded hairpin / 4 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacAGUUCUUGGAGAUCGAUGAG	NCR_1320
+2888	0.45	0.99964463	TRUE	10	intact hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUUUAUGACAGCAUCUGCCAC	NCR_1321
+4186	0.45	0.99946695	TRUE	10	intact hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacCUAGCAUUUCAGUAGUGCCA	NCR_1322
+6379	0.45	0.99555792	TRUE	10	intact hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUUAGAUCUUCGCAGGCAAGA	NCR_1323
+8234	0.35	0.99964463	TRUE	10	intact hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacAUGUCAGAUUGAUGUGACAA	NCR_1324
+8511	0.25	0.99982232	TRUE	10	intact hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUGUUACAACAUUAACAACUU	NCR_1325
+20130	0.4	0.9811656	TRUE	10	intact hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUGAACUGUGUUUUUACGGCU	NCR_1326
+22044	0.4	0.9989339	TRUE	10	intact hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacAGUGCAAUUAUUCGCACUAG	NCR_1327
+29299	0.3	1	TRUE	10	intact hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGAUCUUUGAAAUUUGGAUCU	NCR_1328
+4543	0.4	0.99822317	FALSE	10	misfolded hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacACGCUACAGUUGUUUUACUG	NCR_1329
+8810	0.45	0.99840085	FALSE	10	misfolded hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGCAAUCAAUGGGCAAGCUUU	NCR_1330
+9931	0.4	0.99982232	FALSE	10	misfolded hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacCUUCUCUGUAGCUAGUUGUA	NCR_1331
+10209	0.25	0.99964463	FALSE	10	misfolded hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGAGUAAAUCUUCAUAAUUAG	NCR_1332
+10378	0.4	0.99982232	FALSE	10	misfolded hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacACACUGAAAAAGUCUGUCCU	NCR_1333
+18085	0.45	0.99946695	FALSE	10	misfolded hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUGUGUAGGAUGUAACCCAGU	NCR_1334
+26968	0.45	1	FALSE	10	misfolded hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacAUGGUGUCCAGCAAUACGAA	NCR_1335
+28641	0.5	1	FALSE	10	misfolded hairpin / 10 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGCCGUCUUUGUUAGCACCAU	NCR_1336
+2500	0.45	0.9832978	TRUE	16	intact hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacACACUUCUGUGGGAAGUGUU	NCR_1337
+4093	0.3	0.99964463	TRUE	16	intact hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacCAUCUUUCUUUAAGAAAGUG	NCR_1338
+10112	0.4	0.99964463	TRUE	16	intact hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGUAGUUGUACCACAAGUUAC	NCR_1339
+12498	0.25	0.99982232	TRUE	16	intact hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacACACGUAUUUUUAUAUGUGU	NCR_1340
+13717	0.45	1	TRUE	16	intact hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUGUUUAGCAACAGCUGGACA	NCR_1341
+14351	0.4	1	TRUE	16	intact hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacACAAUGCAGAAUGCAUCUGU	NCR_1342
+26035	0.35	0.99946695	TRUE	16	intact hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacGUACUCAAUUGAGUUGAGUA	NCR_1343
+27976	0.3	0.99964463	TRUE	16	intact hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacAUCAACUACAUAUGGUUGAU	NCR_1344
+3484	0.35	0.99964463	FALSE	16	misfolded hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUAGUAGCCUUAUUUAAGGCU	NCR_1345
+5242	0.25	0.99928927	FALSE	16	misfolded hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacAAGUUAAACCAUUAACUUGU	NCR_1346
+6709	0.3	0.99715707	FALSE	16	misfolded hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUAGUAGUUGUACUAACAACU	NCR_1347
+7836	0.4	0.99857854	FALSE	16	misfolded hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacAUUAGCUCUCAGGUUGUCUA	NCR_1348
+8061	0.35	0.99946695	FALSE	16	misfolded hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUGGUACGUUAAAAGUUGAUG	NCR_1349
+11746	0.45	0.99946695	FALSE	16	misfolded hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUAUUCUUGGGUGGGAGUAGU	NCR_1350
+11815	0.4	0.99982232	FALSE	16	misfolded hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacUGGCUACUUUGAUACAAGGU	NCR_1351
+27292	0.25	0.9989339	FALSE	16	misfolded hairpin / 16 spacer basepairs	uagaccaccccaaaaaugaaggggacuaaaacAUUAUGAGGUUUAUGAUGUA	NCR_1352
+172	0.5	0.97885572	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacAGCCUGCAGAAGAUAGACGA	NCR_1353
+898	0.45	1	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacGUUCGGACAAAGUGCAUGAA	NCR_1354
+1570	0.45	0.99946695	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacCUUCUCCAACAACACCUGUA	NCR_1355
+2191	0.45	0.99822317	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacCAAUUUCCCAACCGUCUCUA	NCR_1356
+3109	0.35	0.99982232	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacAAUCAUCUUCAGUACCAUAC	NCR_1357
+3338	0.3	0.99982232	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUAACCACUAAAACUAUUCAC	NCR_1358
+4376	0.4	1	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUCUCGCAAAUUCCAAGAAAC	NCR_1359
+4640	0.5	0.99857854	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUACCGAGCAGCUUCUUCCAA	NCR_1360
+5430	0.4	0.99840085	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacAACAUCACCUAACUCACCUA	NCR_1361
+5715	0.35	0.99982232	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacACAAGUAAAUGUACCAUGCU	NCR_1362
+6359	0.55	0.99609097	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUUAUCCAUUCCCUGCGCGUC	NCR_1363
+7325	0.25	0.99911158	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacCUAAUAAAAUGUACUGCAAA	NCR_1364
+7627	0.4	0.99964463	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacCAGCACAGAAUGUAUCACAA	NCR_1365
+8255	0.45	0.99964463	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacCAACUAUCGCCAGUAACUUC	NCR_1366
+9131	0.4	0.99946695	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacAUAAUAGAGCCAUCCAUGAG	NCR_1367
+9427	0.4	0.99822317	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacCAAGGCAUGUUACUACGAUA	NCR_1368
+10455	0.35	0.99964463	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacGAAUGAACCCUUAAUAGUGA	NCR_1369
+10840	0.3	0.99982232	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUUAAUGAAGCACACAUAUCU	NCR_1370
+11558	0.3	0.99982232	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacAUGAAGAAAAUAGGGCAAUA	NCR_1371
+12375	0.25	1	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacAUCAUUAUCCAACUUUCUAA	NCR_1372
+12560	0.45	0.99982232	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUCUGCAUCUACAACCUGUUG	NCR_1373
+13553	0.35	0.99715707	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacACCAGCUACUUUAUCAUUGU	NCR_1374
+14040	0.35	0.99964463	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacAUGUCAGUACACCAACAAUA	NCR_1375
+14486	0.45	0.99964463	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacAUGUACAACACCUAGCUCUC	NCR_1376
+15331	0.4	0.99982232	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacACAAGUGAGGCCAUAAUUCU	NCR_1377
+15713	0.5	0.99982232	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacCACAACAGCAUCGUCAGAGA	NCR_1378
+16268	0.35	1	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacACCACAUCUUAAUGAAGUCU	NCR_1379
+16925	0.3	0.99982232	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacACUUAAUGGCAUUACUGUAU	NCR_1380
+17354	0.35	0.99982232	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacGGCCAUUGAAAUUUCAUCAA	NCR_1381
+18358	0.35	0.99964463	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacGUAGAAAAACCUAGCUGUAA	NCR_1382
+18987	0.3	0.99911158	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacCUAAUAAUGCAGCUUUAACA	NCR_1383
+19203	0.4	0.99946695	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUAGCAGGAUAUCUAUCGACA	NCR_1384
+20345	0.35	0.99289268	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUAAACCACCUAACUGACUAU	NCR_1385
+20974	0.35	1	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacAUCAAAGUUGAAUCUGCAUC	NCR_1386
+21464	0.2	0.98773987	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacAAGAAGAGAUAAAAUCAUAU	NCR_1387
+21940	0.25	0.99911158	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacAUUCACAGACUUUAAUAACA	NCR_1388
+22720	0.25	0.99715707	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUAAAGCAGAGAUCAUUUAAU	NCR_1389
+22881	0.35	0.99520256	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacACCAACCUUAGAAUCAAGAU	NCR_1390
+23803	0.35	0.99946695	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacACAAAAGAUUGCUGCAUUCA	NCR_1391
+24532	0.35	0.99946695	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUCAACCUAUCAAUUUGCACU	NCR_1392
+24839	0.4	0.99964463	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacCCAUUUGAAACAAAGACACC	NCR_1393
+25763	0.45	0.99769012	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacGCAAAGCCAAAGCCUCAUUA	NCR_1394
+25963	0.4	1	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacACUCCAGAUUCCCAUUUUUC	NCR_1395
+26610	0.35	0.99964463	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUGUAGAAGACAAAUCCAUGU	NCR_1396
+27689	0.3	0.99289268	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacCGCAACAAUAAGAAAAAUUG	NCR_1397
+28062	0.35	0.99964463	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacUCCACGCACAAUUCAAUUAA	NCR_1398
+28900	0.6	0.99946695	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacCACCGCCAUUGCCAGCCAUU	NCR_1399
+29465	0.4	0.99395878	TRUE	0	random tiling	uagaccaccccaaaaaugaaggggacuaaaacGAGAAAUCAUCCAAAUCUGC	NCR_1400

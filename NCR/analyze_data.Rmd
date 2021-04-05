@@ -1,0 +1,566 @@
+---
+title: "NCR Primary Guide Screening"
+author: "Amanda Mok"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: html_document
+---
+
+```{r setup, echo=F}
+library(here)
+library(xlsx)
+library(reshape)
+library(ggplot2)
+library(patchwork)
+
+knitr::opts_chunk$set(echo=F, cache=T, fig.width=8)
+
+compute_rate <- function(data_subset, 
+                         x="time",
+                         y="signal_bkgdSubtract") {
+  # screening_data: data.frame
+  # x: character; column name to regress against
+  # y: character; column name to regress
+  model_formula <- formula(paste(y, "~", x))
+  model_fit <- lm(model_formula, data_subset)
+  model_rate <- coef(model_fit)[x]
+  return(model_rate)
+}
+
+analyze_guide <- function(screening_data, guide,
+                          signal="signal_bkgdSubtract",
+                          time_start=15) {
+  # screening_data: data.frame
+  # guide: character
+  # model: formula to be used for lm() regression
+  # time_start: timepoint to start regression
+  data_subset <- subset(screening_data, guide_id==guide)
+  data_subset$activator <- relevel(data_subset$activator, ref="noActivator")
+  model_fit <- lm(formula(paste(signal, "~ time*activator")), data=data_subset)
+  data_predict <- expand.grid(time=seq(time_start, 
+                                       signif(max(data_subset$time), 1)),
+                              activator=c("noActivator", "100fM"))
+  data_predict[[signal]] <- predict(model_fit, newdata=data_predict)
+  plot_max <- max(data_subset[[signal]], na.rm=T)
+  plot_width <- max(data_subset[[signal]], na.rm=T) - min(data_subset[[signal]], na.rm=T)
+  plot_text <- data.frame(x=10,
+                          y=plot_max - c(1:3)*plot_width/20,
+                          text=c(paste("no activator rate:", signif(coef(model_fit)["time"], 3)),
+                                 paste("100 fM rate:", signif(coef(model_fit)["time"] +
+                                                                coef(model_fit)["time:activator100fM"], 3)),
+                                 paste("p =", signif(summary(model_fit)$coefficients[,"Pr(>|t|)"]["time:activator100fM"], 3))))
+  guide_plot <- ggplot(data_predict, 
+                       aes_string(x="time", y=signal, col="activator")) +
+    geom_line(size=3) + 
+    geom_point(data=data_subset, 
+               aes_string(x="time", y=signal, col="activator"), alpha=0.5) +
+    geom_text(data=plot_text, aes(x=x, y=y, label=text), col="black", hjust=0) +
+    theme_bw() + scale_color_manual(values=c("black", "red")) +
+    ggtitle(paste0("NCR_", guide)) + xlab("time (min)") + ylab("signal (RFU)")
+  guide_coef <- data.frame(summary(model_fit)$coefficients, guide_id=guide, 
+                           coef=names(coef(model_fit)), row.names=NULL)
+  return(list(plot=guide_plot, coef=guide_coef))
+}
+
+project_dir <- file.path(here(), "NCR")
+```
+
+# Data
+* 204 guides (192 20mers, 12 28mers) screened in triplicate at 0 and 100 fM activator
+    + **96 "good" guides (NCR_504-599)**: selected for good secondary structure (maintains crRNA hairpin, no folding in spacer) and high sensitivity to SARS-CoV-2 genomic diversity; varies by whether target is structured (predicted by SHAPE-MaP and DMA-MaPseq) and whether guide targets any organism in NCBI viral and bacterial database
+    + **15 Ott lab guides (NCR_600-614)**
+    + **48 control "bad" guides (NCR_1305-1352)**: selected for bad secondary structure (crRNA folding interferes with hairpin structure and/or significant folding in spacer)
+    + **48 random guides tiling SARS-CoV-2 (NCR_1353-1400)**: good secondary structure, high sensitivity
+    + **12 28mer guides (NCR_1407-1418)**: span range of predicted activity by ADAPT (also 28mer)
+* plate controls: 612_Control and No_Protein
+
+Example structure of a "good" guide
+
+```{r good_guide}
+knitr::include_graphics(path.expand(file.path(project_dir, "good_guide.png")))
+```
+
+* Spoiler alert: may need to reconsider how much of hairpin structure is mandatory to retain
+
+```{r load_guide_features}
+order1 <- read.delim(file.path(project_dir, "primary_guide_design_20200710.tsv"))
+order2 <- read.delim(file.path(project_dir, "primary_control_guides_20210129.tsv"))
+order2$spacer <- substr(order2$sequence, 33, 52)
+adapt_28mer <- read.delim(file.path(project_dir, "adapt_28mers.tsv"))
+guide_28mer <- read.delim(file.path(project_dir, "cas13a_28nt_results_summary.txt"))
+guide_28mer <- guide_28mer[match(adapt_28mer$target.sequences, guide_28mer$target),]
+guide_28mer$NCR.id <- adapt_28mer$New.Name
+guide_features <- intersect(intersect(colnames(order1), colnames(order2)),  colnames(guide_28mer))
+guide_features <- rbind(order1[, guide_features], order2[, guide_features], guide_28mer[, guide_features])
+guide_features$crRNA_spacer_basepairs <- factor(guide_features$crRNA_spacer_basepairs, 
+                                                levels=sort(unique(guide_features$crRNA_spacer_basepairs)))
+guide_features$group <- sapply(seq(nrow(guide_features)),
+                               function(x) {
+                                 if(guide_features$has_crRNA_hairpin[x] & 
+                                    guide_features$crRNA_spacer_basepairs[x] == 0) {
+                                   return("good guide")
+                                 } else {
+                                   paste0(ifelse(guide_features$has_crRNA_hairpin[x], 
+                                                 "hasHairpin", "noHairpin"), "/",
+                                          guide_features$crRNA_spacer_basepairs[x], "bp")
+                                 }
+                               })
+guide_features$group <- factor(guide_features$group,
+                               levels=c("good guide", 
+                                        "hasHairpin/4bp", "noHairpin/4bp",
+                                        "hasHairpin/6bp",
+                                        "noHairpin/7bp",
+                                        "noHairpin/8bp",
+                                        "noHairpin/9bp",
+                                        "hasHairpin/10bp", "noHairpin/10bp",
+                                        "noHairpin/11bp",
+                                        "hasHairpin/12bp",
+                                        "noHairpin/13bp",
+                                        "noHairpin/14bp",
+                                        "noHairpin/15bp",
+                                        "hasHairpin/16bp", "noHairpin/16bp",
+                                        "noHairpin/17bp"))
+guide_features$class <- sapply(as.numeric(sub("NCR_", "", guide_features$NCR.id)),
+                               function(x) {
+                                 if(x >= 504 & x <= 599) {
+                                   return("good")
+                                 } else {
+                                   if(x >= 600 & x <= 614) {
+                                     return("Ott")
+                                   } else {
+                                     if(x >= 1305 & x <= 1352) {
+                                       return("bad")
+                                     } else {
+                                       if(x >= 1353 & x <= 1400) {
+                                         return("random")
+                                       } else {
+                                         if(x >= 1407 & x <= 1418) {
+                                           return("28mer")
+                                         } else {
+                                           return(NA)
+                                         }
+                                       }
+                                     }
+                                   }
+                                 }
+                               })
+guide_features$class <- factor(guide_features$class, levels=c("good", "Ott", "bad", "random", "28mer"))
+```
+
+```{r map_96_to_384}
+mapping_384_to_96 <- data.frame(matrix(NA, nrow=16, ncol=24))
+rownames(mapping_384_to_96) <- LETTERS[1:16]
+for(x in 1:8) {
+  for(y in 1:12) {
+    tmp_rows <- c(2*x-1, 2*x-1, 2*x)
+    tmp_cols <- c(2*y-1, 2*y, 2*y)
+    tmp_label <- paste0(LETTERS[x], y)
+    for(z in 1:3) {
+      mapping_384_to_96[tmp_rows[z], tmp_cols[z]] <- tmp_label
+    }
+  }
+}
+mapping_384_to_96 <- data.frame(well_96 = unlist(mapping_384_to_96),
+                                well_384 = paste0(rep(LETTERS[1:16], times=24),
+                                                  rep(1:24, each=16)))
+mapping_384_to_96[is.na(mapping_384_to_96)] <- "empty"
+```
+
+```{r load_platemaps}
+expt_names <- c("GS1_1", "GS1_2", "GS2_1", "GS2_2", "GS3")
+plate_maps <- read.xlsx(file.path(project_dir, "AC_Guide_Screening.xlsx"),
+                        sheetName="Plate Setups")
+plate_maps <- subset(plate_maps, NA. %in% LETTERS[1:8])[, 3:14]
+plate_maps <- split(plate_maps, rep(expt_names, each=8))
+plate_maps <- lapply(seq_along(plate_maps),
+                     function(x) {
+                       if(x %in% 1:4) {
+                         data.frame(sample = paste0(unlist(plate_maps[[x]]), 
+                                                    rep(c("_noActivator", "_100fM"), each=48)),
+                                    well_96 = paste0(rep(LETTERS[1:8], times=12),
+                                                     rep(1:12, each=8)))
+                       } else {
+                         tmp_map <- data.frame(sample = paste0(unlist(plate_maps[[x]][1:4,]),
+                                                               c(rep(rep(c("_noActivator", "_100fM"), 
+                                                                         each=2),
+                                                                     times=12))),
+                                               well_96 = paste0(rep(LETTERS[1:4], times=12),
+                                                                rep(1:12, each=4)))
+                         return(subset(tmp_map, !grepl("NA", tmp_map$sample)))
+                       }
+                     })
+names(plate_maps) <- expt_names
+```
+
+```{r load_plate_data}
+data_dir <- file.path(project_dir, "100fM_data")
+data_fnames <- list.files(data_dir)
+plate_data <- lapply(data_fnames,
+                     function(x) {
+                       tmp_plate <- sub("_100fM_Plate", "", 
+                                        sub("-", "_", 
+                                            sub(".xlsx", "", x)))
+                       row_indices <- 57:117
+                       tmp_data <- read.xlsx(file.path(data_dir, x), 
+                                             sheetIndex=1, rowIndex=row_indices, header=T)
+                       tmp_data <- lapply(seq(nrow(tmp_data)),
+                                          function(x) {
+                                            data.frame(tmp_data[x, 1:3],
+                                                       unlist(tmp_data[x, 4:387]),
+                                                       colnames(tmp_data)[4:387],
+                                                       row.names = NULL)
+                                          })
+                       tmp_data <- do.call(rbind, tmp_data)
+                       colnames(tmp_data) <- c("cycle_number", "time", "temp", "signal", "well_384")
+                       tmp_data$well_96 <- mapping_384_to_96$well_96[match(tmp_data$well_384,
+                                                                           mapping_384_to_96$well_384)]
+                       tmp_platemap <- plate_maps[[tmp_plate]]
+                       tmp_data$sample <- tmp_platemap$sample[match(tmp_data$well_96,
+                                                                    tmp_platemap$well_96)]
+                       tmp_data$plate <- tmp_plate
+                       return(tmp_data)
+                     })
+plate_data <- do.call(rbind, plate_data)
+plate_data$guide_id <- sapply(plate_data$sample,
+                              function(x) {
+                                ifelse(grepl("_", x),
+                                       sub(" ", "_", sub("_.*", "", x)),
+                                       "empty")
+                              })
+
+plate_data$activator <- factor(sapply(plate_data$sample,
+                                      function(x) {
+                                        ifelse(grepl("_", x),
+                                               sub(".*_", "", x),
+                                               "empty")
+                                      }), 
+                               levels=c("100fM", "noActivator", "empty"))
+plate_data$cycle_number <- as.numeric(plate_data$cycle_number)
+plate_data$signal <- as.numeric(plate_data$signal)
+plate_data$time <- plate_data$time/60 # convert from seconds to minutes
+```
+
+```{r background_subtract}
+## background subtract: empty wells
+background_empty <- mean(subset(plate_data, is.na(sample))$signal, na.rm=T)
+plate_data$signal_bkgdSubtract <- plate_data$signal - background_empty
+plate_data <- subset(plate_data, !is.na(sample))
+plate_data$activator <- droplevels(plate_data$activator)
+```
+
+# Exploratory data analysis: controls
+
+## Plate controls: 612_Control and No_Protein
+
+```{r analyze_plate_controls}
+## plot controls: No_Protein and 612_Control
+control_data <- subset(plate_data, 
+                       guide_id %in% c("No_Protein", "612_Control"))
+control_outliers <- rbind(subset(control_data,
+                                 cycle_number==60 & 
+                                   guide_id=="612_Control" & 
+                                   signal_bkgdSubtract > 15000),
+                          subset(control_data,
+                                 cycle_number==60 &
+                                   guide_id=="612_Control" &
+                                   activator=="noActivator" &
+                                   signal_bkgdSubtract > 4500),
+                          subset(control_data,
+                                 cycle_number==60 &
+                                   guide_id=="No_Protein" &
+                                   signal_bkgdSubtract > 3500))
+control_data$group <- with(control_data, paste(plate, well_384, sep="_"))
+ggplot(control_data, aes(x=time, y=signal_bkgdSubtract, col=plate)) +
+  theme_bw() + xlab("time (min)") + ylab("background-subtracted fluorescence (RFU)") +
+  geom_line(aes(group=group), alpha=0.5) + facet_grid(guide_id ~ activator) +
+  geom_text(data=control_outliers, 
+            aes(x=time, y=signal_bkgdSubtract, label=well_384),
+            nudge_x=-5, col="black", size=2)
+```
+
+* Plate GS2-2 outliers: O 9-12, 21-24
+* No_Protein (+/- activator) and 612_Control (- activator) controls cluster tightly across plates
+* Variable spread of 612_Control activity with 100 fM activator
+
+## No activator controls
+
+```{r analyze_noActivator, fig.height=7}
+noActivator_data <- subset(plate_data, activator=="noActivator")
+noActivator_outliers <- rbind(subset(noActivator_data,
+                                     cycle_number==60 &
+                                       plate=="GS1_2" &
+                                       signal_bkgdSubtract > 9000),
+                              subset(noActivator_data,
+                                     cycle_number==60 &
+                                       plate=="GS2_1" &
+                                       signal_bkgdSubtract > 10000),
+                              subset(noActivator_data,
+                                     plate=="GS2_1" &
+                                       cycle_number==23 &
+                                       signal_bkgdSubtract > 60000))
+# calculate rates per guide
+noActivator_rates <- split(noActivator_data, noActivator_data$guide_id)
+noActivator_rates <- sapply(noActivator_rates, compute_rate)
+noActivator_rates <- data.frame(guide_id=sub(".time", "", names(noActivator_rates)),
+                                rate=noActivator_rates,
+                                row.names=NULL)
+noActivator_rates$plate <- noActivator_data$plate[match(noActivator_rates$guide_id,
+                                                        noActivator_data$guide_id)]
+# plot
+(ggplot(noActivator_data, aes(x=time, y=signal_bkgdSubtract, col=plate)) +
+    theme_bw() + xlab("time (min)") + ylab("background-subtracted fluoresence (RFU)") +
+    geom_line(aes(group=well_384), alpha=0.5) + facet_grid(~plate) +
+    geom_text(data=noActivator_outliers,
+              aes(x=time, y=signal_bkgdSubtract, label=well_384), col="black") +
+    theme(legend.position="none")) /
+  (ggplot(noActivator_rates, aes(x=plate, y=rate, fill=plate)) +
+     geom_violin() + theme_bw() + xlab("") + theme(legend.position="none") +
+     ylim(-5, 30) + ggtitle("", subtitle="removing outliers")) +
+  plot_layout(heights=c(2,1))
+```
+
+* No activator varies by plate (and presumably by guide) 
++ Want to be able to account for additional gain in rate above no activator background
+* Outliers on plate GS2-1 all correspond to NCR_1344
+
+```{r NCR_1344_structure}
+knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1344.png")))
+```
+
+# Data analysis
+
+## Methods:
+
+* Linear regression to compute rate per condition across triplicates:
+    + per guide: $\text{signal}_i = \beta_0 + (\beta_{\text{100fM}}\cdot\mathbb{I}[\text{100fM}]) \ + (\beta_t\cdot t_i) \ + (\beta_{t:\text{100fM}}\cdot t_i\cdot\mathbb{I}[\text{100fM}])$
+    + no activator: $\text{signal}_i = \beta_0 + (\beta_t \cdot t_i) = \text{intercept} + \text{rate}\cdot\text{time}$
+    + 100fM activator: $\text{signal}_i = (\beta_0 + \beta_{\text{100fM}}) + (\beta_t + \beta_{t:\text{100fM}}) \cdot t_i = \text{intercept} + \text{rate}\cdot\text{time}$
+    + 100fM rate above no activator: $\beta_{t:\text{100fM}}$
+* Background subtract mean of empty wells
+* Exclude timepoints before 1000 seconds (first 10 timepoints show dip in some no activator controls)
+
+```{r analyze_data}
+guide_ids <- unique(plate_data$guide_id)
+guide_ids <- guide_ids[!(guide_ids %in% c("612_Control", "No_Protein"))]
+all_results <- lapply(guide_ids,
+                      function(x) {
+                        analyze_guide(plate_data, guide=x, time_start=15,
+                                      signal="signal_bkgdSubtract")
+                      })
+names(all_results) <- guide_ids
+all_plots <- lapply(seq_along(all_results),
+                    function(x) {
+                      guide_id <- paste0("NCR_", names(all_results)[x])
+                      which_row <- match(guide_id, guide_features$NCR.id)
+                      has_hairpin <- guide_features$has_crRNA_hairpin[which_row]
+                      spacer_bp <- guide_features$crRNA_spacer_basepairs[which_row]
+                      plot_subtitle <- paste(ifelse(has_hairpin, "has hairpin", "no hairpin"), "|",
+                                             spacer_bp, "basepaired positions in spacer")
+                      all_results[[x]]$plot + ggtitle(guide_id, subtitle=plot_subtitle)
+                    })
+names(all_plots) <- guide_ids
+plots_by_group <- split(all_plots, 
+                        guide_features$group[match(paste0("NCR_", names(all_plots)),
+                                                   guide_features$NCR.id)])
+```
+
+### Example traces:
+
+* dots: signal per 384-well per time
+* solid lines: regression fit
+
+```{r example_traces, fig.height=8}
+all_plots[["522"]] / all_plots[["527"]]
+```
+
+## Results: 100 fM rates (above no activator)
+
+### Summary of screen
+
+```{r NCR_1324_structure, fig.height=8, include=F}
+NCR_1324_noOutlier <- subset(plate_data, guide_id=="1324")
+NCR_1324_outlierWell <- NCR_1324_noOutlier$well_384[which.max(NCR_1324_noOutlier$signal_bkgdSubtract)]
+NCR_1324_noOutlier <- subset(NCR_1324_noOutlier, well_384 != NCR_1324_outlierWell)
+NCR_1324_noOutlier_results <- analyze_guide(NCR_1324_noOutlier, guide="1324")
+all_plots[["1324"]] / (NCR_1324_noOutlier_results$plot + ggtitle("NCR_1324", subtitle="remove outlier"))
+all_results[["1324"]] <- NCR_1324_noOutlier_results
+```
+
+```{r aggregate_coefficients}
+all_coef <- lapply(all_results, function(x) x$coef)
+all_coef <- do.call(rbind, all_coef)
+all_coef <- cbind(all_coef,
+                  guide_features[match(paste0("NCR_", all_coef$guide_id),
+                                       guide_features$NCR.id),])
+all_coef$plate <- plate_data$plate[match(all_coef$guide_id, plate_data$guide_id)]
+```
+
+```{r compute_100fM_rate}
+guide_rate_100fM <- aggregate(Estimate ~ guide_id, 
+                              data=subset(all_coef, grepl("time", all_coef$coef)),
+                              FUN=sum)
+guide_rate_100fM <- cbind(guide_rate_100fM,
+                          guide_features[match(paste0("NCR_", guide_rate_100fM$guide_id),
+                                               guide_features$NCR.id),])
+```
+
+```{r plot_rates, fig.height=16}
+guide_rate <- subset(all_coef, grepl(":", all_coef$coef))
+ggplot(guide_rate, aes(x=Estimate, y=guide_id, col=plate)) + geom_point() +
+  geom_errorbar(aes(xmin=Estimate-qnorm(0.05)*Std..Error,
+                    xmax=Estimate+qnorm(0.05)*Std..Error)) + 
+  theme_bw() + geom_vline(xintercept=0,) + theme(axis.text.y=element_text(size=6)) + 
+  xlab("rate above no activator (RFU/min)") + ylab("guide id")
+```
+
+* Similar spread of rates across plates
+    + Expect to see poorer rates for plates GS2-1 and GS2-2 (which harbor the "bad" guides)
+
+### Volcano plots of screening rates
+
+```{r plot_rate_volcano}
+ggplot(guide_rate, aes(x=Estimate, y=-log10(Pr...t..), col=plate)) + geom_point() +
+  theme_bw() + xlab("rate above no activator (RFU/min)") + ylab("-log10(p)") + ylim(0, 350)
+```
+
+* *Caveat*: timepoints from the same sample (384-well) are not independent, so simple linear regression vastly underestimates standard error (i.e. p-values are much too low).  Using a hierarchical linear model (ex. linear mixed model) should be able to account for this interdependence; but overall trends should remain the same, since all samples was measured for the same number of timepoints.
+* Guides on plate GS2-2 have similar rates as to other plates, but are much more variable (p-values closer to 1)
+
+### Rates by position along SARS-CoV-2 genome
+
+```{r rate_by_position}
+ggplot(guide_rate, aes(x=start, y=Estimate, 
+                       col=crRNA_spacer_basepairs, shape=has_crRNA_hairpin)) + 
+  geom_point(size=2, alpha=0.8) + theme_bw() + 
+  xlab("genomic position") + ylab("rate above no activator (RFU/min)")
+```
+
+Structures of the two guides that performed well (rate > 1 above background) but without hairpin structure (NCR_1346, NCR_1351):
+
+```{r NCR_1346_structure}
+knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1346.png")))
+```
+
+```{r NCR_1351_structure}
+knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1351.png")))
+```
+
+### Rates across groups of guide secondary structure
+
+```{r rate_by_guidegroup}
+ggplot(subset(guide_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 16)), 
+       aes(x=group, y=Estimate, fill=has_crRNA_hairpin)) + 
+  geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) + 
+  theme_bw() + xlab("") + ylab("rate above no activator (RFU/min)") + 
+  labs(fill="maintains crRNA hairpin") + theme(axis.text.x=element_text(angle=90, hjust=1))
+```
+
+* "Good" guides exhibit similar 100fM rates as "bad" guides
+
+### Rates across guide ordering group
+
+```{r rate_by_class, fig.height=8}
+(ggplot(guide_rate, aes(x=class, y=Estimate, fill=class)) + 
+  geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) + 
+  theme_bw() + xlab("") + ylab("rate above no activator (RFU/min)") + theme(legend.position="none") +
+  theme(axis.text.x=element_text(angle=90, hjust=1))) / 
+  (ggplot(guide_rate_100fM, aes(x=class, y=Estimate, fill=class)) +
+     geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) +
+     theme_bw() + xlab("") +ylab("100fM rate (RFU/min)") + theme(legend.position="none") +
+     theme(axis.text.x=element_text(angle=90, hjust=1)))
+```
+
+### Background (no activator) rate by guide secondary structure
+
+```{r noActivator_rates}
+noActivator_rate <- subset(all_coef, coef=="time")
+noActivator_rate <- subset(noActivator_rate, guide_id != "1344")
+ggplot(subset(noActivator_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 16)), 
+       aes(x=group, y=Estimate, fill=has_crRNA_hairpin)) + 
+  geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) + 
+  theme_bw() + xlab("") + ylab("no activator rate (RFU/min)") + 
+  labs(fill="maintains crRNA hairpin") + theme(axis.text.x=element_text(angle=90, hjust=1))
+```
+
+* In guides that maintain crRNA hairpin: correlation between number of basepaired positions in spacer and background no activator rate
+
+## Comparison of 20mers to 28mers
+
+```{r adapt_comparison}
+# adapt_28mer$rate_20mer <- guide_rate$Estimate[match(adapt_28mer$Original.Name,
+#                                                     paste0("NCR_", guide_rate$guide_id))]
+# adapt_28mer$rate_28mer <- guide_rate$Estimate[match(adapt_28mer$New.Name,
+#                                                     paste0("NCR_", guide_rate$guide_id))]
+# (ggplot(adapt_28mer, aes(x=rate_20mer, y=rate_28mer)) + geom_point() + 
+#     geom_smooth(method=lm, formula=y~x) + theme_bw() + 
+#     ggtitle("Rates computed from primary screen") + 
+#     xlab("20mer rate (RFU/min)") + ylab("28mer rate (RFU/min)")) + 
+#   ((ggplot(adapt_28mer, aes(x=guide.expected.activities, y=rate_28mer)) + geom_point() + 
+#       geom_smooth(method=lm, formula=y~x) + theme_bw() + 
+#       ggtitle("ADAPT prediction vs. 28mer activity") + 
+#       xlab("ADAPT") + ylab("28mer rate (RFU/min)")) / 
+#      (ggplot(adapt_28mer, aes(x=guide.expected.activities, y=rate_20mer)) + geom_point() +
+#         geom_smooth(method=lm, formula=y~x) + theme_bw() + 
+#         ggtitle("ADAPT prediction vs. 20mer activity") +
+#         xlab("ADAPT") + ylab("20mer rate (RFU/min)")))
+guide_rate_adapt <- rbind(data.frame(adapt_28mer,
+                                     rate=guide_rate$Estimate[match(adapt_28mer$Original.Name,
+                                                                    paste0("NCR_", guide_rate$guide_id))],
+                                     spacer="20mer"),
+                          data.frame(adapt_28mer,
+                                     rate=guide_rate$Estimate[match(adapt_28mer$New.Name,
+                                                                    paste0("NCR_", guide_rate$guide_id))],
+                                     spacer="28mer"))
+ggplot(guide_rate_adapt, aes(x=guide.expected.activities, y=rate, col=spacer)) + 
+  geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() +
+  xlab("ADAPT prediction") + ylab("rate above no activator (RFU/min)")
+```
+
+# Supplementary: all traces
+
+## "Good" guides
+
+```{r suppl_good_guide, }
+plots_by_group$`good guide`
+```
+
+## "Bad" guides: maintains hairpin, 4 basepaired positions in spacer
+
+```{r suppl_hasHairpin_4bp}
+plots_by_group$`hasHairpin/4bp`
+```
+
+## "Bad" guides: no hairpin, 4 basepaired positions in spacer
+
+```{r suppl_noHairpin_4bp}
+plots_by_group$`noHairpin/4bp`
+```
+
+## "Bad" guides: maintains hairpin, 10 basepaired positions in spacer
+
+```{r suppl_hasHairpin_10bp}
+plots_by_group$`hasHairpin/10bp`
+```
+
+## "Bad" guides: no hairpin, 10 basepaired positions in spacer
+
+```{r suppl_noHairpin_10bp}
+plots_by_group$`noHairpin/10bp`
+```
+
+## "Bad" guides: maintains hairpin, 16 basepaired positions in spacer
+
+```{r suppl_hasHairpin_16bp}
+plots_by_group$`hasHairpin/16bp`
+```
+
+## "Bad" guides: no hairpin, 16 basepaired positions in spacer
+
+```{r suppl_noHairpin_16bp}
+plots_by_group$`noHairpin/16bp`
+```
+
+## NCR_1344
+
+```{r suppl_NCR_1344}
+all_plots[["1344"]]
+```
