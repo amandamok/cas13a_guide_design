@@ -72,7 +72,7 @@ sed -i 's/Lyon_06464 /Lyon_06464/' gisaid_cov2020_alignment.txt
 sed -i 's/Czech Republic/CzechRepublic/g' gisaid_cov2020_alignment.txt
 sed -i 's/Saudi Arabia/SaudiArabia/g' gisaid_cov2020_alignment.txt
 
-# human coronaviruses (not SARS-CoV-2) 
+# human coronaviruses (not SARS-CoV-2)
 
 human_CoV/NC_004718v3.fa : SARS coronavirus, complete genome ; download from GenBank
 https://www.ncbi.nlm.nih.gov/nuccore/NC_004718.3?report=fasta
@@ -127,11 +127,19 @@ region: genome
 output format: selected fields from primary and related tables
 selected fields: name, chromStarts, variants, sampleCount, samples
 
+# viral genome structure
+
+manfredonia_2020_lowShannon_highSHAPE.xlsx: download from Manfredonia (2020)
+https://academic.oup.com/nar/article/48/22/12436/5961787#supplementary-data
+Supplementary Table 2
+
 MN985325v1.fa: SARS-CoV-2 isolate (USA-WA1)
+lan_2020_structured.csv: personal correspondance
+lan_2020_unstructured.csv: personal correspondance
 bedtools getfasta -fi MN985325v1.fa -bed dms_map_unstructured.bed -fo dms_map_unstructured.fa
 bowtie --norc -v 2 -S --un dms_map_unstructured_unmapped.fa -f wuhCor1 dms_map_unstructured.fa > dms_map_unstructured_mapped.sam 2> dms_map_unstructured_mapped.bowtiestats
 
-SARS-CoV-2_Full_Length_Secondary_Structure_Map.ct: download from Huston (2021)
+huston_2021_structure.ct: download from Huston (2021)
 https://github.com/pylelab/SARS-CoV-2_SHAPE_MaP_structure
 
 icSHAPE_sun_2021.xlsx: download from Sun (2021)
