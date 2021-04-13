@@ -134,6 +134,8 @@ bowtie --norc -v 2 -S --un dms_map_unstructured_unmapped.fa -f wuhCor1 dms_map_u
 SARS-CoV-2_Full_Length_Secondary_Structure_Map.ct: download from Huston (2021)
 https://github.com/pylelab/SARS-CoV-2_SHAPE_MaP_structure
 
+icSHAPE_sun_2021.xlsx: download from Sun (2021)
+
 influenza sequences downloaded from fludb.org
 influenzaA: all subtypes, human host
 influenzaB: human host
