@@ -212,6 +212,23 @@ guide_features$class <- sapply(as.numeric(sub("NCR_", "", guide_features$NCR.id)
 guide_features$class <- factor(guide_features$class, levels=c("good", "Ott", "bad", "random", "28mer"))
 ```
 
+```{r guide_features_crRNA_structure}
+RNAfold_20nt <- read.table(file.path(here(), "outputs", "cas13a_20nt", 
+                                     "score_RNAfold_crRNAs.txt"), header=T)
+RNAfold_28nt <- read.table(file.path(here(), "outputs", "cas13a_28nt",
+                                     "score_RNAfold_crRNAs.txt"), header=T)
+guide_features$structure <- sapply(seq(nrow(guide_features)),
+                                   function(x) {
+                                     tmp_start <- guide_features$start[x]
+                                     tmp_spacer_length <- nchar(guide_features$spacer[x])
+                                     tmp_structure <- subset(get(paste0("RNAfold_", 
+                                                                        tmp_spacer_length, 
+                                                                        "nt")),
+                                                             start == tmp_start)
+                                     return(tmp_structure$structure[1])
+                                   })
+```
+
 ## Viral secondary structure
 
 * Manfredonia et al. *NAR* (2020)
@@ -775,10 +792,58 @@ ggplot(guide_rate, aes(x=spacer_bp, y=Estimate)) + geom_point() +
 
 ```{r rate_by_guidegroup}
 ggplot(subset(guide_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 16)), 
-       aes(x=group, y=Estimate, fill=has_crRNA_hairpin)) + 
-  geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) + 
+       aes(x=group, y=Estimate)) + 
+  geom_violin(aes(fill=has_crRNA_hairpin), alpha=0.25, 
+              draw_quantiles=c(0.25, 0.75), linetype="dashed") +
+  geom_violin(fill="transparent", draw_quantiles=0.5) +
+  geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + 
+  # geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) + 
   theme_bw() + xlab("") + ylab("rate above no activator (RFU/min)") + 
   labs(fill="maintains crRNA hairpin") + theme(axis.text.x=element_text(angle=90, hjust=1))
+```
+
+Determination of how much of predicted hairpin structure needs to be maintained:
+
+```{r hairpin_structure, fig.height=22.5}
+hairpin_length <- nchar(guide_features$structure[1]) - 20
+good_hairpin <- substr(guide_features$structure[1], 1, hairpin_length)
+
+maintain_hairpin <- sapply(24:hairpin_length,
+                           function(x) {
+                             good_structure <- substr(good_hairpin, 1, x)
+                             tmp_structures <- substr(guide_rate$structure, 1, x)
+                             return(tmp_structures == good_structure)
+                           })
+maintain_hairpin <- data.frame(cbind(guide_rate[, c("guide_id", "start", 
+                                                    "Estimate", "crRNA_spacer_basepairs")],
+                                     maintain_hairpin))
+colnames(maintain_hairpin)[grepl("^X", colnames(maintain_hairpin))] <- paste0("first_", 24:hairpin_length)
+
+maintain_hairpin_noOutliers <- subset(maintain_hairpin, !(guide_id %in% c(1346, 1351)))
+
+maintain_hairpin_plots <- lapply(24:hairpin_length,
+                                 function(x) {
+                                   hairpin_length <- paste0("first_", x)
+                                   tmp_wilcox <- wilcox.test(formula(paste("Estimate ~", 
+                                                                           hairpin_length)),
+                                                             data=maintain_hairpin_noOutliers)
+                                   ggplot(subset(maintain_hairpin_noOutliers,
+                                                 crRNA_spacer_basepairs %in% c(0, 4, 10, 16)), 
+                                          aes_string(x=hairpin_length, y="Estimate")) +
+                                     geom_violin(aes_string(fill="crRNA_spacer_basepairs"),
+                                                 draw_quantiles=0.5, alpha=0.5) + 
+                                     geom_violin(fill="transparent", draw_quantiles=0.5) + 
+                                     geom_violin(fill="transparent", draw_quantiles=c(0.25, 0.75),
+                                                 linetype="dashed") +
+                                     geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + 
+                                     theme_bw() + # guides(fill=F) + 
+                                     xlab("maintain hairpin") + 
+                                     ylab("rate above no activator (RFU/min)") + 
+                                     ggtitle("", subtitle=paste("first", x, "bases")) +
+                                     annotate(geom="text", x=T, y=80, 
+                                              label=paste("p =", round(tmp_wilcox$p.value, digits=3)))
+                                 })
+wrap_plots(maintain_hairpin_plots, ncol=1, byrow=T)
 ```
 
 * "Good" guides exhibit similar 100fM rates as "bad" guides
@@ -786,13 +851,23 @@ ggplot(subset(guide_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 16)),
 ### Rates across guide ordering group
 
 ```{r rate_by_class, fig.height=8}
-(ggplot(guide_rate, aes(x=class, y=Estimate, fill=class)) + 
-   geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) + 
-   theme_bw() + xlab("") + ylab("rate above no activator (RFU/min)") + theme(legend.position="none") +
+(ggplot(guide_rate, aes(x=class, y=Estimate)) + 
+   geom_violin(aes(fill=class), alpha=0.25, 
+               draw_quantiles=c(0.25, 0.75), linetype="dashed") +
+   geom_violin(fill="transparent", draw_quantiles=0.5) +
+   geom_dotplot(binaxis="y", stackdir="center", binwidth=1) +
+   # geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) + 
+   theme_bw() + xlab("") + ylab("rate above no activator (RFU/min)") + 
+   theme(legend.position="none") +
    theme(axis.text.x=element_text(angle=90, hjust=1))) / 
   (ggplot(guide_rate_100fM, aes(x=class, y=Estimate, fill=class)) +
-     geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) +
-     theme_bw() + xlab("") +ylab("100fM rate (RFU/min)") + theme(legend.position="none") +
+     geom_violin(aes(fill=class), alpha=0.25, 
+                 draw_quantiles=c(0.25, 0.75), linetype="dashed") +
+     geom_violin(fill="transparent", draw_quantiles=0.5) +
+     geom_dotplot(binaxis="y", stackdir="center", binwidth=1) +
+     # geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) +
+     theme_bw() + xlab("") +ylab("100fM rate (RFU/min)") + 
+     theme(legend.position="none") +
      theme(axis.text.x=element_text(angle=90, hjust=1)))
 ```
 
@@ -802,13 +877,23 @@ ggplot(subset(guide_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 16)),
 noActivator_rate <- subset(all_coef, coef=="time")
 noActivator_rate <- subset(noActivator_rate, guide_id != "1344")
 ggplot(subset(noActivator_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 16)), 
-       aes(x=group, y=Estimate, fill=has_crRNA_hairpin)) + 
-  geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) + 
+       aes(x=group, y=Estimate)) + 
+  geom_violin(aes(fill=has_crRNA_hairpin), alpha=0.25, 
+               draw_quantiles=c(0.25, 0.75), linetype="dashed") +
+   geom_violin(fill="transparent", draw_quantiles=0.5) +
+   geom_dotplot(binaxis="y", stackdir="center", binwidth=0.25) +
+  # geom_boxplot(alpha=0.5, outlier.shape=NA) + geom_jitter(width=0.2, height=0, alpha=0.8, size=0.8) + 
   theme_bw() + xlab("") + ylab("no activator rate (RFU/min)") + 
   labs(fill="maintains crRNA hairpin") + theme(axis.text.x=element_text(angle=90, hjust=1))
 ```
 
 * In guides that maintain crRNA hairpin: correlation between number of basepaired positions in spacer and background no activator rate
+
+```{r rate_by_gc_content}
+ggplot(guide_rate, aes(x=GC_content, y=Estimate)) + geom_point() + 
+  geom_smooth(method="loess", formula=y~x) + theme_bw() + 
+  xlab("GC content (%)") + ylab("rate above no activator (RFU/min)") 
+```
 
 ## Comparison of 20mers to 28mers
 
@@ -986,6 +1071,9 @@ huston_plot
 manfredonia_plot + sun_plot + plot_layout(widths=c(1,2))
 ```
 
+* Correlation between viral structure as annotated by Lan (2020)
+    + But no correlation with other *in vivo* annotations (Sun and Huston)
+
 ```{r rate_by_viral_structure_intersection, fig.height=4}
 (ggplot(guide_rate, aes(x=sun_invivo, y=huston, col=lan, shape=lan_sun_huston)) + 
   geom_point(alpha=0.75) + theme_bw() + 
@@ -998,6 +1086,8 @@ manfredonia_plot + sun_plot + plot_layout(widths=c(1,2))
      guides(fill=F) + theme_bw() +
      xlab("") + ylab("rate above no activator (RFU/min)"))
 ```
+
+### k-means clustering of in vivo structures (Lan, Sun, Huston)
 
 ```{r rate_by_viral_structure_kmeans, fig.height=8}
 invivo_kmeans_2_wilcox <- wilcox.test(Estimate ~ invivo_kmeans_2, 
