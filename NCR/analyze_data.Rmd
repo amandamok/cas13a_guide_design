@@ -13,6 +13,7 @@ library(patchwork)
 library(nlme)
 library(Biostrings)
 library(bedr)
+library(factoextra)
 
 knitr::opts_chunk$set(echo=F, cache=T, fig.width=8)
 
@@ -405,6 +406,46 @@ manfredonia_huston + lan_huston + sun_invivo_huston + sun_invitro_huston +
     + Lan (2020)
     + Sun (2021)
     + Huston (2021)
+
+```{r in_vivo_intersection, fig.height=4}
+guide_features$lan_sun_huston <- sapply(seq(nrow(guide_features)),
+                                        function(x) {
+                                          tmp_sun <- guide_features$sun_invivo[x]
+                                          tmp_huston <- guide_features$huston[x]
+                                          tmp_lan <- guide_features$lan[x]
+                                          if(tmp_sun > 0.25 & tmp_huston >= 0.75) {
+                                            return("unstructured")
+                                          } else {
+                                            if(tmp_sun <= 0.25 & tmp_huston <= 0.25) {
+                                              return("structured")
+                                            } else {
+                                              return("intermediate")
+                                            }
+                                          }
+                                        })
+guide_features$lan_sun_huston <- factor(guide_features$lan_sun_huston,
+                                        levels=c("unstructured", "intermediate", "structured"))
+
+ggplot(guide_features, aes(x=sun_invivo, y=huston, col=lan, shape=lan_sun_huston)) +
+  geom_point() + theme_bw() + labs(col="Lan", shape="Structure (intersection)") + 
+  xlab("Sun (in vivo)") + ylab("Huston")
+```
+
+```{r in_vivo_kmeans}
+set.seed(10)
+invivo_kmeans_2 <- kmeans(guide_features[, c("lan", "sun_invivo", "huston")], 2)
+invivo_kmeans_2_labels <- rank(rowMeans(invivo_kmeans_2$centers))
+guide_features$invivo_kmeans_2 <- invivo_kmeans_2$cluster
+guide_features$invivo_kmeans_2 <- as.factor(guide_features$invivo_kmeans_2)
+levels(guide_features$invivo_kmeans_2) <- c("structured", "unstructured")[invivo_kmeans_2_labels]
+
+set.seed(20)
+invivo_kmeans_3 <- kmeans(guide_features[, c("lan", "sun_invivo", "huston")], 3)
+invivo_kmeans_3_labels <- rank(rowMeans(invivo_kmeans_3$centers))
+guide_features$invivo_kmeans_3 <- invivo_kmeans_3$cluster
+guide_features$invivo_kmeans_3 <- as.factor(guide_features$invivo_kmeans_3)
+levels(guide_features$invivo_kmeans_3) <- c("structured", "intermediate", "unstructured")[invivo_kmeans_3_labels]
+```
 
 ```{r map_96_to_384}
 mapping_384_to_96 <- data.frame(matrix(NA, nrow=16, ncol=24))
@@ -943,6 +984,62 @@ lan_plot
 lan_spacer_bp_plot
 huston_plot
 manfredonia_plot + sun_plot + plot_layout(widths=c(1,2))
+```
+
+```{r rate_by_viral_structure_intersection, fig.height=4}
+(ggplot(guide_rate, aes(x=sun_invivo, y=huston, col=lan, shape=lan_sun_huston)) + 
+  geom_point(alpha=0.75) + theme_bw() + 
+  xlab("Sun (in vivo)") + ylab("Huston") + labs(col="Lan", shape="Intersection")) +
+  (ggplot(guide_rate, aes(x=lan_sun_huston, y=Estimate)) + 
+     geom_violin(aes(fill=lan_sun_huston),
+                 draw_quantiles=c(0.25, 0.75), linetype="dashed", alpha=0.5) +
+     geom_violin(fill="transparent", draw_quantiles=0.5) +
+     geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + 
+     guides(fill=F) + theme_bw() +
+     xlab("") + ylab("rate above no activator (RFU/min)"))
+```
+
+```{r rate_by_viral_structure_kmeans, fig.height=8}
+invivo_kmeans_2_wilcox <- wilcox.test(Estimate ~ invivo_kmeans_2, 
+                                      data=guide_rate)
+invivo_kmeans_3_wilcox <- wilcox.test(Estimate ~ invivo_kmeans_3,
+                                      data=subset(guide_rate,
+                                                  invivo_kmeans_3 %in% c("structured", "unstructured")))
+
+# (fviz_cluster(invivo_kmeans_3,
+#               data=guide_features[, c("lan", "sun_invivo", "huston")],
+#               geom="point", ellipse.type="confidence") +
+#     theme_bw() + guides(col=F, shape=F) +
+#     scale_fill_discrete(labels=c("structured", "intermediate", "unstructured")[invivo_kmeans_3_labels]))
+# (ggplot(guide_rate, aes(x=invivo_kmeans_3, y=Estimate)) + theme_bw() +
+#         geom_violin(aes(fill=invivo_kmeans_3), alpha=0.5, 
+#                     draw_quantiles=c(0.25, 0.75), linetype="dashed") +
+#         geom_violin(fill="transparent", draw_quantiles=0.5) + 
+#         geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + guides(fill=F) + 
+#         xlab("") + ylab("rate above no activator (RFU/min)") +
+#         ggtitle("Guide activity v. viral genome structure", subtitle="k means: 3 clusters") +
+#         annotate(geom="text", x= "unstructured", y=80, 
+#                  label=paste("p =", round(invivo_kmeans_3_wilcox$p.value, 
+#                                           digits=3))))
+
+((fviz_nbclust(guide_features[, c("lan", "sun_invivo", "huston")], 
+               kmeans, method="silhouette")) + 
+    (fviz_cluster(invivo_kmeans_2, 
+                  data=guide_features[, c("lan", "sun_invivo", "huston")], 
+                  geom="point", ellipse.type="confidence") + 
+       theme_bw() + guides(col=F, shape=F) + 
+       scale_fill_discrete(labels=c("structured", "unstructured")[invivo_kmeans_2_labels]))) /
+  (ggplot(guide_rate, aes(x=invivo_kmeans_2, y=Estimate)) + theme_bw() +
+      geom_violin(aes(fill=invivo_kmeans_2), alpha=0.5, 
+                  draw_quantiles=c(0.25, 0.75), linetype="dashed") +
+      geom_violin(fill="transparent", draw_quantiles=0.5) + 
+      geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + guides(fill=F) + 
+      xlab("") + ylab("rate above no activator (RFU/min)") + 
+      ggtitle("k-means clustering of in vivo viral structure (Lan, Sun, Huston)", 
+              subtitle="k = 2") +
+      annotate(geom="text", x= "unstructured", y=80, 
+               label=paste("p =", round(invivo_kmeans_2_wilcox$p.value, 
+                                        digits=3))))
 ```
 
 ## Comparison to screening performed in gBlocks
