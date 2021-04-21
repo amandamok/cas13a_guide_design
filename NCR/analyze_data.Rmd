@@ -359,6 +359,8 @@ viral_genome$huston <- as.numeric(huston$paired_to)
   plot_layout(nrow=1, widths=rep(1, 5))
 ```
 
+### Correlation between annotations: over entire spacer target
+
 ```{r guide_viral_structure, fig.height=8}
 guide_structure <- sapply(seq(nrow(guide_features)),
                           function(x) {
@@ -414,6 +416,66 @@ manfredonia_huston + lan_huston + sun_invivo_huston + sun_invitro_huston +
   manfredonia_sun_invitro + lan_sun_invitro + sun_invivo_sun_invitro + plot_spacer() +
   manfredonia_sun_invivo + lan_sun_invivo + plot_spacer() + plot_spacer() +
   manfredonia_lan + plot_spacer() + plot_spacer() + plot_spacer()
+```
+
+### Correlation between annotations: over spacer seed region (positions 8-12 on spacer)
+
+```{r guide_viral_structure_seed, fig.height=8}
+guide_structure_seed <- sapply(seq(nrow(guide_features)),
+                          function(x) {
+                            region_start <- guide_features$start[x] + 7
+                            region_end <- guide_features$start[x] + 11
+                            region_features <- viral_genome[match(region_start:region_end,
+                                                                  viral_genome$pos),]
+                            region_annotations <- c(manfredonia = mean(region_features$manfredonia == "lowShannon/highSHAPE"),
+                                                    lan = mean(region_features$lan == "unstructured"),
+                                                    sun_invivo = mean(region_features$sun_invivo),
+                                                    sun_invitro = mean(region_features$sun_invitro),
+                                                    huston = mean(region_features$huston == 0))
+                            return(region_annotations)
+                          })
+guide_structure_seed <- data.frame(t(guide_structure_seed))
+colnames(guide_structure_seed) <- paste0(colnames(guide_structure_seed), "_seed")
+guide_features <- cbind(guide_features, guide_structure_seed)
+
+manfredonia_lan_seed <- plot_guide_feature_cor(guide_structure_seed,
+                                          "manfredonia_seed", "Manfredonia",
+                                          "lan_seed", "Lan")
+manfredonia_sun_invivo_seed <- plot_guide_feature_cor(guide_structure_seed,
+                                                 "manfredonia_seed", "Manfredonia",
+                                                 "sun_invivo_seed", "Sun (in vivo)")
+manfredonia_sun_invitro_seed <- plot_guide_feature_cor(guide_structure_seed,
+                                                  "manfredonia_seed", "Manfredonia",
+                                                  "sun_invitro_seed", "Sun (in vitro)")
+manfredonia_huston_seed <- plot_guide_feature_cor(guide_structure_seed,
+                                             "manfredonia_seed", "Manfredonia",
+                                             "huston_seed", "Huston")
+lan_sun_invivo_seed <- plot_guide_feature_cor(guide_structure_seed,
+                                         "lan_seed", "Lan",
+                                         "sun_invivo_seed", "Sun (in vivo)",
+                                         in_vivo=T)
+lan_sun_invitro_seed <- plot_guide_feature_cor(guide_structure_seed,
+                                          "lan_seed", "Lan",
+                                          "sun_invitro_seed", "Sun (in vitro)")
+lan_huston_seed <- plot_guide_feature_cor(guide_structure_seed,
+                                     "lan_seed", "Lan",
+                                     "huston_seed", "Huston",
+                                     in_vivo=T)
+sun_invivo_sun_invitro_seed <- plot_guide_feature_cor(guide_structure_seed,
+                                                 "sun_invivo_seed", "Sun (in vivo)",
+                                                 "sun_invitro_seed", "Sun (in vitro)")
+sun_invivo_huston_seed <- plot_guide_feature_cor(guide_structure_seed,
+                                            "sun_invivo_seed", "Sun (in vivo)",
+                                            "huston_seed", "Huston",
+                                            in_vivo=T)
+sun_invitro_huston_seed <- plot_guide_feature_cor(guide_structure_seed,
+                                             "sun_invitro_seed", "Sun (in vitro)",
+                                             "huston_seed", "Huston")
+
+manfredonia_huston_seed + lan_huston_seed + sun_invivo_huston_seed + sun_invitro_huston_seed +
+  manfredonia_sun_invitro_seed + lan_sun_invitro_seed + sun_invivo_sun_invitro_seed + plot_spacer() +
+  manfredonia_sun_invivo_seed + lan_sun_invivo_seed + plot_spacer() + plot_spacer() +
+  manfredonia_lan_seed + plot_spacer() + plot_spacer() + plot_spacer()
 ```
 
 * Annotations from Manffedonia (2020) correlate poorly with other annotations
@@ -860,7 +922,7 @@ wrap_plots(maintain_hairpin_plots, ncol=1, byrow=T)
    theme_bw() + xlab("") + ylab("rate above no activator (RFU/min)") + 
    theme(legend.position="none") +
    theme(axis.text.x=element_text(angle=90, hjust=1))) / 
-  (ggplot(guide_rate_100fM, aes(x=class, y=Estimate, fill=class)) +
+  (ggplot(guide_rate_100fM, aes(x=class, y=Estimate)) +
      geom_violin(aes(fill=class), alpha=0.25, 
                  draw_quantiles=c(0.25, 0.75), linetype="dashed") +
      geom_violin(fill="transparent", draw_quantiles=0.5) +
@@ -1130,6 +1192,79 @@ invivo_kmeans_3_wilcox <- wilcox.test(Estimate ~ invivo_kmeans_3,
       annotate(geom="text", x= "unstructured", y=80, 
                label=paste("p =", round(invivo_kmeans_2_wilcox$p.value, 
                                         digits=3))))
+```
+
+### Restriction to spacer seed region (positions 8-12 on spacer)
+
+```{r rate_by_viral_structure_seed, fig.height=8}
+# Manfredonia (2020)
+guide_rate$manfredonia_seed_cat <- ifelse(guide_rate$manfredonia_seed==1,
+                                          "unstructured",
+                                          ifelse(guide_rate$manfredonia_seed==0,
+                                                 "structured",
+                                                 "intermediate"))
+guide_rate$manfredonia_seed_cat <- factor(guide_rate$manfredonia_seed_cat,
+                                          levels=c("structured", "intermediate", "unstructured"))
+manfredonia_seed_plot <- ggplot(guide_rate, aes(x=manfredonia_seed_cat, y=Estimate)) + 
+  geom_violin(aes(fill=manfredonia_seed_cat), alpha=0.5,
+              draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
+  geom_violin(fill="transparent", draw_quantiles=0.5) + 
+  geom_dotplot(binaxis="y", stackdir="center", binwidth=1) +
+  theme_bw() + guides(fill=F) + ggtitle("Manfredonia (2020): spacer seed region") +
+  xlab("") + ylab("rate above no activator (RFU/min)")
+
+# Lan (2020)
+guide_rate$lan_seed_cat <- ifelse(guide_rate$lan_seed==1,
+                                  "unstructured",
+                                  ifelse(guide_rate$lan_seed==0,
+                                         "structured",
+                                         "intermediate"))
+guide_rate$lan_seed_cat <- factor(guide_rate$lan_seed_cat,
+                                  levels=c("structured", "intermediate", "unstructured"))
+lan_seed_plot <- ggplot(guide_rate, aes(x=lan_seed_cat, y=Estimate)) + 
+  geom_violin(aes(fill=lan_seed_cat), alpha=0.5,
+              draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
+  geom_violin(fill="transparent", draw_quantiles=0.5) + 
+  geom_dotplot(binaxis="y", stackdir="center", binwidth=1) +
+  theme_bw() + guides(fill=F) + ggtitle("Lan (2020): spacer seed region") +
+  xlab("") + ylab("rate above no activator (RFU/min)")
+
+# Sun (2021): in vitro
+sun_invitro_seed_cat <- kmeans(guide_rate$sun_invitro_seed, 2)
+guide_rate$sun_invitro_seed_cat <- factor(sun_invitro_seed_cat$cluster)
+levels(guide_rate$sun_invitro_seed_cat) <- c("structured", "unstructured")[rank(sun_invitro_seed_cat$centers)]
+sun_invitro_seed_plot <- ggplot(guide_rate, aes(x=sun_invitro_seed_cat, y=Estimate)) + 
+  geom_violin(aes(fill=sun_invitro_seed_cat), alpha=0.5,
+              draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
+  geom_violin(fill="transparent", draw_quantiles=0.5) + 
+  geom_dotplot(binaxis="y", stackdir="center", binwidth=1) +
+  theme_bw() + guides(fill=F) + ggtitle("Sun (2020): in vitro: spacer seed region") +
+  xlab("") + ylab("rate above no activator (RFU/min)")
+
+# Sun (2021): in vivo
+sun_invivo_seed_cat <- kmeans(guide_rate$sun_invivo_seed, 2)
+guide_rate$sun_invivo_seed_cat <- factor(sun_invivo_seed_cat$cluster)
+levels(guide_rate$sun_invivo_seed_cat) <- c("structured", "unstructured")[rank(sun_invivo_seed_cat$centers)]
+sun_invivo_seed_plot <- ggplot(guide_rate, aes(x=sun_invivo_seed_cat, y=Estimate)) + 
+  geom_violin(aes(fill=sun_invivo_seed_cat), alpha=0.5,
+              draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
+  geom_violin(fill="transparent", draw_quantiles=0.5) + 
+  geom_dotplot(binaxis="y", stackdir="center", binwidth=1) +
+  theme_bw() + guides(fill=F) + ggtitle("Sun (2020): in vivo: spacer seed region") +
+  xlab("") + ylab("rate above no activator (RFU/min)")
+
+# Huston (2021)
+huston_seed_plot <- ggplot(guide_rate, aes(x=factor(huston_seed), y=Estimate)) + 
+  geom_violin(aes(fill=factor(huston_seed)), alpha=0.5,
+              draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
+  geom_violin(fill="transparent", draw_quantiles=0.5) + 
+  geom_dotplot(binaxis="y", stackdir="center", binwidth=1) +
+  theme_bw() + guides(fill=F) + ggtitle("Huston (2020): spacer seed region") +
+  xlab("") + ylab("rate above no activator (RFU/min)")
+
+manfredonia_seed_plot + lan_seed_plot + 
+  sun_invitro_seed_plot + sun_invivo_seed_plot +
+  huston_seed_plot + plot_spacer() + plot_layout(ncol=2)
 ```
 
 ## Comparison to screening performed in gBlocks
