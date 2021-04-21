@@ -418,6 +418,40 @@ manfredonia_huston + lan_huston + sun_invivo_huston + sun_invitro_huston +
   manfredonia_lan + plot_spacer() + plot_spacer() + plot_spacer()
 ```
 
+* Annotations from Manffedonia (2020) correlate poorly with other annotations
+    + Only 12% of genome is labeled
+    + Experimental data generated on 500bp tiling of refolded viral genome
+* Relatively high correlation between annotations generated from *in vivo* settings
+    + Lan (2020)
+    + Sun (2021)
+    + Huston (2021)
+
+### Intersection of *in vivo* viral structure predictions
+
+```{r in_vivo_intersection, fig.height=4}
+guide_features$lan_sun_huston <- sapply(seq(nrow(guide_features)),
+                                        function(x) {
+                                          tmp_sun <- guide_features$sun_invivo[x]
+                                          tmp_huston <- guide_features$huston[x]
+                                          tmp_lan <- guide_features$lan[x]
+                                          if(tmp_sun > 0.25 & tmp_huston >= 0.75) {
+                                            return("unstructured")
+                                          } else {
+                                            if(tmp_sun <= 0.25 & tmp_huston <= 0.25) {
+                                              return("structured")
+                                            } else {
+                                              return("intermediate")
+                                            }
+                                          }
+                                        })
+guide_features$lan_sun_huston <- factor(guide_features$lan_sun_huston,
+                                        levels=c("unstructured", "intermediate", "structured"))
+
+ggplot(guide_features, aes(x=sun_invivo, y=huston, col=lan, shape=lan_sun_huston)) +
+  geom_point() + theme_bw() + labs(col="Lan", shape="Structure (intersection)") + 
+  xlab("Sun (in vivo)") + ylab("Huston")
+```
+
 ### Correlation between annotations: over spacer seed region (positions 8-12 on spacer)
 
 ```{r guide_viral_structure_seed, fig.height=8}
@@ -476,38 +510,6 @@ manfredonia_huston_seed + lan_huston_seed + sun_invivo_huston_seed + sun_invitro
   manfredonia_sun_invitro_seed + lan_sun_invitro_seed + sun_invivo_sun_invitro_seed + plot_spacer() +
   manfredonia_sun_invivo_seed + lan_sun_invivo_seed + plot_spacer() + plot_spacer() +
   manfredonia_lan_seed + plot_spacer() + plot_spacer() + plot_spacer()
-```
-
-* Annotations from Manffedonia (2020) correlate poorly with other annotations
-    + Only 12% of genome is labeled
-    + Experimental data generated on 500bp tiling of refolded viral genome
-* Relatively high correlation between annotations generated from *in vivo* settings
-    + Lan (2020)
-    + Sun (2021)
-    + Huston (2021)
-
-```{r in_vivo_intersection, fig.height=4}
-guide_features$lan_sun_huston <- sapply(seq(nrow(guide_features)),
-                                        function(x) {
-                                          tmp_sun <- guide_features$sun_invivo[x]
-                                          tmp_huston <- guide_features$huston[x]
-                                          tmp_lan <- guide_features$lan[x]
-                                          if(tmp_sun > 0.25 & tmp_huston >= 0.75) {
-                                            return("unstructured")
-                                          } else {
-                                            if(tmp_sun <= 0.25 & tmp_huston <= 0.25) {
-                                              return("structured")
-                                            } else {
-                                              return("intermediate")
-                                            }
-                                          }
-                                        })
-guide_features$lan_sun_huston <- factor(guide_features$lan_sun_huston,
-                                        levels=c("unstructured", "intermediate", "structured"))
-
-ggplot(guide_features, aes(x=sun_invivo, y=huston, col=lan, shape=lan_sun_huston)) +
-  geom_point() + theme_bw() + labs(col="Lan", shape="Structure (intersection)") + 
-  xlab("Sun (in vivo)") + ylab("Huston")
 ```
 
 ```{r in_vivo_kmeans}
@@ -957,6 +959,8 @@ ggplot(guide_rate, aes(x=GC_content, y=Estimate)) + geom_point() +
   xlab("GC content (%)") + ylab("rate above no activator (RFU/min)") 
 ```
 
+* No correlation between spacer GC content and guide activity
+
 ## Comparison of 20mers to 28mers
 
 ```{r adapt_comparison}
@@ -1265,6 +1269,90 @@ huston_seed_plot <- ggplot(guide_rate, aes(x=factor(huston_seed), y=Estimate)) +
 manfredonia_seed_plot + lan_seed_plot + 
   sun_invitro_seed_plot + sun_invivo_seed_plot +
   huston_seed_plot + plot_spacer() + plot_layout(ncol=2)
+```
+
+## Position regression
+
+```{r position_regression, fig.height=10}
+structure_features <- c("manfredonia", "lan", "sun_invivo", "sun_invitro", "huston")
+spacer_viral_structure <- lapply(structure_features,
+                                 function(feature) {
+                                   # wrangle data.frame from regression
+                                   spacer_seq <- sapply(guide_rate$start,
+                                                        function(x) viral_genome$base[x:(x+19)])
+                                   viral_structure <- sapply(guide_rate$start,
+                                                             function(x) {
+                                                               viral_structure <- viral_genome[[feature]][x:(x+19)]
+                                                               if(grepl("sun", feature)) {
+                                                                 viral_structure <- as.numeric(viral_structure)
+                                                               }
+                                                               if(feature == "huston") {
+                                                                 viral_structure <- (viral_structure == 0)
+                                                               }
+                                                               return(viral_structure)
+                                                             })
+                                   regression_data <- data.frame(guide_rate$Estimate,
+                                                                 t(spacer_seq),
+                                                                 t(viral_structure))
+                                   colnames(regression_data) <- c("rate",
+                                                                  paste0("spacer_", 1:20),
+                                                                  paste0("structure_", 1:20))
+                                   regression_data <- subset(regression_data,
+                                                             nchar(guide_rate$spacer)==20)
+                                   # compute full model
+                                   full_model <- lm(rate ~ ., data=regression_data)
+                                   # compute positional models
+                                   position_models <- lapply(colnames(regression_data)[-1],
+                                                             function(x) {
+                                                               lm(formula(paste("rate ~", x)),
+                                                                  data=regression_data)
+                                                             })
+                                   position_models_r2 <- data.frame(colnames(regression_data)[-1],
+                                                                    sapply(position_models,
+                                                                           function(x) summary(x)$r.squared),
+                                                                    matrix(unlist(strsplit(colnames(regression_data)[-1],
+                                                                                           split="_")),
+                                                                           ncol=2, byrow=T))
+                                   colnames(position_models_r2) <- c("var", "r2", "type", "pos")
+                                   position_models_r2$pos <- factor(position_models_r2$pos, 
+                                                                    levels=1:20)
+                                   feature_plot <- ggplot(position_models_r2, 
+                                          aes(x=pos, y=r2, fill=type)) + 
+                                     geom_col(position="stack") + 
+                                     theme_bw() + ylim(0, 0.06) +
+                                     xlab("position in spacer") + 
+                                     ylab(expr(r^2)) + 
+                                     ggtitle("Rate ~ spacer sequence + viral genome structure",
+                                             subtitle=bquote("full model" ~ r^2 == 
+                                                               .(round(summary(full_model)$r.squared, 
+                                                                       digits=3)) ~ 
+                                                               "| structure:"~.(feature)))
+                                   return(list(data=regression_data,
+                                               full_model=full_model,
+                                               position_models=position_models,
+                                               position_models_r2=position_models_r2,
+                                               plot=feature_plot))
+                                 })
+wrap_plots(lapply(spacer_viral_structure, function(x) x$plot), ncol=1)
+
+# loo_models <- lapply(2:ncol(regression_data),
+#                      function(x) {
+#                        tmp_data <- regression_data[, -x]
+#                        lm(rate ~ ., data=tmp_data)
+#                      })
+# loo_models_delta_r2 <- data.frame(colnames(regression_data)[-1],
+#                                   sapply(position_models, 
+#                                          function(x) summary(x)$r.squared),
+#                                   matrix(unlist(strsplit(colnames(regression_data)[-1], 
+#                                                          split="_")),
+#                                          ncol=2, byrow=T))
+# colnames(loo_models_delta_r2) <- c("var", "r2", "type", "pos")
+# loo_models_delta_r2$delta_r2 <- summary(full_model)$r.squared - loo_models_delta_r2$r2
+# loo_models_delta_r2$pos <- factor(loo_models_delta_r2$pos, levels=1:20)
+# loo_plot <- ggplot(loo_models_delta_r2, aes(x=pos, y=delta_r2, fill=type)) + 
+#   geom_col(position="stack") + theme_bw() + xlab("position") + ylab(expr(Delta*r^2)) + 
+#   ggtitle("Rate ~ spacer sequence + viral genome structure",
+#           subtitle="leave-one-out models")
 ```
 
 ## Comparison to screening performed in gBlocks
