@@ -273,7 +273,10 @@ guide_features$structure <- sapply(seq(nrow(guide_features)),
 ```{r load_viral_genome_structure, fig.height=4}
 viral_genome <- Biostrings::readDNAStringSet(file.path(ref_dir, "NC_045512v2.fa"))
 viral_genome <- data.frame(pos = seq(nchar(viral_genome)),
-                           base = unlist(strsplit(as.character(viral_genome), split="")),
+                           base = unlist(strsplit(as.character(viral_genome), 
+                                                  split="")),
+                           spacer_base = unlist(strsplit(as.character(complement(viral_genome)), 
+                                                         split="")),
                            row.names=NULL)
 
 # Manfredonia et al. NAR (2020)
@@ -1224,7 +1227,7 @@ spacer_viral_structure <- lapply(structure_features,
                                  function(feature) {
                                    # wrangle data.frame from regression
                                    spacer_seq <- sapply(guide_rate$start,
-                                                        function(x) viral_genome$base[x:(x+19)])
+                                                        function(x) viral_genome$spacer_base[x:(x+19)])
                                    if(feature == "spacer_only") {
                                      regression_data <- data.frame(guide_rate$Estimate,
                                                                    t(spacer_seq),
@@ -1298,39 +1301,47 @@ spacer_viral_structure <- lapply(structure_features,
                                                plot=feature_plot))
                                  })
 names(spacer_viral_structure) <- structure_features
-spacer_viral_structure[["spacer_only"]]$plot <- spacer_viral_structure[["spacer_only"]]$plot + 
+spacer_viral_structure$spacer_only$plot <- spacer_viral_structure$spacer_only$plot + 
   ggtitle("Rate ~ spacer sequence", 
           subtitle=bquote("full model" ~ r^2 == 
-                            .(round(summary(spacer_viral_structure[["spacer_only"]]$full_model)$r.squared,
+                            .(round(summary(spacer_viral_structure$spacer_only$full_model)$r.squared,
                                    digits=3))))
 wrap_plots(lapply(spacer_viral_structure, function(x) x$plot), ncol=1)
-spacer_viral_structure[["spacer_only"]]$plot / spacer_viral_structure[["lan"]]$plot
+spacer_viral_structure$spacer_only$plot / spacer_viral_structure$lan$plot
 
-# loo_models <- lapply(2:ncol(regression_data),
-#                      function(x) {
-#                        tmp_data <- regression_data[, -x]
-#                        lm(rate ~ ., data=tmp_data)
-#                      })
-# loo_models_delta_r2 <- data.frame(colnames(regression_data)[-1],
-#                                   sapply(position_models, 
-#                                          function(x) summary(x)$r.squared),
-#                                   matrix(unlist(strsplit(colnames(regression_data)[-1], 
-#                                                          split="_")),
-#                                          ncol=2, byrow=T))
-# colnames(loo_models_delta_r2) <- c("var", "r2", "type", "pos")
-# loo_models_delta_r2$delta_r2 <- summary(full_model)$r.squared - loo_models_delta_r2$r2
-# loo_models_delta_r2$pos <- factor(loo_models_delta_r2$pos, levels=1:20)
-# loo_plot <- ggplot(loo_models_delta_r2, aes(x=pos, y=delta_r2, fill=type)) + 
-#   geom_col(position="stack") + theme_bw() + xlab("position") + ylab(expr(Delta*r^2)) + 
-#   ggtitle("Rate ~ spacer sequence + viral genome structure",
-#           subtitle="leave-one-out models")
+spacer_only_coef <- data.frame(summary(spacer_viral_structure$spacer_only$full_model)$coefficients)[-1,]
+lan_structure_coef <- data.frame(summary(spacer_viral_structure$lan$full_model)$coefficients)[-1,]
+lan_structure_coef <- subset(lan_structure_coef, 
+                             grepl("structure", rownames(lan_structure_coef)))
+lan_coef <- rbind(spacer_only_coef, lan_structure_coef)
+lan_coef <- data.frame(lan_coef, 
+                       matrix(unlist(strsplit(rownames(lan_coef), split="_")), 
+                              ncol=3, byrow=T))
+colnames(lan_coef) <- c("estimate", "std_error", "t", "pvalue", 
+                        "type", "position", "feature")
+lan_coef$position <- factor(lan_coef$position, levels=1:20)
+(ggplot(subset(lan_coef, type=="spacer"), 
+        aes(x=position, y=estimate, col=feature)) +
+    geom_point() + theme_bw() + geom_hline(yintercept=0) + 
+    ggtitle("sequence")) / 
+  (ggplot(subset(lan_coef, type=="structure"), 
+          aes(x=position, y=estimate, col=feature)) + 
+     geom_point() + theme_bw() + geom_hline(yintercept=0) +
+     ggtitle("viral structure (Lan 2020)"))
 ```
 
-* "Unstructured" label from Lan (2020) is most predictive of guide rate
+* "Unstructured" label from Lan (2020) is most predictive
 * Also informative:
     + Base-paired-ness from Huston (2021) in position 1
     + *in vitro* icSHAPE score from Sun (2021) in positions 6-9
-* Spacer sequence is most infromative in positions 2, 13, 17, 18
+* Spacer sequence is most informative in positions 2, 13, 17, 18
+
+### Likelihood ratio test (spacer-only vs. spacer+structure): 
+
+```{r}
+lmtest::lrtest(spacer_viral_structure$spacer_only$full_model,
+                                          spacer_viral_structure$lan$full_model)
+```
 
 ## Elastic net regression on all features
 
@@ -1419,6 +1430,24 @@ gblock_round1_data$X100.fM.Activator.above.noActivator <- with(gblock_round1_dat
                                                                as.numeric(X100.fM.Activator.Rate) -
                                                                  as.numeric(No.Activator.Rate))
 
+# load round 2, plate 1-2 platemap
+gblock_round2_platemap_1_2 <- xlsx::read.xlsx(file.path(project_dir, 
+                                                        "Plate1_2_gBlock_384w_replicate_platemap.xlsx"),
+                                              sheetIndex=1)
+gblock_round2_platemap_1_2 <- subset(gblock_round2_platemap_1_2,
+                                     subset=value_type %in% LETTERS[1:16])[, -1]
+gblock_round2_platemap_1_2_activator <- data.frame(matrix("_noActivator", 
+                                                nrow=nrow(gblock_round2_platemap_1_2),
+                                                ncol=ncol(gblock_round2_platemap_1_2)))
+gblock_round2_platemap_1_2_activator[, 13:24] <- "_100fM"
+gblock_round2_platemap_1_2_activator[c(2, 4, 6), 9] <- "_100fM"
+gblock_round2_platemap_1_2_activator[c(2, 4, 6), 11] <- "_100fM"
+gblock_round2_platemap_1_2 <- data.frame(sample = paste0(unlist(gblock_round2_platemap_1_2),
+                                                       unlist(gblock_round2_platemap_1_2_activator)),
+                                         well_384 = paste0(rep(LETTERS[1:16], times=24),
+                                                           rep(1:24, each=16)))
+gblock_round2_platemap_1_2$sample <- sub(" ", "_", gblock_round2_platemap_1_2$sample)
+
 # load round 2, plate 2-2 platemap
 gblock_round2_platemap_2_2 <- xlsx::read.xlsx(file.path(project_dir, 
                                                         "Plate2_2_gBlock_384w_replicate_platemap.xlsx"),
@@ -1457,15 +1486,19 @@ gblock_data <- lapply(gblock_data_fnames,
                                            })
                         tmp_data <- do.call(rbind, tmp_data)
                         colnames(tmp_data) <- c("cycle_number", "time", "temp", "signal", "well_384")
-                        if(tmp_plate=="gBlock2_1") {
+                        if(tmp_plate %in% paste0("gBlock", c("1_1", "2_1"))) {
                           well_96 <- mapping_384_to_96$well_96[match(tmp_data$well_384,
                                                                      mapping_384_to_96$well_384)]
-                          tmp_platemap <- plate_maps[["GS2_1"]]
+                          tmp_platemap <- plate_maps[[sub("gBlock", "GS", tmp_plate)]]
                           tmp_data$sample <- tmp_platemap$sample[match(well_96,
                                                                        tmp_platemap$well_96)]
                         } else {
-                          tmp_data$sample <- gblock_round2_platemap_2_2$sample[match(tmp_data$well_384,
-                                                                                     gblock_round2_platemap_2_2$well_384)]
+                          if(tmp_plate=="gBlock1_2") {
+                            tmp_platemap <- gblock_round2_platemap_1_2
+                          } else {
+                            tmp_platemap <- gblock_round2_platemap_2_2
+                          }
+                          tmp_data$sample <- tmp_platemap$sample[match(tmp_data$well_384, tmp_platemap$well_384)]
                         }
                         tmp_data$plate <- tmp_plate
                         return(tmp_data)
@@ -1532,55 +1565,56 @@ gblock_coef <- do.call(rbind, gblock_coef)
 gblock_rate <- subset(gblock_coef, grepl(":", gblock_coef$coef))
 
 # annotate guide_rate with gblock rate
-guide_rate$gblock_rate <- NA
-guide_rate$gblock_rate[match(gblock_round1_data$NCR.ID,
-                             guide_rate$NCR.id)] <- gblock_round1_data$X100.fM.Activator.above.noActivator
-guide_rate$gblock_rate[match(paste0("NCR_", gblock_rate$guide_id),
-                             guide_rate$NCR.id)] <- gblock_rate$Estimate
-guide_rate$round <- ifelse(guide_rate$NCR.id %in% gblock_round1_data$NCR.ID,
-                           "round 1", "round 2")
-gblock_plot_text <- data.frame(x=-Inf, y=Inf, round=c("round 1", "round 2"),
-                               text=paste("cor =",
-                                          c(round(with(subset(guide_rate, 
-                                                              round=="round 1"),
-                                                       cor(Estimate, gblock_rate, 
-                                                           method="spearman", 
-                                                           use="na.or.complete")), 
-                                                  digits=3),
-                                            round(with(subset(guide_rate, 
-                                                              round=="round 2"),
-                                                       cor(Estimate, gblock_rate, 
-                                                           method="spearman", 
-                                                           use="na.or.complete")), 
-                                                  digits=3))))
-# gblock_plot_text <- data.frame(x=-Inf, y=Inf, class=c("good", "bad", "random"),
-#                                text=paste("cor =",
-#                                           c(round(with(subset(guide_rate, 
-#                                                               class=="good"),
-#                                                        cor(Estimate, gblock_rate, 
-#                                                            method="spearman", 
-#                                                            use="na.or.complete")), 
-#                                                   digits=3),
-#                                             round(with(subset(guide_rate, 
-#                                                               class=="bad"),
-#                                                        cor(Estimate, gblock_rate, 
-#                                                            method="spearman", 
-#                                                            use="na.or.complete")), 
-#                                                   digits=3),
-#                                             c(round(with(subset(guide_rate, 
-#                                                                 class=="random"),
-#                                                          cor(Estimate, gblock_rate, 
-#                                                              method="spearman", 
-#                                                              use="na.or.complete")), 
-#                                                     digits=3)))))
-ggplot(subset(guide_rate, !(round=="round 2" & gblock_rate > 200)), 
-       aes(x=Estimate, y=gblock_rate, col=round)) + 
-  geom_point() + facet_grid(~round, scales="free_y") + theme_bw() + 
-  geom_smooth(method=lm, formula=y~x) + 
-  geom_label(data=gblock_plot_text, aes(x=x, y=y, label=text), 
-            col="black", hjust=0, vjust=1) + 
-  xlab("viral RNA: rate above no activator (RFU/min)") + 
-  ylab("gBlocks: rate above no activator (RFU/min)")
+guide_rate$gblock_rate_round1 <- NA
+guide_rate$gblock_rate_round1[match(gblock_round1_data$NCR.ID,
+                                    guide_rate$NCR.id)] <- gblock_round1_data$X100.fM.Activator.above.noActivator
+guide_rate$gblock_rate_round2[match(paste0("NCR_", gblock_rate$guide_id),
+                                    guide_rate$NCR.id)] <- gblock_rate$Estimate
+(ggplot(subset(guide_rate, !is.na(gblock_rate_round1)), 
+        aes(x=Estimate, y=gblock_rate_round1)) + 
+    geom_point(alpha=0.5) + theme_bw() + ggtitle("gBlock: round 1") +
+    geom_smooth(method=lm, formula=y~x) +
+    xlab("viral RNA: rate above no activator (RFU/min)") + 
+    ylab("gBlocks: rate above no activator (RFU/min)") +
+    annotate(geom="text", x=-Inf, y=Inf, 
+             label=paste("cor =", round(with(guide_rate, 
+                                             cor(Estimate, gblock_rate_round1, 
+                                                 use="pairwise.complete.obs",
+                                                 method="spearman")),
+                                        digits=3)),
+             hjust=-0.25, vjust=2, col="red")) + 
+  (ggplot(guide_rate, aes(x=Estimate, y=gblock_rate_round2)) +
+     geom_point(alpha=0.5) + theme_bw() + 
+     geom_smooth(method=lm, formula=y~x) +
+     xlab("viral RNA: rate above no activator (RFU/min)") +
+     ylab("gBlocks: rate above no activator (RFU/min)") +
+     ggtitle("gBlock: round 2") + ylim(0, 170) + 
+     annotate(geom="text", x=-Inf, y=Inf, 
+              label=paste("cor =", round(with(guide_rate, 
+                                              cor(Estimate, gblock_rate_round2, 
+                                                  use="pairwise.complete.obs",
+                                                  method="spearman")),
+                                         digits=3)),
+              hjust=-0.25, vjust=2, col="red")) + 
+  (ggplot(subset(guide_rate, !is.na(gblock_rate_round1)),
+          aes(x=gblock_rate_round1, y=gblock_rate_round2)) + 
+     geom_point(alpha=0.5) + geom_smooth(method="lm", formula=y~x) + 
+     theme_bw() + xlab("round 1 (RFU/min)") + ylab("round 2 (RFU/min)") + 
+     ggtitle("gBlocks: round 1 vs. round 2") + 
+     annotate(geom="text", x=-Inf, y=Inf,
+              label=paste("cor =", round(with(guide_rate,
+                                              cor(gblock_rate_round1, 
+                                                  gblock_rate_round2,
+                                                  use="pairwise.complete.obs",
+                                                  method="spearman")),
+                                         digits=3)),
+              hjust=-0.25, vjust=2, col="red"))
+```
+
+gBlock round 2 outlier:
+
+```{r gblock_NCR_1352}
+gblock_plots[["1352"]]
 ```
 
 # Supplementary: all traces
