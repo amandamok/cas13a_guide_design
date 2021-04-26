@@ -14,6 +14,7 @@ library(nlme)
 library(Biostrings)
 library(bedr)
 library(factoextra)
+library(ggseqlogo)
 
 knitr::opts_chunk$set(echo=F, cache=T, fig.width=8)
 
@@ -146,6 +147,47 @@ ggplot_violin <- function(plot_data, x_var, y_var="Estimate", fill_var=NULL,
     geom_violin(fill="transparent", draw_quantiles=0.5) +
     geom_dotplot(binaxis="y", stackdir="center", binwidth=binwidth) + 
     theme_bw() + xlab(x_lab) + ylab(y_lab)
+}
+
+compute_nt_freq <- function(sequences, bases=c("A", "U", "C", "G")) {
+  # sequences: character vector; sequences of same length
+  # bases: character vector; letters to compute frequences of at each position
+  seq_length <- unique(nchar(sequences))
+  seq_nt <- matrix(unlist(strsplit(sequences, split="")), ncol=seq_length, byrow=T)
+  seq_freq <- sapply(seq(seq_length),
+                     function(x) {
+                       sapply(bases,
+                              function(base) {
+                                mean(seq_nt[,x]==base)
+                              })
+                     })
+  rownames(seq_freq) <- bases
+  return(data.frame(t(seq_freq)))
+}
+
+calculate_relative_info <- function(q_ik, p_ik) {
+  # q_ik: data.frame; base frequencies per position in queries (bases as columns)
+  # p_ik: data.frame; base frequencies per position in background (bases as columns)
+  num_positions <- nrow(q_ik)
+  if(nrow(p_ik) != num_positions) {
+    stop("q_ik and p_ik have differing number of positions")
+  }
+  if(any(!(colnames(q_ik) %in% colnames(p_ik)))) {
+    stop("q_ik and p_ik have differing alphabets")
+  }
+  info_content <- sapply(seq(num_positions),
+                         function(x) {
+                           sum(q_ik[x,] * log2(q_ik[x,] / p_ik[x,]))
+                         })
+  denominator <- sapply(seq(num_positions),
+                        function(x) {
+                          sum(q_ik[x,] / p_ik[x,])
+                        })
+  base_heights <- sapply(colnames(q_ik),
+                         function(base) {
+                           q_ik[[base]]/p_ik[[base]]/denominator*info_content
+                         })
+  return(t(base_heights))
 }
 
 project_dir <- file.path(here(), "NCR")
@@ -1338,7 +1380,7 @@ lan_coef$position <- factor(lan_coef$position, levels=1:20)
 
 ### Likelihood ratio test (spacer-only vs. spacer+structure): 
 
-```{r}
+```{r lrtest_spaceronly_spacerlan}
 lmtest::lrtest(spacer_viral_structure$spacer_only$full_model,
                                           spacer_viral_structure$lan$full_model)
 ```
@@ -1415,6 +1457,38 @@ best_fit_coefs <- coef(best_fit, s=best_lambda)[,1]
     + $\alpha =$ `r best_alpha` 
     + $\lambda =$ `r best_lambda`
     + regression coefficients: `r best_fit_coefs[best_fit_coefs!=0]`
+
+## Sequence logo
+
+```{r sequence_logo}
+allSpacers_freq <- compute_nt_freq(subset(guide_rate$spacer,
+                                          nchar(guide_rate$spacer)==20))
+
+topSpacers_freq <- compute_nt_freq(subset(guide_rate$spacer,
+                                          nchar(guide_rate$spacer) == 20 &
+                                            rank(-guide_rate$Estimate) <= 20))
+topSpacers_info <- calculate_relative_info(topSpacers_freq, allSpacers_freq)
+
+bottomSpacers_freq <- compute_nt_freq(subset(guide_rate$spacer,
+                                             nchar(guide_rate$spacer) == 20 &
+                                               rank(guide_rate$Estimate) <= 20))
+bottomSpacers_info <- calculate_relative_info(bottomSpacers_freq, allSpacers_freq)
+
+(ggseqlogo::ggseqlogo(topSpacers_info, method="custom") + 
+  ggtitle("Sequence logo of top 20 spacers")) / 
+  (ggseqlogo::ggseqlogo(bottomSpacers_info, method="custom") +
+     ggtitle("Sequence logo for bottom 20 spacers"))
+```
+
+Top guides:
+
+* G in position 19
+* U's in positions 8-9, 11-14
+
+Bottom guides:
+
+* A in position 8
+* G's in positions 8-12, 18-20
 
 ## Comparison to screening performed in gBlocks
 
