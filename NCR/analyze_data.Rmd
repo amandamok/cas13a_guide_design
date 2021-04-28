@@ -18,6 +18,15 @@ library(ggseqlogo)
 
 knitr::opts_chunk$set(echo=F, cache=T, fig.width=8)
 
+ref_dir <- file.path(here(), "ref_data")
+project_dir <- file.path(here(), "NCR")
+traces_dir <- file.path(project_dir, "traces")
+if(!dir.exists(traces_dir)) { dir.create(traces_dir) }
+structure_dir <- file.path(project_dir, "structures")
+mixed <- T
+```
+
+```{r define_functions}
 compute_rate <- function(data_subset, 
                          x="time",
                          y="signal_bkgdSubtract") {
@@ -43,7 +52,8 @@ analyze_guide <- function(screening_data, guide,
   time_stop <- signif(max(data_subset$time))
   if(!mixed_model) {
     # compute fit
-    model_fit <- lm(formula(paste(signal, "~ time*activator")), data=data_subset)
+    model_fit <- lm(formula(paste(signal, "~ time*activator")), 
+                    data=subset(data_subset, time >= time_start))
     # predict trajectory
     model_fit_coef <- coef(model_fit)
     data_predict <- expand.grid(time=seq(time_start, time_stop, 1),
@@ -58,7 +68,7 @@ analyze_guide <- function(screening_data, guide,
     # compute fit
     model_fit <- nlme::lme(formula(paste(signal, "~ time*activator")),
                            random = ~ 1 + time | well_384, 
-                           data = data_subset)
+                           data = subset(data_subset, time >= time_start))
     # predict trajectory
     model_fit_coef <- summary(model_fit)$tTable[,1]
     data_predict_noActivator <- data.frame(time=seq(time_start, time_stop, 1),
@@ -189,10 +199,6 @@ calculate_relative_info <- function(q_ik, p_ik) {
                          })
   return(t(base_heights))
 }
-
-project_dir <- file.path(here(), "NCR")
-ref_dir <- file.path(here(), "ref_data")
-mixed <- T
 ```
 
 # Data
@@ -208,7 +214,7 @@ mixed <- T
 Example structure of a "good" guide
 
 ```{r good_guide}
-knitr::include_graphics(path.expand(file.path(project_dir, "good_guide.png")))
+knitr::include_graphics(path.expand(file.path(structure_dir, "good_guide.png")))
 ```
 
 ```{r load_guide_features}
@@ -772,7 +778,7 @@ noActivator_rates$plate <- noActivator_data$plate[match(noActivator_rates$guide_
 * Outliers on plate GS2-1 all correspond to NCR_1344
 
 ```{r NCR_1344_structure}
-knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1344.png")))
+knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1344.png")))
 ```
 
 # Data analysis
@@ -794,9 +800,19 @@ guide_ids <- unique(plate_data$guide_id)
 guide_ids <- guide_ids[!(guide_ids %in% c("612_Control", "No_Protein"))]
 all_results <- lapply(guide_ids,
                       function(x) {
-                        analyze_guide(plate_data, guide=x, time_start=15,
-                                      signal="signal_bkgdSubtract", 
-                                      mixed_model=mixed)
+                        tmp <- try(analyze_guide(plate_data, guide=x, time_start=15,
+                                                 signal="signal_bkgdSubtract",
+                                                 mixed_model=mixed),
+                                   silent=T)
+                        if(class(tmp) == "try-error") {
+                          print(paste0("mixed model failed: NCR_", x))
+                          tmp <- analyze_guide(plate_data, guide=x, time_start=15, 
+                                               signal="signal_bkgdSubtract",
+                                               mixed_model=F)
+                          return(tmp)
+                        } else {
+                          return(tmp)
+                        }
                       })
 names(all_results) <- guide_ids
 all_plots <- lapply(seq_along(all_results),
@@ -810,9 +826,19 @@ all_plots <- lapply(seq_along(all_results),
                       all_results[[x]]$plot + ggtitle(guide_id, subtitle=plot_subtitle)
                     })
 names(all_plots) <- guide_ids
-plots_by_group <- split(all_plots, 
-                        guide_features$group[match(paste0("NCR_", names(all_plots)),
-                                                   guide_features$NCR.id)])
+# plots_by_group <- split(all_plots, 
+#                         guide_features$group[match(paste0("NCR_", names(all_plots)),
+#                                                    guide_features$NCR.id)])
+```
+
+```{r save_viral_traces, message=F}
+trace_viral_dir <- file.path(traces_dir, "viral")
+if(!dir.exists(trace_viral_dir)) { dir.create(trace_viral_dir) }
+for(x in seq_along(all_plots)) {
+  ggsave(filename=file.path(trace_viral_dir, 
+                            paste0("NCR_", names(all_plots)[x], ".pdf")),
+         plot=all_plots[[x]], device="pdf")
+}
 ```
 
 ### Example traces:
@@ -875,11 +901,57 @@ ggplot(guide_rate, aes(x=Estimate, y=guide_id, col=plate)) + geom_point() +
 * Similar spread of rates across plates
 + Expect to see poorer rates for plates GS2-1 and GS2-2 (which harbor the "bad" guides)
 
+### Detection at last timepoint
+
+```{r detection_last_timepoint}
+ttest_lasttimepoint <- lapply(guide_ids,
+                              function(x) {
+                                tmp_data <- subset(plate_data, 
+                                                   cycle_number==60 &
+                                                     guide_id==x)
+                                t.test(signal_bkgdSubtract ~ activator,
+                                       data=tmp_data)
+                              })
+guide_rate$ttest_t <- sapply(ttest_lasttimepoint, function(x) x$statistic)
+guide_rate$ttest_pvalue <- sapply(ttest_lasttimepoint, function(x) x$p.value)
+guide_rate$detectable <- factor(ifelse(p.adjust(guide_rate$ttest_pvalue, 
+                                         method="fdr")<0.05,
+                                "detectable", "undetectable"),
+                                levels=c("undetectable", "detectable"))
+
+ggplot(subset(guide_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 16)),
+       aes(x=detectable, y=Estimate)) + 
+  geom_violin(aes(fill=detectable), alpha=0.25,
+              draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
+  geom_violin(fill="transparent", draw_quantiles=0.5) + 
+  geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + 
+  facet_grid(~ factor(crRNA_spacer_basepairs, levels=c(0, 4, 10, 16))) + 
+  theme_bw() + xlab("") + ylab("rate above no activator (RFU/min)") + 
+  geom_label(aes(x=x, y=y, label=text),
+            data=data.frame(x=Inf, y=Inf, crRNA_spacer_basepairs=c(0, 4, 10, 16),
+                            text=paste("p =",
+                                       sapply(c(0, 4, 10, 16), 
+                                                     function(x) 
+                                                       signif(wilcox.test(Estimate ~ detectable, 
+                                                                   subset(guide_rate, 
+                                                                          crRNA_spacer_basepairs==x))$p.value,
+                                                              digits=3)))),
+            col="red", hjust="inward", vjust="inward")
+
+ggplot_violin(guide_rate, x_var="detectable") + 
+  annotate(geom="label", x=Inf, y=Inf, col="red", hjust="inward", vjust="inward",
+           label=paste("p =", signif(wilcox.test(Estimate ~ detectable, 
+                                                 data=guide_rate)$p.value, 
+                                     digits=3)))
+```
+
 ### Volcano plots of screening rates
 
 ```{r plot_rate_volcano}
-ggplot(guide_rate, aes(x=Estimate, y=-log10(p.value), col=plate)) + geom_point() +
-  theme_bw() + xlab("rate above no activator (RFU/min)") + ylab("-log10(p)") +
+ggplot(guide_rate, aes(x=Estimate, y=-log10(p.value), 
+                       col=plate, shape=detectable)) + 
+  geom_point() + theme_bw() + 
+  xlab("rate above no activator (RFU/min)") + ylab("-log10(p)") +
   geom_hline(yintercept=-log10(0.05/nrow(guide_rate)), col="red", linetype="dashed")
 ```
 
@@ -888,8 +960,8 @@ ggplot(guide_rate, aes(x=Estimate, y=-log10(p.value), col=plate)) + geom_point()
 ### Rates by position along SARS-CoV-2 genome
 
 ```{r rate_by_position}
-ggplot(guide_rate, aes(x=start, y=Estimate, 
-                       col=crRNA_spacer_basepairs, shape=has_crRNA_hairpin)) + 
+ggplot(guide_rate, aes(x=start, y=Estimate, col=crRNA_spacer_basepairs, 
+                       shape=has_crRNA_hairpin)) + 
   geom_point(size=2, alpha=0.8) + theme_bw() + 
   xlab("genomic position") + ylab("rate above no activator (RFU/min)")
 ```
@@ -897,11 +969,11 @@ ggplot(guide_rate, aes(x=start, y=Estimate,
 Structures of the two guides that performed well (rate > 1 above background) but without hairpin structure (NCR_1346, NCR_1351):
 
 ```{r NCR_1346_structure}
-knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1346.png")))
+knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1346.png")))
 ```
 
 ```{r NCR_1351_structure}
-knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1351.png")))
+knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1351.png")))
 ```
 
 ### Rates across groups of guide secondary structure
@@ -969,31 +1041,31 @@ subset(guide_features, NCR.id %in% paste0("NCR_", bad_hairpin))[, c("NCR.id", "s
 ```
 
 ```{r NCR_1313_structure}
-knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1313.png")))
+knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1313.png")))
 ```
 
 ```{r NCR_1319_structure}
-knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1319.png")))
+knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1319.png")))
 ```
 
 ```{r NCR_1332_structure}
-knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1332.png")))
+knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1332.png")))
 ```
 
 ```{r NCR_1335_structure}
-knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1335.png")))
+knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1335.png")))
 ```
 
 ```{r NCR_1348_structure}
-knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1348.png")))
+knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1348.png")))
 ```
 
 ```{r NCR_1349_structure}
-knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1349.png")))
+knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1349.png")))
 ```
 
 ```{r NCR_1351_structure_2}
-knitr::include_graphics(path.expand(file.path(project_dir, "NCR_1351.png")))
+knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1351.png")))
 ```
 
 * "Good" guides exhibit similar 100fM rates as "bad" guides
@@ -1483,12 +1555,11 @@ bottomSpacers_info <- calculate_relative_info(bottomSpacers_freq, allSpacers_fre
 Top guides:
 
 * G in position 19
-* U's in positions 8-9, 11-14
+* U's in positions 7-9, 11-14
 
 Bottom guides:
 
-* A in position 8
-* G's in positions 8-12, 18-20
+* C's and G's in positions 9-12, 14-15
 
 ## Comparison to screening performed in gBlocks
 
@@ -1602,19 +1673,21 @@ gblock_data$signal_bkgdSubtract <- gblock_data$signal - gblock_bkgd_empty
 gblock_data <- subset(gblock_data, !(gblock_data$sample == "empty"))
 gblock_data$activator <- droplevels(gblock_data$activator)
 gblock_data <- subset(gblock_data, !is.na(signal))
+```
 
+```{r analyze_gblock_data}
 # compute gblock rates
 gblock_guide_ids <- unique(gblock_data$guide_id)
 gblock_guide_ids <- gblock_guide_ids[!(gblock_guide_ids %in% c("612_Control", "No_Protein"))]
 gblock_results <- lapply(gblock_guide_ids,
                          function(x) {
-                           tmp <- try(analyze_guide(gblock_data, guide=x, time_start=15,
+                           tmp <- try(analyze_guide(gblock_data, guide=x, time_start=30,
                                                     signal="signal_bkgdSubtract",
                                                     mixed_model=mixed),
                                       silent=T)
                            if(class(tmp) == "try-error") {
                              print(paste0("mixed model failed: NCR_", x))
-                             tmp <- analyze_guide(gblock_data, guide=x, time_start=15, 
+                             tmp <- analyze_guide(gblock_data, guide=x, time_start=30, 
                                                   signal="signal_bkgdSubtract",
                                                   mixed_model=F)
                              return(tmp)
@@ -1634,6 +1707,7 @@ gblock_plots <- lapply(seq_along(gblock_results),
                          gblock_results[[x]]$plot + ggtitle(guide_id, subtitle=plot_subtitle)
                        })
 names(gblock_plots) <- gblock_guide_ids
+
 gblock_coef <- lapply(gblock_results, function(x) x$coef)
 gblock_coef <- do.call(rbind, gblock_coef)
 gblock_rate <- subset(gblock_coef, grepl(":", gblock_coef$coef))
@@ -1685,64 +1759,18 @@ guide_rate$gblock_rate_round2[match(paste0("NCR_", gblock_rate$guide_id),
               hjust=-0.25, vjust=2, col="red"))
 ```
 
+```{r save_gblock_traces, message=F}
+trace_gblock_dir <- file.path(traces_dir, "gblock")
+if(!dir.exists(trace_gblock_dir)) { dir.create(trace_gblock_dir) }
+for(x in seq_along(all_plots)) {
+  ggsave(filename=file.path(trace_gblock_dir, 
+                            paste0("NCR_", names(gblock_plots)[x], ".pdf")),
+         plot=all_plots[[x]], device="pdf")
+}
+```
+
 gBlock round 2 outlier:
 
 ```{r gblock_NCR_1352}
 gblock_plots[["1352"]]
-```
-
-# Supplementary: all traces
-
-## "Good" guides
-
-```{r suppl_good_guide, }
-plots_by_group$`good guide`
-```
-
-## "Bad" guides: maintains hairpin, 4 basepaired positions in spacer
-
-```{r suppl_hasHairpin_4bp}
-plots_by_group$`hasHairpin/4bp`
-```
-
-## "Bad" guides: no hairpin, 4 basepaired positions in spacer
-
-```{r suppl_noHairpin_4bp}
-plots_by_group$`noHairpin/4bp`
-```
-
-## "Bad" guides: maintains hairpin, 10 basepaired positions in spacer
-
-```{r suppl_hasHairpin_10bp}
-plots_by_group$`hasHairpin/10bp`
-```
-
-## "Bad" guides: no hairpin, 10 basepaired positions in spacer
-
-```{r suppl_noHairpin_10bp}
-plots_by_group$`noHairpin/10bp`
-```
-
-## "Bad" guides: maintains hairpin, 16 basepaired positions in spacer
-
-```{r suppl_hasHairpin_16bp}
-plots_by_group$`hasHairpin/16bp`
-```
-
-## "Bad" guides: no hairpin, 16 basepaired positions in spacer
-
-```{r suppl_noHairpin_16bp}
-plots_by_group$`noHairpin/16bp`
-```
-
-## NCR_1344
-
-```{r suppl_NCR_1344}
-all_plots[["1344"]]
-```
-
-## gBlock traces
-
-```{r suppl_gBlocks}
-gblock_plots
 ```
