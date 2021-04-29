@@ -1333,7 +1333,7 @@ manfredonia_seed_plot + lan_seed_plot +
   huston_seed_plot + plot_spacer() + plot_layout(ncol=2)
 ```
 
-## Position regression
+## Position regression: guide rate
 
 ```{r position_regression, fig.height=10}
 structure_features <- c("spacer_only", "manfredonia", "lan", "sun_invivo", "sun_invitro", "huston")
@@ -1529,6 +1529,96 @@ best_fit_coefs <- coef(best_fit, s=best_lambda)[,1]
     + $\alpha =$ `r best_alpha` 
     + $\lambda =$ `r best_lambda`
     + regression coefficients: `r best_fit_coefs[best_fit_coefs!=0]`
+
+## Position regression: detectability at 2-hr timepoint
+
+```{r position_regression_logistic}
+structure_features <- c("spacer_only", "manfredonia", "lan", "sun_invivo", "sun_invitro", "huston")
+logistic_fit_all <- lapply(structure_features,
+                           function(feature) {
+                             # wrangle data.frame from regression
+                             spacer_seq <- sapply(guide_rate$start,
+                                                  function(x) viral_genome$spacer_base[x:(x+19)])
+                             if(feature == "spacer_only") {
+                               regression_data <- data.frame(guide_rate$detectable,
+                                                             t(spacer_seq),
+                                                             stringsAsFactors=T)
+                               colnames(regression_data) <- c("detectable", paste0("spacer_", 1:20))
+                             } else {
+                               viral_structure <- sapply(guide_rate$start,
+                                                         function(x) {
+                                                           viral_structure <- viral_genome[[feature]][x:(x+19)]
+                                                           if(feature == "lan") {
+                                                             viral_structure[viral_structure=="both"] <- "."
+                                                             viral_structure[viral_structure=="structured"] <- "."
+                                                           }
+                                                           if(grepl("sun", feature)) {
+                                                             viral_structure <- as.numeric(viral_structure)
+                                                           }
+                                                           if(feature == "huston") {
+                                                             viral_structure <- as.character((viral_structure == 0))
+                                                           }
+                                                           return(viral_structure)
+                                                         })
+                               regression_data <- data.frame(guide_rate$detectable,
+                                                             t(spacer_seq),
+                                                             t(viral_structure),
+                                                             stringsAsFactors=T)
+                               colnames(regression_data) <- c("detectable",
+                                                              paste0("spacer_", 1:20),
+                                                              paste0("structure_", 1:20))
+                             }
+                             position_features <- colnames(regression_data)[-1]
+                             regression_data <- subset(regression_data,
+                                                       nchar(guide_rate$spacer)==20)
+                             # compute full model
+                             full_model <- glm(detectable ~ ., data=regression_data, family="binomial")
+                             # compute positional models
+                             position_models <- lapply(position_features,
+                                                       function(x) {
+                                                         tmp_data <- subset(regression_data,
+                                                                            select=colnames(regression_data) %in% 
+                                                                              c("detectable", x))
+                                                         glm(detectable ~ ., data=tmp_data, family="binomial")
+                                                       })
+                             position_models_r2 <- data.frame(position_features,
+                                                              sapply(position_models,
+                                                                     function(x) {
+                                                                       with(summary(x),
+                                                                            1-deviance/null.deviance)
+                                                                     }),
+                                                              matrix(unlist(strsplit(position_features,
+                                                                                     split="_")),
+                                                                     ncol=2, byrow=T))
+                             colnames(position_models_r2) <- c("var", "r2", "type", "pos")
+                             position_models_r2$pos <- factor(position_models_r2$pos, 
+                                                              levels=1:20)
+                             feature_plot <- ggplot(position_models_r2, 
+                                                    aes(x=pos, y=r2, fill=type)) + 
+                               geom_col(position="stack") + theme_bw() + ylim(0, 0.095) + 
+                               xlab("position in spacer") + ylab(expr(r^2)) + 
+                               ggtitle("Detectable @ 2h ~ spacer sequence + viral genome structure",
+                                       subtitle=bquote("full model" ~ r^2 == 
+                                                         .(round(with(summary(full_model),
+                                                                      1-deviance/null.deviance), 
+                                                                 digits=3)) ~ 
+                                                         "| structure:"~.(feature)))
+                             return(list(data=regression_data,
+                                         full_model=full_model,
+                                         position_models=position_models,
+                                         position_models_r2=position_models_r2,
+                                         plot=feature_plot))
+                           })
+names(logistic_fit_all) <- structure_features
+logistic_fit_all$spacer_only$plot <- logistic_fit_all$spacer_only$plot + 
+  ggtitle("Detectable @ 2h ~ spacer sequence", 
+          subtitle=bquote("full model" ~ r^2 == 
+                            .(round(with(summary(logistic_fit_all$spacer_only$full_model),
+                                         1-deviance/null.deviance),
+                                   digits=3))))
+wrap_plots(lapply(logistic_fit_all, function(x) x$plot), ncol=1)
+logistic_fit_all$spacer_only$plot / logistic_fit_all$lan$plot / logistic_fit_all$sun_invivo$plot
+```
 
 ## Sequence logo
 
