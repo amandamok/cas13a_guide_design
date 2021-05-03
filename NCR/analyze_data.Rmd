@@ -44,6 +44,7 @@ analyze_guide <- function(screening_data, guide,
                           time_start=15, mixed_model=F) {
   # screening_data: data.frame
   # guide: character
+  # signal: character; column in screening_data to be used for linear regression
   # model: formula to be used for lm() regression
   # time_start: timepoint to start regression
   # mixed_model: logical; whether to run linear regression with random effects for 384-well
@@ -107,6 +108,34 @@ analyze_guide <- function(screening_data, guide,
     theme_bw() + scale_color_manual(values=c("red", "black")) +
     ggtitle(paste0("NCR_", guide)) + xlab("time (min)") + ylab("signal (RFU)")
   return(list(plot=guide_plot, coef=guide_coef))
+}
+
+compute_detection_time <- function(screening_data, guide, 
+                                   signal="signal_bkgdSubtract") {
+  # screening_data: data.frame
+  # guide: character
+  # signal: character; column in screening_data to be used for linear regression
+  data_subset <- subset(screening_data, guide_id==guide)
+  data_subset$activator <- relevel(data_subset$activator, ref="noActivator")
+  timepoints <- sort(unique(data_subset$time))
+  timepoint_ttest <- lapply(timepoints,
+                            function(x) {
+                              t.test(formula(paste(signal, "~ activator")), 
+                                     data=data_subset,
+                                     subset=(data_subset$time==x))
+                            })
+  timepoint_pvalue <- sapply(seq_along(timepoint_ttest),
+                             function(num_tests) {
+                               tmp_pvalues <- sapply(timepoint_ttest[1:num_tests],
+                                                     function(x) x$p.value)
+                               tmp_pvalues <- p.adjust(tmp_pvalues, method="fdr")
+                               return(tmp_pvalues[length(tmp_pvalues)])
+                             })
+  if(!any(timepoint_pvalue < 0.05)) {
+    return(NA)
+  } else {
+    return(data_subset$time[which.max(timepoint_pvalue < 0.05)])
+  }
 }
 
 load_sam <- function(sam_fname) {
@@ -198,6 +227,37 @@ calculate_relative_info <- function(q_ik, p_ik) {
                            q_ik[[base]]/p_ik[[base]]/denominator*info_content
                          })
   return(t(base_heights))
+}
+
+calculate_info <- function(q_ik, p_k=NULL) {
+  # q_ik: data.frame; base frequencies per position in queries (bases as columns)
+  # p_k: named numeric vector; background base frequencies
+  num_positions <- nrow(q_ik)
+  if(is.null(p_k)) {
+    p_k <- rep(1, ncol(q_ik)) / ncol(q_ik)
+    names(p_k) <- colnames(q_ik)
+  } else {
+    p_k <- p_k[match(colnames(q_ik), names(p_k))]
+  }
+  info_content <- sapply(seq(num_positions),
+                         function(x) {
+                           sum(q_ik[x,] * log2(q_ik[x,] / p_k))
+                         })
+  denominator <- sapply(seq(num_positions),
+                        function(x) {
+                          sum(q_ik[x,] / p_k)
+                        })
+  base_heights <- sapply(colnames(q_ik),
+                         function(base) {
+                           q_ik[[base]]/p_k[base]/denominator*info_content
+                         })
+  return(t(base_heights))
+}
+
+calculate_shannon_entropy <- function(q_ik) {
+  # q_ik: data.frame; base frequencies per position in queries (bases as columns)
+  position_info <- 2-rowSums(-q_ik*log2(q_ik))
+  return(t(q_ik * position_info))
 }
 ```
 
@@ -850,10 +910,6 @@ for(x in seq_along(all_plots)) {
 all_plots[["522"]] / all_plots[["527"]]
 ```
 
-## Results: 100 fM rates (above no activator)
-
-### Summary of screen
-
 ```{r NCR_1324_structure, fig.height=8, include=F}
 NCR_1324_noOutlier <- subset(plate_data, guide_id=="1324")
 NCR_1324_outlierWell <- NCR_1324_noOutlier$well_384[which.max(NCR_1324_noOutlier$signal_bkgdSubtract)]
@@ -870,6 +926,8 @@ all_coef <- cbind(all_coef,
                   guide_features[match(paste0("NCR_", all_coef$guide_id),
                                        guide_features$NCR.id),])
 all_coef$plate <- plate_data$plate[match(all_coef$guide_id, plate_data$guide_id)]
+
+guide_rate <- subset(all_coef, grepl(":", all_coef$coef))
 ```
 
 ```{r compute_100fM_rate}
@@ -881,8 +939,11 @@ guide_rate_100fM <- cbind(guide_rate_100fM,
                                                guide_features$NCR.id),])
 ```
 
+## Results: 100 fM rates (above no activator)
+
+### Summary of screen
+
 ```{r plot_rates, fig.height=16}
-guide_rate <- subset(all_coef, grepl(":", all_coef$coef))
 ggplot(guide_rate, aes(x=Estimate, y=guide_id, col=plate)) + geom_point() +
   geom_errorbar(aes(xmin=Estimate-qnorm(0.05)*Std.Error,
                     xmax=Estimate+qnorm(0.05)*Std.Error)) + 
@@ -943,6 +1004,36 @@ ggplot_violin(guide_rate, x_var="detectable") +
            label=paste("p =", signif(wilcox.test(Estimate ~ detectable, 
                                                  data=guide_rate)$p.value, 
                                      digits=3)))
+```
+
+### Time to detection
+
+Per guide:
+* Per timepoint: t-test for difference in signal between no activator and 100 fM conditions per timepoint
+* Perform FDR correction for number of measurements from start of experiment to timepoint
+* Return first timepoint for which corrected p-value < 0.05
+
+```{r time_to_detection}
+guide_rate$time_to_detection <- sapply(guide_ids,
+                                       function(x)  {
+                                         compute_detection_time(plate_data, x) 
+                                       })
+guide_rate$has_detection_time <- !is.na(guide_rate$time_to_detection)
+
+(ggplot(subset(guide_rate, !is.na(time_to_detection)),
+               aes(x=Estimate, y=time_to_detection)) + 
+   geom_jitter(alpha=0.5) + geom_smooth(method=lm, formula=y~x) + 
+   theme_bw() + xlab("rate above no activator (RFU/min)") + 
+   ylab("time to detection (min)") + 
+   ggtitle("Time to detection",
+           subtitle=paste("Number of detectable guides:",
+                          sum(!is.na(guide_rate$time_to_detection))))) + 
+  (ggplot_violin(guide_rate, x_var="has_detection_time") + 
+     labs(fill="detection time ≤ 2h") + 
+     annotate(geom="text", x=Inf, y=Inf, col="red", hjust="inward", vjust="inward",
+              label=paste("p =", signif(t.test(Estimate ~ has_detection_time, 
+                                               data=guide_rate)$p.value, 
+                                        digits=3))))
 ```
 
 ### Volcano plots of screening rates
@@ -1442,6 +1533,18 @@ lan_coef$position <- factor(lan_coef$position, levels=1:20)
           aes(x=position, y=estimate, col=feature)) + 
      geom_point() + theme_bw() + geom_hline(yintercept=0) +
      ggtitle("viral structure (Lan 2020)"))
+
+lan_model <- spacer_viral_structure$lan$full_model$model
+lan_model$predict <- predict(spacer_viral_structure$lan$full_model)
+ggplot(lan_model, aes(x=rate, y=predict)) + geom_point() + theme_bw() + 
+  geom_abline(aes(slope=1, intercept=0, col="y=x")) + labs(color="") + 
+  xlab("True rate (RFU/min)") + ylab("Predicted rate (RFU/min)") + 
+  ggtitle("Rate ~ spacer sequence + viral genome structure",
+          subtitle=bquote("full model" ~ r^2 == 
+                            .(round(summary(spacer_viral_structure$lan$full_model)$r.squared, 
+                                    digits=3)) ~ 
+                            "| structure: Lan"))
+  
 ```
 
 * "Unstructured" label from Lan (2020) is most predictive
@@ -1449,6 +1552,65 @@ lan_coef$position <- factor(lan_coef$position, levels=1:20)
     + Base-paired-ness from Huston (2021) in position 1
     + *in vitro* icSHAPE score from Sun (2021) in positions 6-9
 * Spacer sequence is most informative in positions 2, 13, 17, 18
+
+```{r crossvalidation}
+k <- 10
+
+spacer_seq <- sapply(guide_rate$start,
+                     function(x) viral_genome$spacer_base[x:(x+19)])
+viral_structure <- sapply(guide_rate$start,
+                          function(x) 
+                            ifelse(viral_genome$lan[x:(x+19)]=="unstructured",
+                                   "unstructured", "."))
+regression_data <- data.frame(guide_rate$Estimate,
+                              t(spacer_seq),
+                              t(viral_structure),
+                              stringsAsFactors=T)
+colnames(regression_data) <- c("rate",
+                               paste0("spacer_", 1:20),
+                               paste0("structure_", 1:20))
+
+lan_regression_data <- regression_data
+lan_regression_data <- lan_regression_data[sample(nrow(lan_regression_data)),]
+folds <- cut(seq(nrow(lan_regression_data)), breaks=k, labels=F)
+
+crossvalidation_r2 <- sapply(seq(k),
+                             function(x) {
+                               training_fit <- lm(rate ~ ., 
+                                             data=subset(lan_regression_data, folds != x))
+                               test <- subset(lan_regression_data, folds == x)$rate
+                               test_predict <- predict(training_fit, 
+                                                           newdata = subset(lan_regression_data,
+                                                                            folds == x))
+                               test_r2 <- cor(test, test_predict)^2
+                               return(c(training=summary(training_fit)$r.squared,
+                                        test=test_r2))
+                             })
+crossvalidation_r2 <- data.frame(t(crossvalidation_r2))
+ggplot(crossvalidation_r2, aes(x=training, y=test)) + geom_point() + theme_bw() + 
+  xlab(expr(paste("training ", r^2))) + ylab(expr(paste("test ", r^2))) + 
+  ggtitle("Rate ~ spacer sequence + viral genome structure (Lan 2020)",
+          subtitle="10-fold cross-validation")
+
+lan_lasso <- glmnet::cv.glmnet(x=model.matrix(rate ~., data=lan_regression_data), 
+                               y=lan_regression_data$rate,
+                               family="gaussian", foldid=folds, alpha=1)
+lan_lasso_metrics <- data.frame(lambda=lan_lasso$lambda, 
+                                error=lan_lasso$cvm, 
+                                cv_upper=lan_lasso$cvup, 
+                                cv_lower=lan_lasso$cvlo,
+                                num_coef=lan_lasso$nzero, 
+                                dev_ratio=lan_lasso$glmnet.fit$dev.ratio)
+(ggplot(lan_lasso_metrics, aes(x=lambda, y=error, col=num_coef)) + theme_bw() + 
+  geom_point() + geom_line() + geom_errorbar(aes(ymin=cv_lower, ymax=cv_upper)) + 
+  labs(col="# non-zero coefficients") + 
+  xlab("LASSO penalty") + ylab("cross-validated MSE") + 
+  ggtitle("Rate ~ spacer sequence + viral genome structure (Lan 2020)",
+          subtitle="Cross-validated LASSO regresion (k=10)")) + 
+  (ggplot(lan_lasso_metrics, aes(x=lambda, y=dev_ratio, col=num_coef)) + theme_bw() +
+     geom_point() + geom_line() + labs(col="# non-zero coefficients") +
+     xlab("LASSO penalty") + ylab("cross-validated MSE"))
+```
 
 ### Likelihood ratio test (spacer-only vs. spacer+structure): 
 
@@ -1532,7 +1694,7 @@ best_fit_coefs <- coef(best_fit, s=best_lambda)[,1]
 
 ## Position regression: detectability at 2-hr timepoint
 
-```{r position_regression_logistic}
+```{r position_regression_logistic, fig.height=10}
 structure_features <- c("spacer_only", "manfredonia", "lan", "sun_invivo", "sun_invitro", "huston")
 logistic_fit_all <- lapply(structure_features,
                            function(feature) {
@@ -1620,11 +1782,67 @@ wrap_plots(lapply(logistic_fit_all, function(x) x$plot), ncol=1)
 logistic_fit_all$spacer_only$plot / logistic_fit_all$lan$plot / logistic_fit_all$sun_invivo$plot
 ```
 
+## New predictive model
+
+Features:
+* Sequence: A/T vs. C/G (binary), with respect to spacer coordinates
+* Target viral structure: structured vs. unstructured (binary) from *in vivo* annotations
+* Spacer viral structure: number of base-paired positions in spacer
+
+```{r clean_memory}
+rm(all_plots, plate_data)
+gc()
+```
+
+```{r viral_structure_invivo}
+invivo_features <- data.frame(lan=factor(ifelse(viral_genome$lan=="unstructured",
+                                                "unstructured", "."),
+                                         levels=c(".", "unstructured")),
+                              sun=viral_genome$sun_invivo,
+                              huston=factor(ifelse(viral_genome$huston==0,
+                                                   "unpaired", "paired"),
+                                            levels=c("paired", "unpaired")))
+invivo_features_dist <- daisy(invivo_features, metric="gower")
+fviz_nbclust(invivo_features, kmeans, method="silhouette")
+
+# ((fviz_nbclust(guide_features[, c("lan", "sun_invivo", "huston")], 
+#                kmeans, method="silhouette")) + 
+#     (fviz_cluster(invivo_kmeans_2, 
+#                   data=guide_features[, c("lan", "sun_invivo", "huston")], 
+#                   geom="point", ellipse.type="confidence") + 
+#        theme_bw() + guides(col=F, shape=F) + 
+#        scale_fill_discrete(labels=c("structured", "unstructured")[invivo_kmeans_2_labels]))) /
+#   (ggplot_violin(guide_rate, x_var="invivo_kmeans_2") + guides(fill=F) + 
+#      ggtitle("k-means clustering of in vivo viral structure (Lan, Sun, Huston)",
+#              subtitle="k = 2") +
+#      annotate(geom="text", x="unstructured", y=80,
+#               label=paste("p =", round(invivo_kmeans_2_wilcox$p.value,
+#                                        digits=3))))
+# 
+# set.seed(30)
+# invivo_kmeans_2 <- kmeans(guide_features[, c("lan", "sun_invivo", "huston")], 2)
+# invivo_kmeans_2_labels <- rank(rowMeans(invivo_kmeans_2$centers))
+# guide_features$invivo_kmeans_2 <- invivo_kmeans_2$cluster
+# guide_features$invivo_kmeans_2 <- as.factor(guide_features$invivo_kmeans_2)
+# levels(guide_features$invivo_kmeans_2) <- c("structured", "unstructured")[invivo_kmeans_2_labels]
+# 
+# set.seed(20)
+# invivo_kmeans_3 <- kmeans(guide_features[, c("lan", "sun_invivo", "huston")], 3)
+# invivo_kmeans_3_labels <- rank(rowMeans(invivo_kmeans_3$centers))
+# guide_features$invivo_kmeans_3 <- invivo_kmeans_3$cluster
+# guide_features$invivo_kmeans_3 <- as.factor(guide_features$invivo_kmeans_3)
+# levels(guide_features$invivo_kmeans_3) <- c("structured", "intermediate", "unstructured")[invivo_kmeans_3_labels]
+```
+
 ## Sequence logo
 
 ```{r sequence_logo}
 allSpacers_freq <- compute_nt_freq(subset(guide_rate$spacer,
                                           nchar(guide_rate$spacer)==20))
+nt_freq <- sapply(c("A", "U", "C", "G"),
+                  function(x) mean(unlist(strsplit(subset(guide_rate$spacer,
+                                                          nchar(guide_rate$spacer)==20), 
+                                                   split=""))==x))
 
 topSpacers_freq <- compute_nt_freq(subset(guide_rate$spacer,
                                           nchar(guide_rate$spacer) == 20 &
@@ -1636,10 +1854,17 @@ bottomSpacers_freq <- compute_nt_freq(subset(guide_rate$spacer,
                                                rank(guide_rate$Estimate) <= 20))
 bottomSpacers_info <- calculate_relative_info(bottomSpacers_freq, allSpacers_freq)
 
-(ggseqlogo::ggseqlogo(topSpacers_info, method="custom") + 
-  ggtitle("Sequence logo of top 20 spacers")) / 
-  (ggseqlogo::ggseqlogo(bottomSpacers_info, method="custom") +
-     ggtitle("Sequence logo for bottom 20 spacers"))
+(ggseqlogo(topSpacers_info, method="custom") + 
+  ggtitle("Sequence logo of top 20 spacers") + ylim(0, 0.5)) / 
+  (ggseqlogo(bottomSpacers_info, method="custom") +
+     ggtitle("Sequence logo for bottom 20 spacers") + ylim(0, 0.5))
+
+(ggseqlogo(calculate_shannon_entropy(allSpacers_freq), method="custom") + 
+    ggtitle("Sequence logo for all 20nt spacers") + ylim(0, 2)) / 
+  (ggseqlogo(calculate_shannon_entropy(topSpacers_freq), method="custom") + 
+     ggtitle("Top 20 spacers") + ylim(0, 2)) / 
+  (ggseqlogo(calculate_shannon_entropy(bottomSpacers_freq), method="custom") + 
+     ggtitle("Bottom 20 spacers") + ylim(0, 2))
 ```
 
 Top guides:
