@@ -1802,8 +1802,9 @@ invivo_features <- data.frame(lan=factor(ifelse(viral_genome$lan=="unstructured"
                               huston=factor(ifelse(viral_genome$huston==0,
                                                    "unpaired", "paired"),
                                             levels=c("paired", "unpaired")))
-invivo_features_dist <- daisy(invivo_features, metric="gower")
-fviz_nbclust(invivo_features, kmeans, method="silhouette")
+write.table(invivo_features,
+            file=file.path(project_dir, "invivo_features.txt"),
+            quote=F, row.names=F, col.names=T, sep="\t")
 
 # ((fviz_nbclust(guide_features[, c("lan", "sun_invivo", "huston")], 
 #                kmeans, method="silhouette")) + 
