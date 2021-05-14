@@ -15,6 +15,7 @@ library(Biostrings)
 library(bedr)
 library(factoextra)
 library(ggseqlogo)
+library(glmnet)
 
 knitr::opts_chunk$set(echo=F, cache=T, fig.width=8)
 
@@ -474,6 +475,13 @@ huston <- read.table(file.path(ref_dir, "huston_2021_structure.ct"), skip=1,
                      col.names=c("index", "base", "previous_index", "next_index", 
                                  "paired_to", "natural_numbering"))
 viral_genome$huston <- as.numeric(huston$paired_to)
+
+# clustering of in vivo metrics
+viral_genome_invivo <- data.frame(lan = (viral_genome$lan %in% c("both", "unstructured")),
+                                  sun = (viral_genome$sun_invivo >= 0.5),
+                                  huston = (viral_genome$huston == 0))
+viral_genome$invivo <- ifelse(rowSums(viral_genome_invivo, na.rm=T) >= 2,
+                              "unstructured", "structured")
 
 (ggplot(viral_genome, aes(x=manfredonia)) + geom_bar() + theme_bw() + 
     ggtitle("Manfredonia") + xlab("") + ylab("# genomic positions") +
@@ -1621,7 +1629,7 @@ lmtest::lrtest(spacer_viral_structure$spacer_only$full_model,
 
 ## Elastic net regression on all features
 
-```{r position_regression_elasticnet}
+```{r position_regression_elasticnet, eval=F}
 regression_data <- lapply(colnames(viral_genome)[-1],
                           function(feature) {
                             t(sapply(guide_rate$start,
@@ -1685,12 +1693,6 @@ best_lambda <- cv_glmnet_mse$lambda[which.min(cv_glmnet_mse$mse)]
 best_fit <- cv_glmnet_fits[[which(alphas==best_alpha)]]$glmnet.fit
 best_fit_coefs <- coef(best_fit, s=best_lambda)[,1]
 ```
-
-* $\alpha=0$: ridge regression; $\alpha=1$: LASSO
-* best fit: 
-    + $\alpha =$ `r best_alpha` 
-    + $\lambda =$ `r best_lambda`
-    + regression coefficients: `r best_fit_coefs[best_fit_coefs!=0]`
 
 ## Position regression: detectability at 2-hr timepoint
 
@@ -1785,14 +1787,10 @@ logistic_fit_all$spacer_only$plot / logistic_fit_all$lan$plot / logistic_fit_all
 ## New predictive model
 
 Features:
+
 * Sequence: A/T vs. C/G (binary), with respect to spacer coordinates
 * Target viral structure: structured vs. unstructured (binary) from *in vivo* annotations
 * Spacer viral structure: number of base-paired positions in spacer
-
-```{r clean_memory}
-rm(all_plots, plate_data)
-gc()
-```
 
 ```{r viral_structure_invivo}
 invivo_features <- data.frame(lan=factor(ifelse(viral_genome$lan=="unstructured",
@@ -1804,35 +1802,246 @@ invivo_features <- data.frame(lan=factor(ifelse(viral_genome$lan=="unstructured"
                                             levels=c("paired", "unpaired")))
 write.table(invivo_features,
             file=file.path(project_dir, "invivo_features.txt"),
-            quote=F, row.names=F, col.names=T, sep="\t")
+            quote=F, row.names=F, col.names=T)
+```
 
-# ((fviz_nbclust(guide_features[, c("lan", "sun_invivo", "huston")], 
-#                kmeans, method="silhouette")) + 
-#     (fviz_cluster(invivo_kmeans_2, 
-#                   data=guide_features[, c("lan", "sun_invivo", "huston")], 
-#                   geom="point", ellipse.type="confidence") + 
-#        theme_bw() + guides(col=F, shape=F) + 
-#        scale_fill_discrete(labels=c("structured", "unstructured")[invivo_kmeans_2_labels]))) /
-#   (ggplot_violin(guide_rate, x_var="invivo_kmeans_2") + guides(fill=F) + 
-#      ggtitle("k-means clustering of in vivo viral structure (Lan, Sun, Huston)",
-#              subtitle="k = 2") +
-#      annotate(geom="text", x="unstructured", y=80,
-#               label=paste("p =", round(invivo_kmeans_2_wilcox$p.value,
-#                                        digits=3))))
-# 
-# set.seed(30)
-# invivo_kmeans_2 <- kmeans(guide_features[, c("lan", "sun_invivo", "huston")], 2)
-# invivo_kmeans_2_labels <- rank(rowMeans(invivo_kmeans_2$centers))
-# guide_features$invivo_kmeans_2 <- invivo_kmeans_2$cluster
-# guide_features$invivo_kmeans_2 <- as.factor(guide_features$invivo_kmeans_2)
-# levels(guide_features$invivo_kmeans_2) <- c("structured", "unstructured")[invivo_kmeans_2_labels]
-# 
-# set.seed(20)
-# invivo_kmeans_3 <- kmeans(guide_features[, c("lan", "sun_invivo", "huston")], 3)
-# invivo_kmeans_3_labels <- rank(rowMeans(invivo_kmeans_3$centers))
-# guide_features$invivo_kmeans_3 <- invivo_kmeans_3$cluster
-# guide_features$invivo_kmeans_3 <- as.factor(guide_features$invivo_kmeans_3)
-# levels(guide_features$invivo_kmeans_3) <- c("structured", "intermediate", "unstructured")[invivo_kmeans_3_labels]
+```{r guide_model, warning=F, fig.height=8}
+window_start <- -5
+window_stop <- 5
+alphas <- seq(0, 1, by=0.1)
+
+# sequence features
+guide_sequence <- t(sapply(guide_rate$start,
+                           function(x) {
+                             tmp_positions <- (x+19+window_stop):(x+window_start)
+                             # factor(ifelse(viral_genome$base[tmp_positions] %in% c("A", "T"),
+                             #               "A_T", "C_G"),
+                             #        levels=c("A_T", "C_G"))
+                             # ifelse(viral_genome$base[tmp_positions] %in% c("A", "T"),
+                             #        0, 1)
+                             viral_genome$base[tmp_positions]
+                           }))
+guide_sequence <- data.frame(lapply(seq(ncol(guide_sequence)),
+                                    function(x)  {
+                                      factor(guide_sequence[, x], 
+                                             levels=c("A", "T", "C", "G")) 
+                                    }))
+colnames(guide_sequence) <- paste0("seq_", (1+window_start):(20+window_stop))
+
+# structure features
+guide_structure <- t(sapply(guide_rate$start,
+                            function(x) {
+                              tmp_positions <- (x+19+window_stop):(x+window_start)
+                              viral_genome$invivo[tmp_positions]
+                            }))
+guide_structure <- data.frame(lapply(seq(ncol(guide_structure)),
+                                     function(x) {
+                                       factor(guide_structure[, x],
+                                              levels=c("structured", "unstructured"))
+                                     }))
+colnames(guide_structure) <- paste0("str_", (1+window_start):(20+window_stop))
+
+# data for model
+regression_data <- data.frame(rate=guide_rate$Estimate, guide_sequence, guide_structure)
+regression_data <- subset(regression_data, nchar(guide_rate$spacer)==20)
+regression_data_onehot <- as.matrix(mltools::one_hot(data.table::data.table(regression_data)))
+
+# optimize hyperparameters
+set.seed(21)
+num_folds <- 5
+full_model_folds <- sample(cut(seq(nrow(regression_data)), breaks=num_folds, labels=F))
+full_model_alphas <- seq(0, 1, by=0.1)
+full_model_elasticnet <- lapply(alphas,
+                                function(alpha) {
+                                  cv.glmnet(regression_data_onehot[, -1], # as.matrix(regression_data[, -1])
+                                            regression_data$rate,
+                                            foldid=full_model_folds,
+                                            alpha=alpha)
+                                })
+full_model_elasticnet_r2 <- lapply(seq_along(alphas),
+                                   function(alpha_id) {
+                                     tmp_lambdas <- full_model_elasticnet[[alpha_id]]$lambda
+                                     do.call(rbind,
+                                             lapply(seq(num_folds),
+                                                    function(fold_id) {
+                                                      tmp_training <- subset(regression_data_onehot,
+                                                                             full_model_folds!=fold_id)
+                                                      tmp_testing <- subset(regression_data_onehot, 
+                                                                            full_model_folds==fold_id)
+                                                      tmp_fit <- glmnet(as.matrix(tmp_training[, -1]),
+                                                                        tmp_training[, 1],
+                                                                        alpha=alphas[alpha_id], lambda=tmp_lambdas)
+                                                      tmp_predict <- lapply(tmp_lambdas,
+                                                                            function(lambda) {
+                                                                              predict(tmp_fit,
+                                                                                      newx=as.matrix(tmp_testing[, -1]),
+                                                                                      s=lambda)
+                                                                            })
+                                                      tmp_r2 <- sapply(tmp_predict,
+                                                                       function(x) {
+                                                                         1 - sum((tmp_testing[, 1]-x)^2) / 
+                                                                           sum((tmp_testing[, 1]-mean(tmp_testing[, 1]))^2)
+                                                                       })
+                                                      return(data.frame(alpha=alphas[alpha_id],
+                                                                        fold_id=fold_id,
+                                                                        lambda=rep(tmp_lambdas, times=2),
+                                                                        r2=c(tmp_fit$dev.ratio, tmp_r2),
+                                                                        split=rep(c("training", "testing"),
+                                                                                  each=length(tmp_lambdas))))
+                                                    }))
+                                             })
+full_model_elasticnet_r2 <- do.call(rbind, full_model_elasticnet_r2)
+full_model_elasticnet_r2 <- aggregate(r2 ~ alpha + lambda + split, data=full_model_elasticnet_r2, FUN=mean)
+full_model_elasticnet_r2$alpha <- factor(as.character(full_model_elasticnet_r2$alpha),
+                                         levels=as.character(alphas))
+full_model_elasticnet_r2$split <- factor(full_model_elasticnet_r2$split,
+                                         levels=c("training", "testing"))
+cv_fullmodel_r2_plot <- ggplot(full_model_elasticnet_r2, aes(x=lambda, y=r2, col=alpha)) + 
+  geom_line() + theme_bw() + scale_x_log10() + 
+  facet_grid(split ~ ., scales="free_y") + 
+  xlab(expr(lambda)) + ylab(bquote("mean" ~ r^2)) + labs(col=expr(alpha)) + 
+  ggtitle("Elastic net regression, 5-fold cross-validation", 
+          subtitle="rate ~ sequence [ spacer +/- 5nt ]")
+full_model_elasticnet_MSE <- lapply(seq_along(full_model_elasticnet),
+                                    function(x) {
+                                      tmp_fit <- full_model_elasticnet[[x]]
+                                      data.frame(lambda=tmp_fit$lambda,
+                                                 cv_error=tmp_fit$cvm,
+                                                 cv_upper=tmp_fit$cvup,
+                                                 cv_lower=tmp_fit$cvlo,
+                                                 num_nonzero=tmp_fit$nzero,
+                                                 alpha=full_model_alphas[x],
+                                                 dev_ratio=tmp_fit$glmnet.fit$dev.ratio)
+                                    })
+full_model_elasticnet_MSE <- do.call(rbind, full_model_elasticnet_MSE)
+full_model_elasticnet_MSE$alpha <- as.factor(full_model_elasticnet_MSE$alpha)
+full_model_elasticnet_bestfits <- lapply(alphas,
+                                         function(x) {
+                                           tmp_fit <- subset(full_model_elasticnet_MSE,
+                                                             alpha==x)
+                                           tmp_fit[which.min(tmp_fit$cv_error),]
+                                         })
+full_model_elasticnet_bestfits <- do.call(rbind, full_model_elasticnet_bestfits)
+full_model_elasticnet_bestfits$alpha <- as.numeric(as.character(full_model_elasticnet_bestfits$alpha))
+best_alpha <- as.numeric(as.character(full_model_elasticnet_MSE$alpha[which.min(full_model_elasticnet_MSE$cv_error)]))
+best_lambda <- full_model_elasticnet_MSE$lambda[which.min(full_model_elasticnet_MSE$cv_error)]
+cv_mse_plot <- ggplot(full_model_elasticnet_MSE, aes(x=lambda, y=cv_error, col=alpha)) + 
+  geom_line() + theme_bw() + scale_x_log10() + 
+  xlab(bquote(lambda)) + labs(col=bquote(alpha)) + 
+  ylab(paste0("cross-validated error (k=", num_folds, ")")) + 
+  ggtitle("rate ~ nucleotide sequence + viral structure",
+          subtitle=bquote("best fit:"~alpha~"="~.(best_alpha)~";"~lambda~"="~.(best_lambda)))
+          # subtitle="base is A/T vs. C/G; sequence neighborhood: spacer +/- 5 nt") 
+cv_r2_plot <- ggplot(full_model_elasticnet_MSE, aes(x=lambda, y=dev_ratio, col=alpha)) +
+  geom_line() + theme_bw() + scale_x_log10() +
+  xlab(bquote(lambda)) + ylab(expr(r^2)) + labs(col=bquote(alpha))
+cv_bestfit_plot <- ggplot(full_model_elasticnet_bestfits, aes(x=alpha, y=dev_ratio, col=num_nonzero)) +
+     geom_point() + geom_path() + theme_bw() +
+     ggtitle("best fit:", subtitle=bquote(alpha~"="~.(best_alpha)~";"~lambda~"="~.(best_lambda))) +
+     ylab(paste0("cross-validated error (k=", num_folds, ")")) +
+     labs(col="number non-zero \ncoefficients")
+
+# pull coefficients for best fit
+full_model_bestfit <- full_model_elasticnet[[which(alphas==best_alpha)]]
+full_model_bestfit_coefs <- coef(full_model_bestfit$glmnet.fit, s=best_lambda)[,1]
+full_model_bestfit_coefs <- data.frame(matrix(unlist(strsplit(names(full_model_bestfit_coefs)[-1], 
+                                                              split="_")), ncol=3, byrow=T),
+                                       full_model_bestfit_coefs[-1],
+                                       row.names=NULL)
+colnames(full_model_bestfit_coefs) <- c("type", "position", "coef", "value")
+full_model_bestfit_coefs$position <- as.numeric(sub("\\.", "-", full_model_bestfit_coefs$position))
+# position_sequence_effects <- ggplot(full_model_bestfit_coefs, 
+#                                     aes(x=position, y=value, col=(value != 0))) + 
+#   annotate("rect", xmin=0.5, xmax=20.5, ymin=-5, ymax=7, fill="grey", alpha=0.5) + 
+#   geom_point() + theme_bw() + xlab("position relative to spacer") + ylab(expr(beta)) + 
+#   annotate("text", x=0.5, y=7, label="spacer,  5' : 3'", col="red", 
+#            hjust="inward", vjust="inward") + 
+#   ggtitle("", subtitle="effect of C/G base versus A/T") + labs(col="nonzero \ncoefficient")
+position_sequence_effects <- ggplot(full_model_bestfit_coefs) + theme_bw() +
+  geom_point(data=subset(full_model_bestfit_coefs, type=="seq"), 
+              aes(x=position, y=value, col=coef), alpha=0.5) +
+  geom_point(data=subset(full_model_bestfit_coefs, type=="str"),
+              aes(x=position, y=value, shape=coef), alpha=0.75) +
+  annotate("rect", xmin=0.5, xmax=20.5, ymin=-15, ymax=2, fill="grey", alpha=0.2) + 
+  annotate("text", x=0.5, y=2, label="spacer,  5' : 3'", col="red", 
+           hjust="inward", vjust="inward") + 
+  xlab("position") + ylab(expr(beta))
+
+full_model_bestfit_cv <- lapply(1:num_folds,
+                                function(x) {
+                                  # tmp_data <- split(regression_data,
+                                  #                   full_model_folds == x)
+                                  tmp_data <- split(seq(nrow(regression_data_onehot)),
+                                                    full_model_folds == x)
+                                  tmp_data <- lapply(tmp_data,
+                                                     function(indices) {
+                                                       data.frame(regression_data_onehot[indices,])
+                                                     })
+                                  names(tmp_data) <- c("training", "testing")
+                                  tmp_fit <- glmnet(as.matrix(tmp_data$training)[, -1],
+                                                    tmp_data$training[, 1],
+                                                    family="gaussian", alpha=best_alpha, 
+                                                    lambda=best_lambda)
+                                  tmp_data$training$predicted <- predict(tmp_fit,
+                                                                         newx=as.matrix(tmp_data$training)[, -1],
+                                                                         s=best_lambda)
+                                  tmp_data$testing$predicted <- predict(tmp_fit,
+                                                                        newx=as.matrix(tmp_data$testing)[, -1],
+                                                                        s=best_lambda)
+                                  tmp_plot_data <- rbind(data.frame(tmp_data$training,
+                                                                    split="training"),
+                                                         data.frame(tmp_data$testing,
+                                                                    split="testing"))
+                                  tmp_r2 <- sapply(tmp_data,
+                                                   function(x) {
+                                                     with(x, 1-sum((rate-predicted)^2)/sum((rate-mean(rate))^2))
+                                                   })
+                                  tmp_cor <- sapply(tmp_data,
+                                                    function(x) {
+                                                      with(x, cor(rate, predicted))
+                                                    })
+                                  # tmp_r2 <- sapply(tmp_data,
+                                  #                  function(x) {
+                                  #                    with(x, cor(rate, predicted)^2)
+                                  #                  })
+                                  tmp_fit_plot <- ggplot(tmp_plot_data, aes(x=rate, y=predicted, col=split)) + 
+                                    geom_point() + geom_abline(slope=1, intercept=0) + theme_bw() + 
+                                    ggtitle(paste("fold:", x), 
+                                            subtitle=paste("# non-zero coefficients: ", tmp_fit$df)) + 
+                                    xlab("true rate (RFU/min)") + ylab("predicted rate (RFU/min)") + 
+                                    scale_color_manual(values=c("#E69F00", "#56B4E9")) + guides(col=F) + 
+                                    annotate(geom="text", x=Inf, y=-Inf, col="#56B4E9",
+                                             label=bquote(r^2~"="~.(round(tmp_r2["training"], digits=3))),
+                                             hjust="inward", vjust=-2) + 
+                                    annotate(geom="text", x=Inf, y=-Inf, col="#E69F00",
+                                             label=bquote(r^2~"="~.(round(tmp_r2["testing"], digits=3))),
+                                             hjust="inward", vjust=-1) + 
+                                    annotate(geom="text", x=Inf, y=Inf, col="black", label="y=x",
+                                             hjust="inward", vjust="inward") + 
+                                    annotate(geom="text", x=-Inf, y=Inf, col="#56B4E9",
+                                             label=bquote(rho~"="~.(round(tmp_cor["training"], digits=2))),
+                                             hjust="inward", vjust=1.5) +
+                                    annotate(geom="text", x=-Inf, y=Inf, col="#E69F00",
+                                             label=bquote(rho~"="~.(round(tmp_cor["testing"], digits=2))),
+                                             hjust="inward", vjust=2.5)
+                                  return(list(data=tmp_plot_data,
+                                              fit=tmp_fit,
+                                              plot=tmp_fit_plot,
+                                              r2=tmp_r2))
+                                })
+full_model_bestfit_cv_plots <- lapply(full_model_bestfit_cv, function(x) x$plot)
+full_model_bestfit_cv_plots <- wrap_plots(full_model_bestfit_cv_plots, nrow=1)
+
+((cv_mse_plot + ggtitle("rate ~ nucleotide sequence + viral structure",
+                        subtitle="one-hot encoding")) +
+    (cv_fullmodel_r2_plot + geom_point(data=subset(full_model_elasticnet_r2,
+                                                   alpha==best_alpha & lambda==best_lambda),
+                                       col=1, size=0.75)) + 
+    (position_sequence_effects + 
+       ggtitle(bquote("best fit:"~alpha~"="~.(best_alpha)~";"~lambda~"="~.(best_lambda)),
+               subtitle=""))) / 
+  full_model_bestfit_cv_plots +
+  plot_annotation(tag_levels="A")
 ```
 
 ## Sequence logo
