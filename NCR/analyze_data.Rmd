@@ -16,6 +16,7 @@ library(bedr)
 library(factoextra)
 library(ggseqlogo)
 library(glmnet)
+library(randomForest)
 
 knitr::opts_chunk$set(echo=F, cache=T, fig.width=8)
 
@@ -578,6 +579,7 @@ guide_28mer <- guide_28mer[match(adapt_28mer$target.sequences, guide_28mer$targe
 guide_28mer$NCR.id <- adapt_28mer$New.Name
 guide_features <- intersect(intersect(colnames(order1), colnames(order2)),  colnames(guide_28mer))
 guide_features <- rbind(order1[, guide_features], order2[, guide_features], guide_28mer[, guide_features])
+guide_features$spacer_structure <- guide_features$crRNA_spacer_basepairs / nchar(guide_features$spacer)
 guide_features$crRNA_spacer_basepairs <- factor(guide_features$crRNA_spacer_basepairs, 
                                                 levels=sort(unique(guide_features$crRNA_spacer_basepairs)))
 guide_features$group <- sapply(seq(nrow(guide_features)),
@@ -803,21 +805,29 @@ viral_genome$invivo <- ifelse(rowSums(viral_genome_invivo, na.rm=T) >= 2,
 ```
 
 ```{r guide_downstream_features}
-guide_features$downstream_U <- sapply(guide_features$start,
+guide_features$downstream_U <- sapply(seq(nrow(guide_features)),
                                       function(x) {
-                                        region_start <- x + 20
+                                        region_start <- guide_features$start[x] +
+                                          nchar(guide_features$spacer[x])
                                         region_end <- region_start + 30 - 1
                                         tmp_region <- viral_genome[region_start:region_end,]
                                         mean(tmp_region$base == "U")
                                       })
-guide_features$downstream_unstructured_u <- sapply(guide_features$start,
+guide_features$downstream_unstructured_U <- sapply(seq(nrow(guide_features)),
                                                    function(x) {
-                                                     region_start <- x + 20
+                                                     region_start <- guide_features$start[x] +
+                                                       nchar(guide_features$spacer[x])
                                                      region_end <- region_start + 30 - 1
                                                      tmp_region <- viral_genome[region_start:region_end,]
                                                      mean((tmp_region$base == "U") &
                                                             (tmp_region$invivo == "unstructured"))
                                                    })
+guide_features$antitag_pos1 <- sapply(seq(nrow(guide_features)),
+                                      function(x) {
+                                        tmp_position <- guide_features$start[x] + 
+                                          nchar(guide_features$spacer[x])
+                                        viral_genome$base[tmp_position]
+                                      })
 ```
 
 ### Correlation between annotations: over entire spacer target
@@ -834,7 +844,7 @@ guide_structure <- sapply(seq(nrow(guide_features)),
                                                     sun_invivo = mean(region_features$sun_invivo),
                                                     sun_invitro = mean(region_features$sun_invitro),
                                                     huston = mean(region_features$huston == 0),
-                                                    invivo = mean(region_features$invivo == 1))
+                                                    invivo = mean(region_features$invivo == "unstructured"))
                             return(region_annotations)
                           })
 guide_structure <- data.frame(t(guide_structure))
@@ -1550,19 +1560,19 @@ ggplot(guide_rate, aes(x=GC_content, y=Estimate)) +
                                                      Estimate,
                                                      method="spearman"))$p.value, 
                                        digits=3))))) + 
-  (ggplot(guide_rate, aes(x=downstream_unstructured_u, y=Estimate)) + 
+  (ggplot(guide_rate, aes(x=downstream_unstructured_U, y=Estimate)) + 
      geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
      xlab("% unstructured U in downstream 30nt in viral genome") + 
      ylab("rate above no activator (RFU/min)") +
      annotate(geom="text", x=Inf, y=75, hjust="inward", vjust="inward", col="red",
               label=bquote(rho~"="~.(round(with(guide_rate, 
-                                                cor.test(downstream_unstructured_u, 
+                                                cor.test(downstream_unstructured_U, 
                                                          Estimate,
                                                          method="spearman"))$estimate, 
                                            digits=3)))) + 
      annotate(geom="text", x=Inf, y=65, hjust="inward", vjust="inward", col="red",
               label=bquote("p ="~.(round(with(guide_rate, 
-                                              cor.test(downstream_unstructured_u, 
+                                              cor.test(downstream_unstructured_U, 
                                                        Estimate,
                                                        method="spearman"))$p.value, 
                                          digits=3)))))
@@ -2273,6 +2283,81 @@ model1_plot <- ((model1$MSE$mse_plot +
 model1_plot
 ```
 
+```{r model1_randomforest, fig.height=8}
+model1_rf_regression <- randomForest(x=regression_data_onehot[, -1],
+                                     y=regression_data_onehot[, 1],
+                                     importance=T)
+model1_rf_regression_importance <- data.frame(model1_rf_regression$importance, 
+                                              matrix(unlist(strsplit(rownames(model1_rf_regression$importance), 
+                                                                     split="_")), 
+                                                     ncol=3, byrow=T))
+colnames(model1_rf_regression_importance) <- c("increaseMSE", "increaseNodePurity",
+                                               "type", "position", "coef")
+model1_rf_regression_importance$position <- with(model1_rf_regression_importance,
+                                                 as.numeric(sub("\\.", "-", position)))
+model1_rf_regression_r2 <- 1-sum((regression_data_onehot[,1]-model1_rf_regression$predicted)^2) / 
+  sum((regression_data_onehot[,1]-mean(regression_data_onehot[,1]))^2)
+model1_rf_regression_plot <- (ggplot(model1_rf_regression_importance) + 
+    geom_point(data=subset(model1_rf_regression_importance, type=="seq"), 
+               aes(x=position, y=increaseMSE, col=coef), alpha=0.5) +
+    geom_point(data=subset(model1_rf_regression_importance, type=="str"),
+               aes(x=position, y=increaseMSE, shape=coef), alpha=0.75) +
+    annotate("rect", xmin=0.5, xmax=20.5, fill="grey", alpha=0.2, 
+             ymin=min(model1_rf_regression_importance$increaseMSE) - 1, 
+             ymax=max(model1_rf_regression_importance$increaseMSE) + 1) + 
+    annotate("text", x=0.5, y=max(model1_rf_regression_importance$increaseMSE) + 1, 
+             label="spacer,  5' : 3'", 
+             col="red", hjust="inward", vjust="inward") + 
+    xlab("position") + ylab("mean decrease in accuracy") + theme_bw() +
+  ggtitle("Model 1: random forest (regression)", 
+          subtitle=bquote(r^2~"="~.(round(model1_rf_regression_r2, digits=3))))) + 
+  (ggplot(data.frame(true=regression_data_onehot[,1], 
+                     predicted=model1_rf_regression$predicted), 
+          aes(x=true, y=predicted)) + 
+     geom_point() + geom_abline(slope=1, intercept=0) + theme_bw() + 
+     xlab("true rate (RFU/min)") + ylab("predicted rate (RFU/min)"))
+
+model1_rf_classification <- randomForest(x=regression_data_onehot[, -1],
+                                         y=factor(ifelse(regression_data_onehot[, 1]>20,
+                                                         "rate>20", "rate<20")),
+                                         importance=T)
+model1_rf_classification_importance <- data.frame(model1_rf_classification$importance, 
+                                                  matrix(unlist(strsplit(rownames(model1_rf_classification$importance), 
+                                                                         split="_")), 
+                                                         ncol=3, byrow=T))
+colnames(model1_rf_classification_importance) <- c("bad", "good",
+                                                   "MeanDecreaseAccuracy", "MeanDecreaseGini",
+                                                   "type", "position", "coef")
+model1_rf_classification_importance$position <- with(model1_rf_classification_importance,
+                                                     as.numeric(sub("\\.", "-", position)))
+model1_rf_classification_accuracy <- mean(model1_rf_classification$predicted == 
+                                        factor(ifelse(regression_data_onehot[, 1]>20, "rate>20", "rate<20")))
+model1_rf_classification_plot <- (ggplot(model1_rf_classification_importance) + 
+    geom_point(data=subset(model1_rf_classification_importance, type=="seq"), 
+               aes(x=position, y=MeanDecreaseAccuracy, col=coef), alpha=0.5) +
+    geom_point(data=subset(model1_rf_classification_importance, type=="str"),
+               aes(x=position, y=MeanDecreaseAccuracy, shape=coef), alpha=0.75) +
+    annotate("rect", xmin=0.5, xmax=20.5, fill="grey", alpha=0.2, 
+             ymin=min(model1_rf_classification_importance$MeanDecreaseAccuracy) - 
+               sd(model1_rf_classification_importance$MeanDecreaseAccuracy), 
+             ymax=max(model1_rf_classification_importance$MeanDecreaseAccuracy) + 
+               sd(model1_rf_classification_importance$MeanDecreaseAccuracy)) + 
+    annotate("text", x=0.5, y=max(model1_rf_classification_importance$MeanDecreaseAccuracy) + 
+               sd(model1_rf_classification_importance$MeanDecreaseAccuracy), 
+             label="spacer,  5' : 3'", 
+             col="red", hjust="inward", vjust="inward") + 
+    xlab("position") + ylab("mean decrease in accuracy") + theme_bw() +
+  ggtitle("Model 1: random forest (classification: rate > 20)", 
+          subtitle=bquote("accuracy ="~.(round(model1_rf_classification_accuracy, digits=3))))) + 
+  (ggplot(data.frame(true=factor(ifelse(regression_data_onehot[, 1]>20,"rate>20", "rate<20")), 
+                     predicted=model1_rf_classification$predicted), 
+          aes(x=true, y=predicted)) + 
+     geom_count() + theme_bw() + 
+     xlab("true rate > 20 RFU/min") + ylab("predicted rate > 20 RFU/min"))
+
+model1_rf_regression_plot / model1_rf_classification_plot
+```
+
 Model 2: only sequence
 
 * sequence: spacer sequence +/- 5 nt
@@ -2342,7 +2427,7 @@ model3_fold_plot <- plot_fold_fits(regression_data_onehot, fold_ids,
                                    model3$MSE$best_alpha, model3$MSE$best_lambda)
 
 model3_plot <- ((model3$MSE$mse_plot + 
-                   ggtitle("Model 1", subtitle="rate ~ structure (+/- 5nt)")) +
+                   ggtitle("Model 3", subtitle="rate ~ structure (+/- 5nt)")) +
                   (model3$MSE$best_r2_plot) +
                   (model3$MSE$best_pearson_r_plot)) / 
   (model3_coef_plot + ggtitle("", subtitle="") + 
@@ -2394,7 +2479,7 @@ model4_fold_plot <- plot_fold_fits(regression_data_onehot, fold_ids,
                                    model4$MSE$best_alpha, model4$MSE$best_lambda)
 
 model4_plot <- ((model4$MSE$mse_plot + 
-                   ggtitle("Model 1", subtitle="rate ~ sequence [A/U v. C/G] (+/- 5nt)")) +
+                   ggtitle("Model 4", subtitle="rate ~ sequence [A/U v. C/G] (+/- 5nt)")) +
                   (model4$MSE$best_r2_plot) +
                   (model4$MSE$best_pearson_r_plot)) / 
   (model4_coef_plot + ggtitle("", subtitle="") + 
@@ -2438,7 +2523,7 @@ model5_fold_plot <- plot_fold_fits(regression_data_onehot, fold_ids,
                                    model5$MSE$best_alpha, model5$MSE$best_lambda)
 
 model5_plot <- ((model5$MSE$mse_plot + 
-                   ggtitle("Model 1", subtitle="rate ~ sequence [A/U v. C/G] + structure(+/- 5nt)")) +
+                   ggtitle("Model 5", subtitle="rate ~ sequence [A/U v. C/G] + structure(+/- 5nt)")) +
                   (model5$MSE$best_r2_plot) +
                   (model5$MSE$best_pearson_r_plot)) / 
   (model5_coef_plot + ggtitle("", subtitle="") + 
@@ -2511,6 +2596,120 @@ model1_coef_plot /
      (pos25_plot + labs(fill="base")))
 
 # subset(guide_rate, nchar(spacer) == 20)[with(regression_data, which(seq_0 == "G" & rate > 20)),]
+```
+
+Model 6: reduced features
+
+* antitag position 1 
+* downstream unstructured U
+* spacer structure
+
+```{r model6, warning=F, fig.height=8}
+model6_data <- subset(guide_rate,
+                      nchar(spacer)==20,
+                      select=c("Estimate", "antitag_pos1", 
+                              "downstream_unstructured_U", "spacer_structure"))
+model6_data$antitag_pos1 <- factor(model6_data$antitag_pos1)
+model6_data_onehot <- mltools::one_hot(data.table::data.table(model6_data))
+# compute model across folds
+model6_fits <- lapply(seq(length(unique(fold_ids))),
+                      function(x) {
+                        tmp_training <- subset(model6_data_onehot, fold_ids != x)
+                        tmp_testing <- subset(model6_data_onehot, fold_ids == x)
+                        tmp_fit <- lm(Estimate ~ ., data=tmp_training)
+                        tmp_training$predicted <- predict(tmp_fit, 
+                                                          newdata=tmp_training)
+                        tmp_testing$predicted <- predict(tmp_fit,
+                                                         newdata=tmp_testing)
+                        tmp_testing_r2 <- 1 - with(tmp_testing, sum((Estimate - predicted)^2)) / 
+                          with(tmp_testing, sum((Estimate - mean(Estimate))^2))
+                        tmp_training_cor <- with(tmp_training, cor(predicted, Estimate))
+                        tmp_testing_cor <- with(tmp_training, cor(predicted, Estimate))
+                        tmp_stats <- data.frame(split=c("training", "testing"),
+                                                r2=c(summary(tmp_fit)$r.squared,
+                                                     tmp_testing_r2),
+                                                pearson_r=c(tmp_training_cor,
+                                                            tmp_testing_cor),
+                                                fold_id=x)
+                        tmp_plot_data <- rbind(data.frame(tmp_training, split="training"), 
+                                               data.frame(tmp_testing, split="testing"))
+                        tmp_plot <- ggplot(tmp_plot_data, aes(x=Estimate, y=predicted, col=split)) + 
+                          geom_point() + geom_abline(slope=1, intercept=0) + theme_bw() + 
+                          scale_color_manual(values=c("#E69F00", "#56B4E9")) + 
+                          ggtitle(paste("fold:", x)) + 
+                          xlab("true rate (RFU/min)") + ylab("predicted rate (RFU/min)") + 
+                          annotate(geom="text", x=Inf, y=-Inf, col="#56B4E9",
+                                    label=bquote(r^2~"="~.(round(tmp_stats$r2[1], digits=3))),
+                                    hjust="inward", vjust=-2) + 
+                           annotate(geom="text", x=Inf, y=-Inf, col="#E69F00",
+                                    label=bquote(r^2~"="~.(round(tmp_stats$r2[2], digits=3))),
+                                    hjust="inward", vjust=-1) + 
+                           annotate(geom="text", x=Inf, y=Inf, col="black", label="y=x",
+                                    hjust="inward", vjust="inward") + 
+                           annotate(geom="text", x=-Inf, y=Inf, col="#56B4E9",
+                                    label=bquote(rho~"="~.(round(tmp_stats$pearson_r[1], digits=2))),
+                                    hjust="inward", vjust=1.5) +
+                           annotate(geom="text", x=-Inf, y=Inf, col="#E69F00",
+                                    label=bquote(rho~"="~.(round(tmp_stats$pearson_r[2], digits=2))),
+                                    hjust="inward", vjust=2.5)
+                        return(list(fit=tmp_fit, stats=tmp_stats, plot=tmp_plot))
+                      })
+model6_stats <- do.call(rbind, lapply(model6_fits, function(x) x$stats))
+model6_r2 <- aggregate(r2 ~ split, data=model6_stats, FUN=mean)
+model6_pearson_r <- aggregate(pearson_r ~ split, data=model6_stats, FUN=mean)
+model6_fold_plot <- wrap_plots(lapply(model6_fits, 
+                                      function(x) x$plot + guides(col=F)), nrow=1)
+model6_all_coef <- do.call(rbind, 
+                           lapply(seq_along(model6_fits),
+                                  function(x) {
+                                    tmp_coef <- summary(model6_fits[[x]]$fit)$coefficients
+                                    data.frame(tmp_coef,
+                                               fold_id=x,
+                                               coef=rownames(tmp_coef))
+                                  }))
+model6_all_coef$significant <- model6_all_coef$Pr...t.. < 0.05
+model6_coef_plot <- ggplot(model6_all_coef, 
+                           aes(x=coef, y=Estimate, col=significant)) + 
+  geom_point(alpha=0.5) + theme_bw() + xlab("") + ylab(expr(beta)) + 
+  theme(axis.text.x=element_text(angle=45, hjust=1)) + labs(col="p < 0.05") + 
+  scale_color_manual(values=c("black", "red"))
+
+model6_coef_plot / model6_fold_plot
+```
+
+```{r model6_comparisons}
+model6_comparison_data <- subset(guide_rate,
+                                 select=c("Estimate", "antitag_pos1", 
+                                          "downstream_unstructured_U", "spacer_structure",
+                                          "spacer"))
+model6_comparison_data$antitag_pos1 <- factor(model6_comparison_data$antitag_pos1)
+model6_comparison_data_onehot <- mltools::one_hot(data.table::data.table(model6_comparison_data))
+
+summary(glm(Estimate ~ ., 
+           data=subset(model6_comparison_data_onehot, 
+                       nchar(spacer)==20, 
+                       select=-spacer),
+           family="gaussian"))
+summary(glm(Estimate ~ ., 
+           data=subset(model6_comparison_data_onehot, 
+                       select=-spacer),
+           family="gaussian"))
+
+(ggplot(guide_rate, aes(x=Estimate)) + geom_histogram(binwidth=5) + 
+    geom_vline(xintercept=20, col="red") + theme_bw() + 
+    xlab("rate (RFU/min)") + ylab("")) + 
+  all_plots[[guide_rate$guide_id[sample(which(guide_rate$Estimate > 20), size=1)]]] +
+  all_plots[[guide_rate$guide_id[sample(which(guide_rate$Estimate < 20), size=1)]]]
+
+summary(glm((Estimate > 20) ~ ., 
+           data=subset(model6_comparison_data_onehot, 
+                       nchar(spacer)==20, 
+                       select=-spacer),
+           family="binomial"))
+summary(glm((Estimate > 20) ~ ., 
+           data=subset(model6_comparison_data_onehot, 
+                       select=-spacer),
+           family="binomial"))
 ```
 
 ## Sequence logo
