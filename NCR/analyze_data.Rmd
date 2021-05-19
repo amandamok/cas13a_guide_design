@@ -633,6 +633,13 @@ guide_features$class <- sapply(as.numeric(sub("NCR_", "", guide_features$NCR.id)
 guide_features$class <- factor(guide_features$class, levels=c("good", "Ott", "bad", "random", "28mer"))
 ```
 
+```{r guide_features_gRNA_MFE}
+all_guides <- read.table(file.path(here(), "outputs", "cas13a_20nt",
+                         "cas13a_results_summary.txt"), header=T)
+guide_features$gRNA_MFE <- all_guides$gRNA_MFE[match(guide_features$start,
+                                                     all_guides$start)]
+```
+
 ```{r guide_features_crRNA_structure}
 repeat_sequence <- "uagaccaccccaaaaaugaaggggacuaaaac"
 RNAfold_20nt <- read.table(file.path(here(), "outputs", "cas13a_20nt", 
@@ -1562,6 +1569,24 @@ ggplot(guide_rate, aes(x=GC_content, y=Estimate)) +
 ```
 
 * slight non-significant correlation between % unstructured U in 30 nt downstream of protospacer in viral genome and guide activity
+
+```{r rate_by_gRNA_MFE}
+ggplot(guide_rate, aes(x=gRNA_MFE, y=Estimate)) + 
+  geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
+  xlab("gRNA MFE (kcal/mol)") + ylab("rate above no activator (RFU/min)") +
+  annotate(geom="text", x=Inf, y=75, hjust="inward", vjust="inward", col="red",
+           label=bquote(rho~"="~.(round(with(guide_rate, 
+                                             cor.test(gRNA_MFE, 
+                                                      Estimate,
+                                                      method="spearman"))$estimate, 
+                                        digits=3)))) + 
+  annotate(geom="text", x=Inf, y=65, hjust="inward", vjust="inward", col="red",
+           label=bquote("p ="~.(round(with(guide_rate, 
+                                           cor.test(gRNA_MFE, 
+                                                    Estimate,
+                                                    method="spearman"))$p.value, 
+                                      digits=3))))
+```
 
 ## Comparison of 20mers to 28mers
 
