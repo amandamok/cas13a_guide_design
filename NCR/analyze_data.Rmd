@@ -273,11 +273,11 @@ optimize_glmnet_hyperparameters <- function(input_data, fold_ids,
   all_models <- lapply(alphas,
                        function(alpha) {
                          glmnet::cv.glmnet(input_data[, -1], input_data[, 1], 
-                                   foldid=fold_ids, alpha=alpha)
+                                           foldid=fold_ids, alpha=alpha)
                        })
   names(all_models) <- alphas
-  # 2. calculate r^2 per split across all models
-  all_models_r2 <- lapply(seq_along(all_models),
+  # 2. calculate r^2 and perason correlation per split across all models
+  all_models_stats <- lapply(seq_along(all_models),
                           function(alpha_id) {
                             lambdas <- all_models[[alpha_id]]$lambda
                             do.call(rbind,
@@ -291,36 +291,62 @@ optimize_glmnet_hyperparameters <- function(input_data, fold_ids,
                                                                        tmp_training[, 1],
                                                                        alpha=alphas[alpha_id],
                                                                        lambda=lambdas)
-                                             tmp_predict <- lapply(lambdas,
-                                                                   function(lambda) {
-                                                                     predict(tmp_fit,
-                                                                             newx=tmp_testing[, -1],
-                                                                             s=lambda)
-                                                                   })
-                                             tmp_r2 <- sapply(tmp_predict,
-                                                              function(x) {
-                                                                1 - sum((tmp_testing[,1]-x)^2) / 
-                                                                  sum((tmp_testing[,1]-mean(tmp_testing[,1]))^2)
-                                                              })
+                                             tmp_training_predict <- lapply(lambdas,
+                                                                            function(lambda) {
+                                                                              predict(tmp_fit,
+                                                                                      newx=tmp_training[,-1],
+                                                                                      s=lambda)
+                                                                            })
+                                             tmp_testing_predict <- lapply(lambdas,
+                                                                           function(lambda) {
+                                                                             predict(tmp_fit,
+                                                                                     newx=tmp_testing[,-1],
+                                                                                     s=lambda)
+                                                                           })
+                                             tmp_testing_null_deviance <- sum((tmp_testing[,1] -
+                                                                                 mean(tmp_testing[,1]))^2)
+                                             tmp_testing_r2 <- sapply(tmp_testing_predict,
+                                                                      function(x) {
+                                                                        1 - sum((tmp_testing[,1]-x)^2) / 
+                                                                          tmp_testing_null_deviance
+                                                                      })
+                                             tmp_training_cor <- sapply(tmp_training_predict,
+                                                                        function(x) {
+                                                                          cor(x, tmp_training[,1])
+                                                                        })
+                                             tmp_testing_cor <- sapply(tmp_testing_predict,
+                                                                       function(x) {
+                                                                         cor(x, tmp_testing[,1])
+                                                                       })
                                              return(data.frame(alpha=alphas[alpha_id],
                                                                fold_id=fold_id,
                                                                lambda=rep(lambdas, times=2),
-                                                               r2=c(tmp_fit$dev.ratio, tmp_r2),
+                                                               r2=c(tmp_fit$dev.ratio, 
+                                                                    tmp_testing_r2),
+                                                               pearson_r=c(tmp_training_cor,
+                                                                           tmp_testing_cor),
                                                                split=rep(c("training", "testing"),
                                                                          each=length(lambdas))))
                                            }))
                           })
-  all_models_r2 <- do.call(rbind, all_models_r2)
+  all_models_stats <- do.call(rbind, all_models_stats)
+  all_models_stats$alpha <- factor(as.character(all_models_stats$alpha),
+                                   levels=as.character(alphas))
+  all_models_stats$split <- factor(all_models_stats$split,
+                                   levels=c("training", "testing"))
   all_models_r2 <- aggregate(r2 ~ alpha + lambda + split, 
-                             data=all_models_r2, FUN=mean)
-  all_models_r2$alpha <- factor(as.character(all_models_r2$alpha), 
-                                levels=as.character(alphas))
-  all_models_r2$split <- factor(all_models_r2$split, 
-                                levels=c("training", "testing"))
+                             data=all_models_stats, FUN=mean)
   r2_plot <- ggplot(all_models_r2, aes(x=lambda, y=r2, col=alpha)) + 
     geom_line() + theme_bw() + scale_x_log10() + 
     facet_grid(split ~ ., scales="free_y") + 
     xlab(expr(lambda)) + ylab(bquote("mean"~r^2)) + labs(col=expr(alpha)) + 
+    ggtitle(paste0("Elastic net regression, ", num_folds, "-fold cross-validation"))
+  all_models_pearson_r <- aggregate(pearson_r ~ alpha + lambda + split, 
+                                    data=all_models_stats, FUN=mean)
+  pearson_r_plot <- ggplot(all_models_pearson_r, aes(x=lambda, y=pearson_r, col=alpha)) + 
+    geom_line() + theme_bw() + scale_x_log10() + 
+    facet_grid(split ~ ., scales="free_y") + 
+    xlab(expr(lambda)) + ylab(bquote("pearson"~r)) + labs(col=expr(alpha)) + 
     ggtitle(paste0("Elastic net regression, ", num_folds, "-fold cross-validation"))
   # 3. calculate mean squared error across all models
   all_models_MSE <- lapply(seq_along(all_models),
@@ -341,7 +367,8 @@ optimize_glmnet_hyperparameters <- function(input_data, fold_ids,
     geom_line() + theme_bw() + scale_x_log10() + scale_y_log10() + 
     xlab(expr(lambda)) + labs(col=bquote(alpha)) + 
     ylab(paste0("cross-validated error (k=", num_folds, ")"))
-  # 4. calculate best r^2 per split per alpha
+  # 4. calculate best r^2 and pearson correlation per split per alpha
+  # best r^2
   all_models_best_r2 <- do.call(rbind,
                                 lapply(alphas,
                                        function(a) {
@@ -350,13 +377,45 @@ optimize_glmnet_hyperparameters <- function(input_data, fold_ids,
                                          tmp_lambda <- tmp_testing$lambda[which.max(tmp_testing$r2)]
                                          subset(all_models_r2, alpha==a & lambda==tmp_lambda)
                                        }))
-  all_models_best_r2$split <- factor(all_models_best_r2$split,
-                                     levels=c("training", "testing"))
-  best_r2_plot <- ggplot(all_models_best_r2, aes(x=as.numeric(as.character(alpha)), y=r2)) + 
-    geom_point() + geom_line(alpha=0.5) + 
-    theme_bw() + facet_grid(split ~ ., scales="free_y") + 
-    scale_color_gradient(low="grey", high="blue") +
-    xlab(expr(alpha)) + ylab(bquote("mean"~r^2))
+  best_r2_plot <- ggplot(all_models_best_r2, 
+                         aes(x=as.numeric(as.character(alpha)), 
+                             y=r2, col=split)) + 
+    geom_point() + geom_line(alpha=0.5) + theme_bw() +
+    xlab(expr(alpha)) + ylab(bquote("mean"~r^2)) + 
+    scale_color_manual(values=c("#E69F00", "#56B4E9"))
+  # best pearson r
+  all_models_best_pearson_r <- do.call(rbind,
+                                       lapply(alphas,
+                                              function(a) {
+                                                tmp_testing <- subset(all_models_pearson_r, 
+                                                                      split=="testing" & alpha==a)
+                                                tmp_lambda <- tmp_testing$lambda[which.max(tmp_testing$pearson_r)]
+                                                subset(all_models_pearson_r, alpha==a & lambda==tmp_lambda)
+                                              }))
+  best_pearson_r_plot <- ggplot(all_models_best_pearson_r, 
+                                aes(x=as.numeric(as.character(alpha)),
+                                    y=pearson_r, col=split)) + 
+    geom_point() + geom_line(alpha=0.5) + theme_bw() + 
+    xlab(expr(alpha)) + ylab(bquote("mean pearson"~r)) + 
+    scale_color_manual(values=c("#E69F00", "#56B4E9"))
+  # pearson r, optimizing r^2
+  match_var <- c("alpha", "lambda", "split")
+  all_models_best_r2_pearson_r <- all_models_pearson_r[prodlim::row.match(all_models_best_r2[, match_var],
+                                                                          all_models_pearson_r[, match_var]),]
+  best_r2_pearson_r_plot <- ggplot(all_models_best_r2_pearson_r, 
+                                   aes(x=as.numeric(as.character(alpha)),
+                                       y=pearson_r, col=split)) + 
+    geom_point() + geom_line(alpha=0.5) + theme_bw() + 
+    xlab(expr(alpha)) + ylab(bquote("mean pearson"~r)) + 
+    scale_color_manual(values=c("#E69F00", "#56B4E9"))
+  # r^2, optimizing pearson r
+  all_models_best_pearson_r_r2 <- all_models_r2[prodlim::row.match(all_models_best_pearson_r[, match_var],
+                                                                   all_models_r2[, match_var]),]
+  best_pearson_r_r2_plot <- ggplot(all_models_best_pearson_r_r2, aes(x=as.numeric(as.character(alpha)),
+                                                                     y=r2, col=split)) + 
+    geom_point() + geom_line(alpha=0.5) + theme_bw() + 
+    xlab(expr(alpha)) + ylab(bquote("mean"~r^2)) + 
+    scale_color_manual(values=c("#E69F00", "#56B4E9"))
   # 5. choose optimal hyperparameters
   if(metric=="mse") {
     best_param <- do.call(rbind, 
@@ -373,12 +432,15 @@ optimize_glmnet_hyperparameters <- function(input_data, fold_ids,
     best_param <- best_param[which.max(best_param$r2), ]
   }
   best_lambda <- best_param$lambda
-    best_alpha <- as.numeric(as.character(best_param$alpha))
+  best_alpha <- as.numeric(as.character(best_param$alpha))
   best_r2_plot <- best_r2_plot + 
     geom_point(data=subset(all_models_best_r2, alpha==best_alpha & lambda==best_lambda),
                aes(x=as.numeric(as.character(alpha)), y=r2), col="red") + 
     ggtitle("optimal hyperparameters:", 
             subtitle=bquote(alpha~"="~.(best_alpha)~";"~lambda~"="~.(best_lambda)))
+  best_pearson_r_plot <- best_pearson_r_plot + 
+    geom_point(data=subset(all_models_best_pearson_r, alpha==best_alpha & lambda==best_lambda),
+               aes(x=as.numeric(as.character(alpha)), y=pearson_r), col="red")
   r2_plot <- r2_plot + 
     geom_point(data=subset(all_models_best_r2, alpha==best_alpha & lambda==best_lambda),
                aes(x=lambda, y=r2), col="red")
@@ -386,9 +448,12 @@ optimize_glmnet_hyperparameters <- function(input_data, fold_ids,
     geom_point(data=subset(all_models_MSE, alpha==best_alpha & lambda==best_lambda),
                aes(x=lambda, y=cv_error), col="red")
   
-  return(list(all_models=all_models, r2=all_models_r2, MSE=all_models_MSE,
+  return(list(all_models=all_models, all_models_stats=all_models_stats, MSE=all_models_MSE,
               best_alpha=best_alpha, best_lambda=best_lambda, metric=metric,
-              r2_plot=r2_plot, mse_plot=mse_plot, best_r2_plot=best_r2_plot))
+              r2_plot=r2_plot, pearson_r_plot=pearson_r_plot, mse_plot=mse_plot, 
+              best_r2_plot=best_r2_plot, best_pearson_r_plot=best_pearson_r_plot,
+              best_r2_pearson_r_plot=best_r2_pearson_r_plot,
+              best_pearson_r_r2_plot=best_pearson_r_r2_plot))
 }
 
 plot_coefs <- function(fit_obj, best_alpha, best_lambda) {
@@ -569,6 +634,7 @@ guide_features$class <- factor(guide_features$class, levels=c("good", "Ott", "ba
 ```
 
 ```{r guide_features_crRNA_structure}
+repeat_sequence <- "uagaccaccccaaaaaugaaggggacuaaaac"
 RNAfold_20nt <- read.table(file.path(here(), "outputs", "cas13a_20nt", 
                                      "score_RNAfold_crRNAs.txt"), header=T)
 RNAfold_28nt <- read.table(file.path(here(), "outputs", "cas13a_28nt",
@@ -583,6 +649,8 @@ guide_features$structure <- sapply(seq(nrow(guide_features)),
                                                              start == tmp_start)
                                      return(tmp_structure$structure[1])
                                    })
+guide_features$direct_repeat <- substr(guide_features$structure, 
+                                       1, nchar(repeat_sequence))
 ```
 
 ## Viral secondary structure
@@ -612,6 +680,8 @@ viral_genome <- data.frame(pos = seq(nchar(viral_genome)),
                            spacer_base = unlist(strsplit(as.character(complement(viral_genome)), 
                                                          split="")),
                            row.names=NULL)
+viral_genome$base[viral_genome$base == "T"] <- "U"
+viral_genome$spacer_base[viral_genome$spacer_base == "T"] <- "U"
 
 # Manfredonia et al. NAR (2020)
 manfredonia_prefix <- "manfredonia_2020_lowShannon_highSHAPE"
@@ -725,6 +795,24 @@ viral_genome$invivo <- ifelse(rowSums(viral_genome_invivo, na.rm=T) >= 2,
   plot_layout(nrow=1, widths=rep(1, 5))
 ```
 
+```{r guide_downstream_features}
+guide_features$downstream_U <- sapply(guide_features$start,
+                                      function(x) {
+                                        region_start <- x + 20
+                                        region_end <- region_start + 30 - 1
+                                        tmp_region <- viral_genome[region_start:region_end,]
+                                        mean(tmp_region$base == "U")
+                                      })
+guide_features$downstream_unstructured_u <- sapply(guide_features$start,
+                                                   function(x) {
+                                                     region_start <- x + 20
+                                                     region_end <- region_start + 30 - 1
+                                                     tmp_region <- viral_genome[region_start:region_end,]
+                                                     mean((tmp_region$base == "U") &
+                                                            (tmp_region$invivo == "unstructured"))
+                                                   })
+```
+
 ### Correlation between annotations: over entire spacer target
 
 ```{r guide_viral_structure, fig.height=8}
@@ -738,7 +826,8 @@ guide_structure <- sapply(seq(nrow(guide_features)),
                                                     lan = mean(region_features$lan == "unstructured"),
                                                     sun_invivo = mean(region_features$sun_invivo),
                                                     sun_invitro = mean(region_features$sun_invitro),
-                                                    huston = mean(region_features$huston == 0))
+                                                    huston = mean(region_features$huston == 0),
+                                                    invivo = mean(region_features$invivo == 1))
                             return(region_annotations)
                           })
 guide_structure <- data.frame(t(guide_structure))
@@ -1418,12 +1507,61 @@ ggplot_violin(subset(noActivator_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 1
 * In guides that maintain crRNA hairpin: correlation between number of basepaired positions in spacer and background no activator rate
 
 ```{r rate_by_gc_content}
-ggplot(guide_rate, aes(x=GC_content, y=Estimate)) + geom_point() + 
-  geom_smooth(method="loess", formula=y~x) + theme_bw() + 
-  xlab("GC content (%)") + ylab("rate above no activator (RFU/min)") 
+ggplot(guide_rate, aes(x=GC_content, y=Estimate)) + 
+  geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
+  xlab("GC content (%)") + ylab("rate above no activator (RFU/min)") +
+  annotate(geom="text", x=Inf, y=75, hjust="inward", vjust="inward", col="red",
+           label=bquote(rho~"="~.(round(with(guide_rate, 
+                                             cor.test(GC_content, 
+                                                      Estimate,
+                                                      method="spearman"))$estimate, 
+                                        digits=3)))) + 
+  annotate(geom="text", x=Inf, y=65, hjust="inward", vjust="inward", col="red",
+           label=bquote("p ="~.(round(with(guide_rate, 
+                                           cor.test(GC_content, 
+                                                    Estimate,
+                                                    method="spearman"))$p.value, 
+                                      digits=3))))
 ```
 
 * No correlation between spacer GC content and guide activity
+
+```{r rate_by_downstream_U}
+(ggplot(guide_rate, aes(x=downstream_U, y=Estimate)) + 
+   geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
+   xlab("% U in downstream 30nt in viral genome") + 
+   ylab("rate above no activator (RFU/min)") +
+   annotate(geom="text", x=Inf, y=75, hjust="inward", vjust="inward", col="red",
+            label=bquote(rho~"="~.(round(with(guide_rate, 
+                                              cor.test(downstream_U, 
+                                                       Estimate,
+                                                       method="spearman"))$estimate, 
+                                         digits=3)))) + 
+   annotate(geom="text", x=Inf, y=65, hjust="inward", vjust="inward", col="red",
+            label=bquote("p ="~.(round(with(guide_rate, 
+                                            cor.test(downstream_U, 
+                                                     Estimate,
+                                                     method="spearman"))$p.value, 
+                                       digits=3))))) + 
+  (ggplot(guide_rate, aes(x=downstream_unstructured_u, y=Estimate)) + 
+     geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
+     xlab("% unstructured U in downstream 30nt in viral genome") + 
+     ylab("rate above no activator (RFU/min)") +
+     annotate(geom="text", x=Inf, y=75, hjust="inward", vjust="inward", col="red",
+              label=bquote(rho~"="~.(round(with(guide_rate, 
+                                                cor.test(downstream_unstructured_u, 
+                                                         Estimate,
+                                                         method="spearman"))$estimate, 
+                                           digits=3)))) + 
+     annotate(geom="text", x=Inf, y=65, hjust="inward", vjust="inward", col="red",
+              label=bquote("p ="~.(round(with(guide_rate, 
+                                              cor.test(downstream_unstructured_u, 
+                                                       Estimate,
+                                                       method="spearman"))$p.value, 
+                                         digits=3)))))
+```
+
+* slight non-significant correlation between % unstructured U in 30 nt downstream of protospacer in viral genome and guide activity
 
 ## Comparison of 20mers to 28mers
 
@@ -2047,7 +2185,7 @@ guide_sequence <- t(sapply(guide_rate$start,
 guide_sequence <- data.frame(lapply(seq(ncol(guide_sequence)),
                                     function(x)  {
                                       factor(guide_sequence[, x], 
-                                             levels=c("A", "T", "C", "G")) 
+                                             levels=c("A", "C", "G", "U")) 
                                     }))
 colnames(guide_sequence) <- paste0("seq_", (1+window_start):(20+window_stop))
 
@@ -2068,14 +2206,16 @@ colnames(guide_structure) <- paste0("str_", (1+window_start):(20+window_stop))
 regression_data <- data.frame(rate=guide_rate$Estimate, guide_sequence, guide_structure)
 regression_data <- subset(regression_data, nchar(guide_rate$spacer)==20)
 regression_data_onehot <- as.matrix(mltools::one_hot(data.table::data.table(regression_data)))
+regression_data_onehot <- subset(regression_data_onehot,
+                                 select=!grepl("_structured", colnames(regression_data_onehot)))
 ```
 
-Model 1: all features
+Model 1: sequence + structure
 
 * sequence: spacer sequence +/- 5 nt
 * viral structure: spacer sequence +/- 5 nt
 
-```{r model_1, warning=F}
+```{r model_1, warning=F, fig.height=8}
 # optimize hyperparameters
 model1 <- list(r2=optimize_glmnet_hyperparameters(regression_data_onehot,
                                                   fold_ids,
@@ -2083,22 +2223,36 @@ model1 <- list(r2=optimize_glmnet_hyperparameters(regression_data_onehot,
                MSE=optimize_glmnet_hyperparameters(regression_data_onehot,
                                                    fold_ids,
                                                    metric="mse"))
-((model1$r2$best_r2_plot + ggtitle(bquote("optimize"~r^2))) + 
-    (model1$MSE$best_r2_plot + ggtitle("optimize MSE"))) /
+model1_hyperparameter_plot <- ((model1$r2$best_r2_plot + ggtitle(bquote("optimize"~r^2))) + 
+                           (model1$MSE$best_r2_plot + ggtitle("optimize MSE"))) /
   (model1$r2$mse_plot + model1$MSE$mse_plot)
+model1_optimize_plot <- ((model1$MSE$best_r2_plot + ggtitle("optimizing testing r^2")) / 
+                           model1$MSE$best_r2_pearson_r_plot) | 
+  ((model1$MSE$best_pearson_r_r2_plot + ggtitle("optimize testing pearson r")) /
+     model1$MSE$best_pearson_r_plot)
+model1_optimize_plot
 # plot coefficients
 model1_bestfit <- model1$MSE$all_models[[which(names(model1$MSE$all_models) == model1$MSE$best_alpha)]]
-plot_coefs(model1_bestfit, model1$MSE$best_alpha, model1$MSE$best_lambda)
+model1_coef_plot <- plot_coefs(model1_bestfit, model1$MSE$best_alpha, model1$MSE$best_lambda)
 # plot fit across folds
-plot_fold_fits(regression_data_onehot, fold_ids, 
-               model1$MSE$best_alpha, model1$MSE$best_lambda)
+model1_fold_plot <- plot_fold_fits(regression_data_onehot, fold_ids, 
+                                   model1$MSE$best_alpha, model1$MSE$best_lambda)
+
+model1_plot <- ((model1$MSE$mse_plot + 
+                   ggtitle("Model 1", subtitle="rate ~ sequence + structure (+/- 5nt)")) +
+                  (model1$MSE$best_r2_plot) +
+                  (model1$MSE$best_pearson_r_plot)) / 
+  (model1_coef_plot + ggtitle("", subtitle="") + 
+                     labs(col="sequence", shape="structure")) /
+  model1_fold_plot
+model1_plot
 ```
 
 Model 2: only sequence
 
 * sequence: spacer sequence +/- 5 nt
 
-```{r model_2, warning=F}
+```{r model_2, warning=F, fig.height=8}
 model2_data <- c("rate", grep("seq", colnames(regression_data_onehot), value=T))
 model2_data <- regression_data_onehot[, model2_data]
 # optimize hyperparameters
@@ -2108,23 +2262,36 @@ model2 <- list(r2=optimize_glmnet_hyperparameters(model2_data,
                MSE=optimize_glmnet_hyperparameters(model2_data,
                                                    fold_ids,
                                                    metric="mse"))
-((model2$r2$best_r2_plot + ggtitle(bquote("optimize"~r^2))) + 
-    (model2$MSE$best_r2_plot + ggtitle("optimize MSE"))) /
+model2_hyperparameter_plot <- ((model2$r2$best_r2_plot + ggtitle(bquote("optimize"~r^2))) + 
+                           (model2$MSE$best_r2_plot + ggtitle("optimize MSE"))) /
   (model2$r2$mse_plot + model2$MSE$mse_plot)
+model2_optimize_plot <- ((model2$MSE$best_r2_plot + ggtitle("optimizing testing r^2")) /
+                           model2$MSE$best_r2_pearson_r_plot) | 
+  ((model2$MSE$best_pearson_r_r2_plot + ggtitle("optimize testing pearson r")) /
+     model2$MSE$best_pearson_r_plot)
+model2_optimize_plot
 # plot coefficients
 model2_bestfit <- model2$MSE$all_models[[which(names(model2$MSE$all_models) == model2$MSE$best_alpha)]]
-plot_coefs(model2_bestfit, model2$MSE$best_alpha, model2$MSE$best_lambda)
-
+model2_coef_plot <- plot_coefs(model2_bestfit, model2$MSE$best_alpha, model2$MSE$best_lambda)
 # plot fit across folds
-plot_fold_fits(model2_data, fold_ids, 
-               model2$MSE$best_alpha, model2$MSE$best_lambda)
+model2_fold_plot <- plot_fold_fits(regression_data_onehot, fold_ids, 
+                                   model2$MSE$best_alpha, model2$MSE$best_lambda)
+
+model2_plot <- ((model2$MSE$mse_plot + 
+                   ggtitle("Model 2", subtitle="rate ~ sequence (+/- 5nt)")) +
+                  (model2$MSE$best_r2_plot) +
+                  (model2$MSE$best_pearson_r_plot)) / 
+  (model2_coef_plot + ggtitle("", subtitle="") + 
+                     labs(col="sequence", shape="structure")) /
+  model2_fold_plot
+model2_plot
 ```
 
 Model 3: only structure
 
 * viral structure: spacer sequence +/- 5 nt
 
-```{r model_3, warning=F}
+```{r model_3, warning=F, fig.height=8}
 model3_data <- c("rate", grep("str", colnames(regression_data_onehot), value=T))
 model3_data <- regression_data_onehot[, model3_data]
 # optimize hyperparameters
@@ -2134,15 +2301,191 @@ model3 <- list(r2=optimize_glmnet_hyperparameters(model3_data,
                MSE=optimize_glmnet_hyperparameters(model3_data,
                                                    fold_ids,
                                                    metric="mse"))
-((model3$r2$best_r2_plot + ggtitle(bquote("optimize"~r^2))) + 
-    (model3$MSE$best_r2_plot + ggtitle("optimize MSE"))) /
+model3_hyperparameter_plot <- ((model3$r2$best_r2_plot + ggtitle(bquote("optimize"~r^2))) + 
+                           (model3$MSE$best_r2_plot + ggtitle("optimize MSE"))) /
   (model3$r2$mse_plot + model3$MSE$mse_plot)
+model3_optimize_plot <- ((model3$MSE$best_r2_plot + ggtitle("optimizing testing r^2")) /
+                           model3$MSE$best_r2_pearson_r_plot) | 
+  ((model3$MSE$best_pearson_r_r2_plot + ggtitle("optimize testing pearson r")) /
+     model3$MSE$best_pearson_r_plot)
+model3_optimize_plot
 # plot coefficients
 model3_bestfit <- model3$MSE$all_models[[which(names(model3$MSE$all_models) == model3$MSE$best_alpha)]]
-plot_coefs(model3_bestfit, model3$MSE$best_alpha, model3$MSE$best_lambda)
+model3_coef_plot <- plot_coefs(model3_bestfit, model3$MSE$best_alpha, model3$MSE$best_lambda)
 # plot fit across folds
-plot_fold_fits(model3_data, fold_ids, 
-               model3$MSE$best_alpha, model3$MSE$best_lambda)
+model3_fold_plot <- plot_fold_fits(regression_data_onehot, fold_ids, 
+                                   model3$MSE$best_alpha, model3$MSE$best_lambda)
+
+model3_plot <- ((model3$MSE$mse_plot + 
+                   ggtitle("Model 1", subtitle="rate ~ structure (+/- 5nt)")) +
+                  (model3$MSE$best_r2_plot) +
+                  (model3$MSE$best_pearson_r_plot)) / 
+  (model3_coef_plot + ggtitle("", subtitle="") + 
+                     labs(col="sequence", shape="structure")) /
+  model3_fold_plot
+model3_plot
+```
+
+Model 4: only sequence (binary)
+
+* sequence: spacer sequence (A/T: 0 ; C/G: 1) +/- 5 nt
+
+```{r model_4, warning=F, fig.height=8}
+model4_data <- c(grep("seq", colnames(regression_data), value=T))
+model4_data <- regression_data[, model4_data]
+model4_data <- data.frame(lapply(seq(ncol(model4_data)),
+                                 function(x) {
+                                   tmp_seq <- as.character(model4_data[, x])
+                                   tmp_seq[tmp_seq %in% c("A", "U")] <- "A/U"
+                                   tmp_seq[tmp_seq %in% c("C", "G")] <- "C/G"
+                                   tmp_seq <- factor(tmp_seq, levels=c("A/U", "C/G"))
+                                   return(tmp_seq)
+                                 }))
+colnames(model4_data) <- c(grep("seq", colnames(regression_data), value=T))
+model4_data <- data.frame(rate = regression_data$rate, model4_data)
+model4_data_onehot <- as.matrix(mltools::one_hot(data.table::data.table(model4_data)))
+model4_data_onehot <- subset(model4_data_onehot,
+                             select=!grepl("A/U", colnames(model4_data_onehot)))
+# optimize hyperparameters
+model4 <- list(r2=optimize_glmnet_hyperparameters(model4_data_onehot,
+                                                  fold_ids,
+                                                  metric="r2"),
+               MSE=optimize_glmnet_hyperparameters(model4_data_onehot,
+                                                   fold_ids,
+                                                   metric="mse"))
+model4_hyperparameter_plot <- ((model4$r2$best_r2_plot + ggtitle(bquote("optimize"~r^2))) + 
+                           (model4$MSE$best_r2_plot + ggtitle("optimize MSE"))) /
+  (model4$r2$mse_plot + model4$MSE$mse_plot)
+model4_optimize_plot <- ((model4$MSE$best_r2_plot + ggtitle("optimizing testing r^2")) /
+                           model4$MSE$best_r2_pearson_r_plot) |
+  ((model4$MSE$best_pearson_r_r2_plot + ggtitle("optimize testing pearson r")) /
+     model4$MSE$best_pearson_r_plot)
+model4_optimize_plot
+# plot coefficients
+model4_bestfit <- model4$MSE$all_models[[which(names(model4$MSE$all_models) == model4$MSE$best_alpha)]]
+model4_coef_plot <- plot_coefs(model4_bestfit, model4$MSE$best_alpha, model4$MSE$best_lambda)
+# plot fit across folds
+model4_fold_plot <- plot_fold_fits(regression_data_onehot, fold_ids, 
+                                   model4$MSE$best_alpha, model4$MSE$best_lambda)
+
+model4_plot <- ((model4$MSE$mse_plot + 
+                   ggtitle("Model 1", subtitle="rate ~ sequence [A/U v. C/G] (+/- 5nt)")) +
+                  (model4$MSE$best_r2_plot) +
+                  (model4$MSE$best_pearson_r_plot)) / 
+  (model4_coef_plot + ggtitle("", subtitle="") + 
+                     labs(col="sequence", shape="structure")) /
+  model4_fold_plot
+model4_plot
+```
+
+Model 5: sequence (binary) + structure
+
+* sequence: spacer sequence (A/T: 0 ; C/G: 1) +/- 5 nt
+* viral structure: spacer sequence +/- 5 nt
+
+```{r model_5, warning=F, fig.height=8}
+model5_data <- data.frame(model4_data,
+                          regression_data[, grepl("str", colnames(regression_data))])
+model5_data_onehot <- as.matrix(mltools::one_hot(data.table::data.table(model5_data)))
+model5_data_onehot <- subset(model5_data_onehot,
+                             select=!grepl("A/T", colnames(model5_data_onehot)) &
+                               !grepl("_structured", colnames(model5_data_onehot)))
+# optimize hyperparameters
+model5 <- list(r2=optimize_glmnet_hyperparameters(model5_data_onehot,
+                                                  fold_ids,
+                                                  metric="r2"),
+               MSE=optimize_glmnet_hyperparameters(model5_data_onehot,
+                                                   fold_ids,
+                                                   metric="mse"))
+model5_hyperparameter_plot <- ((model5$r2$best_r2_plot + ggtitle(bquote("optimize"~r^2))) + 
+                           (model5$MSE$best_r2_plot + ggtitle("optimize MSE"))) /
+  (model5$r2$mse_plot + model5$MSE$mse_plot)
+model5_optimize_plot <- ((model5$MSE$best_r2_plot + ggtitle("optimizing testing r^2")) /
+                           model5$MSE$best_r2_pearson_r_plot) | 
+  ((model5$MSE$best_pearson_r_r2_plot + ggtitle("optimize testing pearson r")) /
+     model5$MSE$best_pearson_r_plot)
+model5_optimize_plot
+# plot coefficients
+model5_bestfit <- model5$MSE$all_models[[which(names(model5$MSE$all_models) == model5$MSE$best_alpha)]]
+model5_coef_plot <- plot_coefs(model5_bestfit, model5$MSE$best_alpha, model5$MSE$best_lambda)
+# plot fit across folds
+model5_fold_plot <- plot_fold_fits(regression_data_onehot, fold_ids, 
+                                   model5$MSE$best_alpha, model5$MSE$best_lambda)
+
+model5_plot <- ((model5$MSE$mse_plot + 
+                   ggtitle("Model 1", subtitle="rate ~ sequence [A/U v. C/G] + structure(+/- 5nt)")) +
+                  (model5$MSE$best_r2_plot) +
+                  (model5$MSE$best_pearson_r_plot)) / 
+  (model5_coef_plot + ggtitle("", subtitle="") + 
+                     labs(col="sequence", shape="structure")) /
+  model5_fold_plot
+model5_plot
+```
+
+```{r verify_coefs}
+pos.3_plot <- ggplot_violin(regression_data, x_var="seq_.3", y_var="rate") + 
+  ggtitle("position -4 to spacer") + xlab("viral genome") +
+  geom_text(data=aggregate(rate ~ seq_.3, data=regression_data, FUN=length),
+            aes(x=seq_.3, y=80, label=paste("n =", rate))) + 
+  annotate(geom="text", x="C", y=90, col="red",
+           label=paste("p =", signif(wilcox.test(rate ~ (seq_.3 == "C"), 
+                                                 data=regression_data)$p.value, 
+                                     digits=3)))
+
+pos0_plot <- ggplot_violin(regression_data, x_var="seq_0", y_var="rate") + 
+  ggtitle("position -1 to spacer") + xlab("viral genome") +
+  geom_text(data=aggregate(rate ~ seq_0, data=regression_data, FUN=length),
+            aes(x=seq_0, y=80, label=paste("n =", rate))) + 
+  annotate(geom="text", x="G", y=90, col="red",
+           label=paste("p =", signif(wilcox.test(rate ~ (seq_0 == "G"), 
+                                                 data=regression_data)$p.value, 
+                                     digits=3)))
+
+pos3_plot <- ggplot_violin(regression_data, x_var="seq_3", y_var="rate") + 
+  ggtitle("position 3 in spacer") + xlab("viral genome") +
+  geom_text(data=aggregate(rate ~ seq_3, data=regression_data, FUN=length),
+            aes(x=seq_3, y=80, label=paste("n =", rate))) + 
+  annotate(geom="text", x="T", y=90, col="red",
+           label=paste("p =", signif(wilcox.test(rate ~ (seq_3 == "U"), 
+                                                 data=regression_data)$p.value, 
+                                     digits=3)))
+
+pos8_plot <- ggplot_violin(regression_data, x_var="seq_8", y_var="rate") + 
+  ggtitle("position 8 in spacer") + xlab("viral genome") +
+  geom_text(data=aggregate(rate ~ seq_8, data=regression_data, FUN=length),
+            aes(x=seq_8, y=80, label=paste("n =", rate))) + 
+  annotate(geom="text", x="A", y=90, col="red",
+           label=paste("p =", signif(wilcox.test(rate ~ (seq_8 == "A"), 
+                                                 data=regression_data)$p.value, 
+                                     digits=3)))
+
+pos22_plot <- ggplot_violin(regression_data, x_var="seq_22", y_var="rate") + 
+  ggtitle("position +2 to spacer") + xlab("viral genome") +
+  geom_text(data=aggregate(rate ~ seq_22, data=regression_data, FUN=length),
+            aes(x=seq_22, y=80, label=paste("n =", rate))) + 
+  annotate(geom="text", x="G", y=90, col="red",
+           label=paste("p =", signif(wilcox.test(rate ~ (seq_22 == "G"), 
+                                                 data=regression_data)$p.value, 
+                                     digits=3)))
+
+pos25_plot <- ggplot_violin(regression_data, x_var="seq_25", y_var="rate") + 
+  ggtitle("position +5 to spacer") + xlab("viral genome") +
+  geom_text(data=aggregate(rate ~ seq_25, data=regression_data, FUN=length),
+            aes(x=seq_25, y=80, label=paste("n =", rate))) + 
+  annotate(geom="text", x="A", y=90, col="red",
+           label=paste("p =", signif(wilcox.test(rate ~ (seq_25 == "A"), 
+                                                 data=regression_data)$p.value, 
+                                     digits=3)))
+
+model1_coef_plot / 
+  ((pos.3_plot + guides(fill=F)) | 
+     (pos0_plot + guides(fill=F)) | 
+     (pos3_plot + labs(fill="base"))) / 
+  ((pos8_plot + guides(fill=F)) | 
+     (pos22_plot + guides(fill=F)) | 
+     (pos25_plot + labs(fill="base")))
+
+# subset(guide_rate, nchar(spacer) == 20)[with(regression_data, which(seq_0 == "G" & rate > 20)),]
 ```
 
 ## Sequence logo
