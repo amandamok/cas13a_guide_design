@@ -16,6 +16,7 @@ windows <- add_column(windows, "score_gisaid_SARS-CoV-2.txt", "sensitivity_01", 
 # read in RNAfold crRNA score
 windows <- add_column(windows, "score_RNAfold_crRNAs.txt", "has_crRNA_hairpin", "has_hairpin")
 windows <- add_column(windows, "score_RNAfold_crRNAs.txt", "crRNA_spacer_basepairs", "spacer_basepairs")
+windows <- add_column(windows, "score_RNAfold_crRNAs.txt", "gRNA_MFE", "MFE")
 
 # read in RNAfold target score
 windows <- add_column(windows, "score_RNAfold_target.txt", "target_basepairing_prob", "target_basepairing_propensity")

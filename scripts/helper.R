@@ -13,7 +13,11 @@ add_column <- function(dat, fname, dat_column, fname_column) {
   if(!file.exists(fname)) {
     stop(paste(fname, "does not exist"))
   }
-  column_names <- c("segment", "start", "strand")
+  if("segment" %in% colnames(dat)) {
+    column_names <- c("segment", "start", "strand")
+  } else {
+    column_names <- c("start", "strand")
+  }
   score_dat <- read.table(fname, header=T, stringsAsFactors=F, sep="\t")
   row_indices <- prodlim::row.match(dat[, column_names], score_dat[, column_names])
   dat[dat_column] <- score_dat[row_indices, fname_column]
