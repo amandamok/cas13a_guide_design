@@ -3,6 +3,8 @@ http://hgdownload.soe.ucsc.edu/goldenPath/wuhCor1/bigZips/chromFa.tar.gz
 
 wuhCor1 bowtie indices : bowtie-build NC_045512v2.fa wuhCor1
 
+cov2_genes.txt : select fields from UCSC Genome Browser wuhCor1.ncbiGeneBGP
+
 wuhCor1_RNAfold.txt : fold with RNAfold
 RNAfold -i NC_045512v2.fa --outfile=wuhCor1_RNAfold.txt
 
