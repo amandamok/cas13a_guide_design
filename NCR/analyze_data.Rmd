@@ -3575,7 +3575,7 @@ Suppl. Figure 3B
 ```{r suppl_figure_3B}
 ((ggplot(guide_rate, aes(x=lan, y=Estimate)) + theme_classic(base_size=10) +
     geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-    xlab("% unstructured") + ylab("rate above noa activator (RFU/min)") + 
+    xlab("% unstructured") + ylab("rate above no activator (RFU/min)") + 
     ggtitle("Lan (2020)", subtitle="unstructuredness")) + 
     (ggplot(guide_rate, aes(x=huston, y=Estimate)) + theme_classic(base_size=10) +
        geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
@@ -3591,9 +3591,9 @@ ggsave(file=file.path(figure_dir, "suppl_figure_3B.pdf"),
        device="pdf", width=6.5, height=3, units="in")
 ```
 
-Suppl. Figure 4
+Suppl. Figure 4A
 
-```{r suppl_figure_4}
+```{r suppl_figure_4A}
 ggplot(model1_rf_regression_importance, 
        aes(x=position, y=increaseMSE, fill=coef)) + 
   geom_col(position="stack") + geom_hline(yintercept=0) +
@@ -3609,20 +3609,20 @@ ggplot(model1_rf_regression_importance,
           subtitle=bquote("mean testing"~r^2~"="~
                             .(round(model1_rf_regression_r2, digits=3))))
 
-ggsave(file=file.path(figure_dir, "suppl_figure_4.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_4A.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=3, units="in")
 ```
 
-Suppl. Figure 5
+Suppl. Figure 4B
 
-```{r suppl_figure_5}
+```{r suppl_figure_4B}
 (ggseqlogo(topSpacers_info, method="custom") + 
   ggtitle(paste("Top", num_spacers, "spacers")) + ylim(0, 0.5)) / 
   (ggseqlogo(bottomSpacers_info, method="custom") +
      ggtitle(paste("Bottom", num_spacers, "spacers")) + ylim(0, 0.5))
 
-ggsave(file=file.path(figure_dir, "suppl_figure_5.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_4B.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=3, units="in")
 ```
