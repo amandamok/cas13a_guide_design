@@ -807,12 +807,12 @@ viral_genome$invivo <- ifelse(rowSums(viral_genome_invivo, na.rm=T) >= 2,
 ```
 
 ```{r guide_downstream_features}
-downstream_U_window <- 30
+U_window <- 30
 guide_features$downstream_U <- sapply(seq(nrow(guide_features)),
                                       function(x) {
                                         region_start <- guide_features$start[x] +
                                           nchar(guide_features$spacer[x])
-                                        region_end <- region_start + downstream_U_window - 1
+                                        region_end <- region_start + U_window - 1
                                         tmp_region <- viral_genome[region_start:region_end,]
                                         mean(tmp_region$base == "U")
                                       })
@@ -820,11 +820,34 @@ guide_features$downstream_unstructured_U <- sapply(seq(nrow(guide_features)),
                                                    function(x) {
                                                      region_start <- guide_features$start[x] +
                                                        nchar(guide_features$spacer[x])
-                                                     region_end <- region_start + downstream_U_window - 1
+                                                     region_end <- region_start + U_window - 1
                                                      tmp_region <- viral_genome[region_start:region_end,]
                                                      mean((tmp_region$base == "U") &
                                                             (tmp_region$invivo == "unstructured"))
                                                    })
+guide_features$U_context <- sapply(seq(nrow(guide_features)),
+                                   function(x) {
+                                     upstream_start <- guide_features$start[x] - 1
+                                     upstream_end <- upstream_start - U_window + 1
+                                     downstream_start <- guide_features$start[x] + 
+                                       nchar(guide_features$spacer[x])
+                                     downstream_end <- downstream_start + U_window - 1
+                                     tmp_region <- rbind(viral_genome[upstream_start:upstream_end,],
+                                                         viral_genome[downstream_start:downstream_end,])
+                                     mean(tmp_region$base=="U")
+                                   })
+guide_features$U_context_unstructured <- sapply(seq(nrow(guide_features)),
+                                                function(x) {
+                                                  upstream_start <- guide_features$start[x] - 1
+                                                  upstream_end <- upstream_start - U_window + 1
+                                                  downstream_start <- guide_features$start[x] + 
+                                                    nchar(guide_features$spacer[x])
+                                                  downstream_end <- downstream_start + U_window - 1
+                                                  tmp_region <- rbind(viral_genome[upstream_start:upstream_end,],
+                                                                      viral_genome[downstream_start:downstream_end,])
+                                                  mean((tmp_region$base=="U") &
+                                                         (tmp_region$invivo=="unstructured"))
+                                   })
 guide_features$antitag <- sapply(seq(nrow(guide_features)),
                                       function(x) {
                                         tmp_position <- guide_features$start[x] + 
@@ -833,6 +856,15 @@ guide_features$antitag <- sapply(seq(nrow(guide_features)),
                                               collapse="")
                                       })
 guide_features$antitag_pos1 <- substr(guide_features$antitag, 1, 1)
+guide_features$antitag_label <- sapply(guide_features$antitag,
+                                       function(x) {
+                                         ifelse(grepl("^GUU", x), "GUU",
+                                                ifelse(grepl("^GU", x), "GU",
+                                                       ifelse(grepl("^G", x), "G",
+                                                              substr(x, 1, 1))))
+                                       })
+guide_features$antitag_label <- factor(guide_features$antitag_label,
+                                       levels=c("A", "C", "U", "G", "GU", "GUU"))
 ```
 
 ### Correlation between annotations: over entire spacer target
@@ -1300,7 +1332,7 @@ ggplot(guide_rate, aes(x=Estimate, y=guide_id, col=plate)) + geom_point() +
   geom_errorbar(aes(xmin=Estimate-qnorm(0.05)*Std.Error,
                     xmax=Estimate+qnorm(0.05)*Std.Error)) + 
   theme_bw() + geom_vline(xintercept=0,) + theme(axis.text.y=element_text(size=6)) + 
-  xlab("rate above no activator (RFU/min)") + ylab("guide id")
+  xlab("rate above no activator\n(RFU/min)") + ylab("guide id")
 
 # rotated plot
 # ggplot(guide_rate, aes(x=guide_id, y=Estimate, col=plate)) + geom_point() +
@@ -1308,7 +1340,7 @@ ggplot(guide_rate, aes(x=Estimate, y=guide_id, col=plate)) + geom_point() +
 #                     ymax=Estimate+qnorm(0.05)*Std.Error)) + 
 #   theme_bw() + geom_hline(yintercept=0) + scale_x_discrete(limits=rev) +
 #   theme(axis.text.x=element_text(angle=90, size=6, hjust=1, vjust=0.5)) + 
-#   xlab("") + ylab("rate above no activator (RFU/min)")
+#   xlab("") + ylab("rate above no activator\n(RFU/min)")
 ```
 
 ```{r exclude_1344_outlier}
@@ -1343,7 +1375,7 @@ ggplot(subset(guide_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 16)),
   geom_violin(fill="transparent", draw_quantiles=0.5) + 
   geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + 
   facet_grid(~ factor(crRNA_spacer_basepairs, levels=c(0, 4, 10, 16))) + 
-  theme_bw() + xlab("") + ylab("rate above no activator (RFU/min)") + 
+  theme_bw() + xlab("") + ylab("rate above no activator\n(RFU/min)") + 
   geom_label(aes(x=x, y=y, label=text),
             data=data.frame(x=Inf, y=Inf, crRNA_spacer_basepairs=c(0, 4, 10, 16),
                             text=paste("p =",
@@ -1379,7 +1411,7 @@ guide_rate$has_detection_time <- !is.na(guide_rate$time_to_detection)
 (ggplot(subset(guide_rate, !is.na(time_to_detection)),
                aes(x=Estimate, y=time_to_detection)) + 
    geom_jitter(alpha=0.5) + geom_smooth(method=lm, formula=y~x) + 
-   theme_bw() + xlab("rate above no activator (RFU/min)") + 
+   theme_bw() + xlab("rate above no activator\n(RFU/min)") + 
    ylab("time to detection (min)") + 
    ggtitle("Time to detection",
            subtitle=paste("Number of detectable guides:",
@@ -1398,7 +1430,7 @@ guide_rate$has_detection_time <- !is.na(guide_rate$time_to_detection)
 ggplot(guide_rate, aes(x=Estimate, y=-log10(p.value), 
                        col=plate, shape=detectable)) + 
   geom_point() + theme_bw() + 
-  xlab("rate above no activator (RFU/min)") + ylab("-log10(p)") +
+  xlab("rate above no activator\n(RFU/min)") + ylab("-log10(p)") +
   geom_hline(yintercept=-log10(0.05/nrow(guide_rate)), col="red", linetype="dashed")
 ```
 
@@ -1410,7 +1442,7 @@ ggplot(guide_rate, aes(x=Estimate, y=-log10(p.value),
 ggplot(guide_rate, aes(x=start, y=Estimate, col=crRNA_spacer_basepairs, 
                        shape=has_crRNA_hairpin)) + 
   geom_point(size=2, alpha=0.8) + theme_bw() + 
-  xlab("genomic position") + ylab("rate above no activator (RFU/min)")
+  xlab("genomic position") + ylab("rate above no activator\n(RFU/min)")
 ```
 
 Structures of the two guides that performed well (rate > 1 above background) but without hairpin structure (NCR_1346, NCR_1351):
@@ -1431,7 +1463,7 @@ spacer_structure_cor <- with(guide_rate, cor.test(Estimate, spacer_bp))
 ggplot(guide_rate, aes(x=spacer_bp, y=Estimate)) + geom_point() + 
   geom_smooth(method=lm, formula=y~x) + theme_bw() +
   xlab("number of basepaired positions in spacer") + 
-  ylab("rate above no activator (RFU/min)") +
+  ylab("rate above no activator\n(RFU/min)") +
   annotate(geom="text", x=0.5, y=-15, 
            label=paste("cor =", round(spacer_structure_cor$estimate, digits=3))) +
   annotate(geom="text", x=0.5, y=-20,
@@ -1545,7 +1577,7 @@ ggplot_violin(subset(noActivator_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 1
 ```{r rate_by_gc_content}
 ggplot(guide_rate, aes(x=GC_content, y=Estimate)) + 
   geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
-  xlab("GC content (%)") + ylab("rate above no activator (RFU/min)") +
+  xlab("GC content (%)") + ylab("rate above no activator\n(RFU/min)") +
   annotate(geom="text", x=Inf, y=75, hjust="inward", vjust="inward", col="red",
            label=bquote(rho~"="~.(round(with(guide_rate, 
                                              cor.test(GC_content, 
@@ -1565,8 +1597,8 @@ ggplot(guide_rate, aes(x=GC_content, y=Estimate)) +
 ```{r rate_by_downstream_U}
 (ggplot(guide_rate, aes(x=downstream_U, y=Estimate)) + 
    geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
-   xlab(paste0("% U in downstream ", downstream_U_window, "nt in viral genome")) + 
-   ylab("rate above no activator (RFU/min)") +
+   xlab(paste0("% U in downstream ", U_window, "nt in viral genome")) + 
+   ylab("rate above no activator\n(RFU/min)") +
    annotate(geom="text", x=Inf, y=75, hjust="inward", vjust="inward", col="red",
             label=bquote(rho~"="~.(round(with(guide_rate, 
                                               cor.test(downstream_U, 
@@ -1581,8 +1613,8 @@ ggplot(guide_rate, aes(x=GC_content, y=Estimate)) +
                                        digits=3))))) + 
   (ggplot(guide_rate, aes(x=downstream_unstructured_U, y=Estimate)) + 
      geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
-     xlab(paste0("% unstructured U in downstream ", downstream_U_window, "nt in viral genome")) + 
-     ylab("rate above no activator (RFU/min)") +
+     xlab(paste0("% unstructured U in downstream ", U_window, "nt in viral genome")) + 
+     ylab("rate above no activator\n(RFU/min)") +
      annotate(geom="text", x=Inf, y=75, hjust="inward", vjust="inward", col="red",
               label=bquote(rho~"="~.(round(with(guide_rate, 
                                                 cor.test(downstream_unstructured_U, 
@@ -1602,7 +1634,7 @@ ggplot(guide_rate, aes(x=GC_content, y=Estimate)) +
 ```{r rate_by_gRNA_MFE}
 ggplot(guide_rate, aes(x=gRNA_MFE, y=Estimate)) + 
   geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
-  xlab("gRNA MFE (kcal/mol)") + ylab("rate above no activator (RFU/min)") +
+  xlab("gRNA MFE (kcal/mol)") + ylab("rate above no activator\n(RFU/min)") +
   annotate(geom="text", x=-Inf, y=75, hjust="inward", vjust="inward", col="red",
            label=bquote(rho~"="~.(round(with(guide_rate, 
                                              cor.test(gRNA_MFE, 
@@ -1630,7 +1662,7 @@ guide_rate_adapt <- rbind(data.frame(adapt_28mer,
                                      spacer="28mer"))
 ggplot(guide_rate_adapt, aes(x=guide.expected.activities, y=rate, col=spacer)) + 
   geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() +
-  xlab("ADAPT prediction") + ylab("rate above no activator (RFU/min)")
+  xlab("ADAPT prediction") + ylab("rate above no activator\n(RFU/min)")
 ```
 
 ## Guide activity by viral structure
@@ -1658,7 +1690,7 @@ lan_wilcox <- with(guide_rate,
 lan_plot <- (ggplot(guide_rate, aes(x=lan, y=Estimate)) + 
                geom_point() + geom_smooth(method=loess, formula=y~x) + theme_bw() + 
                xlab("% unstructured positions in viral target") + 
-               ylab("rate above no activator (RFU/min)") +
+               ylab("rate above no activator\n(RFU/min)") +
                ggtitle("Lan (2020)", subtitle="Unstructured region")) + 
   (ggplot_violin(guide_rate, x_var="lan_cat",
                  x_lab="% unstructured positions in viral target") + 
@@ -1677,7 +1709,7 @@ lan_spacer_bp_plot <- ((ggplot(guide_rate, aes(x=spacer_bp, y=Estimate)) +
                           geom_point() + 
                           geom_smooth(method=lm, formula=y~x) + theme_bw() +
                           xlab("number of basepaired positions in spacer") + 
-                          ylab("rate above no activator (RFU/min)") +
+                          ylab("rate above no activator\n(RFU/min)") +
                           annotate(geom="text", x=1, y=-15, 
                                    label=paste("cor =", 
                                                round(spacer_structure_cor$estimate, 
@@ -1736,7 +1768,7 @@ huston_wilcox <- with(guide_rate,
 huston_plot <- (ggplot(guide_rate, aes(x=huston, y=Estimate)) + 
     geom_point() + geom_smooth(method=loess, formula=y~x) + theme_bw() + 
     xlab("% unbound positions in viral target") + 
-    ylab("rate above no activator (RFU/min)") +
+    ylab("rate above no activator\n(RFU/min)") +
     ggtitle("Huston (2021)", subtitle="Viral RNA secondary structure")) + 
   (ggplot_violin(guide_rate, x_var="huston_cat", 
                  x_lab="% unbound positions in viral target") + 
@@ -1779,7 +1811,7 @@ invivo_kmeans_3_wilcox <- wilcox.test(Estimate ~ invivo_kmeans_3,
 #                     draw_quantiles=c(0.25, 0.75), linetype="dashed") +
 #         geom_violin(fill="transparent", draw_quantiles=0.5) + 
 #         geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + guides(fill=F) + 
-#         xlab("") + ylab("rate above no activator (RFU/min)") +
+#         xlab("") + ylab("rate above no activator\n(RFU/min)") +
 #         ggtitle("Guide activity v. viral genome structure", subtitle="k means: 3 clusters") +
 #         annotate(geom="text", x= "unstructured", y=80, 
 #                  label=paste("p =", round(invivo_kmeans_3_wilcox$p.value, 
@@ -3078,6 +3110,20 @@ gBlock round 2 outlier:
 gblock_plots[["1352"]]
 ```
 
+```{r save_antitag_G_spacers}
+antitag_G <- subset(guide_rate, 
+                    antitag_pos1=="G" & 
+                      has_crRNA_hairpin & 
+                      crRNA_spacer_basepairs==0)
+antitag_G <- antitag_G[, c("NCR.id", "start", "spacer", "Estimate", "antitag", "antitag_label")]
+antitag_G$num_complementary <- with(antitag_G,
+                                    ifelse(antitag_label=="GUUR", 3,
+                                           ifelse(antitag_label=="GURR", 2, 1)))
+antitag_G$old_direct_repeat <- "uagaccaccccaaaaaugaaggggacuaaaac"
+write.csv(antitag_G, 
+          file=file.path(project_dir, "guides_antitag_G.csv"))
+```
+
 # Figures for paper
 
 ```{r make_figure_directory}
@@ -3085,9 +3131,9 @@ figure_dir <- file.path(here(), "NCR", "figures")
 if(!dir.exists(figure_dir)) { dir.create(figure_dir) }
 ```
 
-Figure 1A
+Figure 1A (data): guide design pipeline
 
-```{r figure_1a}
+```{r figure_1A}
 # all guides targeting SARS-CoV-2: n=29,880
 design_data <- read.table(file.path(here(), "outputs", "cas13a_20nt", 
                                     "cas13a_results_summary.txt")) 
@@ -3102,7 +3148,7 @@ design_data <- subset(design_data,
 design_data <- subset(design_data, sensitivity_01 >= 0.95)
 ```
 
-Figure 2A
+Figure 2A: range of observed guide activities 
 
 ```{r figure_2A}
 gene_bed <- read.table(file.path(here(), "ref_data", "cov2_genes.txt"),
@@ -3126,7 +3172,7 @@ for(x in seq(nrow(gene_bed))) {
 (ggplot(guide_rate, aes(x=start, y=Estimate)) + theme_classic() + 
     geom_point() + geom_errorbar(aes(ymin=Estimate+qnorm(0.05)*Std.Error,
                                      ymax=Estimate-qnorm(0.05)*Std.Error)) + 
-    xlab("position along genome") + ylab("rate above no activator (RFU/min)") + ylim(-10, 100) + 
+    xlab("position along genome") + ylab("rate above no activator\n(RFU/min)") + ylim(-10, 100) + 
     theme(axis.title=element_text(size=10), 
           axis.text=element_text(size=10))) + 
   (ggplot(gene_bed, aes(xmin=thickStart, xmax=thickEnd, ymin=ymax-4.5, ymax=ymax)) + 
@@ -3141,12 +3187,13 @@ for(x in seq(nrow(gene_bed))) {
      scale_x_continuous(breaks=c(0, 20))) + 
   plot_spacer() + 
   plot_layout(byrow=F, widths=c(10,1), heights=c(5,1))
+
 ggsave(filename=file.path(figure_dir, "figure_2A.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=3, units="in")
 ```
 
-Figure 2B
+Figure 2B: example traces
 
 ```{r figure_2B_data}
 time_start <- 15
@@ -3267,42 +3314,40 @@ ggsave(filename=file.path(figure_dir, "figure_2B.pdf"),
        device="pdf", width=4, height=3.5, units="in")
 ```
 
-Figure 2C
+Figure 2C: viral RNA v. gblock 
 
 ```{r figure_2C}
 # gblock outlier: NCR_1352
 virus_v_gblock_data <- subset(guide_rate, NCR.id != "NCR_1352" & nchar(spacer)==20)
 (ggplot(virus_v_gblock_data, aes(x=Estimate)) + 
     geom_histogram(binwidth=5) + xlab("") + ylab("") + 
-    theme_classic() + scale_y_continuous(breaks=c(0, 20)) +
-    theme(axis.text.x=element_blank(),
-          axis.text.y=element_text(size=10))) + 
+    theme_classic(base_size=10) + scale_y_continuous(breaks=c(0, 20)) +
+    theme(axis.text.x=element_blank())) + 
   plot_spacer() +
   (ggplot(virus_v_gblock_data, aes(x=Estimate, y=gblock_rate_round2)) + 
      geom_point(shape=16, alpha=0.75) + 
      # geom_abline(slope=1, intercept=0, linetype="dashed") + 
-     xlab("viral genome rate") + 
-     ylab("gblock rate") + 
+     xlab("viral genome rate\n(RFU/min)") + 
+     ylab("gblock rate\n(RFU/min)") + 
      # annotate(geom="text", x=-Inf, y=Inf, hjust="inward", vjust="inward",
      #          label=paste("  cor =", 
      #                      round(with(virus_v_gblock_data, 
      #                                 cor(Estimate, gblock_rate_round2)), 
      #                            digits=3))) + 
-     theme_classic() + 
-     theme(axis.text=element_text(size=10),
-           axis.title=element_text(size=10))) + 
+     theme_classic(base_size=10)) + 
   (ggplot(virus_v_gblock_data, aes(y=gblock_rate_round2)) + 
      geom_histogram(binwidth=5) + xlab("") + ylab("") + 
-     theme_classic() + scale_x_continuous(breaks=c(0, 50)) + 
-     theme(axis.text.x=element_text(size=10, angle=-90, vjust=0.5), 
+     theme_classic(base_size=10) + scale_x_continuous(breaks=c(0, 50)) + 
+     theme(axis.text.x=element_text(angle=-90, vjust=0.5), 
            axis.text.y=element_blank())) + 
   plot_layout(nrow=2, widths=c(4,1), heights=c(1,4))
+
 ggsave(filename=file.path(figure_dir, "figure_2C.pdf"),
        plot=last_plot(),
        device="pdf", width=3, height=3, units="in")
 ```
 
-Figure 3
+Figure 3: elastic net regression + anti-tag result
 
 ```{r figure_3}
 model1_coefs <- coef(model1_bestfit, s=model1$MSE$best_lambda)[, 1]
@@ -3319,16 +3364,6 @@ model1_MSE_r2 <- aggregate(r2~split,
                                        alpha==model1$MSE$best_alpha & 
                                          lambda==model1$MSE$best_lambda), 
                            FUN=mean)
-
-guide_rate$antitag_label <- sapply(guide_rate$antitag,
-                                   function(x) {
-                                     ifelse(grepl("^GUU", x), "GUU",
-                                                  ifelse(grepl("^GU", x), "GU",
-                                                               ifelse(grepl("^G", x), "G",
-                                                                            substr(x, 1, 1))))
-                                   })
-guide_rate$antitag_label <- factor(guide_rate$antitag_label,
-                                   levels=c("A", "C", "U", "G", "GU", "GUU"))
 
 (ggplot(model1_coefs, aes(x=position, y=value, fill=coef)) + 
     geom_col(position="stack") + geom_hline(yintercept=0) +
@@ -3356,44 +3391,123 @@ guide_rate$antitag_label <- factor(guide_rate$antitag_label,
      scale_fill_manual(values=RColorBrewer::brewer.pal(4, "Set1")) +
      theme_classic() + guides(fill=F) +
      theme(axis.text=element_text(size=10), axis.title=element_text(size=10)) + 
-     xlab("first position in anti-tag") + ylab("rate above no activator (RFU/min)"))
+     xlab("first position in anti-tag") + ylab("rate above no activator\n(RFU/min)"))
 
 ggsave(filename=file.path(figure_dir, "figure_3.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=3, units="in")
 ```
 
-Suppl. Figure 1
+Suppl. Figure 1: anti-tag complementarity
 
 ```{r suppl_figure_1}
-gblock_rate$start <- guide_rate$start[match(gblock_rate$guide_id,
-                                            guide_rate$guide_id)]
-(ggplot(gblock_rate, aes(x=start, y=Estimate)) + theme_classic() + 
-    geom_point() + geom_errorbar(aes(ymin=Estimate+qnorm(0.05)*Std.Error,
-                                     ymax=Estimate-qnorm(0.05)*Std.Error)) + 
-    xlab("") + ylab("rate above no activator (RFU/min)") + ylim(-10, 100) + 
-    theme(axis.title=element_text(size=10),
-          axis.text=element_text(size=10))) + 
-  (ggplot(gene_bed, aes(xmin=thickStart, xmax=thickEnd, ymin=ymax-4.5, ymax=ymax)) + 
-     theme_void() + geom_rect() + 
-     geom_text(data=subset(gene_bed, thickEnd-thickStart > 500*nchar(geneName)),
-               aes(x=(thickStart + thickEnd)/2, y=ymax-(4.5/2), label=name),
-               col="white", size=2.5)) +
-  (ggplot(guide_rate, aes(y=Estimate)) + theme_classic() + 
-     geom_histogram(binwidth=5) + xlab("") + ylab("") + ylim(-10, 100) + 
-     scale_x_continuous(breaks=c(0, 20)) +
-     theme(axis.text.y=element_blank(), axis.ticks=element_blank(),
-           axis.text.x=element_text(size=10))) + 
-  plot_spacer() + 
-  plot_layout(byrow=F, widths=c(10,1), heights=c(5,1))
+levels(guide_rate$antitag_label) <- c("ARRR", "CRRR", "URRR", "GRRR", "GURR", "GUUR")
+
+ggplot(subset(guide_rate, nchar(spacer)==20),
+       aes(x=antitag_label, y=Estimate, fill=antitag_label)) + 
+  geom_violin(draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
+  geom_violin(fill="transparent", draw_quantiles=0.5) + 
+  geom_dotplot(binaxis="y", stackdir="center", binwidth=1, fill="black") +
+  theme_classic(base_size=10) + guides(fill=F) +
+  scale_fill_manual(values=RColorBrewer::brewer.pal(6, "Set1")) +
+  xlab("anti-tag") + ylab("rate above no activator\n(RFU/min)")
+
 ggsave(file=file.path(figure_dir, "suppl_figure_1.pdf"),
+       plot=last_plot(),
+       device="pdf", width=4, height=3, units="in")
+```
+
+Suppl. Figure 2A: random forest variable importance
+
+```{r suppl_figure_2A}
+ggplot(model1_rf_regression_importance, 
+       aes(x=position, y=increaseMSE, fill=coef)) + 
+  geom_col(position="stack") + geom_hline(yintercept=0) +
+  xlab("position relative to spacer") + ylab("mean decrease in accuracy") +
+  theme_classic(base_size=10) + labs(fill="") +
+  scale_x_continuous(breaks=c(1, 10, 20)) + 
+  scale_fill_manual(values=c(RColorBrewer::brewer.pal(4, "Set1"), "grey")) +
+  annotate("rect", xmin=1, xmax=20, ymin=-10, ymax=-5, fill="black") + 
+  annotate("text", x=10.5, y=-7.5, label="protospacer", col="white", size=2.5) +
+  annotate("rect", xmin=-5, xmax=1, ymin=-10, ymax=-5, fill="darkgrey") +
+  annotate("text", x=-2, y=-7.5, label="anti-tag", col="white", size=2.5) + 
+  ggtitle("random forest regression", 
+          subtitle=bquote("mean testing"~r^2~"="~
+                            .(round(model1_rf_regression_r2, digits=3)))) + 
+  theme(legend.position="bottom")
+
+ggsave(file=file.path(figure_dir, "suppl_figure_2A.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=3, units="in")
 ```
 
-Suppl. Figure 2A
+Suppl. Figure 2B: sequence logo
 
-```{r suppl_figure_2A}
+```{r suppl_figure_2B}
+(ggseqlogo(topSpacers_info, method="custom") + 
+  ggtitle(paste("Top", num_spacers, "spacers")) + ylim(0, 0.5) + 
+   theme_classic(base_size=10)) / 
+  (ggseqlogo(bottomSpacers_info, method="custom") +
+     ggtitle(paste("Bottom", num_spacers, "spacers")) + ylim(0, 0.5) +
+     theme_classic(base_size=10))
+
+ggsave(file=file.path(figure_dir, "suppl_figure_2B.pdf"),
+       plot=last_plot(),
+       device="pdf", width=6.5, height=3, units="in")
+```
+
+Suppl. Figure 3A: GC content
+
+```{r suppl_figure_3A}
+(ggplot(guide_rate, aes(x=GC_content, y=Estimate)) + theme_classic(base_size=10) + 
+     geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) + 
+     xlab("spacer %GC") + ylab("rate above no activator\n(RFU/min)"))
+
+ggsave(file=file.path(figure_dir, "suppl_figure_3A.pdf"),
+       plot=last_plot(),
+       device="pdf", width=3, height=2, units="in")
+```
+
+Suppl. Figure 3B: cleaveable U in target context
+
+```{r suppl_figure_3B}
+U_context_data <- data.frame(Estimate=rep(guide_rate$Estimate, times=2),
+                             U_context=c(guide_rate$U_context, 
+                                         guide_rate$U_context_unstructured),
+                             structure=rep(c("structured + unstructured", 
+                                             "unstructured"),
+                                           each=nrow(guide_rate)))
+U_context_cor <- list(both=cor.test(guide_rate$Estimate, 
+                                    guide_rate$U_context),
+                      unstructured=cor.test(guide_rate$Estimate, 
+                                            guide_rate$U_context_unstructured))
+U_context_text <- data.frame(x=Inf,
+                             y=rep(c(75, 65), each=2),
+                             text=c(paste("cor =",
+                                          round(sapply(U_context_cor, function(x) x$estimate),
+                                                digits=3)),
+                                    paste("p =", signif(sapply(U_context_cor, function(x) x$p.value),
+                                                        digits=3))),
+                             structure=rep(c("structured + unstructured", "unstructured"),
+                                           times=2))
+
+ggplot(U_context_data, aes(x=U_context, y=Estimate)) + 
+  geom_point() + geom_smooth(method=lm, formula=y~x) + 
+  facet_grid(~structure, scales="free_x") + 
+  theme_classic(base_size=10) + 
+  xlab("%U in target context") + 
+  ylab("rate above no activator\n(RFU/min)") + 
+  geom_text(data=U_context_text, col="red", hjust="inward", size=2.5,
+            aes(x=x, y=y, label=text))
+
+ggsave(file=file.path(figure_dir, "suppl_figure_3B.pdf"),
+       plot=last_plot(),
+       device="pdf", width=6, height=2, units="in")
+```
+
+Suppl. Figure 4A: spacer structure
+
+```{r suppl_figure_4A}
 # noActivator_structure <- lm(Estimate ~ as.numeric(as.character(crRNA_spacer_basepairs)),
 #                             data=subset(noActivator_rate, 
 #                                         crRNA_spacer_basepairs %in% c(0, 4, 10, 16)))
@@ -3481,7 +3595,7 @@ guide_spacer_antitag_violin <- ggplot(subset(guide_rate,
   theme(axis.text=element_text(size=10), axis.title=element_text(size=10)) +
   scale_x_continuous(breaks=c(0, 4, 10, 16)) + 
   xlab("# basepaired positions in spacer") + 
-  ylab("rate above no activator (RFU/min)") + 
+  ylab("rate above no activator\n(RFU/min)") + 
   geom_text(data=spacer_structure_antitag_text, 
             aes(x=x, y=y, label=text), hjust=0, size=2.5)
 
@@ -3494,17 +3608,17 @@ guide_spacer_antitag_violin <- ggplot(subset(guide_rate,
              label=paste("p =", 
                          signif(noActivator_structure_rate$Pr...t..[2], 
                                 digits=3))) + 
-    xlab("")) / 
+    xlab("") + ylab("rate above no activator\n(RFU/min)")) / 
   guide_spacer_antitag_violin
 
-ggsave(file=file.path(figure_dir, "suppl_figure_2A.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_4A.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=4, units="in")
 ```
 
-Suppl. Figure 2B
+Suppl. Figure 4B: structure of direct repeat
 
-```{r suppl_figure_2B}
+```{r suppl_figure_4B}
 (ggplot(noActivator_rate, aes(x=direct_repeat, y=Estimate)) + 
    theme_classic() + 
    theme(axis.text.x=element_blank(), axis.text.y=element_text(size=10),
@@ -3520,111 +3634,91 @@ Suppl. Figure 2B
      xlab("structure of crRNA direct repeat") + 
      ylab("rate above no activator\n(RFU/min)"))
 
-ggsave(file=file.path(figure_dir, "suppl_figure_2B.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_4B.pdf"),
        plot=last_plot(),
-       device="pdf", width=6.5, height=5, units="in")
+       device="pdf", width=6.5, height=4, units="in")
 ```
 
-Suppl. Figure 2C
+Suppl. Figure 5A: in vivo viral structure
 
-```{r suppl_figure_2C}
-(ggplot(guide_rate, aes(x=GC_content, y=Estimate)) + theme_classic(base_size=10) + 
-     geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) + 
-     xlab("spacer %GC") + ylab("rate above no activator (RFU/min)"))
-
-ggsave(file=file.path(figure_dir, "suppl_figure_2C.pdf"),
-       plot=last_plot(),
-       device="pdf", width=4, height=2, units="in")
-```
-
-Suppl. Figure 2D
-
-```{r suppl_figure_2D}
-levels(guide_rate$antitag_label) <- c("ARRR", "CRRR", "URRR", "GRRR", "GURR", "GUUR")
-
-ggplot(subset(guide_rate, nchar(spacer)==20),
-       aes(x=antitag_label, y=Estimate, fill=antitag_label)) + 
-  geom_violin(draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
-  geom_violin(fill="transparent", draw_quantiles=0.5) + 
-  geom_dotplot(binaxis="y", stackdir="center", binwidth=1, fill="black") +
-  theme_classic() + guides(fill=F) +
-  scale_fill_manual(values=RColorBrewer::brewer.pal(6, "Set1")) +
-  theme(axis.text=element_text(size=10), 
-        axis.title=element_text(size=10)) + 
-  xlab("anti-tag") + ylab("rate above no activator (RFU/min)")
-
-ggsave(file=file.path(figure_dir, "suppl_figure_2D.pdf"),
-       plot=last_plot(),
-       device="pdf", width=4, height=2, units="in")
-```
-
-Suppl. Figure 3A
-
-```{r suppl_figure_3A}
+```{r suppl_figure_5A}
 (lan_huston + theme_classic(base_size=10)) + 
   (sun_invivo_huston + theme_classic(base_size=10)) + 
   (lan_sun_invivo + theme_classic(base_size=10))
 
-ggsave(file=file.path(figure_dir, "suppl_figure_3A.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_5A.pdf"),
        plot=last_plot(),
-       device="pdf", width=6.5, height=3, units="in")
+       device="pdf", width=6.5, height=2, units="in")
 ```
 
-Suppl. Figure 3B
+Suppl. Figure 5B: genomic structure vs. activity
 
-```{r suppl_figure_3B}
+```{r suppl_figure_5B}
 ((ggplot(guide_rate, aes(x=lan, y=Estimate)) + theme_classic(base_size=10) +
     geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-    xlab("% unstructured") + ylab("rate above no activator (RFU/min)") + 
+    xlab("% unstructured") + ylab("rate above no activator\n(RFU/min)") + 
     ggtitle("Lan (2020)", subtitle="unstructuredness")) + 
     (ggplot(guide_rate, aes(x=huston, y=Estimate)) + theme_classic(base_size=10) +
        geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-       xlab("% double-stranded") + ylab("rate above no activator (RFU/min)") +
+       xlab("% double-stranded") + ylab("rate above no activator\n(RFU/min)") +
        ggtitle("Huston (2021)", subtitle="double-stranded folded viral genome")) +
     (ggplot(guide_rate, aes(x=sun_invivo, y=Estimate)) + theme_classic(base_size=10) +
        geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-       xlab("mean icSHAPE score") + ylab("rate above no activator (RFU/min)") +
+       xlab("mean icSHAPE score") + ylab("rate above no activator\n(RFU/min)") +
        ggtitle("Sun (2021)", subtitle="mean icSHAPE score in vivo")))
 
-ggsave(file=file.path(figure_dir, "suppl_figure_3B.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_5B.pdf"),
        plot=last_plot(),
-       device="pdf", width=6.5, height=3, units="in")
+       device="pdf", width=6.5, height=2, units="in")
 ```
 
-Suppl. Figure 4A
+Suppl. Figure 6A: multiplex set of 40 vs. primary screen
 
-```{r suppl_figure_4A}
-ggplot(model1_rf_regression_importance, 
-       aes(x=position, y=increaseMSE, fill=coef)) + 
-  geom_col(position="stack") + geom_hline(yintercept=0) +
-  xlab("position relative to spacer") + ylab("mean decrease in accuracy") +
-  theme_classic(base_size=10) + labs(fill="") +
-  scale_x_continuous(breaks=c(1, 10, 20)) + 
-  scale_fill_manual(values=c(RColorBrewer::brewer.pal(4, "Set1"), "grey")) +
-  annotate("rect", xmin=1, xmax=20, ymin=-10, ymax=-5, fill="black") + 
-  annotate("text", x=10.5, y=-7.5, label="protospacer", col="white", size=2.5) +
-  annotate("rect", xmin=-5, xmax=1, ymin=-10, ymax=-5, fill="darkgrey") +
-  annotate("text", x=-2, y=-7.5, label="anti-tag", col="white", size=2.5) + 
-  ggtitle("random forest regression", 
-          subtitle=bquote("mean testing"~r^2~"="~
-                            .(round(model1_rf_regression_r2, digits=3))))
+```{r suppl_figure_6A}
+multiplex_40 <- readLines(file.path(project_dir, "40_guide_List.csv"), skip=1)[-1]
+guide_rate$multiplex_40 <- sapply(guide_rate$guide_id,
+                                  function(x) {
+                                    ifelse(x %in% multiplex_40,
+                                           "multiplex pool", "not selected")
+                                  })
+guide_rate$multiplex_40 <- factor(guide_rate$multiplex_40, 
+                                  levels=c("not selected", "multiplex pool"))
 
-ggsave(file=file.path(figure_dir, "suppl_figure_4A.pdf"),
+ggplot_violin(guide_rate, x_var="multiplex_40") + 
+  theme_classic(base_size=10) + guides(fill=F) + 
+  ylab("rate above no activator\n(RFU/min)")
+
+ggsave(file=file.path(figure_dir, "suppl_figure_6A.pdf"),
        plot=last_plot(),
-       device="pdf", width=6.5, height=3, units="in")
+       device="pdf", width=3, height=2, units="in")
 ```
 
-Suppl. Figure 4B
+gblock rates
 
-```{r suppl_figure_4B}
-(ggseqlogo(topSpacers_info, method="custom") + 
-  ggtitle(paste("Top", num_spacers, "spacers")) + ylim(0, 0.5)) / 
-  (ggseqlogo(bottomSpacers_info, method="custom") +
-     ggtitle(paste("Bottom", num_spacers, "spacers")) + ylim(0, 0.5))
-
-ggsave(file=file.path(figure_dir, "suppl_figure_4B.pdf"),
-       plot=last_plot(),
-       device="pdf", width=6.5, height=3, units="in")
+```{r suppl_figure_x}
+gblock_rate$start <- guide_rate$start[match(gblock_rate$guide_id,
+                                            guide_rate$guide_id)]
+(ggplot(gblock_rate, aes(x=start, y=Estimate)) + theme_classic() + 
+    geom_point() + geom_errorbar(aes(ymin=Estimate+qnorm(0.05)*Std.Error,
+                                     ymax=Estimate-qnorm(0.05)*Std.Error)) + 
+    xlab("") + ylab("rate above no activator\n(RFU/min)") + ylim(-10, 100) + 
+    theme(axis.title=element_text(size=10),
+          axis.text=element_text(size=10))) + 
+  (ggplot(gene_bed, aes(xmin=thickStart, xmax=thickEnd, ymin=ymax-4.5, ymax=ymax)) + 
+     theme_void() + geom_rect() + 
+     geom_text(data=subset(gene_bed, thickEnd-thickStart > 500*nchar(geneName)),
+               aes(x=(thickStart + thickEnd)/2, y=ymax-(4.5/2), label=name),
+               col="white", size=2.5)) +
+  (ggplot(guide_rate, aes(y=Estimate)) + theme_classic() + 
+     geom_histogram(binwidth=5) + xlab("") + ylab("") + ylim(-10, 100) + 
+     scale_x_continuous(breaks=c(0, 20)) +
+     theme(axis.text.y=element_blank(), axis.ticks=element_blank(),
+           axis.text.x=element_text(size=10))) + 
+  plot_spacer() + 
+  plot_layout(byrow=F, widths=c(10,1), heights=c(5,1))
+# ggsave(file=file.path(figure_dir, "suppl_figure_1.pdf"),
+#        plot=last_plot(),
+#        device="pdf", width=6.5, height=3, units="in")
 ```
 
 ```{r save_image}
