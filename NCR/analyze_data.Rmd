@@ -3110,18 +3110,37 @@ gBlock round 2 outlier:
 gblock_plots[["1352"]]
 ```
 
-```{r save_antitag_G_spacers}
+```{r test_antitag}
+# choose 4 guides with GRRR anti-tag and low activity
+# also: good guide secondary structure
 antitag_G <- subset(guide_rate, 
-                    antitag_pos1=="G" & 
-                      has_crRNA_hairpin & 
-                      crRNA_spacer_basepairs==0)
+                    antitag_label=="G" &has_crRNA_hairpin & crRNA_spacer_basepairs==0)
 antitag_G <- antitag_G[, c("NCR.id", "start", "spacer", "Estimate", "antitag", "antitag_label")]
-antitag_G$num_complementary <- with(antitag_G,
-                                    ifelse(antitag_label=="GUUR", 3,
-                                           ifelse(antitag_label=="GURR", 2, 1)))
-antitag_G$old_direct_repeat <- "uagaccaccccaaaaaugaaggggacuaaaac"
-write.csv(antitag_G, 
-          file=file.path(project_dir, "guides_antitag_G.csv"))
+antitag_G <- antitag_G[order(antitag_G$Estimate),]
+antitag_G <- antitag_G[1:4,]
+
+# choose 2 guides w/o G anti-tag and high activity
+antitag_notG <- subset(guide_rate, 
+                       antitag_pos1 != "G" & has_crRNA_hairpin & crRNA_spacer_basepairs==0)
+antitag_notG <- antitag_notG[, c("NCR.id", "start", "spacer", "Estimate", "antitag", "antitag_label")]
+antitag_notG <- antitag_notG[order(antitag_notG$Estimate, decreasing=T),]
+antitag_notG <- antitag_notG[c(2,4),]
+
+old_repeat <- toupper("uagaccaccccaaaaaugaaggggacuaaaac")
+new_repeats <- data.frame(new_tag_pos1=c("A", "U", "G"))
+new_repeats$new_repeat <- sapply(new_repeats$new_tag_pos1,
+                                 function(x) {
+                                   paste0(substr(old_repeat, 1, 
+                                                 nchar(old_repeat)-1), x)
+                                 })
+
+test_antitag <- rbind(antitag_G, antitag_notG)
+test_antitag <- expand.grid.df(test_antitag, new_repeats)
+test_antitag$crRNA_seq <-paste0(test_antitag$new_repeat, test_antitag$spacer)
+test_antitag <- test_antitag[order(test_antitag$start),]
+
+write.csv(test_antitag, 
+          file=file.path(project_dir, "test_antitag_G.csv"))
 ```
 
 # Figures for paper
