@@ -664,6 +664,23 @@ guide_features$direct_repeat <- relevel(guide_features$direct_repeat,
                                         ref=".......((((.........))))........")
 ```
 
+```{r hybridization_MFE}
+guide_features$target <- as.character(reverseComplement(RNAStringSet(guide_features$spacer)))
+guide_features$hybridization_MFE <- sapply(seq(nrow(guide_features)),
+                                           function(x) {
+                                             tmp <- system(paste0('printf "', 
+                                                                  guide_features$spacer[x],
+                                                                  '\n',
+                                                                  guide_features$target[x],
+                                                                  '" | RNAduplex'),
+                                                           intern=T)
+                                             tmp <- strsplit(tmp, split=" ")[[1]][[11]]
+                                           })
+guide_features$hybridization_MFE <- as.numeric(sub("\\(", "",
+                                                   sub("\\)", "", 
+                                                       guide_features$hybridization_MFE)))
+```
+
 ## Viral secondary structure
 
 * Manfredonia et al. *NAR* (2020)
@@ -3139,7 +3156,9 @@ test_antitag <- expand.grid.df(test_antitag, new_repeats)
 test_antitag$crRNA_seq <-paste0(test_antitag$new_repeat, test_antitag$spacer)
 test_antitag <- test_antitag[order(test_antitag$start),]
 
-write.csv(test_antitag, 
+test_antitag$new_NCR_id <- paste0("NCR_", 1629:1646)
+
+write.csv(test_antitag, row.names=F,
           file=file.path(project_dir, "test_antitag_G.csv"))
 ```
 
@@ -3148,6 +3167,10 @@ write.csv(test_antitag,
 ```{r make_figure_directory}
 figure_dir <- file.path(here(), "NCR", "figures")
 if(!dir.exists(figure_dir)) { dir.create(figure_dir) }
+```
+
+```{r remove_28mers}
+guide_rate <- subset(guide_rate, nchar(spacer)==20)
 ```
 
 Figure 1A (data): guide design pipeline
@@ -3337,7 +3360,7 @@ Figure 2C: viral RNA v. gblock
 
 ```{r figure_2C}
 # gblock outlier: NCR_1352
-virus_v_gblock_data <- subset(guide_rate, NCR.id != "NCR_1352" & nchar(spacer)==20)
+virus_v_gblock_data <- subset(guide_rate, NCR.id != "NCR_1352")
 (ggplot(virus_v_gblock_data, aes(x=Estimate)) + 
     geom_histogram(binwidth=5) + xlab("") + ylab("") + 
     theme_classic(base_size=10) + scale_y_continuous(breaks=c(0, 20)) +
@@ -3402,7 +3425,7 @@ model1_MSE_r2 <- aggregate(r2~split,
     annotate("text", x=10.5, y=2.5, label="protospacer", col="white", size=2.5) +
     annotate("rect", xmin=-5, xmax=1, ymin=2, ymax=3, fill="darkgrey") +
     annotate("text", x=-2, y=2.5, label="anti-tag", col="white", size=2.5)) + 
-  (ggplot(subset(guide_rate, nchar(spacer)==20),
+  (ggplot(guide_rate,
           aes(x=antitag_pos1, y=Estimate, fill=antitag_pos1)) + 
      geom_violin(draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
      geom_violin(fill="transparent", draw_quantiles=0.5) + 
@@ -3422,7 +3445,7 @@ Suppl. Figure 1: anti-tag complementarity
 ```{r suppl_figure_1}
 levels(guide_rate$antitag_label) <- c("ARRR", "CRRR", "URRR", "GRRR", "GURR", "GUUR")
 
-ggplot(subset(guide_rate, nchar(spacer)==20),
+ggplot(guide_rate,
        aes(x=antitag_label, y=Estimate, fill=antitag_label)) + 
   geom_violin(draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
   geom_violin(fill="transparent", draw_quantiles=0.5) + 
@@ -3487,9 +3510,32 @@ ggsave(file=file.path(figure_dir, "suppl_figure_3A.pdf"),
        device="pdf", width=3, height=2, units="in")
 ```
 
-Suppl. Figure 3B: cleaveable U in target context
+Suppl. Figure 3B: hybridization MFE
 
 ```{r suppl_figure_3B}
+hyb_MFE_cor <- with(guide_rate, cor.test(hybridization_MFE, Estimate))
+hyb_MFE_text <- data.frame(x=-Inf,
+                           y=c(75, 65),
+                           text=c(paste("cor =",
+                                        round(hyb_MFE_cor$estimate, digits=3)),
+                                  paste("p =", signif(hyb_MFE_cor$p.value, digits=3))))
+
+ggplot(guide_rate, aes(x=hybridization_MFE, y=Estimate)) + 
+  geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) + 
+  theme_classic(base_size=10) + 
+  xlab("hybridization MFE (kcal/mol)") + 
+  ylab("rate above no activator\n(RFU/min)") + 
+  geom_text(data=hyb_MFE_text, col="red", hjust="inward", size=2.5,
+            aes(x=x, y=y, label=text))
+
+ggsave(file=file.path(figure_dir, "suppl_figure_3B.pdf"),
+       plot=last_plot(),
+       device="pdf", width=3, height=2, units="in")
+```
+
+Suppl. Figure 3C: cleaveable U in target context
+
+```{r suppl_figure_3C}
 U_context_data <- data.frame(Estimate=rep(guide_rate$Estimate, times=2),
                              U_context=c(guide_rate$U_context, 
                                          guide_rate$U_context_unstructured),
@@ -3519,9 +3565,9 @@ ggplot(U_context_data, aes(x=U_context, y=Estimate)) +
   geom_text(data=U_context_text, col="red", hjust="inward", size=2.5,
             aes(x=x, y=y, label=text))
 
-ggsave(file=file.path(figure_dir, "suppl_figure_3B.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_3C.pdf"),
        plot=last_plot(),
-       device="pdf", width=6, height=2, units="in")
+       device="pdf", width=3, height=2, units="in")
 ```
 
 Suppl. Figure 4A: spacer structure
@@ -3635,6 +3681,48 @@ ggsave(file=file.path(figure_dir, "suppl_figure_4A.pdf"),
        device="pdf", width=6.5, height=4, units="in")
 ```
 
+```{r antitag_G_structure}
+antitag_G_structure <- subset(guide_rate, 
+                              antitag_pos1=="G" & crRNA_spacer_basepairs != 0 &
+                                nchar(spacer)==20)
+antitag_G_structure <- antitag_G_structure[order(antitag_G_structure$crRNA_spacer_basepairs),]
+antitag_G_structure <- rbind(subset(guide_rate, 
+                                    antitag_pos1=="G" & crRNA_spacer_basepairs==0 &
+                                      nchar(spacer==20))[1,],
+                             antitag_G_structure)
+antitag_G_structure$structure <- factor(antitag_G_structure$structure, 
+                                        levels=antitag_G_structure$structure)
+antitag_G_structure$Estimate[1] <- mean(subset(guide_rate, 
+                                               antitag_pos1=="G" & crRNA_spacer_basepairs==0 &
+                                                 nchar(spacer==20))$Estimate)
+antitag_G_structure$spacer_structure <- sapply(as.character(antitag_G_structure$structure),
+                                               function(x) {
+                                                 substr(x, nchar(x)-20+1, nchar(x))
+                                               })
+
+(ggplot(subset(guide_rate, 
+               crRNA_spacer_basepairs %in% c(0, 4, 10, 16) & 
+                 antitag_pos1=="G" &
+                 nchar(spacer)==20),
+        aes(x=as.numeric(as.character(crRNA_spacer_basepairs)), 
+            y=Estimate)) + 
+    geom_violin(aes(fill=crRNA_spacer_basepairs), alpha=0.25, 
+                draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
+    geom_violin(aes(fill=crRNA_spacer_basepairs), alpha=0.25, draw_quantiles=0.5) + 
+    geom_dotplot(aes(fill=crRNA_spacer_basepairs), 
+                 binaxis="y", stackdir="center", binwidth=1) + 
+    geom_smooth(method=lm, formula=y~x) + 
+    theme_classic() + guides(fill=F) + 
+    theme(axis.text=element_text(size=10), axis.title=element_text(size=10)) +
+    scale_x_continuous(breaks=c(0, 4, 10, 16)) + 
+    xlab("# basepaired positions in spacer") + 
+    ylab("rate above no activator\n(RFU/min)")) /
+  (ggplot(antitag_G_structure, 
+          aes(x=spacer_structure, y=Estimate, fill=crRNA_spacer_basepairs)) + 
+     geom_col() + theme_classic() + theme(axis.text.x=element_text(angle=90)) + 
+     xlab("") + ylab("rate above no activator\n(RFU/min)"))
+```
+
 Suppl. Figure 4B: structure of direct repeat
 
 ```{r suppl_figure_4B}
@@ -3676,19 +3764,32 @@ Suppl. Figure 5B: genomic structure vs. activity
 ((ggplot(guide_rate, aes(x=lan, y=Estimate)) + theme_classic(base_size=10) +
     geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
     xlab("% unstructured") + ylab("rate above no activator\n(RFU/min)") + 
-    ggtitle("Lan (2020)", subtitle="unstructuredness")) + 
+    ggtitle("Lan (2020)", subtitle="20nt target region")) + 
     (ggplot(guide_rate, aes(x=huston, y=Estimate)) + theme_classic(base_size=10) +
        geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-       xlab("% double-stranded") + ylab("rate above no activator\n(RFU/min)") +
-       ggtitle("Huston (2021)", subtitle="double-stranded folded viral genome")) +
+       xlab("% double-stranded") + ylab("") +
+       ggtitle("Huston (2021)", subtitle="20nt target region")) +
     (ggplot(guide_rate, aes(x=sun_invivo, y=Estimate)) + theme_classic(base_size=10) +
        geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-       xlab("mean icSHAPE score") + ylab("rate above no activator\n(RFU/min)") +
-       ggtitle("Sun (2021)", subtitle="mean icSHAPE score in vivo")))
+       xlab("mean icSHAPE score") + ylab("") +
+       ggtitle("Sun (2021)", subtitle="20nt target region"))) / 
+  ((ggplot(guide_rate, aes(x=lan_seed, y=Estimate)) + theme_classic(base_size=10) +
+    geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
+    xlab("% unstructured") + ylab("rate above no activator\n(RFU/min)") + 
+    ggtitle("", subtitle="target seed region")) + 
+    (ggplot(guide_rate, aes(x=as.numeric(as.character(huston_seed)), y=Estimate)) + 
+       theme_classic(base_size=10) +
+       geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
+       xlab("% double-stranded") + ylab("") +
+       ggtitle("", subtitle="target seed region")) +
+    (ggplot(guide_rate, aes(x=sun_invivo_seed, y=Estimate)) + theme_classic(base_size=10) +
+       geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
+       xlab("mean icSHAPE score") + ylab("") +
+       ggtitle("", subtitle="target seed region")))
 
 ggsave(file=file.path(figure_dir, "suppl_figure_5B.pdf"),
        plot=last_plot(),
-       device="pdf", width=6.5, height=2, units="in")
+       device="pdf", width=6.5, height=4, units="in")
 ```
 
 Suppl. Figure 6A: multiplex set of 40 vs. primary screen
@@ -3741,5 +3842,7 @@ gblock_rate$start <- guide_rate$start[match(gblock_rate$guide_id,
 ```
 
 ```{r save_image}
-save.image(file=file.path(here(), "NCR", ".RData"))
+write.csv(guide_features, file=file.path(project_dir, "guide_features.csv"), row.names=F)
+write.csv(guide_rate, file=file.path(project_dir, "guide_rate.csv"), row.names=F)
+save.image(file=file.path(project_dir, ".RData"))
 ```
