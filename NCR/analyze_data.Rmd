@@ -17,6 +17,7 @@ library(factoextra)
 library(ggseqlogo)
 library(glmnet)
 library(randomForest)
+library(emmeans)
 
 knitr::opts_chunk$set(echo=F, cache=T, fig.width=8)
 
@@ -170,7 +171,7 @@ plot_guide_feature_cor <- function(plot_data, x, x_lab, y, y_lab, in_vivo=F) {
 }
 
 ggplot_violin <- function(plot_data, x_var, y_var="Estimate", fill_var=NULL,
-                          x_lab="", y_lab="rate above no activator (RFU/min)",
+                          x_lab="", y_lab="activator-dependent activity (RFU/min)",
                           binwidth=1) {
   # plot_data: data.frame ; input to ggplot()
   # x_var: character; x argument for aes_string()
@@ -694,7 +695,7 @@ guide_features$hybridization_MFE <- as.numeric(sub("\\(", "",
 * Sun et al. *Cell* (2021)
     + icSHAPE in infected Huh7.5.1 cells & on extracted RNA
     + data: icSHAPE score [0,1] per nucleotide
-    + per-guide metric: mean icSHAPE score (higher = more likely to be single-stranded)
+    + per-the guide metric: mean icSHAPE score (higher = more likely to be single-stranded)
 * Huston et al. *Molecular Cell* (2021)
     + SHAPE-MaP of purified RNA from infected Vero E6 cells
     + data: RNAstructure connectivity table (CT) per nucleotide (12527 positions unbound; 41.9% of genome)
@@ -1235,7 +1236,7 @@ noActivator_rates$plate <- noActivator_data$plate[match(noActivator_rates$guide_
 ```
 
 * No activator varies by plate (and presumably by guide) 
-+ Want to be able to account for additional gain in rate above no activator background
++ Want to be able to account for additional gain in activator-dependent activity background
 * Outliers on plate GS2-1 all correspond to NCR_1344
 
 ```{r NCR_1344_structure}
@@ -1250,7 +1251,7 @@ knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1344.png")))
     + per guide: $\text{signal}_i(t) = (\beta_0 + \beta_{0,i}) + (\beta_{\text{100fM}}\cdot\mathbb{I}[\text{100fM}]) \ + (\beta_{t} + \beta_{t,i}) \cdot t \ + (\beta_{t:\text{100fM}}\cdot t\cdot\mathbb{I}[\text{100fM}])$
     + no activator: $\text{signal}_i(t) = (\beta_0 + \beta_{0,i}) +  (\beta_t + \beta_{t,i}) \cdot t_i$
     + 100fM activator: $\text{signal}_i(t) = (\beta_0 + \beta_{0,i} + \beta_{\text{100fM}}) + (\beta_t + \beta_{t,i} +  \beta_{t:\text{100fM}}) \cdot t_i$
-    + 100fM rate above no activator: $\beta_{t:\text{100fM}}$
+    + 100fM activator-dependent activity: $\beta_{t:\text{100fM}}$
 * Background subtract mean of empty wells
 * Exclude timepoints before 1000 seconds (first 10 timepoints show dip in some no activator controls)
 * Random effects (per 384-well, across timepoints): intercept, slope (wrt time)
@@ -1349,7 +1350,7 @@ ggplot(guide_rate, aes(x=Estimate, y=guide_id, col=plate)) + geom_point() +
   geom_errorbar(aes(xmin=Estimate-qnorm(0.05)*Std.Error,
                     xmax=Estimate+qnorm(0.05)*Std.Error)) + 
   theme_bw() + geom_vline(xintercept=0,) + theme(axis.text.y=element_text(size=6)) + 
-  xlab("rate above no activator\n(RFU/min)") + ylab("guide id")
+  xlab("activator-dependent activity\n(RFU/min)") + ylab("guide id")
 
 # rotated plot
 # ggplot(guide_rate, aes(x=guide_id, y=Estimate, col=plate)) + geom_point() +
@@ -1357,7 +1358,7 @@ ggplot(guide_rate, aes(x=Estimate, y=guide_id, col=plate)) + geom_point() +
 #                     ymax=Estimate+qnorm(0.05)*Std.Error)) + 
 #   theme_bw() + geom_hline(yintercept=0) + scale_x_discrete(limits=rev) +
 #   theme(axis.text.x=element_text(angle=90, size=6, hjust=1, vjust=0.5)) + 
-#   xlab("") + ylab("rate above no activator\n(RFU/min)")
+#   xlab("") + ylab("activator-dependent activity\n(RFU/min)")
 ```
 
 ```{r exclude_1344_outlier}
@@ -1392,7 +1393,7 @@ ggplot(subset(guide_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 16)),
   geom_violin(fill="transparent", draw_quantiles=0.5) + 
   geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + 
   facet_grid(~ factor(crRNA_spacer_basepairs, levels=c(0, 4, 10, 16))) + 
-  theme_bw() + xlab("") + ylab("rate above no activator\n(RFU/min)") + 
+  theme_bw() + xlab("") + ylab("activator-dependent activity\n(RFU/min)") + 
   geom_label(aes(x=x, y=y, label=text),
             data=data.frame(x=Inf, y=Inf, crRNA_spacer_basepairs=c(0, 4, 10, 16),
                             text=paste("p =",
@@ -1428,7 +1429,7 @@ guide_rate$has_detection_time <- !is.na(guide_rate$time_to_detection)
 (ggplot(subset(guide_rate, !is.na(time_to_detection)),
                aes(x=Estimate, y=time_to_detection)) + 
    geom_jitter(alpha=0.5) + geom_smooth(method=lm, formula=y~x) + 
-   theme_bw() + xlab("rate above no activator\n(RFU/min)") + 
+   theme_bw() + xlab("activator-dependent activity\n(RFU/min)") + 
    ylab("time to detection (min)") + 
    ggtitle("Time to detection",
            subtitle=paste("Number of detectable guides:",
@@ -1447,7 +1448,7 @@ guide_rate$has_detection_time <- !is.na(guide_rate$time_to_detection)
 ggplot(guide_rate, aes(x=Estimate, y=-log10(p.value), 
                        col=plate, shape=detectable)) + 
   geom_point() + theme_bw() + 
-  xlab("rate above no activator\n(RFU/min)") + ylab("-log10(p)") +
+  xlab("activator-dependent activity\n(RFU/min)") + ylab("-log10(p)") +
   geom_hline(yintercept=-log10(0.05/nrow(guide_rate)), col="red", linetype="dashed")
 ```
 
@@ -1459,7 +1460,7 @@ ggplot(guide_rate, aes(x=Estimate, y=-log10(p.value),
 ggplot(guide_rate, aes(x=start, y=Estimate, col=crRNA_spacer_basepairs, 
                        shape=has_crRNA_hairpin)) + 
   geom_point(size=2, alpha=0.8) + theme_bw() + 
-  xlab("genomic position") + ylab("rate above no activator\n(RFU/min)")
+  xlab("genomic position") + ylab("activator-dependent activity\n(RFU/min)")
 ```
 
 Structures of the two guides that performed well (rate > 1 above background) but without hairpin structure (NCR_1346, NCR_1351):
@@ -1480,7 +1481,7 @@ spacer_structure_cor <- with(guide_rate, cor.test(Estimate, spacer_bp))
 ggplot(guide_rate, aes(x=spacer_bp, y=Estimate)) + geom_point() + 
   geom_smooth(method=lm, formula=y~x) + theme_bw() +
   xlab("number of basepaired positions in spacer") + 
-  ylab("rate above no activator\n(RFU/min)") +
+  ylab("activator-dependent activity\n(RFU/min)") +
   annotate(geom="text", x=0.5, y=-15, 
            label=paste("cor =", round(spacer_structure_cor$estimate, digits=3))) +
   annotate(geom="text", x=0.5, y=-20,
@@ -1582,7 +1583,7 @@ noActivator_rate <- subset(all_coef, coef=="time")
 noActivator_rate <- subset(noActivator_rate, guide_id != "1344")
 ggplot_violin(subset(noActivator_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 16)),
               x_var="group", fill_var="has_crRNA_hairpin",
-              y_lab="no activator rate (RFU/min)", binwidth=0.25) +
+              y_lab="activator-independent activity (RFU/min)", binwidth=0.25) +
   labs(fill="maintains crRNA hairpin") +
   theme(axis.text.x=element_text(angle=90, hjust=1))
 ```
@@ -1594,7 +1595,7 @@ ggplot_violin(subset(noActivator_rate, crRNA_spacer_basepairs %in% c(0, 4, 10, 1
 ```{r rate_by_gc_content}
 ggplot(guide_rate, aes(x=GC_content, y=Estimate)) + 
   geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
-  xlab("GC content (%)") + ylab("rate above no activator\n(RFU/min)") +
+  xlab("GC content (%)") + ylab("activator-dependent activity\n(RFU/min)") +
   annotate(geom="text", x=Inf, y=75, hjust="inward", vjust="inward", col="red",
            label=bquote(rho~"="~.(round(with(guide_rate, 
                                              cor.test(GC_content, 
@@ -1615,7 +1616,7 @@ ggplot(guide_rate, aes(x=GC_content, y=Estimate)) +
 (ggplot(guide_rate, aes(x=downstream_U, y=Estimate)) + 
    geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
    xlab(paste0("% U in downstream ", U_window, "nt in viral genome")) + 
-   ylab("rate above no activator\n(RFU/min)") +
+   ylab("activator-dependent activity\n(RFU/min)") +
    annotate(geom="text", x=Inf, y=75, hjust="inward", vjust="inward", col="red",
             label=bquote(rho~"="~.(round(with(guide_rate, 
                                               cor.test(downstream_U, 
@@ -1631,7 +1632,7 @@ ggplot(guide_rate, aes(x=GC_content, y=Estimate)) +
   (ggplot(guide_rate, aes(x=downstream_unstructured_U, y=Estimate)) + 
      geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
      xlab(paste0("% unstructured U in downstream ", U_window, "nt in viral genome")) + 
-     ylab("rate above no activator\n(RFU/min)") +
+     ylab("activator-dependent activity\n(RFU/min)") +
      annotate(geom="text", x=Inf, y=75, hjust="inward", vjust="inward", col="red",
               label=bquote(rho~"="~.(round(with(guide_rate, 
                                                 cor.test(downstream_unstructured_U, 
@@ -1651,7 +1652,7 @@ ggplot(guide_rate, aes(x=GC_content, y=Estimate)) +
 ```{r rate_by_gRNA_MFE}
 ggplot(guide_rate, aes(x=gRNA_MFE, y=Estimate)) + 
   geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() + 
-  xlab("gRNA MFE (kcal/mol)") + ylab("rate above no activator\n(RFU/min)") +
+  xlab("gRNA MFE (kcal/mol)") + ylab("activator-dependent activity\n(RFU/min)") +
   annotate(geom="text", x=-Inf, y=75, hjust="inward", vjust="inward", col="red",
            label=bquote(rho~"="~.(round(with(guide_rate, 
                                              cor.test(gRNA_MFE, 
@@ -1679,7 +1680,7 @@ guide_rate_adapt <- rbind(data.frame(adapt_28mer,
                                      spacer="28mer"))
 ggplot(guide_rate_adapt, aes(x=guide.expected.activities, y=rate, col=spacer)) + 
   geom_point() + geom_smooth(method="lm", formula=y~x) + theme_bw() +
-  xlab("ADAPT prediction") + ylab("rate above no activator\n(RFU/min)")
+  xlab("ADAPT prediction") + ylab("activator-dependent activity\n(RFU/min)")
 ```
 
 ## Guide activity by viral structure
@@ -1707,7 +1708,7 @@ lan_wilcox <- with(guide_rate,
 lan_plot <- (ggplot(guide_rate, aes(x=lan, y=Estimate)) + 
                geom_point() + geom_smooth(method=loess, formula=y~x) + theme_bw() + 
                xlab("% unstructured positions in viral target") + 
-               ylab("rate above no activator\n(RFU/min)") +
+               ylab("activator-dependent activity\n(RFU/min)") +
                ggtitle("Lan (2020)", subtitle="Unstructured region")) + 
   (ggplot_violin(guide_rate, x_var="lan_cat",
                  x_lab="% unstructured positions in viral target") + 
@@ -1726,7 +1727,7 @@ lan_spacer_bp_plot <- ((ggplot(guide_rate, aes(x=spacer_bp, y=Estimate)) +
                           geom_point() + 
                           geom_smooth(method=lm, formula=y~x) + theme_bw() +
                           xlab("number of basepaired positions in spacer") + 
-                          ylab("rate above no activator\n(RFU/min)") +
+                          ylab("activator-dependent activity\n(RFU/min)") +
                           annotate(geom="text", x=1, y=-15, 
                                    label=paste("cor =", 
                                                round(spacer_structure_cor$estimate, 
@@ -1785,7 +1786,7 @@ huston_wilcox <- with(guide_rate,
 huston_plot <- (ggplot(guide_rate, aes(x=huston, y=Estimate)) + 
     geom_point() + geom_smooth(method=loess, formula=y~x) + theme_bw() + 
     xlab("% unbound positions in viral target") + 
-    ylab("rate above no activator\n(RFU/min)") +
+    ylab("activator-dependent activity\n(RFU/min)") +
     ggtitle("Huston (2021)", subtitle="Viral RNA secondary structure")) + 
   (ggplot_violin(guide_rate, x_var="huston_cat", 
                  x_lab="% unbound positions in viral target") + 
@@ -1828,7 +1829,7 @@ invivo_kmeans_3_wilcox <- wilcox.test(Estimate ~ invivo_kmeans_3,
 #                     draw_quantiles=c(0.25, 0.75), linetype="dashed") +
 #         geom_violin(fill="transparent", draw_quantiles=0.5) + 
 #         geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + guides(fill=F) + 
-#         xlab("") + ylab("rate above no activator\n(RFU/min)") +
+#         xlab("") + ylab("activator-dependent activity\n(RFU/min)") +
 #         ggtitle("Guide activity v. viral genome structure", subtitle="k means: 3 clusters") +
 #         annotate(geom="text", x= "unstructured", y=80, 
 #                  label=paste("p =", round(invivo_kmeans_3_wilcox$p.value, 
@@ -3074,8 +3075,8 @@ guide_rate$gblock_rate_round2[match(paste0("NCR_", gblock_rate$guide_id),
         aes(x=Estimate, y=gblock_rate_round1)) + 
     geom_point(alpha=0.5) + theme_bw() + ggtitle("gBlock: round 1") +
     geom_smooth(method=lm, formula=y~x) +
-    xlab("viral RNA: rate above no activator (RFU/min)") + 
-    ylab("gBlocks: rate above no activator (RFU/min)") +
+    xlab("viral RNA: activator-dependent activity (RFU/min)") + 
+    ylab("gBlocks: activator-dependent activity (RFU/min)") +
     annotate(geom="text", x=-Inf, y=Inf, 
              label=paste("cor =", round(with(guide_rate, 
                                              cor(Estimate, gblock_rate_round1, 
@@ -3086,8 +3087,8 @@ guide_rate$gblock_rate_round2[match(paste0("NCR_", gblock_rate$guide_id),
   (ggplot(guide_rate, aes(x=Estimate, y=gblock_rate_round2)) +
      geom_point(alpha=0.5) + theme_bw() + 
      geom_smooth(method=lm, formula=y~x) +
-     xlab("viral RNA: rate above no activator (RFU/min)") +
-     ylab("gBlocks: rate above no activator (RFU/min)") +
+     xlab("viral RNA: activator-dependent activity (RFU/min)") +
+     ylab("gBlocks: activator-dependent activity (RFU/min)") +
      ggtitle("gBlock: round 2") + ylim(0, 170) + 
      annotate(geom="text", x=-Inf, y=Inf, 
               label=paste("cor =", round(with(guide_rate, 
@@ -3214,7 +3215,7 @@ for(x in seq(nrow(gene_bed))) {
 (ggplot(guide_rate, aes(x=start, y=Estimate)) + theme_classic() + 
     geom_point() + geom_errorbar(aes(ymin=Estimate+qnorm(0.05)*Std.Error,
                                      ymax=Estimate-qnorm(0.05)*Std.Error)) + 
-    xlab("position along genome") + ylab("rate above no activator\n(RFU/min)") + ylim(-10, 100) + 
+    xlab("position along genome") + ylab("activator-dependent activity\n(RFU/min)") + ylim(-10, 100) + 
     theme(axis.title=element_text(size=10), 
           axis.text=element_text(size=10))) + 
   (ggplot(gene_bed, aes(xmin=thickStart, xmax=thickEnd, ymin=ymax-4.5, ymax=ymax)) + 
@@ -3433,35 +3434,132 @@ model1_MSE_r2 <- aggregate(r2~split,
      scale_fill_manual(values=RColorBrewer::brewer.pal(4, "Set1")) +
      theme_classic() + guides(fill=F) +
      theme(axis.text=element_text(size=10), axis.title=element_text(size=10)) + 
-     xlab("first position in anti-tag") + ylab("rate above no activator\n(RFU/min)"))
+     xlab("first position in anti-tag") + ylab("activator-dependent activity\n(RFU/min)"))
 
 ggsave(filename=file.path(figure_dir, "figure_3.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=3, units="in")
 ```
 
-Suppl. Figure 1: anti-tag complementarity
+```{r figure_3_ttest}
+t.test(x=subset(guide_rate$Estimate,
+                guide_rate$antitag_pos1 != "G"),
+       y=subset(guide_rate$Estimate,
+                guide_rate$antitag_pos1 == "G"),
+       alternative="greater")
 
-```{r suppl_figure_1}
-levels(guide_rate$antitag_label) <- c("ARRR", "CRRR", "URRR", "GRRR", "GURR", "GUUR")
-
-ggplot(guide_rate,
-       aes(x=antitag_label, y=Estimate, fill=antitag_label)) + 
-  geom_violin(draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
-  geom_violin(fill="transparent", draw_quantiles=0.5) + 
-  geom_dotplot(binaxis="y", stackdir="center", binwidth=1, fill="black") +
-  theme_classic(base_size=10) + guides(fill=F) +
-  scale_fill_manual(values=RColorBrewer::brewer.pal(6, "Set1")) +
-  xlab("anti-tag") + ylab("rate above no activator\n(RFU/min)")
-
-ggsave(file=file.path(figure_dir, "suppl_figure_1.pdf"),
-       plot=last_plot(),
-       device="pdf", width=4, height=3, units="in")
+t.test(x=subset(guide_rate$Estimate, 
+                guide_rate$antitag_label=="G"),
+       y=subset(guide_rate$Estimate, 
+                guide_rate$antitag_label %in% c("GU", "GUU")),
+       alternative="greater")
 ```
 
-Suppl. Figure 2A: random forest variable importance
+Figure 4D: robustness to genetic variants
 
-```{r suppl_figure_2A}
+```{r figure_4D}
+# load platemap
+variants_platemap <- xlsx::read.xlsx(file.path(project_dir,
+                                               "supplementary_data",
+                                               "Variants_1 Platemap.xlsx"),
+                                     sheetName="Variants Platemap",
+                                     rowIndex=2:12, colIndex=2:25, header=T)
+variants_platemap <- data.frame(plate_row=rep(LETTERS[seq(nrow(variants_platemap))],
+                                        times=ncol(variants_platemap)),
+                                plate_col=rep(seq(ncol(variants_platemap)),
+                                        each=nrow(variants_platemap)),
+                                variant=unlist(variants_platemap))
+variants_platemap <- subset(variants_platemap, !is.na(variant))
+variants_platemap$variant[variants_platemap$variant=="B.1.17"] <- "alpha: B.1.1.7"
+variants_platemap$variant[variants_platemap$variant=="B.1.351"] <- "beta: B.1.351"
+variants_platemap$variant[variants_platemap$variant=="B.1.617.1"] <- "delta: B.1.617.1"
+variants_platemap$variant[variants_platemap$variant=="P.1"] <- "gamma: P.1"
+variants_platemap$well <- with(variants_platemap, paste0(plate_row, plate_col))
+variants_platemap$multiplex <- ""
+variants_platemap$multiplex[(variants_platemap$plate_row %in% c("A", "B")) & 
+                         (variants_platemap$plate_col %in% 3:4)] <- "multiplex_8"
+variants_platemap$multiplex[variants_platemap$plate_col %in% 5:14] <- "multiplex_8"
+variants_platemap$multiplex[(variants_platemap$plate_row %in% c("C", "D")) & 
+                         (variants_platemap$plate_col %in% 3:4)] <- "multiplex_32"
+variants_platemap$multiplex[variants_platemap$plate_col %in% 15:24] <- "multiplex_32"
+variants_platemap$conc <- ""
+variants_platemap$conc[variants_platemap$plate_col %in% c(5:6, 15:16)] <- "10 fM"
+variants_platemap$conc[variants_platemap$plate_col %in% c(7:8, 17:18)] <- "1 fM"
+variants_platemap$conc[variants_platemap$plate_col %in% c(9:10, 19:20)] <- "100 aM"
+variants_platemap$conc[variants_platemap$plate_col %in% c(11:12, 21:22)] <- "10 aM"
+variants_platemap$conc[variants_platemap$plate_col %in% c(13:14, 23:24)] <- "1 aM"
+variants_platemap$sample <- with(variants_platemap, paste(variant, multiplex, conc, sep="_"))
+
+# load data
+variants_data <- xlsx::read.xlsx(file.path(project_dir,
+                                           "supplementary_data", 
+                                           "Variants_1.xlsx"),
+                                 sheetName="Sheet2",
+                                 rowIndex=41:102, header=T)
+variants_data <- lapply(seq(nrow(variants_platemap)),
+                   function(x) {
+                     data.frame(time=variants_data$Time..s.,
+                                RFU=variants_data[[variants_platemap$well[x]]],
+                                well=variants_platemap$well[x])
+                   })
+variants_data <- do.call(rbind, variants_data)
+variants_data$time <- variants_data$time/60
+
+# slopes start to diverge at 10min mark --> take data from timepoints after 10min
+# ggplot(variants_data, aes(x=time, y=RFU)) + geom_point() + geom_vline(xintercept=10)
+
+# calculate slopes
+variant_slopes <- lapply(unique(variants_platemap$sample),
+                         function(x) {
+                           tmp_variant <- strsplit(x, split="_")[[1]][1]
+                           tmp_multiplex <- paste(strsplit(x, split="_")[[1]][2:3], sep="_")
+                           tmp_conc <- strsplit(x, split="_")[[1]][4]
+                           tmp_wells <- subset(variants_platemap, sample==x)$well
+                           tmp_data <- subset(variants_data, 
+                                              well %in% tmp_wells & time >= 10)
+                           tmp_model <- lm(RFU ~ time, tmp_data)
+                           tmp_coef <- data.frame(summary(tmp_model)$coefficients,
+                                                  sample=x,
+                                                  variant=tmp_variant,
+                                                  multiplex=tmp_multiplex,
+                                                  conc=tmp_conc)
+                           tmp_coef$coef <- rownames(tmp_coef)
+                           return(tmp_coef)
+                         })
+variant_slopes <- do.call(rbind, variant_slopes)
+variant_slopes <- subset(variant_slopes, coef=="time")
+variant_slopes$conc[variant_slopes$variant=="No Activator"] <- "No Activator"
+variant_slopes$variant[variant_slopes$variant=="No Activator"] <- "Controls"
+variant_slopes$conc[variant_slopes$variant=="No Protein"] <- "No Protein"
+variant_slopes$variant[variant_slopes$variant=="No Protein"] <- "Controls"
+variant_slopes$conc <- factor(variant_slopes$conc,
+                              levels=c("1 aM", "10 aM", "100 aM", "1 fM", "10 fM",
+                                       "No Activator", "No Protein"))
+variant_slopes$variant <- factor(variant_slopes$variant,
+                                 levels=c("WT", "Controls", 
+                                          "alpha: B.1.1.7",
+                                          "beta: B.1.351",
+                                          "gamma: P.1",
+                                          "delta: B.1.617.1"))
+variant_slopes$multiplex <- factor(variant_slopes$multiplex,
+                                   levels=c("8", "32"))
+levels(variant_slopes$multiplex) <- c("8 guides", "32 guides")
+
+ggplot(subset(variant_slopes, conc=="10 fM"), aes(x=multiplex, y=Estimate, fill=multiplex)) + 
+  geom_col(position="dodge") + facet_grid(~variant, scales="free_x", space="free_x") +
+  theme_classic(base_size=10) + xlab("") + ylab("activator-dependent activity\n(RFU/min)") + 
+  scale_fill_manual(values=c("grey", "black")) + 
+  theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=1),
+        legend.position="none", strip.text.x=element_text(angle=90)) 
+
+ggsave(file=file.path(figure_dir, "figure_4D.pdf"),
+       plot=last_plot(),
+       device="pdf", width=3, height=3, units="in")
+```
+
+Suppl. Figure 1A: random forest variable importance
+
+```{r suppl_figure_1A}
 ggplot(model1_rf_regression_importance, 
        aes(x=position, y=increaseMSE, fill=coef)) + 
   geom_col(position="stack") + geom_hline(yintercept=0) +
@@ -3478,14 +3576,14 @@ ggplot(model1_rf_regression_importance,
                             .(round(model1_rf_regression_r2, digits=3)))) + 
   theme(legend.position="bottom")
 
-ggsave(file=file.path(figure_dir, "suppl_figure_2A.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_1A.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=3, units="in")
 ```
 
-Suppl. Figure 2B: sequence logo
+Suppl. Figure 1B: sequence logo
 
-```{r suppl_figure_2B}
+```{r suppl_figure_1B}
 (ggseqlogo(topSpacers_info, method="custom") + 
   ggtitle(paste("Top", num_spacers, "spacers")) + ylim(0, 0.5) + 
    theme_classic(base_size=10)) / 
@@ -3493,29 +3591,38 @@ Suppl. Figure 2B: sequence logo
      ggtitle(paste("Bottom", num_spacers, "spacers")) + ylim(0, 0.5) +
      theme_classic(base_size=10))
 
-ggsave(file=file.path(figure_dir, "suppl_figure_2B.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_1B.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=3, units="in")
 ```
 
-Suppl. Figure 3A: GC content
+Suppl. Figure 2A: GC content
 
-```{r suppl_figure_3A}
+```{r suppl_figure_2A}
+GC_cor <- with(guide_rate, cor.test(GC_content, Estimate))
+GC_text <- data.frame(x=Inf,
+                      y=c(75, 65),
+                      text=c(paste("cor =",
+                                   round(GC_cor$estimate, digits=3)),
+                             paste("p =", signif(GC_cor$p.value, digits=3))))
+
 (ggplot(guide_rate, aes(x=GC_content, y=Estimate)) + theme_classic(base_size=10) + 
-     geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) + 
-     xlab("spacer %GC") + ylab("rate above no activator\n(RFU/min)"))
+    geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) + 
+    xlab("spacer %GC") + ylab("activator-dependent activity\n(RFU/min)") +
+    geom_text(data=GC_text, col="red", hjust="inward", size=2.5,
+              aes(x=x, y=y, label=text)))
 
-ggsave(file=file.path(figure_dir, "suppl_figure_3A.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_2A.pdf"),
        plot=last_plot(),
        device="pdf", width=3, height=2, units="in")
 ```
 
-Suppl. Figure 3B: hybridization MFE
+Suppl. Figure 2B: hybridization MFE
 
-```{r suppl_figure_3B}
+```{r suppl_figure_2B}
 hyb_MFE_cor <- with(guide_rate, cor.test(hybridization_MFE, Estimate))
-hyb_MFE_text <- data.frame(x=-Inf,
-                           y=c(75, 65),
+hyb_MFE_text <- data.frame(x=Inf,
+                           y=c(77, 65),
                            text=c(paste("cor =",
                                         round(hyb_MFE_cor$estimate, digits=3)),
                                   paste("p =", signif(hyb_MFE_cor$p.value, digits=3))))
@@ -3524,18 +3631,18 @@ ggplot(guide_rate, aes(x=hybridization_MFE, y=Estimate)) +
   geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) + 
   theme_classic(base_size=10) + 
   xlab("hybridization MFE (kcal/mol)") + 
-  ylab("rate above no activator\n(RFU/min)") + 
+  ylab("activator-dependent activity\n(RFU/min)") + 
   geom_text(data=hyb_MFE_text, col="red", hjust="inward", size=2.5,
             aes(x=x, y=y, label=text))
 
-ggsave(file=file.path(figure_dir, "suppl_figure_3B.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_2B.pdf"),
        plot=last_plot(),
        device="pdf", width=3, height=2, units="in")
 ```
 
-Suppl. Figure 3C: cleaveable U in target context
+Suppl. Figure 2C: cleaveable U in target context
 
-```{r suppl_figure_3C}
+```{r suppl_figure_2C}
 U_context_data <- data.frame(Estimate=rep(guide_rate$Estimate, times=2),
                              U_context=c(guide_rate$U_context, 
                                          guide_rate$U_context_unstructured),
@@ -3561,18 +3668,18 @@ ggplot(U_context_data, aes(x=U_context, y=Estimate)) +
   facet_grid(~structure, scales="free_x") + 
   theme_classic(base_size=10) + 
   xlab("%U in target context") + 
-  ylab("rate above no activator\n(RFU/min)") + 
+  ylab("activator-dependent activity\n(RFU/min)") + 
   geom_text(data=U_context_text, col="red", hjust="inward", size=2.5,
             aes(x=x, y=y, label=text))
 
-ggsave(file=file.path(figure_dir, "suppl_figure_3C.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_2C.pdf"),
        plot=last_plot(),
-       device="pdf", width=3, height=2, units="in")
+       device="pdf", width=4, height=2.5, units="in")
 ```
 
-Suppl. Figure 4A: spacer structure
+Suppl. Figure 3A: spacer structure
 
-```{r suppl_figure_4A}
+```{r suppl_figure_3A}
 # noActivator_structure <- lm(Estimate ~ as.numeric(as.character(crRNA_spacer_basepairs)),
 #                             data=subset(noActivator_rate, 
 #                                         crRNA_spacer_basepairs %in% c(0, 4, 10, 16)))
@@ -3660,7 +3767,7 @@ guide_spacer_antitag_violin <- ggplot(subset(guide_rate,
   theme(axis.text=element_text(size=10), axis.title=element_text(size=10)) +
   scale_x_continuous(breaks=c(0, 4, 10, 16)) + 
   xlab("# basepaired positions in spacer") + 
-  ylab("rate above no activator\n(RFU/min)") + 
+  ylab("activator-dependent activity\n(RFU/min)") + 
   geom_text(data=spacer_structure_antitag_text, 
             aes(x=x, y=y, label=text), hjust=0, size=2.5)
 
@@ -3673,15 +3780,509 @@ guide_spacer_antitag_violin <- ggplot(subset(guide_rate,
              label=paste("p =", 
                          signif(noActivator_structure_rate$Pr...t..[2], 
                                 digits=3))) + 
-    xlab("") + ylab("rate above no activator\n(RFU/min)")) / 
+    xlab("# basepaired positions in spacer") + 
+    ylab("no activator rate\n(RFU/min)")) / 
   guide_spacer_antitag_violin
 
-ggsave(file=file.path(figure_dir, "suppl_figure_4A.pdf"),
+ggsave(file=file.path(figure_dir, "suppl_figure_3A.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=4, units="in")
 ```
 
-```{r antitag_G_structure}
+Suppl. Figure 3B: structure of direct repeat
+
+```{r suppl_figure_3B}
+(ggplot(subset(noActivator_rate, NCR.id %in% guide_rate$NCR.id), 
+        aes(x=direct_repeat, y=Estimate)) + 
+   theme_classic() + 
+   theme(axis.text.x=element_blank(), axis.text.y=element_text(size=10),
+         axis.title=element_text(size=10)) + 
+   geom_dotplot(binaxis="y", stackdir="center", binwidth=0.25) + 
+   xlab("") + ylab("activator-independent activity\n(RFU/min)")) / 
+  (ggplot(guide_rate, aes(x=direct_repeat, y=Estimate)) + 
+     theme_classic() + 
+     theme(axis.text.x=element_text(angle=90, size=10, vjust=0),
+           axis.text.y=element_text(size=10),
+           axis.title=element_text(size=10)) + 
+     geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + 
+     xlab("structure of crRNA direct repeat") + 
+     ylab("activator-dependent activity\n(RFU/min)"))
+
+ggsave(file=file.path(figure_dir, "suppl_figure_3B.pdf"),
+       plot=last_plot(),
+       device="pdf", width=6.5, height=4, units="in")
+```
+
+Suppl. Figure 4A: in vivo viral structure
+
+```{r suppl_figure_4A}
+(lan_huston + theme_classic(base_size=10)) + 
+  (sun_invivo_huston + theme_classic(base_size=10)) + 
+  (lan_sun_invivo + theme_classic(base_size=10))
+
+ggsave(file=file.path(figure_dir, "suppl_figure_4A.pdf"),
+       plot=last_plot(),
+       device="pdf", width=6.5, height=2, units="in")
+```
+
+Suppl. Figure 4B: genomic structure vs. activity
+
+```{r suppl_figure_4B}
+((ggplot(guide_rate, aes(x=lan, y=Estimate)) + theme_classic(base_size=10) +
+    geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
+    xlab("% unstructured") + ylab("activator-dependent activity\n(RFU/min)") + 
+    ggtitle("Lan (2020)", subtitle="20nt target region")) + 
+    (ggplot(guide_rate, aes(x=huston, y=Estimate)) + theme_classic(base_size=10) +
+       geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
+       xlab("% double-stranded") + ylab("") +
+       ggtitle("Huston (2021)", subtitle="20nt target region")) +
+    (ggplot(guide_rate, aes(x=sun_invivo, y=Estimate)) + theme_classic(base_size=10) +
+       geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
+       xlab("mean icSHAPE score") + ylab("") +
+       ggtitle("Sun (2021)", subtitle="20nt target region"))) / 
+  ((ggplot(guide_rate, aes(x=lan_seed, y=Estimate)) + theme_classic(base_size=10) +
+    geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
+    xlab("% unstructured") + ylab("activator-dependent activity\n(RFU/min)") + 
+    ggtitle("", subtitle="target seed region")) + 
+    (ggplot(guide_rate, aes(x=as.numeric(as.character(huston_seed)), y=Estimate)) + 
+       theme_classic(base_size=10) +
+       geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
+       xlab("% double-stranded") + ylab("") +
+       ggtitle("", subtitle="target seed region")) +
+    (ggplot(guide_rate, aes(x=sun_invivo_seed, y=Estimate)) + theme_classic(base_size=10) +
+       geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
+       xlab("mean icSHAPE score") + ylab("") +
+       ggtitle("", subtitle="target seed region")))
+
+ggsave(file=file.path(figure_dir, "suppl_figure_4B.pdf"),
+       plot=last_plot(),
+       device="pdf", width=6.5, height=4, units="in")
+```
+
+Suppl. Figure 5A: multiplex set of 40 vs. primary screen
+
+```{r suppl_figure_5A}
+# load plate map (for loo counterscreen)
+loo_platemap <- xlsx::read.xlsx(file.path(project_dir, 
+                                          "supplementary_data",
+                                          "LeaveOneOut Platemap.xlsx"),
+                                sheetName="Variants Platemap",
+                                rowIndex=3:18, colIndex=2:25, header=F)
+loo_platemap <- data.frame(well=paste0(rep(LETTERS[seq(nrow(loo_platemap))],
+                                           times=ncol(loo_platemap)),
+                                       rep(seq(ncol(loo_platemap)),
+                                           each=nrow(loo_platemap))),
+                           sample=unlist(loo_platemap))
+loo_platemap <- subset(loo_platemap, sample != "<NA>")
+loo_samples <- unique(loo_platemap$sample)
+loo_samples <- subset(loo_samples, 
+                      !grepl(" ", loo_samples) &
+                        !grepl("\\+", loo_samples) &
+                        !(loo_samples %in% c("8plex", "612")))
+guide_rate$multiplex_60 <- sapply(guide_rate$guide_id,
+                                  function(x) {
+                                    ifelse(x %in% loo_samples,
+                                           "multiplex pool", "not selected")
+                                  })
+guide_rate$multiplex_60 <- factor(guide_rate$multiplex_60,
+                                  levels=c("not selected", "multiplex pool"))
+
+# multiplex_40 <- readLines(file.path(project_dir, "40_guide_List.csv"), skip=1)[-1]
+# guide_rate$multiplex_40 <- sapply(guide_rate$guide_id,
+#                                   function(x) {
+#                                     ifelse(x %in% multiplex_40,
+#                                            "multiplex pool", "not selected")
+#                                   })
+# guide_rate$multiplex_40 <- factor(guide_rate$multiplex_40, 
+#                                   levels=c("not selected", "multiplex pool"))
+
+(ggplot(guide_rate, aes(x=start, y=Estimate, col=multiplex_60)) + theme_classic() + 
+    geom_point() + geom_errorbar(aes(ymin=Estimate+qnorm(0.05)*Std.Error,
+                                     ymax=Estimate-qnorm(0.05)*Std.Error)) + 
+    xlab("position along genome") + ylab("activator-dependent activity\n(RFU/min)") + 
+    ylim(-10, 100) + scale_color_manual(values=c("black", "red")) +
+    theme(axis.title=element_text(size=10), 
+          axis.text=element_text(size=10),
+          legend.position="none")) /
+  (ggplot(gene_bed, aes(xmin=thickStart, xmax=thickEnd, ymin=ymax-4.5, ymax=ymax)) + 
+     theme_void() + geom_rect() + 
+     geom_text(data=subset(gene_bed, thickEnd-thickStart > 300*nchar(geneName)),
+               aes(x=(thickStart + thickEnd)/2, y=ymax-(4.5/2), label=name),
+               col="white", size=2.5)) +
+  plot_layout(heights=c(5,1))
+
+ggsave(file=file.path(figure_dir, "suppl_figure_5A.pdf"),
+       plot=last_plot(),
+       device="pdf", width=6.5, height=3, units="in")
+```
+
+Suppl. Figure 5B: leave-one-out counterscreen
+
+```{r suppl_figure_5B}
+# load plate data
+loo_data <- xlsx::read.xlsx(file.path(project_dir,
+                                      "supplementary_data",
+                                      "LeaveOneOut.xlsx"),
+                            sheetName="Result sheet",
+                            rowIndex=57:117, header=T)
+loo_data <- lapply(seq(nrow(loo_platemap)),
+                   function(x) {
+                     data.frame(time=loo_data$Time..s.,
+                                RFU=loo_data[[loo_platemap$well[x]]],
+                                well=loo_platemap$well[x],
+                                sample=loo_platemap$sample[x])
+                   })
+loo_data <- do.call(rbind, loo_data)
+loo_data$time <- loo_data$time/60
+
+pool_4 <- unique(grep("\\+", loo_data$sample, value=T))
+loo_data$pool <- sapply(loo_data$sample,
+                        function(x) {
+                          if(any(grepl(x, pool_4))) {
+                            return(pool_4[grepl(x, pool_4)])
+                          } else {
+                            return(x)
+                          }
+                        })
+
+### take slopes dip for first 20 minutes --> estimate slopes after 20min timepoint
+# ggplot(loo_data, aes(x=time, y=RFU, col=sample)) + geom_point() + geom_vline(xintercept=20) + 
+#   theme_classic() + theme(legend.position="none")
+
+pool4_tests <- lapply(pool_4,
+                     function(x) {
+                       tmp_data <- subset(loo_data, pool==x & time >= 20)
+                       tmp_data$sample <- relevel(as.factor(tmp_data$sample), ref=x)
+                       tmp_model <- lm(RFU ~ time * sample, tmp_data)
+                       tmp_anova <- anova(tmp_model)
+                       tmp_slopes <- emmeans::emtrends(tmp_model, "sample", var="time")
+                       tmp_pairs <- data.frame(pairs(tmp_slopes), pool=x)
+                       tmp_pairs <- subset(tmp_pairs, grepl("\\(", tmp_pairs$contrast))
+                       tmp_slopes <- data.frame(tmp_slopes)
+                       tmp_slopes$p_contrast <- tmp_pairs$p.value[match(paste0("(", x, ") - ", 
+                                                                               tmp_slopes$sample),
+                                                                        tmp_pairs$contrast)]
+                       return(tmp_slopes)
+                     })
+pool4_tests <- do.call(rbind, pool4_tests)
+
+loo_control_tests <- data.frame(emtrends(lm(RFU ~ time * sample, 
+                                            subset(loo_data, !(pool %in% pool_4) & 
+                                                     time >= 20)), 
+                                         "sample", var="time"),
+                                p_contrast = NA)
+
+loo_plot_data <- rbind(pool4_tests, loo_control_tests)
+loo_plot_data$pool <- sapply(as.character(loo_plot_data$sample),
+                             function(x) {
+                               if(any(grepl(x, pool_4))) {
+                                 return(pool_4[grepl(x, pool_4)])
+                               } else {
+                                 return(ifelse(x %in% pool_4, x, "control"))
+                               }
+                             })
+levels(loo_plot_data$sample)[levels(loo_plot_data$sample)=="No Act"] <- "No Activator"
+levels(loo_plot_data$sample)[levels(loo_plot_data$sample)=="612"] <- "crRNA control"
+loo_plot_data$text <- ""
+loo_plot_data$text[loo_plot_data$p_contrast < 0.05] <- "*"
+(ggplot(loo_plot_data, aes(x=sample, y=time.trend, fill=pool)) + geom_col() + 
+  geom_errorbar(aes(ymin=lower.CL, ymax=upper.CL)) + geom_hline(yintercept=0) + 
+  geom_text(aes(y=time.trend+0.5, label=text), col="red") + 
+  theme_classic(base_size=10) + xlab("") + ylab("RFU/min") + 
+  theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=1),
+        legend.position="none"))
+
+ggsave(file=file.path(figure_dir, "suppl_figure_5B.pdf"),
+       plot=last_plot(),
+       device="pdf", width=6.5, height=4, units="in")
+```
+
+Suppl. Figure 5C: human RNA counterscreen
+
+```{r suppl_figure_5C}
+# load platemap
+human_rna_platemap <- xlsx::read.xlsx(file.path(project_dir,
+                                                "supplementary_data", 
+                                                "Human RNA Screen Platemap.xlsx"),
+                                      sheetName="Variants Platemap",
+                                      startRow=2, endRow=18, colIndex=2:25, header=T)
+human_rna_platemap <- data.frame(well=paste0(rep(LETTERS[seq(nrow(human_rna_platemap))],
+                                                 times=ncol(human_rna_platemap)),
+                                             rep(seq(ncol(human_rna_platemap)),
+                                                 each=nrow(human_rna_platemap))),
+                                 guide=unlist(human_rna_platemap))
+human_rna_platemap$human_rna <- sapply(human_rna_platemap$well,
+                                       function(x) {
+                                         ifelse(substr(x, 1, 1) %in% LETTERS[9:16],
+                                                "-", "+")
+                                       })
+human_rna_platemap$sample <- with(human_rna_platemap, paste(guide, human_rna, sep="_"))
+human_rna_platemap <- subset(human_rna_platemap, guide != "<NA>")
+
+# load data
+human_rna_data <- xlsx::read.xlsx(file.path(project_dir,
+                                            "supplementary_data",
+                                            "HumanRNA_1.xlsx"),
+                                  sheetName="Result sheet",
+                                  rowIndex=55:115, header=T)
+human_rna_data <- lapply(seq(nrow(human_rna_platemap)),
+                         function(x) {
+                           data.frame(time=human_rna_data$Time..s.,
+                                      RFU=human_rna_data[[human_rna_platemap$well[x]]],
+                                      well=human_rna_platemap$well[x],
+                                      guide=human_rna_platemap$guide[x],
+                                      human_rna=human_rna_platemap$human_rna[x],
+                                      sample=human_rna_platemap$sample[x])
+                         })
+human_rna_data <- do.call(rbind, human_rna_data)
+
+# compute slopes
+human_rna_slopes <- lapply(unique(human_rna_platemap$guide),
+                           function(x) {
+                             tmp_data <- subset(human_rna_data, guide==x)
+                             tmp_model <- lm(RFU ~ time * human_rna, tmp_data)
+                             tmp_coef <- data.frame(summary(tmp_model)$coefficients,
+                                                    guide=x)
+                             tmp_coef$coef <- rownames(tmp_coef)
+                             return(tmp_coef)
+                           })
+human_rna_slopes <- do.call(rbind, human_rna_slopes)
+human_rna_slopes <- subset(human_rna_slopes, coef=="time:human_rna+")
+
+human_rna_slopes$type <- "expt"
+human_rna_slopes$type[human_rna_slopes$guide %in% c("No Protein", "Apo Protein", "612")] <- "control"
+human_rna_slopes$text <- ""
+human_rna_slopes$text[p.adjust(human_rna_slopes$Pr...t.., method="fdr")<0.05] <- "*"
+human_rna_slopes$guide[human_rna_slopes$guide=="Apo Protein"] <- "No Activator"
+human_rna_slopes$guide[human_rna_slopes$guide=="612"] <- "crRNA control"
+
+ggplot(human_rna_slopes, aes(x=guide, y=Estimate, fill=type)) + geom_col() + 
+  theme_classic(base_size=10) + scale_fill_manual(values=c("grey", "black")) + 
+  theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=1), 
+        legend.position="none") + 
+  geom_errorbar(aes(ymin=Estimate+qnorm(0.025)*Std..Error, 
+                    ymax=Estimate-qnorm(0.025)*Std..Error)) + 
+  geom_text(aes(y=Estimate + 0.01, label=text), col="red") + 
+  xlab("") + ylab("RFU/min\n(+ human RNA) - (- human RNA)")
+
+ggsave(file=file.path(figure_dir, "suppl_figure_5C.pdf"),
+       plot=last_plot(),
+       device="pdf", width=6.5, height=3.5, units="in")
+```
+
+Suppl. Figure 6: 32-pool vs. 8-pool w/ forced mismatch
+
+```{r suppl_figure_6}
+# load platemap
+loo_largepool_platemap <- xlsx::read.xlsx(file.path(project_dir,
+                                                    "supplementary_data", 
+                                                    "LeaveOneOut_LargePool Platemap.xlsx"),
+                                          sheetName="Variants Platemap",
+                                          startRow=2, endRow=18, colIndex=2:25, header=T)
+loo_largepool_platemap <- data.frame(plate_row=rep(LETTERS[seq(nrow(loo_largepool_platemap))],
+                                                   times=ncol(loo_largepool_platemap)),
+                                     plate_col=rep(seq(ncol(loo_largepool_platemap)),
+                                                   each=nrow(loo_largepool_platemap)),
+                                     multiplex=unlist(loo_largepool_platemap))
+loo_largepool_platemap$well <- with(loo_largepool_platemap, paste0(plate_row, plate_col))
+loo_largepool_platemap <- subset(loo_largepool_platemap, multiplex != "<NA>")
+loo_largepool_conc <- c("No Protein", "No Activator", "30 fM", "10 fM", "3 fM", "1 fM", "300 aM")
+loo_largepool_platemap$conc <- ""
+for(x in seq_along(loo_largepool_conc)) {
+  tmp_col <- c(2*x-1, 2*x)
+  tmp_conc <- loo_largepool_conc[x]
+  loo_largepool_platemap$conc[loo_largepool_platemap$plate_col %in% tmp_col] <- tmp_conc
+}
+loo_largepool_platemap$sample <- with(loo_largepool_platemap, 
+                                      paste(multiplex, conc, sep="_"))
+
+# load data (use findit_75 for gain=75)
+loo_largepool_data <- xlsx::read.xlsx(file.path(project_dir,
+                                                "supplementary_data",
+                                                "LeaveOneOut_LargePool.xlsx"),
+                                      sheetName="Result sheet",
+                                      rowIndex=101:161, header=T)
+loo_largepool_data <- lapply(seq(nrow(loo_largepool_platemap)),
+                             function(x) {
+                               data.frame(time=loo_largepool_data$Time..s.,
+                                          RFU=loo_largepool_data[[loo_largepool_platemap$well[x]]],
+                                          well=loo_largepool_platemap$well[x],
+                                          multiplex=loo_largepool_platemap$multiplex[x],
+                                          conc=loo_largepool_platemap$conc[x],
+                                          sample=loo_largepool_platemap$sample[x])
+                             })
+loo_largepool_data <- do.call(rbind, loo_largepool_data)
+loo_largepool_data$time <- loo_largepool_data$time / 60
+
+# compute slopes
+loo_largepool_rates <- lapply(unique(loo_largepool_data$sample),
+                              function(x) {
+                                tmp_data <- subset(loo_largepool_data, sample==x)
+                                tmp_model <- lm(RFU ~ time, tmp_data)
+                                tmp_coef <- data.frame(summary(tmp_model)$coefficients,
+                                                       sample=x)
+                                tmp_coef$coef <- rownames(tmp_coef)
+                                return(tmp_coef)
+                              })
+loo_largepool_rates <- do.call(rbind, loo_largepool_rates)
+loo_largepool_rates <- subset(loo_largepool_rates, coef=="time")
+loo_largepool_rates$conc <- matrix(unlist(strsplit(loo_largepool_rates$sample, split="_")), 
+                                          byrow=T, ncol=2)[,2]
+loo_largepool_rates$multiplex <- matrix(unlist(strsplit(loo_largepool_rates$sample, split="_")),
+                                        byrow=T, ncol=2)[,1]
+
+# compute p-values
+loo_largepool_detectable <- lapply(unique(loo_largepool_platemap$multiplex),
+                                   function(tmp_pool) {
+                                     if(tmp_pool == "No Protein") { return(NULL) }
+                                     do.call(rbind,
+                                             lapply(loo_largepool_conc[-c(1:2)],
+                                                    function(tmp_conc) {
+                                                      tmp_data <- subset(loo_largepool_data,
+                                                                         multiplex==tmp_pool &
+                                                                           conc %in% c("No Activator", tmp_conc))
+                                                      tmp_data$conc <- relevel(as.factor(tmp_data$conc),
+                                                                               ref="No Activator")
+                                                      tmp_model <- lm(RFU ~ time * conc, tmp_data)
+                                                      tmp_slopes <- data.frame(summary(tmp_model)$coefficients,
+                                                                               multiplex=tmp_pool,
+                                                                               conc=tmp_conc)
+                                                      tmp_slopes$coef <- rownames(tmp_slopes)
+                                                      return(tmp_slopes)
+                                                    }))
+                                   })
+loo_largepool_detectable <- do.call(rbind, loo_largepool_detectable)
+loo_largepool_detectable <- subset(loo_largepool_detectable, 
+                                   grepl("time:", loo_largepool_detectable$coef))
+loo_largepool_detectable$label <- ifelse(loo_largepool_detectable$Pr...t.. < 0.05,
+                                         "*", "")
+## all multiplex pools are detectable above no activator at all concentrations
+loo_largepool_mismatch <- lapply(loo_largepool_conc[-(1:2)],
+                                 function(tmp_conc) {
+                                   do.call(rbind,
+                                           lapply(c(8, 32),
+                                                  function(tmp_pool) {
+                                                    if(tmp_pool == 8) {
+                                                      tmp_pools <- c("8 Guides", "7 Guides")
+                                                    } else {
+                                                      tmp_pools <- c("32 Guides", "31 Guides")
+                                                    }
+                                                    tmp_data <- subset(loo_largepool_data,
+                                                                       conc==tmp_conc & 
+                                                                         multiplex %in% tmp_pools)
+                                                    tmp_data$multiplex <- relevel(as.factor(tmp_data$multiplex),
+                                                                                  ref=tmp_pools[1])
+                                                    tmp_model <- lm(RFU ~ time*multiplex, tmp_data)
+                                                    tmp_coef <- data.frame(summary(tmp_model)$coefficients,
+                                                                           multiplex_label = tmp_pools[1],
+                                                                           conc=tmp_conc)
+                                                    tmp_coef$coef <- rownames(tmp_coef)
+                                                    return(tmp_coef)
+                                                  }))
+                                 })
+loo_largepool_mismatch <- do.call(rbind, loo_largepool_mismatch)
+loo_largepool_mismatch <- subset(loo_largepool_mismatch,
+                                 grepl("time:", loo_largepool_mismatch$coef))
+loo_largepool_mismatch$text <- ifelse(loo_largepool_mismatch$Pr...t.. < 0.05,
+                                      "*", "")
+loo_largepool_mismatch$text_height <- sapply(seq(nrow(loo_largepool_mismatch)),
+                                   function(x) {
+                                     tmp_pool <- loo_largepool_mismatch$multiplex[x]
+                                     tmp_conc <- loo_largepool_mismatch$conc[x]
+                                     if(tmp_pool == "8 Guides") {
+                                       tmp_pools <- c("8 Guides", "7 Guides")
+                                     } else {
+                                       tmp_pools <- c("32 Guides", "31 Guides")
+                                     }
+                                     tmp_data <- subset(loo_largepool_rates,
+                                                        multiplex %in% tmp_pools &
+                                                          conc == tmp_conc)
+                                     return(max(tmp_data$Estimate))
+                                   })
+loo_largepool_mismatch$multiplex_label <- relevel(as.factor(loo_largepool_mismatch$multiplex_label),
+                                                  ref="8 Guides")
+
+# format for plotting
+loo_largepool_rates$conc <- factor(loo_largepool_rates$conc, levels=loo_largepool_conc)
+loo_largepool_rates$mismatch <- ifelse(loo_largepool_rates$multiplex %in% 
+                                         c("31 Guides", "7 Guides"),
+                                       "mismatch", "no mismatch")
+loo_largepool_rates$mismatch[loo_largepool_rates$multiplex == "No Protein"] <- NA
+loo_largepool_rates$multiplex_label <- loo_largepool_rates$multiplex
+loo_largepool_rates$multiplex_label[loo_largepool_rates$multiplex=="31 Guides"] <- "32 Guides"
+loo_largepool_rates$multiplex_label[loo_largepool_rates$multiplex=="7 Guides"] <- "8 Guides"
+loo_largepool_rates$multiplex_label <- factor(loo_largepool_rates$multiplex_label,
+                                              levels=c("No Protein", "8 Guides", "32 Guides"))
+
+ggplot(subset(loo_largepool_rates, mismatch != "No Protein"), 
+       aes(x=conc, y=Estimate)) + 
+  geom_col(aes(fill=mismatch), position="dodge") + theme_classic(base_size=10) + 
+  geom_errorbar(aes(ymin = Estimate + qnorm(0.025)*Std..Error,
+                    ymax = Estimate - qnorm(0.025)*Std..Error,
+                    fill=mismatch),
+                position="dodge") + 
+  facet_grid(~multiplex_label, scales="free_x", space="free_x") + 
+  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) + 
+  xlab("") + ylab("RFU/min") + labs(fill="") + scale_y_log10() +
+  scale_fill_manual(values=c("grey", "black")) + 
+  geom_text(data=loo_largepool_mismatch, col="red",
+            aes(x=conc, y=1.2*text_height, label=text))
+
+ggsave(file=file.path(figure_dir, "suppl_figure_6.pdf"),
+       plot=last_plot(),
+       device="pdf", width=6.5, height=3.5, units="in")
+```
+
+gblock rates
+
+```{r suppl_figure_x1}
+gblock_rate$start <- guide_rate$start[match(gblock_rate$guide_id,
+                                            guide_rate$guide_id)]
+(ggplot(gblock_rate, aes(x=start, y=Estimate)) + theme_classic() + 
+    geom_point() + geom_errorbar(aes(ymin=Estimate+qnorm(0.05)*Std.Error,
+                                     ymax=Estimate-qnorm(0.05)*Std.Error)) + 
+    xlab("") + ylab("activator-dependent activity\n(RFU/min)") + ylim(-10, 100) + 
+    theme(axis.title=element_text(size=10),
+          axis.text=element_text(size=10))) + 
+  (ggplot(gene_bed, aes(xmin=thickStart, xmax=thickEnd, ymin=ymax-4.5, ymax=ymax)) + 
+     theme_void() + geom_rect() + 
+     geom_text(data=subset(gene_bed, thickEnd-thickStart > 500*nchar(geneName)),
+               aes(x=(thickStart + thickEnd)/2, y=ymax-(4.5/2), label=name),
+               col="white", size=2.5)) +
+  (ggplot(guide_rate, aes(y=Estimate)) + theme_classic() + 
+     geom_histogram(binwidth=5) + xlab("") + ylab("") + ylim(-10, 100) + 
+     scale_x_continuous(breaks=c(0, 20)) +
+     theme(axis.text.y=element_blank(), axis.ticks=element_blank(),
+           axis.text.x=element_text(size=10))) + 
+  plot_spacer() + 
+  plot_layout(byrow=F, widths=c(10,1), heights=c(5,1))
+# ggsave(file=file.path(figure_dir, "suppl_figure_1.pdf"),
+#        plot=last_plot(),
+#        device="pdf", width=6.5, height=3, units="in")
+```
+
+anti-tag complementarity
+
+```{r suppl_figure_x2}
+levels(guide_rate$antitag_label) <- c("ARRR", "CRRR", "URRR", "GRRR", "GURR", "GUUR")
+
+ggplot(guide_rate,
+       aes(x=antitag_label, y=Estimate, fill=antitag_label)) + 
+  geom_violin(draw_quantiles=c(0.25, 0.75), linetype="dashed") + 
+  geom_violin(fill="transparent", draw_quantiles=0.5) + 
+  geom_dotplot(binaxis="y", stackdir="center", binwidth=1, fill="black") +
+  theme_classic(base_size=10) + guides(fill=F) +
+  scale_fill_manual(values=RColorBrewer::brewer.pal(6, "Set1")) +
+  xlab("anti-tag") + ylab("activator-dependent activity\n(RFU/min)")
+
+# ggsave(file=file.path(figure_dir, "suppl_figure_1.pdf"),
+#        plot=last_plot(),
+#        device="pdf", width=4, height=3, units="in")
+```
+
+interaction btwn anti-tag G and spacer structure
+
+```{r suppl_figure_x3}
 antitag_G_structure <- subset(guide_rate, 
                               antitag_pos1=="G" & crRNA_spacer_basepairs != 0 &
                                 nchar(spacer)==20)
@@ -3716,129 +4317,11 @@ antitag_G_structure$spacer_structure <- sapply(as.character(antitag_G_structure$
     theme(axis.text=element_text(size=10), axis.title=element_text(size=10)) +
     scale_x_continuous(breaks=c(0, 4, 10, 16)) + 
     xlab("# basepaired positions in spacer") + 
-    ylab("rate above no activator\n(RFU/min)")) /
+    ylab("activator-dependent activity\n(RFU/min)")) /
   (ggplot(antitag_G_structure, 
           aes(x=spacer_structure, y=Estimate, fill=crRNA_spacer_basepairs)) + 
      geom_col() + theme_classic() + theme(axis.text.x=element_text(angle=90)) + 
-     xlab("") + ylab("rate above no activator\n(RFU/min)"))
-```
-
-Suppl. Figure 4B: structure of direct repeat
-
-```{r suppl_figure_4B}
-(ggplot(noActivator_rate, aes(x=direct_repeat, y=Estimate)) + 
-   theme_classic() + 
-   theme(axis.text.x=element_blank(), axis.text.y=element_text(size=10),
-         axis.title=element_text(size=10)) + 
-   geom_dotplot(binaxis="y", stackdir="center", binwidth=0.25) + 
-   xlab("") + ylab("no activator rate\n(RFU/min)")) / 
-  (ggplot(guide_rate, aes(x=direct_repeat, y=Estimate)) + 
-     theme_classic() + 
-     theme(axis.text.x=element_text(angle=90, size=10, vjust=0),
-           axis.text.y=element_text(size=10),
-           axis.title=element_text(size=10)) + 
-     geom_dotplot(binaxis="y", stackdir="center", binwidth=1) + 
-     xlab("structure of crRNA direct repeat") + 
-     ylab("rate above no activator\n(RFU/min)"))
-
-ggsave(file=file.path(figure_dir, "suppl_figure_4B.pdf"),
-       plot=last_plot(),
-       device="pdf", width=6.5, height=4, units="in")
-```
-
-Suppl. Figure 5A: in vivo viral structure
-
-```{r suppl_figure_5A}
-(lan_huston + theme_classic(base_size=10)) + 
-  (sun_invivo_huston + theme_classic(base_size=10)) + 
-  (lan_sun_invivo + theme_classic(base_size=10))
-
-ggsave(file=file.path(figure_dir, "suppl_figure_5A.pdf"),
-       plot=last_plot(),
-       device="pdf", width=6.5, height=2, units="in")
-```
-
-Suppl. Figure 5B: genomic structure vs. activity
-
-```{r suppl_figure_5B}
-((ggplot(guide_rate, aes(x=lan, y=Estimate)) + theme_classic(base_size=10) +
-    geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-    xlab("% unstructured") + ylab("rate above no activator\n(RFU/min)") + 
-    ggtitle("Lan (2020)", subtitle="20nt target region")) + 
-    (ggplot(guide_rate, aes(x=huston, y=Estimate)) + theme_classic(base_size=10) +
-       geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-       xlab("% double-stranded") + ylab("") +
-       ggtitle("Huston (2021)", subtitle="20nt target region")) +
-    (ggplot(guide_rate, aes(x=sun_invivo, y=Estimate)) + theme_classic(base_size=10) +
-       geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-       xlab("mean icSHAPE score") + ylab("") +
-       ggtitle("Sun (2021)", subtitle="20nt target region"))) / 
-  ((ggplot(guide_rate, aes(x=lan_seed, y=Estimate)) + theme_classic(base_size=10) +
-    geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-    xlab("% unstructured") + ylab("rate above no activator\n(RFU/min)") + 
-    ggtitle("", subtitle="target seed region")) + 
-    (ggplot(guide_rate, aes(x=as.numeric(as.character(huston_seed)), y=Estimate)) + 
-       theme_classic(base_size=10) +
-       geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-       xlab("% double-stranded") + ylab("") +
-       ggtitle("", subtitle="target seed region")) +
-    (ggplot(guide_rate, aes(x=sun_invivo_seed, y=Estimate)) + theme_classic(base_size=10) +
-       geom_point(shape=16) + geom_smooth(method=lm, formula=y~x) +
-       xlab("mean icSHAPE score") + ylab("") +
-       ggtitle("", subtitle="target seed region")))
-
-ggsave(file=file.path(figure_dir, "suppl_figure_5B.pdf"),
-       plot=last_plot(),
-       device="pdf", width=6.5, height=4, units="in")
-```
-
-Suppl. Figure 6A: multiplex set of 40 vs. primary screen
-
-```{r suppl_figure_6A}
-multiplex_40 <- readLines(file.path(project_dir, "40_guide_List.csv"), skip=1)[-1]
-guide_rate$multiplex_40 <- sapply(guide_rate$guide_id,
-                                  function(x) {
-                                    ifelse(x %in% multiplex_40,
-                                           "multiplex pool", "not selected")
-                                  })
-guide_rate$multiplex_40 <- factor(guide_rate$multiplex_40, 
-                                  levels=c("not selected", "multiplex pool"))
-
-ggplot_violin(guide_rate, x_var="multiplex_40") + 
-  theme_classic(base_size=10) + guides(fill=F) + 
-  ylab("rate above no activator\n(RFU/min)")
-
-ggsave(file=file.path(figure_dir, "suppl_figure_6A.pdf"),
-       plot=last_plot(),
-       device="pdf", width=3, height=2, units="in")
-```
-
-gblock rates
-
-```{r suppl_figure_x}
-gblock_rate$start <- guide_rate$start[match(gblock_rate$guide_id,
-                                            guide_rate$guide_id)]
-(ggplot(gblock_rate, aes(x=start, y=Estimate)) + theme_classic() + 
-    geom_point() + geom_errorbar(aes(ymin=Estimate+qnorm(0.05)*Std.Error,
-                                     ymax=Estimate-qnorm(0.05)*Std.Error)) + 
-    xlab("") + ylab("rate above no activator\n(RFU/min)") + ylim(-10, 100) + 
-    theme(axis.title=element_text(size=10),
-          axis.text=element_text(size=10))) + 
-  (ggplot(gene_bed, aes(xmin=thickStart, xmax=thickEnd, ymin=ymax-4.5, ymax=ymax)) + 
-     theme_void() + geom_rect() + 
-     geom_text(data=subset(gene_bed, thickEnd-thickStart > 500*nchar(geneName)),
-               aes(x=(thickStart + thickEnd)/2, y=ymax-(4.5/2), label=name),
-               col="white", size=2.5)) +
-  (ggplot(guide_rate, aes(y=Estimate)) + theme_classic() + 
-     geom_histogram(binwidth=5) + xlab("") + ylab("") + ylim(-10, 100) + 
-     scale_x_continuous(breaks=c(0, 20)) +
-     theme(axis.text.y=element_blank(), axis.ticks=element_blank(),
-           axis.text.x=element_text(size=10))) + 
-  plot_spacer() + 
-  plot_layout(byrow=F, widths=c(10,1), heights=c(5,1))
-# ggsave(file=file.path(figure_dir, "suppl_figure_1.pdf"),
-#        plot=last_plot(),
-#        device="pdf", width=6.5, height=3, units="in")
+     xlab("") + ylab("activator-dependent activity\n(RFU/min)"))
 ```
 
 ```{r save_image}

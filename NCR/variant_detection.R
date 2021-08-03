@@ -14,7 +14,8 @@ multiplex_32$target <- sapply(multiplex_32$spacer,
                                 gsub("U", "T", as.character(reverseComplement(RNAStringSet(x))))
                               })
 
-ottlab_8 <- subset(guide_features, guide_features$NCR.id %in% paste0("NCR_", 600:614))
+ottlab_8 <- readLines(file.path(here(), "NCR", "Ott8.csv"))[-1]
+ottlab_8 <- subset(guide_features, guide_features$NCR.id %in% ottlab_8)
 ottlab_8$target <- sapply(ottlab_8$spacer,
                           function(x) {
                             gsub("U", "T", as.character(reverseComplement(RNAStringSet(x))))
