@@ -9,6 +9,8 @@ option_list <- list(make_option(c("-g", "--genome"), type="character", default=N
                                 help="number of mismatches allowed", metavar="integer"),
                     make_option(c("-e", "--enzyme"), type="character", default=NULL, # "Cas13a" or "Cas12"
                                 help="Cas enzyme type", metavar="character"),
+                    make_option(c("-v", "--omit"), type="character", default=NULL,
+                                help="transcripts to omit", metavar="character"),
                     make_option(c("-o", "--out"), type="character", default=".",
                                 help="output directory", metavar="character"))
 opt_parser <- OptionParser(option_list=option_list)
@@ -60,6 +62,10 @@ mapped <- subset(mapped, mapped$aligned_to != "*")
 if(opt$enzyme == "Cas13a") {
   mapped <- subset(mapped, flag != 16) # do not report alignments to minus strand
 }
+if(!is.null(opt$omit)) {
+  omit_transcripts <- readLines(opt$omit)
+  mapped <- subset(mapped, !(aligned_to %in% omit_transcripts))
+}
 
 # format table of alignment counts
 cat("- counting alignments\n")
@@ -73,7 +79,7 @@ window_cts <- data.frame(seq=windows$target,
                                      if(x %in% unmapped) {
                                        return(0)
                                      } else {
-                                       tmp <- subset(mapped, mapped$window==x)
+                                       tmp <- subset(mapped, mapped$template==x)
                                        return(length(unique(tmp$aligned_to)))
                                      }
                                    }))

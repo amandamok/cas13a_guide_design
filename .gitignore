@@ -25,6 +25,8 @@ outputs/influenza*/*txt
 outputs/influenza*/*sam
 outputs/influenza*/*fa
 outputs/influenza*/*bowtiestats
+outputs/*/*sam
+outputs/*/*bowtiestats
 NCR/analyze_data_cache/*
 NCR/analyze_data_files/*
 *.DS_Store
