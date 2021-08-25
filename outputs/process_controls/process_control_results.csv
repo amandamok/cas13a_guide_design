@@ -1,0 +1,10 @@
+"guide","crRNA","crRNA_structure","spacer","dr_structure","spacer_structure","num_bp_spacer"
+"ACTB1","UAGACCACCCCAAAAAUGAAGGGGACUAAAACGUGAACUUUGGGGGAUGCUCG","..((.((((((.....(((((...((......))...))))))))).)).)).","GUGAACUUUGGGGGAUGCUCG","..((.((((((.....(((((...((......","))...))))))))).)).)).",15
+"ACTB2","UAGACCACCCCAAAAAUGAAGGGGACUAAAACGAACUUUGGGGGAUGCUCGCU",".......(((((((......................)))))))..........","GAACUUUGGGGGAUGCUCGCU",".......(((((((..................","....)))))))..........",7
+"ACTB3","UAGACCACCCCAAAAAUGAAGGGGACUAAAACACUUUGGGGGAUGCUCGCUCC",".......((((.........)))).............((((........))))","ACUUUGGGGGAUGCUCGCUCC",".......((((.........))))........",".....((((........))))",8
+"GAPDH91","UAGACCACCCCAAAAAUGAAGGGGACUAAAACGUUGGCAGUGGGGACACGGA","....((((.((((......((....))......))))..)))).........","GUUGGCAGUGGGGACACGGA","....((((.((((......((....)).....",".))))..)))).........",8
+"GAPDH92","UAGACCACCCCAAAAAUGAAGGGGACUAAAACCACGUUGGCAGUGGGGACAC",".......((((.........)))).......((((.......))))......","CACGUUGGCAGUGGGGACAC",".......((((.........)))).......(","(((.......))))......",7
+"GAPDH93","UAGACCACCCCAAAAAUGAAGGGGACUAAAACUGACACGUUGGCAGUGGGGA",".......(((((..((((...((........))....)))).....))))).","UGACACGUUGGCAGUGGGGA",".......(((((..((((...((........)",")....)))).....))))).",10
+"GAPDH51","UAGACCACCCCAAAAAUGAAGGGGACUAAAACACGGUGCCAUGGAAUUUGCCA",".......((((.........)))).................(((......)))","ACGGUGCCAUGGAAUUUGCCA",".......((((.........))))........",".........(((......)))",6
+"GAPDH52","UAGACCACCCCAAAAAUGAAGGGGACUAAAACGGUGCCAUGGAAUUUGCCAUG",".......((((.........)))).............(((((......)))))","GGUGCCAUGGAAUUUGCCAUG",".......((((.........))))........",".....(((((......)))))",10
+"GAPDH53","UAGACCACCCCAAAAAUGAAGGGGACUAAAACUGCCAUGGAAUUUGCCAUGGG",".......((((.........))))..........((((((......)))))).","UGCCAUGGAAUUUGCCAUGGG",".......((((.........))))........","..((((((......)))))).",12
