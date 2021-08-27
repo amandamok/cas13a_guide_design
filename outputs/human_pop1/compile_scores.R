@@ -84,7 +84,7 @@ windows$guide_id <- paste0("pop1_", seq(nrow(windows)))
 windows$bed_chrStart <- 98117293 + windows$start - 1
 windows$bed_chrEnd <- windows$bed_chrStart + 20 - 1
 
-windows_bed <- data.frame(chr="chr7",
+windows_bed <- data.frame(chr="chr8",
                           chrStart=windows$bed_chrStart,
                           chrEnd = windows$bed_chrEnd,
                           guide_id = windows$guide_id)
