@@ -51,35 +51,18 @@ names(exon_intron_labels) <- c(paste0("exon", exon_chunks),
 actb_fasta$label <- exon_intron_labels[with(actb_fasta, paste0(exon, chunk))]
 
 # load common SNPs
-actb_snp <- read.table("human_actb_snp151common.tsv",
-                       col.names=c("chr", "start", "rsID", "snp_type", "alleles", "freq"),
-                       stringsAsFactors=F)
-actb_snp$major_allele <- sapply(actb_snp$alleles,
-                                function(x) {
-                                  strsplit(x, split=",")[[1]][1]
-                                })
-actb_snp$minor_allele <- sapply(actb_snp$alleles,
-                                function(x) {
-                                  strsplit(x, split=",")[[1]][2]
-                                })
-actb_snp$major_freq <- sapply(actb_snp$freq,
-                              function(x) {
-                                as.numeric(strsplit(x, split=",")[[1]][1])
-                              })
-actb_snp$minor_freq <- sapply(actb_snp$freq,
-                              function(x) {
-                                as.numeric(strsplit(x, split=",")[[1]][2])
-                              })
-actb_snp$MAF <- sapply(seq(nrow(actb_snp)),
-                       function(x) {
-                         min(actb_snp$major_freq[x], actb_snp$minor_freq[x])
-                       })
+actb_snp <- read.table("human_actb_snp153common.tsv",
+                       comment.char="", header=T, stringsAsFactors=F)
+actb_snp$chromStart <- actb_snp$chromStart + 1 # accounting for UCSC coordinates
 
-# annotate SNP MAF
-actb_fasta$MAF <- 1
-actb_fasta$MAF[match(actb_snp$start, actb_fasta$pos)] <- actb_snp$MAF
-actb_fasta$minor_freq <- 1
-actb_fasta$minor_freq[match(actb_snp$start, actb_fasta$pos)] <- actb_snp$minor_freq
+# annotate positions overlapping with variants in dbSNP 153
+actb_fasta$dbSNP153 <- 0
+for(x in seq(nrow(actb_snp))) {
+  tmp_start <- actb_snp$chromStart[x]
+  tmp_end <- actb_snp$chromEnd[x]
+  which_pos <- match(seq(tmp_start, tmp_end), actb_fasta$pos)
+  actb_fasta$dbSNP153[which_pos] <- actb_fasta$dbSNP153[which_pos] + 1
+}
 
 # add extra annotations ---------------------------------------------------
 
@@ -90,12 +73,45 @@ windows$label <- sapply(windows$start,
                         })
 windows$exon_only <- grepl("^exon", windows$label) & !grepl("_", windows$label)
 
-windows$num_SNPs <- sapply(windows$start,
+windows$dbSNP153 <- sapply(windows$start,
                            function(x) {
-                             tmp_window <- actb_fasta$MAF[x:(x+19)]
-                             return(sum(tmp_window != 1))
+                             tmp_window <- actb_fasta$dbSNP153[x:(x+19)]
+                             return(sum(tmp_window != 0))
                            })
 
 # write output ------------------------------------------------------------
 
-write.table(windows, file="human_actb_summary.txt", quote=F, col.names=T, sep="\t")
+windows$guide_id <- paste0("actb_", seq(nrow(windows)))
+windows$bed_chrEnd <- 5563902 - windows$start + 1
+windows$bed_chrStart <- windows$bed_chrEnd - 20 + 1
+
+windows_bed <- data.frame(chr="chr7",
+                          chrStart=windows$bed_chrStart,
+                          chrEnd = windows$bed_chrEnd,
+                          guide_id = windows$guide_id)
+
+write.table(windows, file="human_actb_summary.txt",
+            quote=F, row.names=F, col.names=T, sep="\t")
+write.table(windows_bed, file="human_actb_spacers.bed",
+            quote=F, row.names=F, col.names=F, sep="\t")
+
+# select guides -----------------------------------------------------------
+
+# starting: n = 36728
+# 1. crRNA: good secondary structure; avoid antitag G (n = 3483)
+selected_windows <- subset(windows,
+                           has_crRNA_hairpin &
+                             crRNA_spacer_basepairs == 0 &
+                             !grepl("^G", antitag))
+# 2. sensitivity: avoid variant in dbSNP 153 common variants (n = 2830)
+selected_windows <- subset(selected_windows,
+                           dbSNP153 == 0)
+# 3. specificty: avoid targeting other human coronaviruses or transcripts (n = 548)
+selected_windows <- subset(selected_windows,
+                           specificity == 1 &
+                             match_against_hg38 == 0)
+
+selected_windows_bed <- subset(windows_bed,
+                               windows_bed$guide_id %in% selected_windows$guide_id)
+write.table(selected_windows_bed, file="human_actb_selected.bed",
+            quote=F, row.names=F, col.names=F, sep="\t")
