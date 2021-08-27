@@ -109,6 +109,8 @@ selected_windows <- subset(selected_windows,
 selected_windows <- subset(selected_windows,
                            specificity == 1 &
                              match_against_hg38 == 0)
+# 4. position: only target exonic regions (n = 9)
+selected_windows <- subset(selected_windows, exon_only)
 
 selected_windows_bed <- subset(windows_bed,
                                windows_bed$guide_id %in% selected_windows$guide_id)
