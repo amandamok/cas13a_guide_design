@@ -11,9 +11,17 @@ option_list <- list(make_option(c("-g", "--genome"), type="character", default="
                     make_option(c("-m", "--mismatch"), type="character", default=1,
                                 help="number of mismatches allowed", metavar="integer"),
                     make_option(c("-o", "--out"), type="character", default=".",
-                                help="output directory", metavar="character"))
+                                help="output directory", metavar="character"),
+                    make_option(c("-b", "--bowtie"), type="character", default=NULL,
+                                help="path to bowtie", metavar="character"))
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
+
+bowtie_path <- system("which bowtie", intern=T)
+if(length(bowtie_path)==0 & is.null(opt$bowtie)) {
+  cat("ERROR: need to supply path to bowtie")
+  q(save="no")
+}
 
 cat("\nCalculating specificity against other human coronaviruses\n")
 
@@ -21,7 +29,7 @@ cat("\nCalculating specificity against other human coronaviruses\n")
 cts_fname <- file.path(opt$out, paste0("bowtie_", opt$genome, "_mapped.sam"))
 if(!file.exists(cts_fname)) {
   cat(paste("- aligning windows to", opt$genome, "\n"))
-  system(paste("/mnt/ingolialab/linux-x86_64/bin/bowtie",
+  system(paste(bowtie_path,
                ifelse(opt$enzyme=="Cas13a", "--norc", ""), # for Cas13a, do not align to reverse complement
                "-k 50", # report up to 50 alignments
                "-v", opt$mismatch, # up to opt$mismatch mismatches allowed

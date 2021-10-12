@@ -2,11 +2,15 @@
 ### count bowtie alignments
 
 library(optparse)
-option_list = list(make_option(c("-g", "--genome"), type="character", 
-                               default=NULL, 
+library(here)
+
+option_list = list(make_option(c("-g", "--genome"), type="character",
+                               default=NULL,
                                help="bowtie index prefix", metavar="character"),
-                   make_option(c("-o", "--out"), type="character", default=".", 
-                               help="output directory", metavar="character")) 
+                   make_option(c("-o", "--out"), type="character", default=".",
+                               help="output directory", metavar="character"),
+                   make_option(c("-b", "--bowtie"), type="character", default=NULL,
+                               help="path to bowtie", metavar="character"))
 opt_parser = OptionParser(option_list=option_list)
 opt = parse_args(opt_parser)
 
@@ -18,13 +22,20 @@ if(is.null(opt$genome)) {
   cat(paste("aligning against off-target:", opt$genome, "(bowtie) \n"))
 }
 
+bowtie_path <- system("which bowtie", intern=T)
+if(length(bowtie_path)==0 & is.null(opt$bowtie)) {
+  cat("ERROR: need to supply path to bowtie")
+  q(save="no")
+}
+
 # align windows with bowtie
 cts_fname <- file.path(opt$out, paste0("windows_", opt$genome, "_mapped_cts.txt"))
 if(!file.exists(cts_fname)) {
   cat(paste("- aligning windows to", opt$genome, "(bowtie)"))
-  system(paste("/mnt/ingolialab/linux-x86_64/bin/bowtie -a -v 3 -p 10 -S --un", 
+  system(paste(bowtie_path,
+               "-a -v 3 -p 10 -S --un",
                file.path(opt$out, paste0("windows_", opt$genome, "_unmapped.fa")), # fasta file of unmapped windows
-               "-f", file.path("~/covid-19/ref_data", opt$genome),  # path to bowtie index
+               "-f", file.path(here(), "ref_data", opt$genome),  # path to bowtie index
                file.path(opt$out, "windows.fa"), # fname of windows fasta file
                ">", file.path(opt$out, paste0("windows_", opt$genome, "_mapped.sam")), # sam alignment file of mapped windows
                "2>", file.path(opt$out, paste0("windows_", opt$genome, "_mapped.bowtiestats"))))

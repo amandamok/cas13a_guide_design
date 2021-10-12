@@ -2,14 +2,15 @@
 ### score PhyloP
 
 library(optparse)
+library(here)
 
-option_list <- list(make_option(c("-i", "--input"), type="character", 
-                               default="~/covid-19/ref_data/wuhCor1.phyloP119way.txt", 
+option_list <- list(make_option(c("-i", "--input"), type="character",
+                               default=file.path(here(), "ref_data", "wuhCor1.phyloP119way.txt"),
                                help="multiz alignment file name", metavar="character"),
                    make_option(c("-w", "--window"), type="integer", default=20,
                                help="window size", metavar="integer"),
-                   make_option(c("-o", "--out"), type="character", default=".", 
-                               help="output directory", metavar="character")) 
+                   make_option(c("-o", "--out"), type="character", default=".",
+                               help="output directory", metavar="character"))
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
@@ -25,7 +26,7 @@ colnames(phylop) <- c("position", "PhyloP")
 # compute average PhyloP score per window
 if(file.exists(file.path(opt$out, "windows_tags.txt"))) {
   cat("- pulling window positions from windows_tags.txt\n")
-  window_starts <- read.table(file.path(opt$out, "windows_tags.txt"), header=T)$start 
+  window_starts <- read.table(file.path(opt$out, "windows_tags.txt"), header=T)$start
 } else {
   window_starts <- seq.int(ncol(covid_alignment)-opt$window-3)
 }

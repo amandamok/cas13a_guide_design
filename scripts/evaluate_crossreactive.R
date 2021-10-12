@@ -44,8 +44,8 @@ option_list <- list(make_option(c("-m", "--mismatch"), type="integer", default=4
                                 help="number of mismatches allowed", metavar="integer"),
                     make_option(c("-t", "--target"), type="character", default=NULL,
                                 help="target is DNA or RNA", metavar="DNA or RNA"),
-                    make_option(c("-o", "--out"), type="character", default=".", 
-                                help="output directory", metavar="character")) 
+                    make_option(c("-o", "--out"), type="character", default=".",
+                                help="output directory", metavar="character"))
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
@@ -126,21 +126,21 @@ alignment_summary$target_type[colnames(alignment_cts) %in% human_CoVs] <- "human
 alignment_summary$target_type[colnames(alignment_cts) %in% offtarget_ssRNA_minusStrand] <- "ssRNA (-)"
 alignment_summary$target_type[colnames(alignment_cts) %in% offtarget_ssRNA_plusStrand] <- "ssRNA (+)"
 alignment_summary$target_type[colnames(alignment_cts) %in% offtarget_dsDNA] <- "dsDNA"
-crossreactive_plot <- ggplot(alignment_summary, aes(target, offtarget_rate)) + 
-  geom_col(aes(fill=target_type)) + theme_bw() + theme(axis.text.x=element_text(angle=90)) + 
-  ggtitle(paste0("off-target cross-reactivity: ", opt$target), 
-          subtitle=paste0("all spacers (n=", nrow(alignment_cts), ")")) + 
+crossreactive_plot <- ggplot(alignment_summary, aes(target, offtarget_rate)) +
+  geom_col(aes(fill=target_type)) + theme_bw() + theme(axis.text.x=element_text(angle=90)) +
+  ggtitle(paste0("off-target cross-reactivity: ", opt$target),
+          subtitle=paste0("all spacers (n=", nrow(alignment_cts), ")")) +
   xlab("") + ylab("% spacers aligned with ≤4 mismatches")
 ggsave(filename=file.path(opt$out, paste0("crossreactive_offtargets_", opt$target, ".pdf")),
        crossreactive_plot, device="pdf", width=6, height=4, units="in")
 
-# ordered <- readLines("~/covid-19/outputs/spacers_20200504.txt")
+# ordered <- readLines("~/cas13a_guide_design-19/outputs/spacers_20200504.txt")
 # ordered <- gsub("T", "U", ordered)
 # alignment_ordered <- alignment_cts[match(ordered, windows$spacer),]
 # alignment_ordered_summary <- alignment_summary
 # alignment_ordered_summary$offtarget_rate <- colMeans(alignment_ordered>0)
 # ggplot(alignment_ordered_summary, aes(target, offtarget_rate)) +
 #   geom_col(aes(fill=target_type)) + theme_bw() + theme(axis.text.x=element_text(angle=90)) +
-#   ggtitle(paste0("off-target cross-reactivity: ", opt$target), 
-#           subtitle=paste0("all spacers (n=", nrow(alignment_ordered_summary), ")")) + 
+#   ggtitle(paste0("off-target cross-reactivity: ", opt$target),
+#           subtitle=paste0("all spacers (n=", nrow(alignment_ordered_summary), ")")) +
 #   xlab("") + ylab("% spacers aligned with ≤4 mismatches")

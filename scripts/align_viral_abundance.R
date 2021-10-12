@@ -5,8 +5,8 @@ library(optparse)
 library(ggplot2)
 library(here)
 
-option_list <- list(make_option(c("-g", "--genome"), type="character", 
-                                default=file.path(here(), "ref_data/wuhCor1"), 
+option_list <- list(make_option(c("-g", "--genome"), type="character",
+                                default=file.path(here(), "ref_data/wuhCor1"),
                                 help="genome index prefix", metavar="character"),
                     make_option(c("-a", "--accession"), type="character",
                                 default=NULL,
@@ -15,11 +15,17 @@ option_list <- list(make_option(c("-g", "--genome"), type="character",
                                 help="data is paired-end"),
                     make_option(c("-o", "--out"), type="character",
                                 default=file.path(here(), "ref_data/RNA_expression"),
-                                help="output directory", metavar="character"))
+                                help="output directory", metavar="character"),
+                    make_option(c("-b", "--bowtie"), type="character", default=NULL,
+                                help="path to bowtie", metavar="character"))
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
-bowtie_path <- "/mnt/ingolialab/linux-x86_64/bin/bowtie"
+bowtie_path <- system("which bowtie", intern=T)
+if(length(bowtie_path)==0 & is.null(opt$bowtie)) {
+  cat("ERROR: need to supply path to bowtie")
+  q(save="no")
+}
 
 if(!("accession" %in% names(opt))) {
   cat("\nNO DATASET SPECIFIED\n")
@@ -34,14 +40,14 @@ if(!file.exists(alignment_fname)) {
     system(paste("prefetch", opt$accession))
     if(opt$paired) {
       system(paste("fastq-dump --split-files -O", opt$out, file.path("~/ncbi/public/sra", paste0(opt$accession, ".sra"))))
-      system(paste("cat", file.path(opt$out, paste0(opt$accession, "_1.fastq")), 
+      system(paste("cat", file.path(opt$out, paste0(opt$accession, "_1.fastq")),
                    file.path(opt$out, paste0(opt$accession, "_2.fastq")),
                    ">", file.path(opt$out, paste0(opt$accession, ".fastq"))))
     } else {
       system(paste("fastq-dump", "-O", opt$out, file.path("~/ncbi/public/sra", paste0(opt$accession, ".sra"))))
     }
   }
-  system(paste(bowtie_path, "-S -q", file.path(here(), "ref_data/wuhCor1"), 
+  system(paste(bowtie_path, "-S -q", file.path(here(), "ref_data/wuhCor1"),
                file.path(opt$out, paste0(opt$accession, ".fastq")),
                ">", file.path(opt$out, paste0(opt$accession, "_mapped.sam")),
                "2>", file.path(opt$out, paste0(opt$accession, "_mapped.bowtiestats"))))
@@ -53,7 +59,7 @@ aligned_reads <- data.frame(matrix(unlist(strsplit(aligned_reads, split="\t")), 
 colnames(aligned_reads) <- c("seqID", "rname", "pos")
 aligned_reads$pos <- as.numeric(aligned_reads$pos)
 
-pileup_plot <- ggplot(aligned_reads, aes(pos)) + geom_histogram(binwidth=300) + 
+pileup_plot <- ggplot(aligned_reads, aes(pos)) + geom_histogram(binwidth=300) +
   theme_bw() + ggtitle(opt$accession) + xlab("genomic position") + ylab("read count")
 ggsave(plot=pileup_plot,
        filename=file.path(opt$out, paste0(opt$accession, "_plot.pdf")),

@@ -1,0 +1,149 @@
+---
+title: 'COVID-19 guide design (Cas13a): RPA/LAMP amplicon overlap, minus strand'
+author: "Amanda Mok"
+date: "Last compiled on `r format(Sys.Date(), '%B %d, %Y')`"
+output: html_document
+---
+
+```{r setup, echo=F}
+knitr::opts_chunk$set(echo=F, fig.width=12, fig.height=8, warning=F)
+
+library(ggplot2)
+library(patchwork)
+library(prodlim)
+
+source("~/cas13a_guide_design/scripts/helper.R")
+```
+
+```{r load_data}
+num_covid19_strains <- as.numeric(strsplit(system("wc -l ~/cas13a_guide_design/ref_data/gisaid_cov2020_alignment.txt", intern=T),
+                                           split=" ")[[1]][1])
+num_human_CoV <- as.numeric(system(paste("grep ^'>' ~/cas13a_guide_design/ref_data/human_CoV.fa | wc -l"), intern=T))
+
+coverage_id <- "PRJNA616446"
+abundance_binSize <- 300
+abundance <- load_coverage(coverage_id, abundance_binSize)
+
+windows <- read.table("cas13a_minusStrand_results_summary.txt", header=T, stringsAsFactors=F)
+```
+
+# Design
+
+AIM: High quality spacers that overlap with RPA/LAMP amplicons
+
+### 1. Pre-processing
+
+- Remove spacers with GUUU antitags
+- Remove spacers that interfere with crRNA hairpin
+- Remove spacers with ≥4 internal base-pairs
+
+```{r subset_1}
+subset_1 <- subset(windows, antitag != "GUUU")
+subset_1 <- subset(subset_1, has_crRNA_hairpin)
+subset_1 <- subset(subset_1, crRNA_spacer_basepairs <= 4)
+filter_1 <- "Preprocessed"
+plot_diagnostic(subset_1, abundance, filter=filter_1,
+                alpha=0.2, jitter_x=0.01, jitter_y=0.05,
+                var1="sensitivity_0", var1_name="Sensitivity", var1_desc="% SARS-CoV-2 genomes captured",
+                var2="specificity", var2_name="Specificity", var2_desc="% human coronaviruses missed",
+                var3="match_against_hg38", var3_name="Reactivity: hg38", var3_desc="# alignments to human transcriptome")
+```
+
+### 2. Select spacers with high specificity
+
+- No alignments to other human coronaviruses
+- No alignments to human transcriptome
+
+```{r subset_2}
+subset_2 <- subset(subset_1, specificity==1 & match_against_hg38==0)
+filter_2 <- paste(filter_1, "100% specificity", sep=", ")
+plot_diagnostic(subset_2, abundance, filter=filter_2,
+                alpha=0.2, jitter_x=0.01, jitter_y=0.05,
+                var1="sensitivity_0", var1_name="Sensitivity", var1_desc="% SARS-CoV-2 genomes captured",
+                var2="GC_content", var2_name="% GC", var2_desc="Spacer GC content",
+                var3="target_basepairing_prob", var3_name="Protospacer structure", 
+                var3_desc="Propensity for viral protospacer to base-pair")
+```
+
+### 3. Select spacers that overlap with RPA/LAMP amplicons
+
+```{r subset_3}
+# read in alignments
+amplicons <- system("grep -v @ ~/cas13a_guide_design/isothermal_amplification/amplicons_mapped.sam | cut -f 1,2,4,10", intern=T)
+amplicons <- data.frame(matrix(unlist(strsplit(amplicons, split="\t")), byrow=T, ncol=4), stringsAsFactors=F)
+colnames(amplicons) <- c("name", "flag", "position", "sequence")
+
+# process name
+amplicons$amplicon <- sapply(amplicons$name, function(x) strsplit(x, split=";")[[1]][1])
+amplicons$FW <- sapply(amplicons$name, function(x) strsplit(strsplit(x, split=";")[[1]][2], split=":")[[1]][1])
+amplicons$FW_seq <- sapply(amplicons$name, function(x) strsplit(strsplit(x, split=";")[[1]][2], split=":")[[1]][2])
+amplicons$REV <- sapply(amplicons$name, function(x) strsplit(strsplit(x, split=";")[[1]][3], split=":")[[1]][1])
+amplicons$REV_seq <- sapply(amplicons$name, function(x) strsplit(strsplit(x, split=";")[[1]][3], split=":")[[1]][2])
+amplicons <- amplicons[,-1]
+
+# remove RPA amplicons
+amplicons <- subset(amplicons, !grepl("RPA", amplicons$amplicon))
+
+# find spacers that overlap with amplicons
+subset_3 <- lapply(seq.int(nrow(amplicons)),
+                           function(x) {
+                             ## account for primer lengths, spacer length, and antitag
+                             amplicon_start <- as.numeric(amplicons$position[x]) + nchar(amplicons$FW_seq[x])-1
+                             amplicon_stop <- amplicon_start + nchar(amplicons$sequence[x]) - nchar(amplicons$REV_seq[x])+1
+                             spacer_start <- amplicon_start + 20+4-1 # account for spacer length and antitag
+                             selection <- subset(subset_2, start>=spacer_start & start<=amplicon_stop)
+                             if(nrow(selection)>0) {
+                               return(data.frame(selection,
+                                                 amplicon=amplicons$amplicon[x],
+                                                 FW=amplicons$FW[x],
+                                                 FW_seq=amplicons$FW_seq[x],
+                                                 REV=amplicons$REV[x],
+                                                 REV_seq=amplicons$REV_seq[x]))
+                             } else {
+                               return(NULL)
+                             }
+                           })
+subset_3 <- do.call(rbind, subset_3)
+
+# output spacers
+# write.table(subset_3, quote=F, row.names=F, sep="\t",
+#             file=paste0("~/cas13a_guide_design/isothermal_amplification/guides_amplicon_overlap_minusStrand", 
+#                         format(Sys.time(), "%Y%m%d"), ".txt"))
+
+# diagnostic plot
+subset_3$amplicon_label <- gsub(":.*", "", subset_3$amplicon) 
+genome_breaks <- seq(from=1, to=30000, by=300)
+axis_scale <- max(abundance$coverage)/max(summary(cut(subset_3$start, breaks=genome_breaks)))
+abundance$scaled_coverage <- abundance$coverage / axis_scale
+plot_position <- ggplot() + 
+  geom_histogram(data=subset_3, aes(start), binwidth=300, fill=2, col=2, alpha=0.5) + xlim(0, 30000) + 
+  geom_area(data=abundance, aes(x=bin, y=scaled_coverage), fill=1, col=1, alpha=0.2) +
+  scale_y_continuous(name="guide", sec.axis=sec_axis(~(axis_scale)*., name="virus")) +
+  theme_bw() + ggtitle("Genomic position", subtitle=paste(length(unique(subset_3$start)), "spacers")) + 
+  xlab("position") + ylab("# spacers") +
+  theme(axis.title.y=element_text(color=1), axis.title.y.left = element_text(color=2))
+plot_sensitivity <- ggplot(subset_3, aes(x=amplicon_label, y=sensitivity_01, col=amplicon_label)) + theme_bw() + 
+  geom_jitter(alpha=0.5, size=2, height=0.005, width=0.4) + ggtitle("Sensitivity (allowing 1 mismatch)") + 
+  xlab("") + ylab("") + theme(legend.position="none") + scale_x_discrete(labels=summary(as.factor(subset_3$amplicon_label)))
+plot_count <- ggplot(subset_3, aes(amplicon_label, fill=amplicon_label)) + theme_bw() + geom_bar() +
+  theme(axis.text.x=element_text(angle=90), legend.position="none") + xlab("")
+plot_position / plot_sensitivity / plot_count + plot_layout(heights=c(1,2,1))
+```
+
+```{r output}
+subset_4 <- aggregate(amplicon_label~start+target+spacer+strand, data=subset_3, FUN=paste, collapse=", ")
+subset_4 <- subset_4[order(subset_4$start),]
+subset_4$region <- NA
+for(x in seq.int(nrow(subset_4))) {
+  if(x == 1) {
+    region <- 1
+  } else {
+    if(subset_4$start[x] >= (subset_4$start[x-1]+10)) {
+      region <- region+1
+    }
+  }
+  subset_4$region[x] <- region
+}
+
+knitr::kable(subset_4, row.names=F)
+```
