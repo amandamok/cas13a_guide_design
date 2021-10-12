@@ -1,4 +1,4 @@
-# SARS-CoV-2_guidedesign
+# Cas13a guide design
 
 ## Data needed
 - reference genome sequence (.fa)
