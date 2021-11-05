@@ -496,6 +496,7 @@ plot_coefs <- function(fit_obj, best_alpha, best_lambda) {
       annotate("text", x=40.5, y=max(coefs$value)+1.5, 
                label="cis-cleavage neighborhood", col="white")
   }
+  return(coef_plot)
 }
 
 plot_fold_fits <- function(input_data, fold_ids, best_alpha, best_lambda) {
