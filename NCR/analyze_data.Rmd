@@ -2609,7 +2609,7 @@ model8_fold_plot <- plot_fold_fits(regression_data_onehot, fold_ids,
                                    model8$MSE$best_alpha, model8$MSE$best_lambda)
 
 model8_plot <- ((model8$MSE$mse_plot + 
-                   ggtitle("Model 2", subtitle="rate ~ sequence (+/- 5nt)")) +
+                   ggtitle("Model 8", subtitle="rate ~ sequence (+/- 5nt) + cis cleavage neighborhood")) +
                   (model8$MSE$best_r2_plot) +
                   (model8$MSE$best_pearson_r_plot)) / 
   (model8_coef_plot + ggtitle("", subtitle="") + 
