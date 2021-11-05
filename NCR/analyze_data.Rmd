@@ -18,6 +18,7 @@ library(ggseqlogo)
 library(glmnet)
 library(randomForest)
 library(emmeans)
+library(prodlim)
 
 knitr::opts_chunk$set(echo=F, cache=T, fig.width=8)
 
@@ -556,6 +557,17 @@ plot_fold_fits <- function(input_data, fold_ids, best_alpha, best_lambda) {
                        })
   return(wrap_plots(fold_plots, nrow=1))
 }
+
+label_p <- function(pvalues, thresholds=c(0.05, 0.01, 0.001)) {
+  # pvalues: numeric vector of p-values
+  # thresholds: numeric vector with length = 3
+    ## >= 1st value: ns
+    ## between 1st and 2nd value: *
+    ## between 2nd and 3rd value: **
+    ## lower than 3rd value: ***
+  as.character(cut(pvalues, breaks=c(0, sort(thresholds), 1), 
+                   labels=c("***", "**", "*", "ns")))
+}
 ```
 
 # Data
@@ -641,7 +653,7 @@ guide_features$class <- factor(guide_features$class, levels=c("good", "Ott", "ba
 ```
 
 ```{r guide_features_gRNA_MFE}
-all_guides <- read.table(file.path(here(), "outputs", "cas13a_20nt",
+all_guides <- read.table(file.path(here(), "outputs", "covid", "cas13a_20nt",
                          "cas13a_results_summary.txt"), header=T)
 guide_features$gRNA_MFE <- all_guides$gRNA_MFE[match(guide_features$start,
                                                      all_guides$start)]
@@ -649,9 +661,9 @@ guide_features$gRNA_MFE <- all_guides$gRNA_MFE[match(guide_features$start,
 
 ```{r guide_features_crRNA_structure}
 repeat_sequence <- "uagaccaccccaaaaaugaaggggacuaaaac"
-RNAfold_20nt <- read.table(file.path(here(), "outputs", "cas13a_20nt", 
+RNAfold_20nt <- read.table(file.path(here(), "outputs", "covid", "cas13a_20nt", 
                                      "score_RNAfold_crRNAs.txt"), header=T)
-RNAfold_28nt <- read.table(file.path(here(), "outputs", "cas13a_28nt",
+RNAfold_28nt <- read.table(file.path(here(), "outputs", "covid", "cas13a_28nt",
                                      "score_RNAfold_crRNAs.txt"), header=T)
 guide_features$structure <- sapply(seq(nrow(guide_features)),
                                    function(x) {
@@ -831,24 +843,28 @@ viral_genome$invivo <- ifelse(rowSums(viral_genome_invivo, na.rm=T) >= 2,
 ```{r guide_downstream_features}
 U_window <- 30
 guide_features$downstream_U <- sapply(seq(nrow(guide_features)),
-                                      function(x) {
-                                        region_start <- guide_features$start[x] +
-                                          nchar(guide_features$spacer[x])
-                                        region_end <- region_start + U_window - 1
+                                      function(x) { # downstream wrt spacer
+                                        # region_start <- guide_features$start[x] +
+                                        #   nchar(guide_features$spacer[x])
+                                        # region_end <- region_start + U_window - 1
+                                        region_end <- guide_features$start[x] - 1
+                                        region_start <- region_end - U_window + 1
                                         tmp_region <- viral_genome[region_start:region_end,]
                                         mean(tmp_region$base == "U")
                                       })
 guide_features$downstream_unstructured_U <- sapply(seq(nrow(guide_features)),
-                                                   function(x) {
-                                                     region_start <- guide_features$start[x] +
-                                                       nchar(guide_features$spacer[x])
-                                                     region_end <- region_start + U_window - 1
+                                                   function(x) { # downstream wrt spacer
+                                                     # region_start <- guide_features$start[x] +
+                                                     #   nchar(guide_features$spacer[x])
+                                                     # region_end <- region_start + U_window - 1
+                                                     region_end <- guide_features$start[x] - 1
+                                                     region_start <- region_end - U_window + 1
                                                      tmp_region <- viral_genome[region_start:region_end,]
                                                      mean((tmp_region$base == "U") &
                                                             (tmp_region$invivo == "unstructured"))
                                                    })
 guide_features$U_context <- sapply(seq(nrow(guide_features)),
-                                   function(x) {
+                                   function(x) { # upstream/downstream wrt spacer
                                      upstream_start <- guide_features$start[x] - 1
                                      upstream_end <- upstream_start - U_window + 1
                                      downstream_start <- guide_features$start[x] + 
@@ -887,6 +903,27 @@ guide_features$antitag_label <- sapply(guide_features$antitag,
                                        })
 guide_features$antitag_label <- factor(guide_features$antitag_label,
                                        levels=c("A", "C", "U", "G", "GU", "GUU"))
+```
+
+```{r guide_cis_cleavage_site}
+cis_cleavage_start <- 20
+cis_cleavage_window <- 20
+guide_features$downstream_U <- sapply(seq(nrow(guide_features)),
+                                      function(x) {
+                                        region_start <- guide_features$start[x] +
+                                          nchar(guide_features$spacer[x])
+                                        region_end <- region_start + U_window - 1
+                                        tmp_region <- viral_genome[region_start:region_end,]
+                                        mean(tmp_region$base == "U")
+                                      })
+guide_features$cis_cleavage_site <- sapply(seq(nrow(guide_features)),
+                                           function(x) {
+                                             region_end <- guide_features$start[x] - 1 - 
+                                               cis_cleavage_start + cis_cleavage_window/2
+                                             region_start<- region_end - cis_cleavage_window + 1
+                                             tmp_region <- viral_genome[region_start:region_end,]
+                                             paste(tmp_region$base, collapse="")
+                                           })
 ```
 
 ### Correlation between annotations: over entire spacer target
@@ -1161,9 +1198,14 @@ plate_data$time <- plate_data$time/60 # convert from seconds to minutes
 ```
 
 ```{r background_subtract}
-## background subtract: empty wells
-background_empty <- mean(subset(plate_data, is.na(sample))$signal, na.rm=T)
-plate_data$signal_bkgdSubtract <- plate_data$signal - background_empty
+# background_empty <- mean(subset(plate_data, is.na(sample))$signal, na.rm=T)
+# plate_data$signal_bkgdSubtract <- plate_data$signal - background_empty
+background_empty <- aggregate(signal ~ cycle_number + plate, 
+                              subset(plate_data, is.na(sample)), 
+                              mean, na.rm=T)
+plate_data$background <- background_empty$signal[row.match(plate_data[, c("cycle_number", "plate")],
+                                                           background_empty[, c("cycle_number", "plate")])]
+plate_data$signal_bkgdSubtract <- with(plate_data, signal - background)
 plate_data <- subset(plate_data, !is.na(sample))
 plate_data$activator <- droplevels(plate_data$activator)
 ```
@@ -1575,9 +1617,9 @@ knitr::include_graphics(path.expand(file.path(structure_dir, "NCR_1351.png")))
 
 ```{r rate_by_class, fig.height=8}
 (ggplot_violin(guide_rate, x_var="class") +
-   guides(fill=F) + theme(axis.text.x=element_text(angle=90, hjust=1))) / 
+   guides(fill="none") + theme(axis.text.x=element_text(angle=90, hjust=1))) / 
   (ggplot_violin(guide_rate_100fM, x_var="class", y_lab="100fM rate (RFU/min)") + 
-     guides(fill=F) + theme(axis.text.x=element_text(angle=90, hjust=1)))
+     guides(fill="none") + theme(axis.text.x=element_text(angle=90, hjust=1)))
 ```
 
 ### Background (RNP-only) rate by guide secondary structure
@@ -3184,7 +3226,7 @@ Figure 1A (data): guide design pipeline
 
 ```{r figure_1A}
 # all guides targeting SARS-CoV-2: n=29,880
-design_data <- read.table(file.path(here(), "outputs", "cas13a_20nt", 
+design_data <- read.table(file.path(here(), "outputs", "covid", "cas13a_20nt", 
                                     "cas13a_results_summary.txt")) 
 # filter out 4nt of antitag complementarity: n=29,658
 design_data <- subset(design_data, antitag != "GUUU")
@@ -3463,6 +3505,182 @@ t.test(x=subset(guide_rate$Estimate,
                 guide_rate$antitag_label %in% c("GU", "GUU")),
        alternative="greater")
 ```
+
+Figure 4C: LOD with Cas13-Csm6 tandem assay
+
+```{r figure_4C}
+# load platemap
+findit_platemap <- xlsx::read.xlsx(file.path(project_dir,
+                                             "supplementary_data",
+                                             "FIND-IT_multiplex_platemap.xlsx"),
+                                   sheetName="Variants Platemap",
+                                   rowIndex=2:10, colIndex=2:15, header=T)
+findit_platemap <- data.frame(plate_row=rep(LETTERS[seq(nrow(findit_platemap))],
+                                            times=ncol(findit_platemap)),
+                              plate_col=rep(seq(ncol(findit_platemap)),
+                                            each=nrow(findit_platemap)),
+                              multiplex=unlist(findit_platemap))
+findit_platemap <- subset(findit_platemap, !is.na(multiplex))
+findit_platemap$well <- with(findit_platemap, paste0(plate_row, plate_col))
+findit_platemap$multiplex <- paste(findit_platemap$multiplex, "crRNAs")
+findit_platemap$conc <- ""
+findit_conc <- c(125, 63, 31, 16, 8, 4, 0)
+for(x in seq_along(findit_conc)) {
+  findit_platemap$conc[findit_platemap$plate_col %in% c(2*x-1, 2*x)] <- findit_conc[x]
+}
+
+# load data
+findit_data <- xlsx::read.xlsx(file.path(project_dir,
+                                         "supplementary_data",
+                                         "FIND-IT_multiplex.xlsx"),
+                               sheetName="Result sheet",
+                               rowIndex=82:142)
+findit_data <- lapply(seq(nrow(findit_platemap)),
+                   function(x) {
+                     data.frame(time=findit_data$Time..s.,
+                                RFU=findit_data[[findit_platemap$well[x]]],
+                                well=findit_platemap$well[x],
+                                multiplex=findit_platemap$multiplex[x],
+                                conc=findit_platemap$conc[x])
+                   })
+findit_data <- do.call(rbind, findit_data)
+findit_data$time <- round(findit_data$time/60)
+findit_data$RFU_norm_6 <- sapply(seq(nrow(findit_data)),
+                               function(x) {
+                                 tmp <- subset(findit_data,
+                                               time == 6 & 
+                                                 well == findit_data$well[x])
+                                 return(findit_data$RFU[x] / tmp$RFU)
+                               })
+findit_data$RFU_norm_10 <- sapply(seq(nrow(findit_data)),
+                               function(x) {
+                                 tmp <- subset(findit_data,
+                                               time == 10 & 
+                                                 well == findit_data$well[x])
+                                 return(findit_data$RFU[x] / tmp$RFU)
+                               })
+
+# ggplot(subset(findit_data, multiplex != "No Protein"),
+#        aes(x=time, y=RFU, col=factor(conc, levels=findit_conc))) +
+#   stat_summary(fun="mean", geom="line") + 
+#   stat_summary(fun="mean", geom="point", size=0.5) + 
+#   stat_summary(fun.data="mean_se", geom="errorbar") + 
+#   facet_grid(~factor(multiplex, levels=c("8 crRNAs", "32 crRNAs"))) + 
+#   theme_classic() + labs(col="")
+
+findit_detection_120 <- lapply(unique(findit_platemap$multiplex),
+                           function(tmp_pool) {
+                             do.call(rbind,
+                                     lapply(findit_conc[-length(findit_conc)],
+                                            function(tmp_conc) {
+                                              tmp_data <- subset(findit_data,
+                                                                 time %in% max(time) & 
+                                                                   multiplex==tmp_pool &
+                                                                   conc %in% c(tmp_conc, 0))
+                                              tmp_p <- t.test(subset(tmp_data, 
+                                                                     conc==tmp_conc)$RFU,
+                                                              subset(tmp_data,
+                                                                     conc==0)$RFU,
+                                                              alternative="greater")
+                                              tmp_p_norm_6 <- t.test(subset(tmp_data, 
+                                                                            conc==tmp_conc)$RFU_norm_6,
+                                                                     subset(tmp_data,
+                                                                            conc==0)$RFU_norm_6,
+                                                                     alternative="greater")
+                                              tmp_p_norm_10 <- t.test(subset(tmp_data, 
+                                                                             conc==tmp_conc)$RFU_norm_10,
+                                                                      subset(tmp_data,
+                                                                             conc==0)$RFU_norm_10,
+                                                                      alternative="greater")
+                                              return(data.frame(multiplex=tmp_pool,
+                                                                conc=tmp_conc,
+                                                                p=tmp_p$p.value,
+                                                                p_norm_6=tmp_p_norm_6$p.value,
+                                                                p_norm_10=tmp_p_norm_10$p.value))
+                                            }))
+                           })
+findit_detection_120 <- do.call(rbind, findit_detection_120)
+findit_detection_120$text <- label_p(findit_detection_120$p)
+findit_detection_120$text_norm_6 <- label_p(findit_detection_120$p_norm_6)
+findit_detection_120$text_norm_10 <- label_p(findit_detection_120$p_norm_10)
+findit_detection_120$text_height <- sapply(seq(nrow(findit_detection_120)),
+                                       function(x) {
+                                         tmp_data <- subset(findit_data,
+                                                            multiplex==findit_detection_120$multiplex[x] &
+                                                              conc==findit_detection_120$conc[x] & 
+                                                              time==max(time))
+                                         return(mean(tmp_data$RFU_norm_10))
+                                       })
+
+findit_detection_30 <- lapply(unique(findit_platemap$multiplex),
+                              function(tmp_pool) {
+                                do.call(rbind,
+                                        lapply(findit_conc[-length(findit_conc)],
+                                               function(tmp_conc) {
+                                                 tmp_data <- subset(findit_data,
+                                                                    time %in% 30 & 
+                                                                      multiplex==tmp_pool &
+                                                                      conc %in% c(tmp_conc, 0))
+                                                 tmp_p <- t.test(subset(tmp_data, 
+                                                                        conc==tmp_conc)$RFU,
+                                                                 subset(tmp_data,
+                                                                        conc==0)$RFU,
+                                                                 alternative="greater")
+                                                 tmp_p_norm_6 <- t.test(subset(tmp_data, 
+                                                                               conc==tmp_conc)$RFU_norm_6,
+                                                                        subset(tmp_data,
+                                                                               conc==0)$RFU_norm_6,
+                                                                        alternative="greater")
+                                                 tmp_p_norm_10 <- t.test(subset(tmp_data, 
+                                                                                conc==tmp_conc)$RFU_norm_10,
+                                                                         subset(tmp_data,
+                                                                                conc==0)$RFU_norm_10,
+                                                                         alternative="greater")
+                                                 return(data.frame(multiplex=tmp_pool,
+                                                                   conc=tmp_conc,
+                                                                   p=tmp_p$p.value,
+                                                                   p_norm_6=tmp_p_norm_6$p.value,
+                                                                   p_norm_10=tmp_p_norm_10$p.value))
+                                               }))
+                              })
+findit_detection_30 <- do.call(rbind, findit_detection_30)
+findit_detection_30$text <- label_p(findit_detection_30$p)
+findit_detection_30$text_norm_6 <- label_p(findit_detection_30$p_norm_6)
+findit_detection_30$text_norm_10 <- label_p(findit_detection_30$p_norm_10)
+findit_detection_30$text_height <- sapply(seq(nrow(findit_detection_30)),
+                                          function(x) {
+                                            tmp_data <- subset(findit_data,
+                                                               multiplex==findit_detection_30$multiplex[x] &
+                                                                 conc==findit_detection_30$conc[x] & 
+                                                                 time==30)
+                                            return(mean(tmp_data$RFU_norm_10))
+                                          })
+
+findit_2h <- ggplot(subset(findit_data, time == max(time)), 
+       aes(x=factor(conc, levels=findit_conc), y=RFU_norm_10,
+           fill=factor(conc, levels=findit_conc))) + 
+  stat_summary(fun="mean", geom="bar", width=0.75) + 
+  stat_summary(fun.data="mean_se", geom="errorbar", width=0.5) + 
+  theme_classic(base_size=10) + labs(fill="") + xlab("") + 
+  facet_grid(~factor(multiplex, levels=c("8 crRNAs", "32 crRNAs")),
+             scales="free_x", space="free_x") + 
+  geom_text(data=findit_detection_120, size=3,
+            aes(y=text_height + 0.25, label=text_norm_10)) + 
+  xlab(expr(copies/mu*L)) + ylab(expr(RFU / RFU[10]))
+
+findit_30min <- ggplot(subset(findit_data, time == 30), 
+       aes(x=factor(conc, levels=findit_conc), y=RFU_norm_10,
+           fill=factor(conc, levels=findit_conc))) + 
+  stat_summary(fun="mean", geom="bar", width=0.75) + 
+  stat_summary(fun.data="mean_se", geom="errorbar", width=0.5) + 
+  theme_classic(base_size=10) + labs(fill="") + xlab("") + 
+  facet_grid(~factor(multiplex, levels=c("8 crRNAs", "32 crRNAs")),
+             scales="free_x", space="free_x") + 
+  geom_text(data=findit_detection_30, size=3,
+            aes(y=text_height + 0.05, label=text_norm_10)) + 
+  xlab(expr(copies/mu*L)) + ylab(expr(RFU / RFU[10]))
+```
+
 
 Figure 4D: robustness to genetic variants
 
