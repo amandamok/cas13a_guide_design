@@ -8,7 +8,7 @@
 ## Need to install:
 - [bowtie](http://bowtie-bio.sourceforge.net/index.shtml)
 - [RNAfold](https://www.tbi.univie.ac.at/RNA/RNAfold.1.html)
-- [R](https://www.r-project.org/), with libraries: optparse, here, Biostrings
+- [R](https://www.r-project.org/), with libraries: optparse, here, Biostrings, parallel, doParallel
 
 ## Workflow (using `scripts`)
 
