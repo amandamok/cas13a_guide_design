@@ -10,6 +10,8 @@ option_list <- list(make_option(c("-g", "--genome"), type="character", default="
                                 help="Cas enzyme type", metavar="character"),
                     make_option(c("-m", "--mismatch"), type="character", default=1,
                                 help="number of mismatches allowed", metavar="integer"),
+                    make_option(c("-n", "--num_human_CoV"), type="character", default=6,
+                                help="number of other human coronaviruses", metavar="character"),
                     make_option(c("-o", "--out"), type="character", default=".",
                                 help="output directory", metavar="character"),
                     make_option(c("-b", "--bowtie"), type="character", default=NULL,
@@ -18,9 +20,13 @@ opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
 bowtie_path <- system("which bowtie", intern=T)
-if(length(bowtie_path)==0 & is.null(opt$bowtie)) {
-  cat("ERROR: need to supply path to bowtie")
-  q(save="no")
+if(is.null(opt$bowtie)) {
+  opt$bowtie <- bowtie_path
+} else {
+  if(length(bowtie_path)==0) {
+    cat("ERROR: need to supply path to bowtie")
+    q(save="no")
+  }
 }
 
 cat("\nCalculating specificity against other human coronaviruses\n")
@@ -67,9 +73,9 @@ if(length(alignment)==0) {
                               }
                             })
 }
-num_human_CoV <- as.numeric(system(paste("grep ^'>'", file.path(here(), "ref_data", paste0(opt$genome, ".fa")),
-                                         "| wc -l"), intern=T))
-specificity <- (num_human_CoV - num_CoV_aligned) / num_human_CoV
+# num_human_CoV <- as.numeric(system(paste("grep ^'>'", file.path(here(), "ref_data", paste0(opt$genome, ".fa")),
+#                                          "| wc -l"), intern=T))
+specificity <- (opt$num_human_CoV - num_CoV_aligned) / num_human_CoV
 
 # output specificity score
 write.table(data.frame(segment=windows$segment,

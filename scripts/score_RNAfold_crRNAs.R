@@ -5,35 +5,50 @@ library(optparse)
 
 option_list <- list(make_option(c("-e", "--enzyme"), type="character", default=NULL, # "Cas13a" or "Cas12"
                                 help="Cas enzyme type", metavar="character"),
+                    make_option(c("-c", "--cas_repeat"), type="character", 
+                                default=toupper("uagaccaccccaaaaaugaaggggacuaaaac"),
+                                help="crRNA repeat sequence", metavar="character"),
+                    make_option(c("-s", "--spacer"), type="character", default=NULL,
+                                help="example `good` spacer", metavar="character"),
                     make_option(c("-o", "--out"), type="character", default=".",
-                                help="output directory", metavar="character"))
+                                help="output directory", metavar="character"),
+                    make_option(c("-r", "--rnafold"), type="character", default=NULL,
+                                help="path to rnafold", metavar="character"))
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
 cat("\nRNAfold score: crRNA structure\n")
 
-if(!("enzyme" %in% names(opt))) {
-  cat("\nNO ENZYME SPECIFIED\n")
-  q()
+rnafold_path <- system("which RNAfold", intern=T)
+if(is.null(opt$rnafold)) {
+  opt$rnafold <- rnafold_path
+} else {
+  if(length(rnafold_path)==0) {
+    cat("ERROR: need to supply path to rnafold")
+    q(save="no")
+  }
 }
 
 # establish repeat and guide sequences
-if(opt$enzyme == "Cas13a") {
-  # cas_repeat <- "UAG ACC AGC CCA AAA AUG AAG GGC ACU AAA AC" # from Gavin
-  # cas_repeat <- gsub(" ", "", cas_repeat)
-  cas_repeat <- toupper("uagaccaccccaaaaaugaaggggacuaaaac") # from Gavin
-  good_spacer <- "GCA GCG CCU CUU GCA ACG AU" # from Gavin
-  good_spacer <- gsub(" ", "", good_spacer)
-} else {
-  if(opt$enzyme == "Cas12") {
-    cas_repeat <- "aauuucuacuaaguguagau" # from Gavin
-    cas_repeat <- toupper(cas_repeat)
-    good_spacer <- "UCGAUGGGGAAACCUUACCCUCCAG" # from Creutzburg et al. NAR (2020) - Figure 1A
+if(!is.null(opt$spacer)) {
+  if(opt$enzyme == "Cas13a") {
+    # cas_repeat <- "UAG ACC AGC CCA AAA AUG AAG GGC ACU AAA AC" # from Gavin
+    # cas_repeat <- gsub(" ", "", cas_repeat)
+    # cas_repeat <- toupper("uagaccaccccaaaaaugaaggggacuaaaac") # from Gavin
+    cas_repeat <- gsub(" ", "", toupper(opt$cas_repeat))
+    good_spacer <- "GCA GCG CCU CUU GCA ACG AU" # from Gavin
+    good_spacer <- gsub(" ", "", good_spacer)
+  } else {
+    if(opt$enzyme == "Cas12") {
+      # cas_repeat <- toupper("aauuucuacuaaguguagau") # from Gavin
+      cas_repeat <- gsub(" ", "", toupper(opt$cas_repeat))
+      good_spacer <- "UCGAUGGGGAAACCUUACCCUCCAG" # from Creutzburg et al. NAR (2020) - Figure 1A
+    }
   }
 }
 
 # fold good crRNA
-good_guide_structure <- system(paste("echo", paste0(cas_repeat, good_spacer), "| /usr/bin/RNAfold --noPS"), intern=T)[2]
+good_guide_structure <- system(paste("echo", paste0(cas_repeat, good_spacer), "| ", rnafold_path, "--noPS"), intern=T)[2]
 good_guide_structure <- strsplit(good_guide_structure, split=" ")[[1]][1]
 hairpin_structure <- substr(good_guide_structure, start=1, stop=nchar(cas_repeat))
 
@@ -42,7 +57,7 @@ cat("- computing folding energies (crRNAs)\n")
 spacers <- readLines(file.path(opt$out, "spacers.txt"))
 crRNA_seq <- paste0(cas_repeat, spacers)
 writeLines(crRNA_seq, con=file.path(opt$out, "crRNAs.txt"))
-system(paste0("/usr/bin/RNAfold -i ", file.path(opt$out, "crRNAs.txt"),
+system(paste0(rnafold_path, " -i ", file.path(opt$out, "crRNAs.txt"),
               " --noPS --outfile=crRNAs_RNAfold.txt"))
 
 # read in RNAfold output: windows

@@ -12,6 +12,10 @@ option_list <- list(make_option(c("-g", "--genome"), type="character",
                     make_option(c("-i", "--input"), type="character",
                                 default=file.path(here(), "ref_data/gisaid_cov2020_sequences.fasta"),
                                 help="SARS-CoV-2 .fasta sequences", metavar="character"),
+                    make_option(c("-n", "--num_cores"), type="integer", default=1, 
+                                help="number of cores to parallelize over", metavar="character"),
+                    make_option(c("-c", "--chunk_size"), type="integer", default=10,
+                                help="number of genomes to align at a time", metavar="character"),
                     make_option(c("-o", "--output"), type="character",
                                 default=file.path(here(), "ref_data", "gisaid_cov2020_alignment.txt"),
                                 help="output filepath", metavar="character"))
@@ -24,8 +28,8 @@ wuhCor1 <- readDNAStringSet(opt$genome)
 strains <- readDNAStringSet(opt$input)
 
 # align strains to wuhCor1
-num_cores <- 15
-chunk_size <- 10
+num_cores <- opt$num_cores
+chunk_size <- opt$chunk_size
 cl <- parallel::makeCluster(num_cores)
 doParallel::registerDoParallel(cl)
 strains_chunk <- split(strains, ceiling(seq_along(strains)/chunk_size))

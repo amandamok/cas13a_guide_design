@@ -8,7 +8,7 @@ library(seqinr, quietly=T)
 option_list <- list(make_option(c("-i", "--input"), type="character", default=NULL,
                                 help="filepath to input alignment file", metavar="character"),
                     make_option(c("-t", "--type"), type="character", default=NULL,
-                                help="input type (CLUSTAL or FASTA)", metavar="character"),
+                                help="input type (`clustal` or `fasta`)", metavar="character"),
                     make_option(c("-n", "--name"), type="character", default="consensus",
                                 help="name of sequence", metavar="character"),
                     make_option(c("-o", "--output"), type="character", default="consensus.fasta",
@@ -18,6 +18,11 @@ opt <- parse_args(opt_parser)
 
 if(is.null(opt$type)) {
   cat("\nERROR: input file type not specified")
+  q(save="no")
+}
+
+if(!(opt$type %in% c("clustal", "fasta"))) {
+  cat("\nERROR: input file type is not recognized")
   q(save="no")
 }
 

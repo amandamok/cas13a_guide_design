@@ -58,7 +58,6 @@ windows <- lapply(seq_along(genome_seq),
                                                }))
                   })
 windows <- data.frame(do.call(rbind, windows), stringsAsFactors=F)
-opposite_strand <- ifelse(opt$genome_strand == "+", "-", "+")
 if(opt$enzyme == "Cas13a") {
   if(opt$strand == opt$genome_strand) {
     windows$spacer <- gsub("T", "U", as.character(reverseComplement(DNAStringSet(windows$target))))
@@ -66,7 +65,7 @@ if(opt$enzyme == "Cas13a") {
   } else {
     windows$spacer <- gsub("T", "U", windows$target)
     windows$target <- as.character(reverseComplement(DNAStringSet(windows$target)))
-    windows$strand <- opposite_strand
+    windows$strand <- opt$strand
   }
 } else { # Cas12, add spacers that target minus strand
   windows_minusStrand <- windows

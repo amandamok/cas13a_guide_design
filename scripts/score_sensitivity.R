@@ -1,5 +1,5 @@
 ##################################################
-### calculating sensitivity to SARS-CoV-2 strains
+### calculate sensitivity
 
 library(optparse)
 library(here)
@@ -9,7 +9,7 @@ option_list <- list(make_option(c("-g", "--genome"), type="character",
                                 help="genome .fa file name", metavar="character"),
                     make_option(c("-i", "--input"), type="character",
                                 default=file.path(here(), "ref_data/gisaid_cov2020_alignment.txt"),
-                                help="SARS-CoV-2 .fasta sequences", metavar="character"),
+                                help="pairwise alignments of sampled genomes to input genome", metavar="character"),
                     make_option(c("-w", "--window"), type="integer", default=20,
                                 help="window size", metavar="integer"),
                     make_option(c("-o", "--out"), type="character", default=".", 
@@ -17,7 +17,7 @@ option_list <- list(make_option(c("-g", "--genome"), type="character",
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
-cat("\nCalculating sensitivity to SARS-CoV-2 strains\n")
+cat("\nCalculating sensitivity to sampled genomes\n")
 
 # read in genome sequence, process into continuous string
 genome_seq <- readLines(opt$genome)
@@ -25,7 +25,7 @@ genome_seq <- genome_seq[!grepl(">", genome_seq)]
 genome_seq <- paste0(genome_seq, collapse="")
 genome_seq <- strsplit(genome_seq, split="")[[1]]
 
-# align SARS-CoV-2 genomes to wuhCor1
+# align sampled genomes to target genome
 if(!file.exists(opt$input)) {
   system(paste("Rscript", file.path(here(), "scripts/generate_pairwise_alignments.R")))
 } else {
@@ -58,13 +58,13 @@ alignment_scores <- data.frame(t(sapply(window_starts,
                                           mismatch_2 <- sum(tmp_num_mismatch>=2)
                                           return(c(mismatch_0, mismatch_1, mismatch_2))
                                         })))
-colnames(alignment_scores) <- paste0("gisaid_mismatch_", 0:2)
+colnames(alignment_scores) <- paste0("mismatch_", 0:2)
 
 # output alignment scores
 write.table(data.frame(start=window_starts,
                        strand=read.table(file.path(opt$out, "windows.txt"), header=T)$strand,
                        alignment_scores,
-                       sensitivity_0=alignment_scores$gisaid_mismatch_0/nrow(strains),
-                       sensitivity_01=(alignment_scores$gisaid_mismatch_0 + alignment_scores$gisaid_mismatch_1)/nrow(strains)),
-            file=file.path(opt$out, "score_gisaid_SARS-CoV-2.txt"),
+                       sensitivity_0=alignment_scores$mismatch_0/nrow(strains),
+                       sensitivity_01=(alignment_scores$mismatch_0 + alignment_scores$mismatch_1)/nrow(strains)),
+            file=file.path(opt$out, "score_sensitivity.txt"),
             quote=F, sep="\t", row.names=F)

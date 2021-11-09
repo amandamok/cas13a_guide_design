@@ -1,5 +1,5 @@
 ##################################################
-### count bowtie alignments
+### calculate sensitivity with multisegment genome
 
 library(optparse)
 library(here)
@@ -10,6 +10,8 @@ option_list <- list(make_option(c("-f", "--file"), type="character", default=NUL
                                 help="filepath header to alignment files", metavar="integer"),
                     make_option(c("-t", "--type"), type="character", default=NULL,
                                 help="input file"),
+                    make_option(c("-s", "--segments"), type="integer", default=8,
+                                help="number of segments in input genome", metavar="integer"),
                     make_option(c("-m", "--mismatch"), type="character", default=1,
                                 help="number of mismatches allowed", metavar="integer"),
                     make_option(c("-w", "--window"), type="integer", default=20,
@@ -19,17 +21,12 @@ option_list <- list(make_option(c("-f", "--file"), type="character", default=NUL
 opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
-if(is.null(opt$file %in% c("influenzaA", "influenzaB", "influenzaAB"))) {
-  cat("\nERROR: input filepath headers not specified")
-  q(save="no")
-}
-
 if(is.null(opt$type)) {
   cat("\nERROR: input file type not specified")
   q(save="no")
 }
 
-cat("\nCalculating sensitivity to influenza strains\n")
+cat("\nCalculating sensitivity to sampled genomes\n")
 
 calculate_sensitivity <- function(alignment, consensus_seq, consensus_indices,
                                   window_start, mismatch=1, window_size=20) {
@@ -72,13 +69,13 @@ calculate_sensitivity <- function(alignment, consensus_seq, consensus_indices,
 
 # load alignments
 if(opt$type=="clustal") {
-  alignments <- lapply(1:8,
+  alignments <- lapply(1:opt$segments,
                        function(x) {
                          fname <- paste0(opt$file, x, ".aln")
                          seqinr::read.alignment(fname, format="clustal")
                        })
 } else {
-  alignments <- lapply(1:8,
+  alignments <- lapply(1:opt$segments,
                        function(x) {
                          fname <- paste0(opt$file, x, ".fasta")
                          Biostrings::readDNAStringSet(fname)
