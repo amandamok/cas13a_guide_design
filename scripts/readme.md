@@ -23,6 +23,7 @@ Generate all possible target windows from input target genome.
 - `--input, -i`: file path to target sequence (FASTA file format)
 - `--window, -w`: size of target window (default = 20nt)
 - `--enzyme, -e`: Cas enzyme for detection; currently only supports `Cas13a` or `Cas12`
+- `--pfs_length, -p`: length of PFS/PAM sequence to evaluate (default = 4nt)
 - `--genome-strand, -g`: whether input sequence is `+` or `-` strand
 - `--strand, -s`: whether to target `+` or `-` strand
 - `--out, -o`: file path to write output file

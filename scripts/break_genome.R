@@ -12,6 +12,8 @@ option_list <- list(make_option(c("-i", "--input"), type="character",
                                 help="window size", metavar="integer"),
                     make_option(c("-e", "--enzyme"), type="character", default=NULL, # "Cas13a" or "Cas12"
                                 help="Cas enzyme type", metavar="character"),
+                    make_option(c("-p", "--pfs_length"), type="integer", default=4,
+                                help="length of PFS/PAM to evaluate", metavar="integer"),
                     make_option(c("-g", "--genome_strand", type="character", default="+",
                                   help="strandedness of viral genome", metavar="character")),
                     make_option(c("-s", "--strand"), type="character", default="+",
