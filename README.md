@@ -12,6 +12,8 @@
 
 ## Workflow (using `scripts`)
 
+[Documentation](scripts/readme.md)
+
 1. Break reference genome into windows of 20nt: `break_genome.R`
 - need reference genome .fa file
 
