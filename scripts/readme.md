@@ -132,6 +132,8 @@ Calculate number of alignments to offtarget genome
 
 If `--enzyme Cas13a` is specified, `bowtie` will not search for reverse complement alignments.
 
+Requires bowtie index to be located in `/ref_data`
+
 OUTPUT:
 - `alignment_cts_<genome>.txt`: segment, position, strand, # alignments
 - `bowtie_<genome>_unmapped.fa`: FASTA file of unaligned target windows
