@@ -46,6 +46,7 @@ Generate pairwise alignments of sampled genomes to target genome.
 - `--input, -i`: file path to sampled genomes (FASTA file format)
 - `--num_cores, -n`: number of cores to parallelize over (default n = 1)
 - `--chunk_size, -c`: number of sampled genomes to align at a time for parallelization (default c = 10)
+- `--align_type, -a`: alignment "type" argument for Biostrings::pairwiseAlignment() (default a = "global")
 - `--output, -o`: file path to write aligned sequences to
 
 OUTPUT:
