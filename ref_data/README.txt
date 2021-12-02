@@ -149,3 +149,6 @@ icSHAPE_sun_2021.xlsx: download from Sun (2021)
 influenza sequences downloaded from fludb.org
 influenzaA: all subtypes, human host
 influenzaB: human host
+
+gisaid_omicron_variants_20211201.fasta
+n = 309 viruses labeled "VOC Omicron GR/484A" from GISAID downloaded 1-dec-2021
