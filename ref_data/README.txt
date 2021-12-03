@@ -155,3 +155,6 @@ n = 309 viruses labeled "VOC Omicron GR/484A" from GISAID downloaded 1-dec-2021
 
 gisaid_omicron_variants_alignment.txt
 Rscript ../scripts/generate_pairwise_alignments.R -g NC_045512v2.fa -i gisaid_omicron_variants_20211201.fasta -n 10 -c 10 -a overlap -o gisaid_omicron_variants_alignment.txt
+
+gisaid_omicron_variants_minimap.paf
+minimap2 -cx asm5 --cs NC_045512v2.fa gisaid_omicron_variants_20211201.fasta > gisaid_omicron_variants_minimap.paf
