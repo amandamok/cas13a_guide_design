@@ -5,8 +5,8 @@ library(optparse)
 
 option_list <- list(make_option(c("-e", "--enzyme"), type="character", default=NULL, # "Cas13a" or "Cas12"
                                 help="Cas enzyme type", metavar="character"),
-                    make_option(c("-c", "--cas_repeat"), type="character", 
-                                default=toupper("uagaccaccccaaaaaugaaggggacuaaaac"),
+                    make_option(c("-c", "--cas_repeat"), type="character",
+                                default="uagaccaccccaaaaaugaaggggacuaaaac",
                                 help="crRNA repeat sequence", metavar="character"),
                     make_option(c("-s", "--spacer"), type="character", default=NULL,
                                 help="example `good` spacer", metavar="character"),
@@ -30,7 +30,7 @@ if(is.null(opt$rnafold)) {
 }
 
 # establish repeat and guide sequences
-if(!is.null(opt$spacer)) {
+if(is.null(opt$spacer)) {
   if(opt$enzyme == "Cas13a") {
     # cas_repeat <- "UAG ACC AGC CCA AAA AUG AAG GGC ACU AAA AC" # from Gavin
     # cas_repeat <- gsub(" ", "", cas_repeat)

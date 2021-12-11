@@ -50,7 +50,7 @@ windows <- lapply(seq_along(genome_seq),
                   function(x) {
                     segment_seq <- genome_seq[x]
                     num_windows <- nchar(segment_seq) - opt$window - 3
-                    data.frame(segment = names(genome_seq)[x],
+                    data.frame(segment = strsplit(names(genome_seq)[x], split=" ")[[1]][1],
                                start=seq.int(num_windows),
                                target = sapply(seq.int(num_windows),
                                                function(x) {
