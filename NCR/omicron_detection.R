@@ -128,7 +128,7 @@ guide_mutations <- lapply(seq(nrow(guides)),
                           function(x) {
                             tmp_guide <- guides$NCR.id[x]
                             tmp_start <- guides$start[x]
-                            tmp_end <- tmp_start + guides$width[x] - 1
+                            tmp_end <- tmp_start + guides$width[x] - 1 + 1 # add first position of anti-tag
                             num_mutated_positions <- sapply(omicron_mutations_common,
                                                             function(y) {
                                                               sum(y$position %in% seq(tmp_start, tmp_end))
