@@ -97,19 +97,17 @@ write.table(windows, file="human_actb_mRNA_summary.txt",
 # select guides -----------------------------------------------------------
 
 # starting: n = 1789
-# 1. crRNA: good secondary structure; avoid antitag G (n = 182)
-selected_windows <- subset(windows,
-                           has_crRNA_hairpin &
-                             crRNA_spacer_basepairs == 0 &
-                             !grepl("^G", antitag))
-# 2. sensitivity: avoid variant in dbSNP 153 common variants (n = 174)
-selected_windows <- subset(selected_windows,
-                           dbSNP155 == 0)
-# 3. specificty: avoid targeting other human coronaviruses or transcripts (n = 11)
-selected_windows <- subset(selected_windows,
-                           specificity == 1 &
-                             match_against_hg38 == 0)
+# 1. crRNA: avoid antitag G (n = 1338)
+selected_windows <- subset(windows, !grepl("^G", antitag))
+# 2. sensitivity: avoid variant in dbSNP 153 common variants (n = 1148)
+selected_windows <- subset(selected_windows, dbSNP155 == 0)
+# 3. specificty: avoid targeting other human coronaviruses or transcripts (n = 1148)
+selected_windows <- subset(selected_windows, specificity == 1)
+
+with(selected_windows, table(has_crRNA_hairpin, crRNA_spacer_basepairs))
 
 previous_set <- read.csv("../new_process_controls.csv")
-new_set <- subset(selected_windows, !(target %in% previous_set$target))
+new_set <- subset(subset(selected_windows,
+                         has_crRNA_hairpin & crRNA_spacer_basepairs==0),
+                  !(target %in% previous_set$target))
 ## new set targets 2 SNPs in dbSNP_153: rs7612 and rs11546906

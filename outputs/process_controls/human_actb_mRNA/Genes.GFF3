@@ -1,0 +1,26 @@
+##gff-version 3
+#!gff-spec-version 1.21
+#!processor NCBI annotwriter
+##sequence-region NG_007992.1 4482 8971
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?name=Homo+sapiens
+NG_007992.1	RefSeq	region	4482	8971	.	+	.	ID=NG_007992.1:1..10454;Name=7;chromosome=7;gbkey=Src;genome=genomic;map=7p22.1;mol_type=genomic DNA
+NG_007992.1	RefSeq	gene	5001	8454	.	+	.	ID=gene-ACTB;Dbxref=GeneID:60,HGNC:HGNC:132,MIM:102630;Name=ACTB;description=actin beta;gbkey=Gene;gene=ACTB;gene_biotype=protein_coding;gene_synonym=BRWS1,PS1TP5BP1
+NG_007992.1	RefSeq	exon	5001	5078	.	+	.	ID=id-ACTB-1;Parent=gene-ACTB;Dbxref=GeneID:60,HGNC:HGNC:132,MIM:102630;exon_number=1;gbkey=exon;gene=ACTB;inference=alignment:Splign:1.39.8;number=1
+NG_007992.1	RefSeq	exon	5939	6067	.	+	.	ID=id-ACTB-2;Parent=gene-ACTB;Dbxref=GeneID:60,HGNC:HGNC:132,MIM:102630;exon_number=2;gbkey=exon;gene=ACTB;inference=alignment:Splign:1.39.8;number=2
+NG_007992.1	RefSeq	exon	6202	6441	.	+	.	ID=id-ACTB-3;Parent=gene-ACTB;Dbxref=GeneID:60,HGNC:HGNC:132,MIM:102630;exon_number=3;gbkey=exon;gene=ACTB;inference=alignment:Splign:1.39.8;number=3
+NG_007992.1	RefSeq	exon	6883	7321	.	+	.	ID=id-ACTB-4;Parent=gene-ACTB;Dbxref=GeneID:60,HGNC:HGNC:132,MIM:102630;exon_number=4;gbkey=exon;gene=ACTB;inference=alignment:Splign:1.39.8;number=4
+NG_007992.1	RefSeq	exon	7417	7598	.	+	.	ID=id-ACTB-5;Parent=gene-ACTB;Dbxref=GeneID:60,HGNC:HGNC:132,MIM:102630;exon_number=5;gbkey=exon;gene=ACTB;inference=alignment:Splign:1.39.8;number=5
+NG_007992.1	RefSeq	exon	7711	8454	.	+	.	ID=id-ACTB-6;Parent=gene-ACTB;Dbxref=GeneID:60,HGNC:HGNC:132,MIM:102630;exon_number=6;gbkey=exon;gene=ACTB;inference=alignment:Splign:1.39.8;number=6
+NG_007992.1	RefSeq	mRNA	5001	8454	.	+	.	ID=rna-NM_001101.3;Parent=gene-ACTB;Dbxref=GeneID:60,LRG:t1,Genbank:NM_001101.3,HGNC:HGNC:132,MIM:102630;Name=NM_001101.3;gbkey=mRNA;gene=ACTB;product=actin beta;transcript_id=NM_001101.3
+NG_007992.1	RefSeq	exon	5001	5078	.	+	.	ID=exon-NM_001101.3-1;Parent=rna-NM_001101.3;Dbxref=GeneID:60,LRG:t1,Genbank:NM_001101.3,HGNC:HGNC:132,MIM:102630;gbkey=mRNA;gene=ACTB;product=actin beta;transcript_id=NM_001101.3
+NG_007992.1	RefSeq	exon	5939	6067	.	+	.	ID=exon-NM_001101.3-2;Parent=rna-NM_001101.3;Dbxref=GeneID:60,LRG:t1,Genbank:NM_001101.3,HGNC:HGNC:132,MIM:102630;gbkey=mRNA;gene=ACTB;product=actin beta;transcript_id=NM_001101.3
+NG_007992.1	RefSeq	exon	6202	6441	.	+	.	ID=exon-NM_001101.3-3;Parent=rna-NM_001101.3;Dbxref=GeneID:60,LRG:t1,Genbank:NM_001101.3,HGNC:HGNC:132,MIM:102630;gbkey=mRNA;gene=ACTB;product=actin beta;transcript_id=NM_001101.3
+NG_007992.1	RefSeq	exon	6883	7321	.	+	.	ID=exon-NM_001101.3-4;Parent=rna-NM_001101.3;Dbxref=GeneID:60,LRG:t1,Genbank:NM_001101.3,HGNC:HGNC:132,MIM:102630;gbkey=mRNA;gene=ACTB;product=actin beta;transcript_id=NM_001101.3
+NG_007992.1	RefSeq	exon	7417	7598	.	+	.	ID=exon-NM_001101.3-5;Parent=rna-NM_001101.3;Dbxref=GeneID:60,LRG:t1,Genbank:NM_001101.3,HGNC:HGNC:132,MIM:102630;gbkey=mRNA;gene=ACTB;product=actin beta;transcript_id=NM_001101.3
+NG_007992.1	RefSeq	exon	7711	8454	.	+	.	ID=exon-NM_001101.3-6;Parent=rna-NM_001101.3;Dbxref=GeneID:60,LRG:t1,Genbank:NM_001101.3,HGNC:HGNC:132,MIM:102630;gbkey=mRNA;gene=ACTB;product=actin beta;transcript_id=NM_001101.3
+NG_007992.1	RefSeq	CDS	5945	6067	.	+	0	ID=cds-NP_001092.1;Parent=rna-NM_001101.3;Dbxref=CCDS:CCDS5341.1,GeneID:60,LRG:p1,Genbank:NP_001092.1,HGNC:HGNC:132,MIM:102630;Name=NP_001092.1;gbkey=CDS;gene=ACTB;product=actin%2C cytoplasmic 1;protein_id=NP_001092.1
+NG_007992.1	RefSeq	CDS	6202	6441	.	+	0	ID=cds-NP_001092.1;Parent=rna-NM_001101.3;Dbxref=CCDS:CCDS5341.1,GeneID:60,LRG:p1,Genbank:NP_001092.1,HGNC:HGNC:132,MIM:102630;Name=NP_001092.1;gbkey=CDS;gene=ACTB;product=actin%2C cytoplasmic 1;protein_id=NP_001092.1
+NG_007992.1	RefSeq	CDS	6883	7321	.	+	0	ID=cds-NP_001092.1;Parent=rna-NM_001101.3;Dbxref=CCDS:CCDS5341.1,GeneID:60,LRG:p1,Genbank:NP_001092.1,HGNC:HGNC:132,MIM:102630;Name=NP_001092.1;gbkey=CDS;gene=ACTB;product=actin%2C cytoplasmic 1;protein_id=NP_001092.1
+NG_007992.1	RefSeq	CDS	7417	7598	.	+	2	ID=cds-NP_001092.1;Parent=rna-NM_001101.3;Dbxref=CCDS:CCDS5341.1,GeneID:60,LRG:p1,Genbank:NP_001092.1,HGNC:HGNC:132,MIM:102630;Name=NP_001092.1;gbkey=CDS;gene=ACTB;product=actin%2C cytoplasmic 1;protein_id=NP_001092.1
+NG_007992.1	RefSeq	CDS	7711	7854	.	+	0	ID=cds-NP_001092.1;Parent=rna-NM_001101.3;Dbxref=CCDS:CCDS5341.1,GeneID:60,LRG:p1,Genbank:NP_001092.1,HGNC:HGNC:132,MIM:102630;Name=NP_001092.1;gbkey=CDS;gene=ACTB;product=actin%2C cytoplasmic 1;protein_id=NP_001092.1
+###

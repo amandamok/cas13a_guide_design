@@ -117,3 +117,16 @@ selected_windows_bed <- subset(windows_bed,
                                windows_bed$guide_id %in% selected_windows$guide_id)
 write.table(selected_windows_bed, file="human_actb_selected.bed",
             quote=F, row.names=F, col.names=F, sep="\t")
+
+# check overlap w/ qRT-PCR amplicon ---------------------------------------
+
+pcr_amplicon <- seq(5529176, 5529360)
+rt_pcr <- subset(windows,
+                 sapply(windows$bed_chrStart,
+                        function(x) {
+                          any(seq(x, x+19) %in% pcr_amplicon)
+                        }))
+# n = 204 guides overlapping with qRT-PCR amplicon
+# all guides have specificity == 0, match_against_hg38 >= 5, dbSNP153 == 0
+rt_pcr <- subset(rt_pcr, !grepl("^G", antitag)) # n = 148
+rt_pcr <- subset(rt_pcr, crRNA_spacer_basepairs <= 5) # n = 16
