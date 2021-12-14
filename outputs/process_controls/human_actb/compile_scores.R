@@ -129,14 +129,13 @@ rt_pcr <- subset(windows,
                         }))
 # n = 989 guides overlapping with qRT-PCR amplicon
 # all guides have specificity == 1
-rt_pcr <- subset(rt_pcr, !grepl("^G", antitag)) # n = 580
-rt_pcr <- subset(rt_pcr, dbSNP153 == 0) # n = 497
-rt_pcr <- subset(rt_pcr, match_against_hg38 == 0) # n = 294
-rt_pcr <- subset(rt_pcr, crRNA_spacer_basepairs <= 4) # n = 11
+rt_pcr <- subset(rt_pcr, exon_only) # n = 61
+rt_pcr <- subset(rt_pcr, !grepl("^G", antitag)) # n = 39
+rt_pcr <- subset(rt_pcr, dbSNP153 == 0) # n = 39
+rt_pcr <- subset(rt_pcr, crRNA_spacer_basepairs <= 8) # n = 13
 
-# manual selection (minimize overlapping guides)
-rt_pcr_selection <- c(33507, 33733, 33770, 33887,
-                      34079, 34090, 34110, 34094)
+# manual selection (optimize for crRNA secondary structure)
+rt_pcr_selection <- c(34248, 34249, 34251, 34252, 34258, 34274, 34288, 34290)
 rt_pcr_selection <- subset(rt_pcr, start %in% rt_pcr_selection)
 
 write.csv(rt_pcr_selection, file="human_actb_rtpcr_amplicon.csv")
