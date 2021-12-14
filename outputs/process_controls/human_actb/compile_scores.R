@@ -135,7 +135,7 @@ rt_pcr <- subset(rt_pcr, dbSNP153 == 0) # n = 39
 rt_pcr <- subset(rt_pcr, crRNA_spacer_basepairs <= 8) # n = 13
 
 # manual selection (optimize for crRNA secondary structure)
-rt_pcr_selection <- c(34248, 34249, 34251, 34252, 34258, 34274, 34288, 34290)
+rt_pcr_selection <- c(34248, 34249, 34251, 34252, 34254, 34258, 34274, 34290)
 rt_pcr_selection <- subset(rt_pcr, start %in% rt_pcr_selection)
 
 write.csv(rt_pcr_selection, file="human_actb_rtpcr_amplicon.csv")
