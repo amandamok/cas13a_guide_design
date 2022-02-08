@@ -283,7 +283,7 @@ optimize_glmnet_hyperparameters <- function(input_data, fold_ids,
                                            foldid=fold_ids, alpha=alpha)
                        })
   names(all_models) <- alphas
-  # 2. calculate r^2 and perason correlation per split across all models
+  # 2. calculate r^2 and pearson correlation per split across all models
   all_models_stats <- lapply(seq_along(all_models),
                           function(alpha_id) {
                             lambdas <- all_models[[alpha_id]]$lambda
@@ -3384,110 +3384,105 @@ findit_30min <- ggplot(subset(findit_data, time == 30),
   xlab(expr(copies/mu*L)) + ylab(expr(RFU / RFU[10]))
 ```
 
-
 Figure 4D: robustness to genetic variants
 
 ```{r figure_4D}
-# load platemap
-variants_platemap <- xlsx::read.xlsx(file.path(project_dir,
-                                               "supplementary_data",
-                                               "Variants_1 Platemap.xlsx"),
-                                     sheetName="Variants Platemap",
-                                     rowIndex=2:12, colIndex=2:25, header=T)
-variants_platemap <- data.frame(plate_row=rep(LETTERS[seq(nrow(variants_platemap))],
-                                        times=ncol(variants_platemap)),
-                                plate_col=rep(seq(ncol(variants_platemap)),
-                                        each=nrow(variants_platemap)),
-                                variant=unlist(variants_platemap))
-variants_platemap <- subset(variants_platemap, !is.na(variant))
-variants_platemap$variant[variants_platemap$variant=="B.1.17"] <- "alpha: B.1.1.7"
-variants_platemap$variant[variants_platemap$variant=="B.1.351"] <- "beta: B.1.351"
-variants_platemap$variant[variants_platemap$variant=="B.1.617.1"] <- "delta: B.1.617.1"
-variants_platemap$variant[variants_platemap$variant=="P.1"] <- "gamma: P.1"
-variants_platemap$well <- with(variants_platemap, paste0(plate_row, plate_col))
-variants_platemap$multiplex <- ""
-variants_platemap$multiplex[(variants_platemap$plate_row %in% c("A", "B")) & 
-                         (variants_platemap$plate_col %in% 3:4)] <- "multiplex_8"
-variants_platemap$multiplex[variants_platemap$plate_col %in% 5:14] <- "multiplex_8"
-variants_platemap$multiplex[(variants_platemap$plate_row %in% c("C", "D")) & 
-                         (variants_platemap$plate_col %in% 3:4)] <- "multiplex_32"
-variants_platemap$multiplex[variants_platemap$plate_col %in% 15:24] <- "multiplex_32"
-variants_platemap$conc <- ""
-variants_platemap$conc[variants_platemap$plate_col %in% c(5:6, 15:16)] <- "10 fM"
-variants_platemap$conc[variants_platemap$plate_col %in% c(7:8, 17:18)] <- "1 fM"
-variants_platemap$conc[variants_platemap$plate_col %in% c(9:10, 19:20)] <- "100 aM"
-variants_platemap$conc[variants_platemap$plate_col %in% c(11:12, 21:22)] <- "10 aM"
-variants_platemap$conc[variants_platemap$plate_col %in% c(13:14, 23:24)] <- "1 aM"
-variants_platemap$sample <- with(variants_platemap, paste(variant, multiplex, conc, sep="_"))
-variants_platemap <- subset(variants_platemap, variant != "No Protein")
+# generate platemap
+variants_platemap <- data.frame(plate_row=rep(LETTERS[1:4], each=16),
+                                plate_col=rep(1:16, times=4))
+variants_platemap$plate_well <- with(variants_platemap, paste0(plate_row, plate_col))
+variants_platemap <- subset(variants_platemap,
+                            !((plate_row %in% LETTERS[c(2, 4)]) & (plate_col %in% (2*seq(8)-1))))
+variants_platemap$multiplex <- ifelse(variants_platemap$plate_row %in% LETTERS[1:2],
+                                      8, 32)
+variants_platemap$multiplex <- as.factor(variants_platemap$multiplex)
+variant_samples <- c("No protein", "No activator", "WT", "alpha", 
+                     "beta", "gamma", "kappa", "delta")
+variants_platemap$sample <- ""
+for(x in seq_along(variant_samples)) {
+  variants_platemap$sample[variants_platemap$plate_col %in% c(2*x-1, 2*x)] <- variant_samples[x]
+}
+variants_platemap$sample <- factor(variants_platemap$sample, levels=variant_samples)
 
 # load data
-variants_data <- xlsx::read.xlsx(file.path(project_dir,
-                                           "supplementary_data", 
-                                           "Variants_1.xlsx"),
-                                 sheetName="Sheet2",
-                                 rowIndex=41:102, header=T)
+variants_data <- read.csv(file.path(project_dir, "supplementary_data",
+                                    "Pairwise Guide Screening (Modified)_20210928_150557.xlsx - Result sheet.csv"),
+                          header=T, skip=83, nrows=60)
 variants_data <- lapply(seq(nrow(variants_platemap)),
-                   function(x) {
-                     data.frame(time=variants_data$Time..s.,
-                                RFU=variants_data[[variants_platemap$well[x]]],
-                                well=variants_platemap$well[x],
-                                variant=variants_platemap$variant[x],
-                                multiplex=variants_platemap$multiplex[x],
-                                conc=variants_platemap$conc[x])
-                   })
+                        function(x) {
+                          tmp_well <- variants_platemap$plate_well[x]
+                          data.frame(time=variants_data$Time..s.,
+                                     RFU=as.numeric(variants_data[[tmp_well]]),
+                                     well=tmp_well,
+                                     multiplex=variants_platemap$multiplex[x],
+                                     variant=variants_platemap$sample[x])
+                        })
 variants_data <- do.call(rbind, variants_data)
-variants_data$time <- variants_data$time/60
-
-# slopes start to diverge at 10min mark --> take data from timepoints after 10min
-# ggplot(variants_data, aes(x=time, y=RFU)) + geom_point() + geom_vline(xintercept=10)
+variants_data$time <- variants_data$time / 60
 
 # calculate slopes
-variant_slopes <- lapply(unique(variants_data$multiplex),
-                         function(tmp_pool) {
-                           do.call(rbind, 
-                                   lapply(unique(variants_data$variant)[-1],
-                                          function(tmp_variant) {
-                                            tmp_data <- subset(variants_data,
-                                                               multiplex == tmp_pool &
-                                                                 variant %in% c(tmp_variant, "No Activator"))
-                                            tmp_model <- lm(RFU ~ time * conc, tmp_data)
-                                            tmp_coef <- data.frame(summary(tmp_model)$coefficients,
-                                                                   multiplex=tmp_pool,
-                                                                   variant=tmp_variant)
-                                            tmp_coef <- subset(tmp_coef, grepl("time:", rownames(tmp_coef)))
-                                            tmp_coef$conc <- sub("time:conc", "", rownames(tmp_coef))
-                                            return(tmp_coef)
-                                          }))
+variant_slopes <- lapply(variant_samples,
+                         function(x) {
+                           tmp_slopes <- lapply(c(8, 32),
+                                                function(y) {
+                                                  tmp_data <- subset(variants_data,
+                                                                     variant==x & multiplex==y & time >= 10)
+                                                  tmp_model <- lm(RFU ~ time, tmp_data)
+                                                  tmp_coef <- data.frame(summary(tmp_model)$coefficients)
+                                                  tmp_coef$coef <- rownames(tmp_coef)
+                                                  tmp_coef$variant <- x
+                                                  tmp_coef$multiplex <- y
+                                                  return(tmp_coef)
+                                                })
+                           tmp_slopes <- do.call(rbind, tmp_slopes)
+                           return(tmp_slopes)
                          })
 variant_slopes <- do.call(rbind, variant_slopes)
-variant_slopes$conc <- factor(variant_slopes$conc,
-                              levels=c("1 aM", "10 aM", "100 aM", "1 fM", "10 fM"))
-variant_slopes$variant <- factor(variant_slopes$variant,
-                                 levels=c("WT", 
-                                          "alpha: B.1.1.7",
-                                          "beta: B.1.351",
-                                          "gamma: P.1",
-                                          "delta: B.1.617.1"))
-variant_slopes$multiplex <- factor(variant_slopes$multiplex, 
-                                   levels=c("multiplex_8", "multiplex_32"))
-variant_slopes$text <- ifelse(variant_slopes$Pr...t.. < 0.05 & 
-                                variant_slopes$Estimate > 0,
-                              "*", "")
+variant_slopes <- subset(variant_slopes, coef=="time")
+variant_slopes$variant <- factor(variant_slopes$variant, levels=variant_samples)
+variant_slopes$multiplex <- factor(variant_slopes$multiplex, levels=c(8, 32))
 
-ggplot(variant_slopes, aes(x=conc, y=Estimate, fill=multiplex)) + 
-  geom_col(position="dodge2") + 
-  facet_grid(~variant, scales="free_x", space="free_x") +
-  geom_errorbar(aes(ymin=Estimate + qnorm(0.025) * Std..Error,
-                    ymax=Estimate - qnorm(0.025) * Std..Error),
-                position=position_dodge2()) + 
-  theme_classic(base_size=10) + xlab("") + ylab("activator-dependent rate\n(RFU/min)") + 
+variant_compare_slopes <- lapply(variant_samples,
+                                 function(x) {
+                                   tmp_data <- subset(variants_data,
+                                                      variant==x & time >= 10)
+                                   tmp_model <- lm(RFU ~ time*multiplex, tmp_data)
+                                   tmp_coef <- data.frame(summary(tmp_model)$coefficients)
+                                   tmp_coef$coef <- rownames(tmp_coef)
+                                   tmp_coef$variant <- x
+                                   return(tmp_coef)
+                                 })
+variant_compare_slopes <- do.call(rbind, variant_compare_slopes)
+variant_compare_slopes <- subset(variant_compare_slopes, 
+                                 variant_compare_slopes$coef=="time:multiplex32")
+# add labels for ggprism::add_pvalue()
+variant_compare_slopes$diff <- cut(variant_compare_slopes$Pr...t..,
+                                   breaks=c(0, 0.001, 0.01, 0.05, 1),
+                                   labels=c("***", "**", "*", "ns"))
+variant_compare_slopes$group1 <- 8
+variant_compare_slopes$group2 <- 32
+variant_compare_slopes$y.position <- sapply(seq(nrow(variant_compare_slopes)),
+                                            function(x) {
+                                              max(subset(variant_slopes, 
+                                                         variant==variant_compare_slopes$variant[x])$Estimate)
+                                            })
+variant_compare_slopes$y.position <- variant_compare_slopes$y.position + 50
+variant_compare_slopes$x <- as.numeric(factor(variant_compare_slopes$variant,
+                                              levels=variant_samples))
+variant_compare_slopes$xmin <- variant_compare_slopes$x - 0.2
+variant_compare_slopes$xmax <- variant_compare_slopes$x + 0.2
+
+# plot
+ggplot(variant_slopes, aes(x=variant, y=Estimate, 
+                           ymin=Estimate+qnorm(0.05)*Std..Error,
+                           ymax=Estimate+qnorm(0.95)*Std..Error)) + 
+  geom_col(aes(fill=multiplex), position="dodge", width=0.5) + 
+  geom_errorbar(aes(group=multiplex), position=position_dodge(), width=0.5) + 
+  theme_classic() + xlab("") + ylab("RFU/min") + 
   scale_fill_manual(values=c(ucb_colors$`Rose Garden`, ucb_colors$`Lawrence`),
                     labels=c("8", "32")) + 
-  labs(fill="multiplex\npool") + 
-  theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=1)) + 
-  geom_text(aes(x=conc, y=Estimate - qnorm(0.025) * Std..Error + 2, label=text),
-            position=position_dodge2(width=0.9))
+  labs(fill="multiplex\npool")
+  # add_pvalue(variant_compare_slopes, label="diff", xmin="xmin", xmax="xmax", tip.length=0.01)
 
 ggsave(file=file.path(figure_dir, "figure_4D.pdf"),
        plot=last_plot(),
@@ -3718,7 +3713,7 @@ guide_spacer_antitag_violin <- ggplot(subset(guide_rate,
                          signif(noActivator_structure_rate$Pr...t..[2], 
                                 digits=3))) + 
     xlab("# basepaired positions in spacer") + 
-    ylab("activatory-independent rate\n(RFU/min)")) / 
+    ylab("activator-independent rate\n(RFU/min)")) / 
   guide_spacer_antitag_violin
 
 ggsave(file=file.path(figure_dir, "suppl_figure_3A.pdf"),
