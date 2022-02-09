@@ -23,25 +23,59 @@ parse_mutations <- function(paf) {
   block_lengths[block_labels=="*"] <- 1 # substitution
   block_lengths[block_labels=="+"] <- 0 # insertion (wrt to target)
   mutation_blocks <- which(block_labels != "=")
-  mutation_positions <- lapply(mutation_blocks,
-                               function(x) {
-                                 tmp_label <- block_labels[x]
-                                 if(tmp_label %in% c("-", "*")) { # mismatch or deletion
-                                   # return positions in target corresponding to mismatch/deletion
-                                   tmp_length <- block_lengths[x] - 1
-                                   tmp_start <- align_start + sum(block_lengths[1:(x-1)])
-                                   tmp_positions <- seq(tmp_start, tmp_start + tmp_length)
-                                 } else { # insertion
-                                   # return positions flanking insertion
-                                   tmp_start <- align_start + sum(block_lengths[1:(x-1)]) - 1
-                                   tmp_end <- tmp_start + 1
-                                   tmp_positions <- c(tmp_start, tmp_end)
-                                 }
-                                 names(tmp_positions) <- rep(tmp_label, length(tmp_positions))
-                                 return(tmp_positions)
-                               })
-  mutation_positions <- unlist(mutation_positions)
+  if(length(mutation_blocks) == 0) {
+    return(NULL)
+  } else {
+    mutations <- lapply(mutation_blocks,
+                        function(x) {
+                          tmp_label <- block_labels[x]
+                          if(tmp_label %in% c("-", "*")) { # mismatch or deletion
+                            # return positions in target corresponding to mismatch/deletion
+                            tmp_length <- block_lengths[x] - 1
+                            tmp_start <- align_start + sum(block_lengths[1:(x-1)])
+                            tmp_positions <- seq(tmp_start, tmp_start + tmp_length)
+                            tmp_positions <- data.frame(pos=tmp_positions,
+                                                        type=rep(tmp_label, length(tmp_positions)))
+                            if(tmp_label == "-") {
+                              tmp_positions$variant="-"
+                            } else {
+                              tmp_positions$variant <- strsplit(block_seq[x], split="")[[1]][2]
+                            }
+                          } else { # insertion
+                            # return positions flanking insertion
+                            tmp_start <- align_start + sum(block_lengths[1:(x-1)]) - 1
+                            tmp_positions <- tmp_start + 0.5
+                            tmp_positions <- data.frame(pos=tmp_positions,
+                                                        type=rep(tmp_label, length(tmp_positions)),
+                                                        variant=strsplit(block_seq[x], split="")[[1]])
+                          }
+                          return(tmp_positions)
+                        })
+    mutations <- do.call(rbind, mutations)
+    mutations$genome <- paf[1]
+    return(mutations)
+  }
 }
+
+# load paf output from minimap
+delta_paf_fname <- file.path(here(), "ref_data",
+                               "gisaid_delta_2022_02_08_09_minimap.paf")
+delta_paf <- readLines(delta_paf_fname)
+
+# identify variant names
+delta_genomes <- system(paste("cut -f1", delta_paf_fname), intern=T)
+delta_genomes <- unique(delta_genomes)
+num_genomes <- length(delta_genomes)
+
+# identify mutations relative to reference genome
+delta_variants <- lapply(delta_genomes,
+                           function(x) {
+                             tmp_align <- delta_paf[grepl(x, delta_paf, fixed=T)]
+                             tmp_mutations <- lapply(tmp_align, parse_mutations)
+                             tmp_mutations <- do.call(rbind, tmp_mutations)
+                             return(unique(tmp_mutations))
+                           })
+delta_variants <- do.call(rbind, delta_variants)
 
 # load bed file of nextstrain genes
 genes_bed <- read.table(file.path(here(), "ref_data", "nextstrain_genes.bed"),
@@ -53,45 +87,19 @@ genes_bed$ymax <- 1.3 - 0.1*(genes_bed$row - 1)
 genes_bed$ymin <- 1.21 - 0.1*(genes_bed$row - 1)
 genes_bed$width_per_char <- with(genes_bed, width / nchar(gene))
 
-# load paf output from minimap
-delta_paf_fname <- file.path(here(), "ref_data",
-                             "gisaid_delta_2022_02_08_09_minimap.paf")
-delta_paf <- readLines(delta_paf_fname)
-
-# identify variant names
-delta_variants <- system(paste("cut -f1", delta_paf_fname), intern=T)
-delta_variants <- unique(delta_variants)
-num_variants <- length(delta_variants)
-
-# identify mutations relative to reference genome
-delta_mutations <- lapply(delta_variants,
-                          function(x) {
-                            tmp_align <- delta_paf[grepl(x, delta_paf, fixed=T)]
-                            tmp_mutations <- lapply(tmp_align, parse_mutations)
-                            tmp_mutations <- unlist(tmp_mutations)
-                            tmp_mutations <- data.frame(variant=x,
-                                                        type=names(tmp_mutations),
-                                                        position=tmp_mutations)
-                            return(unique(tmp_mutations))
-                          })
-names(delta_mutations) <- delta_variants
-
 # plot all mutations by type
-mutation_freq <- aggregate(variant ~ position,
-                           do.call(rbind, delta_mutations),
-                           length)
-mutation_summary <- aggregate(variant ~ type + position,
-                              do.call(rbind, delta_mutations),
-                              length)
-summary_plot <- ggplot(mutation_summary,
-                       aes(x=position, y=variant/num_variants, fill=type)) +
+delta_mutation_summary <- aggregate(genome ~ type + pos,
+                                      unique(delta_variants[, c("pos", "type", "genome")]),
+                                      length)
+summary_plot <- ggplot(delta_mutation_summary,
+                       aes(x=pos, y=genome/num_genomes, fill=type)) +
   geom_col(position="stack", width=50) + theme_classic() +
   xlab("position") + ylab("frequency") + expand_limits(y=max(genes_bed$ymax)) +
   theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=1)) +
-  ggtitle(paste0(sum(mutation_freq$variant/num_variants >= min_freq),
+  ggtitle(paste0(sum(delta_mutation_summary$genome/num_genomes >= min_freq),
                  " variants present in >", min_freq*100,
                  "% sequenced delta genomes (n =",
-                 length(delta_variants), ")")) +
+                 num_genomes, " )")) +
   scale_fill_manual(values=fill_colors, labels=fill_labels) +
   scale_x_continuous(breaks=seq(0, 30000, 5000)) +
   scale_y_continuous(breaks=c(0, 0.25, 0.5, 0.75, 1)) +
@@ -109,15 +117,33 @@ for(x in seq(nrow(genes_bed))) {
 summary_plot
 
 # subset to common mutations
-common_mutations <- subset(mutation_freq, variant/num_variants >= min_freq)
-delta_mutations_common <- lapply(delta_mutations,
-                                 function(x) {
-                                   subset(x, position %in% common_mutations$position)
-                                 })
+common_variants <- subset(delta_mutation_summary, genome/num_genomes >= min_freq)
+delta_common_variants <- dplyr::left_join(common_variants, delta_variants,
+                                            by=c("type", "pos"))
 
-save(delta_mutations, mutation_freq, mutation_summary, delta_mutations_common,
+# load guides
+guide_features <- read.csv(file.path(here(), "NCR", "guide_features.csv"), stringsAsFactors=F)
+multiplex_32 <- readLines(file.path(here(), "NCR", "32_Guide_List.csv"))
+ottlab_8 <- readLines(file.path(here(), "NCR", "Ott8.csv"))[-1]
+guides <- subset(guide_features,
+                 NCR.id %in% c(paste0("NCR_", multiplex_32), ottlab_8))
+guides$width <- nchar(guides$spacer)
+
+# find overlap between NCR guides and common mutations
+guide_mutations <- lapply(seq(nrow(guides)),
+                          function(x) {
+                            tmp_guide <- guides$NCR.id[x]
+                            tmp_start <- guides$start[x]
+                            tmp_end <- tmp_start + guides$width[x] - 1 + 1 # add first position of anti-tag
+                            num_mutated_positions <- sapply(delta_common_variants$pos,
+                                                            function(y) {
+                                                              sum(y %in% seq(tmp_start, tmp_end))
+                                                            })
+                            return(num_mutated_positions)
+                          })
+guide_mutations <- do.call(cbind, guide_mutations)
+colnames(guide_mutations) <- guides$NCR.id # no overlap between guides and delta variants
+
+save(delta_variants, delta_common_variants, delta_mutation_summary,
      file=file.path(here(), "outputs", "covid", "variant_detection",
                     "delta_variants.Rda"))
-write.csv(mutation_freq, row.names=F,
-          file=file.path(here(), "outputs", "covid", "variant_detection",
-                         "delta_variant_freq.csv"))
