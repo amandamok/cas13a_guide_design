@@ -2,60 +2,179 @@ rm(list=ls())
 
 library(here)
 
-variant_detection_dir <- file.path(here(), "outputs", "covid", "variant_detection")
-load(file.path(variant_detection_dir, "delta_variants.Rda"))
-load(file.path(variant_detection_dir, "omicron_variants.Rda"))
+# load variant fasta files ------------------------------------------------
 
-num_delta_variants <- 3052
-num_omicron_variants <- 309
+variant_dir <- file.path(here(), "ref_data", "twist_variants")
+twist_variants <- read.table(file.path(variant_dir, "twist_variants.tsv"), 
+                             sep="\t", header=T, stringsAsFactors=F)
 
-# load common variants ----------------------------------------------------
+wt_control <- subset(twist_variants, Variant=="Control")$GenBank.ID
+delta_variants <- subset(twist_variants, WHO.label=="delta")$GenBank.ID
+omicron_variants <- subset(twist_variants, WHO.label=="omicron")$GenBank.ID
 
-omicron_variants <- unique(omicron_common_variants[, c("type", "pos", "variant", "genome.x")])
-omicron_variants$freq <- omicron_variants$genome.x / num_omicron_variants
-omicron_variants_substitutions <- subset(omicron_variants, type=="*")
-omicron_variants_substitutions$label <- with(omicron_variants_substitutions, paste(pos, type, sep="_"))
+# generate minimap alignment ----------------------------------------------
 
-delta_variants <- unique(delta_common_variants[, c("type", "pos", "variant", "genome.x")])
-delta_variants$freq <- delta_variants$genome.x / num_delta_variants
-delta_variants_substitutions <- subset(delta_variants, type=="*")
-delta_variants_substitutions$label <- with(delta_variants_substitutions, paste(pos, type, sep="_"))
+for(x in c(delta_variants, omicron_variants)) {
+  if(!file.exists(file.path(variant_dir, paste0(x, ".vars")))) {
+    paste("minimap2 --cs", 
+          file.path(variant_dir, "MN908947.3.fasta"), 
+          file.path(variant_dir, paste0(x, ".fasta")), 
+          "| paftools.js call -L 10000 - >",
+          file.path(variant_dir, paste0(x, ".vars")))
+  }
+}
 
+# load nextstrain clade definitions ---------------------------------------
 
-# identify unique common substitutions ------------------------------------
+# https://github.com/nextstrain/ncov/blob/master/defaults/clades.tsv
+clade_snps <- read.table(file.path(here(), "outputs", "covid",
+                                   "variant_detection", "clades.tsv"),
+                         sep="\t", header=T)
+clade_snps$variant <- with(clade_snps, paste(site, alt, sep="_"))
 
-# n = 29 substitutions unique to delta
-delta_unique_substitutions <- subset(delta_variants_substitutions,
-                                     !(label %in% omicron_variants_substitutions$label))
-delta_unique_substitutions <- subset(delta_unique_substitutions, variant != "n")
-delta_unique_substitutions$detect <- "delta"
-# n = 47 substitutions unique to omicron
-omicron_unique_substitutions <- subset(omicron_variants_substitutions,
-                                       !(label %in% delta_variants_substitutions$label))
-omicron_unique_substitutions <- subset(omicron_unique_substitutions, variant!="n")
-omicron_unique_substitutions$detect <- "omicron"
+# identify clades ---------------------------------------------------------
 
-unique_substitutions <- rbind(delta_unique_substitutions,
-                              omicron_unique_substitutions)
-unique_substitutions$start <- unique_substitutions$pos - 20
+detection_clades <- c("Delta", "Omicron")
+detection_clades <- grep(paste0("(", paste(detection_clades, collapse=")|("), ")"),
+                         unique(clade_snps$clade), value=T)
 
-# guide design ------------------------------------------------------------
+# identify differentiating snps -------------------------------------------
 
-all_guides <- read.table(file.path(here(), "outputs", "covid", "cas13a_20nt",
+detection_snps <- subset(clade_snps, clade %in% detection_clades)
+detection_snps <- aggregate(clade~variant, detection_snps, unique)
+detection_snps <- cbind(detection_snps,
+                        sapply(detection_clades,
+                               function(x) {
+                                 sapply(detection_snps$clade,
+                                        function(y) {
+                                          as.numeric(x %in% y)
+                                        })
+                               }))
+detection_snps <- subset(detection_snps, select=-clade)
+detection_snps$position <- as.numeric(sub("_.", "", detection_snps$variant))
+detection_snps$alt_allele <- sub(".*_", "", detection_snps$variant)
+
+detection_snps$num_delta_nextstrain <- rowSums(detection_snps[, grepl("Delta", colnames(detection_snps))])
+detection_snps$num_omicron_nextstrain <- rowSums(detection_snps[, grepl("Omicron", colnames(detection_snps))])
+
+# detection_snps$clade_specific <- rowSums(subset(detection_snps,
+#                                                 select=grepl("2", colnames(detection_snps)))) == 1
+# detection_snps$delta_specific <- (rowSums(subset(detection_snps,
+#                                                  select=grepl("Delta", colnames(detection_snps)))) == 
+#                                     sum(grepl("Delta", detection_clades))) & 
+#   (rowSums(subset(detection_snps,
+#                   select=grepl("Omicron", colnames(detection_snps)))) == 0)
+# detection_snps$omicron_specific <- (rowSums(subset(detection_snps,
+#                                                    select=grepl("Omicron", colnames(detection_snps)))) == 
+#                                       sum(grepl("Omicron", detection_clades))) & 
+#   (rowSums(subset(detection_snps,
+#                   select=grepl("Delta", colnames(detection_snps)))) == 0)
+# detection_snps$detect_variant <- with(detection_snps, delta_specific | omicron_specific)
+
+# identify crRNA spacers --------------------------------------------------
+
+all_crRNAs <- read.table(file.path(here(), "outputs", "covid", "cas13a_20nt", 
                                    "cas13a_results_summary.txt"))
-unique_substitutions <- merge(unique_substitutions, all_guides, by="start")
+all_crRNAs$antitag_pos1 <- substr(all_crRNAs$antitag, 1, 1)
 
-# annotate first position of antitag (n=76)
-unique_substitutions$antitag_pos1 <- substr(unique_substitutions$antitag, 1, 1)
-# sensitivity >= 95% (n=74)
-unique_substitutions <- subset(unique_substitutions, sensitivity_01 >= 0.95)
-# specificity = 100% (n=55)
-unique_substitutions <- subset(unique_substitutions, specificity == 1)
-# no hits to human transcirptome (n=40)
-unique_substitutions <- subset(unique_substitutions, match_against_hg38 == 0)
-# good crRNA secondary structure (n=14)
-unique_substitutions <- subset(unique_substitutions, crRNA_spacer_basepairs == 0)
+detection_crRNAs <- all_crRNAs[match(detection_snps$position-20,
+                                     all_crRNAs$start),]
+detection_crRNAs <- cbind(detection_crRNAs, detection_snps)
 
-write.csv(unique_substitutions,
-          file=file.path(variant_detection_dir, "unique_substitutions.csv"),
+# check delta variants ----------------------------------------------------
+
+delta_mutations <- data.frame(delta_allele=sapply(seq(nrow(detection_crRNAs)),
+                                                  function(x) {
+                                                    if(detection_crRNAs$num_delta_nextstrain[x] == 3) {
+                                                      # SNP in all 3 Delta clades in Nextstrain
+                                                      # return alternative allele
+                                                      return(detection_crRNAs$alt_allele[x])
+                                                    } else {
+                                                      # return WT allele
+                                                      return(detection_crRNAs$antitag_pos1[x])
+                                                    }
+                                                  }))
+
+for(x in delta_variants) {
+  tmp_vars <- read.table(file.path(variant_dir, paste0(x, ".vars")),
+                         sep="\t", header=F, skip=1)
+  colnames(tmp_vars) <- c("type", "chr", "start", "end", "query_depth", 
+                          "mapping_quality", "ref_allele", "alt_allele",
+                          "query_name", "query_start", "query_end", 
+                          "query_orientation")
+  tmp_vars$ref_allele[tmp_vars$ref_allele=="t"] <- "u"
+  tmp_vars$alt_allele[tmp_vars$alt_allele=="t"] <- "u"
+  delta_mutations[x] <- sapply(seq(nrow(detection_crRNAs)),
+                               function(y) {
+                                 which_row <- match(detection_crRNAs$position[y], 
+                                                    tmp_vars$end)
+                                 if(is.na(which_row)) {
+                                   # SNP not detected
+                                   return(detection_crRNAs$antitag_pos1[y])
+                                 } else {
+                                   return(toupper(tmp_vars$alt_allele[which_row]))
+                                 }
+                               })
+}
+
+delta_mutations$num_delta_twist <- sapply(seq(nrow(delta_mutations)),
+                                          function(x) {
+                                            sum(delta_mutations$delta_allele[x] == 
+                                                  delta_mutations[x, delta_variants])
+                                          })
+
+detection_crRNAs <- cbind(detection_crRNAs, delta_mutations)
+
+# check omicron variants --------------------------------------------------
+
+omicron_mutations <- data.frame(omicron_allele=sapply(seq(nrow(detection_crRNAs)),
+                                                      function(x) {
+                                                        if(detection_crRNAs$num_omicron_nextstrain[x] == 3) {
+                                                          # SNP in all 3 Omicron clades in Nextstrain
+                                                          # return alternative allele
+                                                          return(detection_crRNAs$alt_allele[x])
+                                                        } else {
+                                                          # return WT allele
+                                                          return(detection_crRNAs$antitag_pos1[x])
+                                                        }
+                                                      }))
+
+for(x in omicron_variants) {
+  tmp_vars <- read.table(file.path(variant_dir, paste0(x, ".vars")),
+                         sep="\t", header=F, skip=1)
+  colnames(tmp_vars) <- c("type", "chr", "start", "end", "query_depth", 
+                          "mapping_quality", "ref_allele", "alt_allele",
+                          "query_name", "query_start", "query_end", 
+                          "query_orientation")
+  tmp_vars$ref_allele[tmp_vars$ref_allele=="t"] <- "u"
+  tmp_vars$alt_allele[tmp_vars$alt_allele=="t"] <- "u"
+  omicron_mutations[x] <- sapply(seq(nrow(detection_crRNAs)),
+                                 function(y) {
+                                   which_row <- match(detection_crRNAs$position[y], 
+                                                      tmp_vars$end)
+                                   if(is.na(which_row)) {
+                                     # SNP not detected
+                                     return(detection_crRNAs$antitag_pos1[y])
+                                   } else {
+                                     return(toupper(tmp_vars$alt_allele[which_row]))
+                                   }
+                                 })
+}
+
+omicron_mutations$num_omicron_twist <- sapply(seq(nrow(omicron_mutations)),
+                                              function(x) {
+                                                sum(omicron_mutations$omicron_allele[x] == 
+                                                      omicron_mutations[x, omicron_variants])
+                                              })
+
+detection_crRNAs <- cbind(detection_crRNAs, omicron_mutations)
+
+# write results -----------------------------------------------------------
+
+detection_crRNAs$good_SNP <- with(detection_crRNAs,
+                                  (num_delta_twist==3) & (num_omicron_twist==3))
+
+write.csv(detection_crRNAs,
+          file=file.path(here(), "outputs", "covid",
+                         "variant_detection", "detection_crRNAs.csv"),
           row.names=F)
