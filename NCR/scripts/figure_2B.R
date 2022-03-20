@@ -81,7 +81,7 @@ guide_plot_505 <- ggplot(data_predict_505, aes(x=time, y=RFU, col=activator)) +
   geom_point(data=data_505, shape=16, alpha=0.75,
              aes(x=time, y=RFU, col=activator, group=well_384)) +
   scale_color_manual(values=c("noActivator"="grey35", "100fM"="red")) +
-  ggtitle("target region: 7720-7739",
+  ggtitle("target region: 510-529",
           subtitle=paste(plot_text_505$text, collapse="\n")) + 
   xlab("time (min)") + ylab("RFU") + guides(col="none")
 
