@@ -53,6 +53,7 @@ detection_snps <- cbind(detection_snps,
 detection_snps <- subset(detection_snps, select=-clade)
 detection_snps$position <- as.numeric(sub("_.", "", detection_snps$variant))
 detection_snps$alt_allele <- sub(".*_", "", detection_snps$variant)
+detection_snps$alt_allele[detection_snps$alt_allele=="T"] <- "U"
 
 detection_snps$num_delta_nextstrain <- rowSums(detection_snps[, grepl("Delta", colnames(detection_snps))])
 detection_snps$num_omicron_nextstrain <- rowSums(detection_snps[, grepl("Omicron", colnames(detection_snps))])

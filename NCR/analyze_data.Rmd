@@ -2966,7 +2966,7 @@ for(x in seq(nrow(gene_bed))) {
 (ggplot(guide_rate, aes(x=start, y=Estimate)) + theme_classic() + 
     geom_point() + geom_errorbar(aes(ymin=Estimate+qnorm(0.05)*Std.Error,
                                      ymax=Estimate-qnorm(0.05)*Std.Error)) + 
-    xlab("position along genome") + ylab("activator-dependent rate\n(RFU/min)") + ylim(-10, 100) + 
+    xlab("genomic position") + ylab("activator-dependent rate\n(RFU/min)") + ylim(-10, 100) + 
     theme(axis.title=element_text(size=10), 
           axis.text=element_text(size=10))) + 
   (ggplot(gene_bed, aes(xmin=thickStart, xmax=thickEnd, ymin=ymax-4.5, ymax=ymax)) + 
@@ -3103,7 +3103,7 @@ guide_plot_505 <- ggplot(data_predict_505,
         legend.position="bottom") + 
   ggtitle("target position: 510-529",
           subtitle=paste(plot_text_505$text, collapse="\n")) +
-  xlab("time (min)") + ylab("") + labs(col="")
+  xlab("time (min)") + ylab("RFU") + labs(col="")
 
 guide_plot_527 + guide_plot_505
 ggsave(filename=file.path(figure_dir, "figure_2B.pdf"),
@@ -3396,8 +3396,8 @@ variants_platemap <- subset(variants_platemap,
 variants_platemap$multiplex <- ifelse(variants_platemap$plate_row %in% LETTERS[1:2],
                                       8, 32)
 variants_platemap$multiplex <- as.factor(variants_platemap$multiplex)
-variant_samples <- c("No protein", "No activator", "WT", "alpha", 
-                     "beta", "gamma", "kappa", "delta")
+variant_samples <- c("No\nprotein", "No\nactivator", "WT", "Alpha", 
+                     "Beta", "Gamma", "Kappa", "Delta")
 variants_platemap$sample <- ""
 for(x in seq_along(variant_samples)) {
   variants_platemap$sample[variants_platemap$plate_col %in% c(2*x-1, 2*x)] <- variant_samples[x]
@@ -3406,7 +3406,7 @@ variants_platemap$sample <- factor(variants_platemap$sample, levels=variant_samp
 
 # load data
 variants_data <- read.csv(file.path(project_dir, "supplementary_data",
-                                    "Pairwise Guide Screening (Modified)_20210928_150557.xlsx - Result sheet.csv"),
+                                    "variant_detection_EM_28092021_results.csv"),
                           header=T, skip=83, nrows=60)
 variants_data <- lapply(seq(nrow(variants_platemap)),
                         function(x) {
@@ -3499,14 +3499,14 @@ ggplot(model1_rf_regression_importance,
   theme_classic(base_size=10) + labs(fill="") +
   scale_x_continuous(breaks=c(1, 10, 20)) + 
   scale_fill_manual(values=c(RColorBrewer::brewer.pal(4, "Set1"), "grey")) +
-  annotate("rect", xmin=1, xmax=20, ymin=-10, ymax=-5, fill="black") + 
-  annotate("text", x=10.5, y=-7.5, label="protospacer", col="white", size=2.5) +
-  annotate("rect", xmin=-5, xmax=1, ymin=-10, ymax=-5, fill="darkgrey") +
-  annotate("text", x=-2, y=-7.5, label="anti-tag", col="white", size=2.5) + 
-  ggtitle("random forest regression", 
-          subtitle=bquote("mean testing"~r^2~"="~
-                            .(round(model1_rf_regression_r2, digits=3)))) + 
-  theme(legend.position="bottom")
+  annotate("rect", xmin=0.5, xmax=20, ymin=-20, ymax=-10, fill="black") + 
+  annotate("text", x=10.25, y=-15, label="protospacer", col="white", size=2.5) +
+  annotate("rect", xmin=-5, xmax=0.5, ymin=-20, ymax=-10, fill="darkgrey") +
+  annotate("text", x=-2.25, y=-15, label="anti-tag", col="white", size=2.5) + 
+  # ggtitle("random forest regression", 
+  #         subtitle=bquote("mean testing"~r^2~"="~
+  #                           .(round(model1_rf_regression_r2, digits=3)))) + 
+  theme(legend.position="top")
 
 ggsave(file=file.path(figure_dir, "suppl_figure_1A.pdf"),
        plot=last_plot(),
@@ -3518,10 +3518,10 @@ Suppl. Figure 1B: sequence logo
 ```{r suppl_figure_1B}
 (ggseqlogo(topSpacers_info, method="custom") + 
   ggtitle(paste("Top", num_spacers, "spacers")) + ylim(0, 0.5) + 
-   theme_classic(base_size=10)) / 
+   theme_classic(base_size=10) + ylab("bits")) / 
   (ggseqlogo(bottomSpacers_info, method="custom") +
      ggtitle(paste("Bottom", num_spacers, "spacers")) + ylim(0, 0.5) +
-     theme_classic(base_size=10))
+     theme_classic(base_size=10) + ylab("bits"))
 
 ggsave(file=file.path(figure_dir, "suppl_figure_1B.pdf"),
        plot=last_plot(),
@@ -3935,6 +3935,27 @@ loo_plot_data$text[loo_plot_data$p_contrast < 0.05] <- "*"
 ggsave(file=file.path(figure_dir, "suppl_figure_5B.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=4, units="in")
+
+# plot subset for figure 5A
+loo_subset <- subset(loo_plot_data, pool=="1354+1367+1368+1370")
+loo_subset$new_label <- c("1+2+3+4", "-1", "-2", "-3", "-4")
+loo_subset$new_label <- factor(loo_subset$new_label, 
+                               levels=loo_subset$new_label)
+loo_subset$new_color <- sapply(loo_subset$p_contrast,
+                               function(x) {
+                                 ifelse(is.na(x), "4-plex", 
+                                        ifelse(x<0.05, "keep", "filter out"))
+                               })
+ggplot(loo_subset, aes(x=new_label, y=time.trend, fill=new_color,
+                       ymin=lower.CL, ymax=upper.CL)) + 
+  geom_col() + geom_errorbar() + geom_hline(yintercept=0) + 
+  theme_classic(base_size=7) + xlab("") + ylab("RFU/min") + 
+  theme(axis.text.x=element_text(angle=45, vjust=0.5, hjust=1)) + 
+  scale_fill_manual(values=c("grey", "black", "red")) + 
+  labs(fill="")
+ggsave(file=file.path(figure_dir, "figure_5A_loo.pdf"),
+       plot=last_plot(),
+       device="pdf", width=3, height=1.5, units="in")
 ```
 
 Suppl. Figure 5C: human RNA counterscreen
@@ -4011,6 +4032,19 @@ ggplot(human_rna_slopes,
 ggsave(file=file.path(figure_dir, "suppl_figure_5C.pdf"),
        plot=last_plot(),
        device="pdf", width=6.5, height=3.5, units="in")
+
+human_rna_subset <- subset(human_rna_slopes, guide %in% c(516, 546, 558, 576, 590))
+human_rna_subset$new_label <- seq(nrow(human_rna_subset))
+human_rna_subset$keep <- ifelse(human_rna_subset$Pr...t.. < 0.05, "filter", "keep")
+ggplot(human_rna_subset, aes(guide, y=Estimate, fill=keep, 
+                             ymin=Estimate+qnorm(0.025)*Std..Error,
+                             ymax=Estimate+qnorm(0.975)*Std..Error)) + 
+  geom_col() + geom_errorbar() + geom_hline(yintercept=0) + 
+  theme_classic(base_size=7) + scale_fill_manual(values=c("black", "red")) + 
+  theme(legend.position="none") + xlab("") + ylab("human RNA-\ndependent\nrate\n(RFU/min)")
+ggsave(file=file.path(figure_dir, "figure_5A_humanRNA.pdf"),
+       plot=last_plot(),
+       device="pdf", width=2.5, height=1, units="in")
 ```
 
 Suppl. Figure 6: 32-pool vs. 8-pool w/ forced mismatch
