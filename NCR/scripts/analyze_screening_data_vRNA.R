@@ -105,19 +105,22 @@ mapping_384_to_96[is.na(mapping_384_to_96)] <- "empty"
 # load platemaps ----------------------------------------------------------
 
 expt_names <- c("GS1_1", "GS1_2", "GS2_1", "GS2_2", "GS3")
-plate_maps <- xlsx::read.xlsx(file.path(data_dir, "AC_Guide_Screening.xlsx"),
-                              sheetName="Plate Setups")
-plate_maps <- subset(plate_maps, NA. %in% LETTERS[1:8])[, 3:14]
+plate_maps <- openxlsx::read.xlsx(file.path(data_dir, "AC_Guide_Screening.xlsx"),
+                                  sheet="Plate Setups")
+plate_maps <- subset(plate_maps, X2 %in% LETTERS[1:8])[, 3:14]
 plate_maps <- split(plate_maps, rep(expt_names, each=8))
 plate_maps <- lapply(seq_along(plate_maps),
                      function(x) {
                        if(x %in% 1:4) {
-                         data.frame(sample = paste0(unlist(plate_maps[[x]]), 
-                                                    rep(c("_noActivator", "_100fM"), each=48)),
+                         data.frame(sample = paste0(sub("\\.0", "", 
+                                                        unlist(plate_maps[[x]])), 
+                                                    rep(c("_noActivator", "_100fM"), 
+                                                        each=48)),
                                     well_96 = paste0(rep(LETTERS[1:8], times=12),
                                                      rep(1:12, each=8)))
                        } else {
-                         tmp_map <- data.frame(sample = paste0(unlist(plate_maps[[x]][1:4,]),
+                         tmp_map <- data.frame(sample = paste0(sub("\\.0", "", 
+                                                                   unlist(plate_maps[[x]][1:4,])),
                                                                c(rep(rep(c("_noActivator", "_100fM"), 
                                                                          each=2),
                                                                      times=12))),
@@ -138,8 +141,8 @@ plate_data <- lapply(data_fnames,
                                         sub("-", "_", 
                                             sub(".xlsx", "", x)))
                        row_indices <- 57:117
-                       tmp_data <- xlsx::read.xlsx(file.path(screening_data_dir, x), 
-                                                   sheetIndex=1, rowIndex=row_indices, header=T)
+                       tmp_data <- openxlsx::read.xlsx(file.path(screening_data_dir, x), 
+                                                       sheet=1, rows=row_indices)
                        tmp_data <- lapply(seq(nrow(tmp_data)),
                                           function(x) {
                                             data.frame(tmp_data[x, 1:3],
@@ -188,7 +191,7 @@ guide_ids <- guide_ids[!(guide_ids %in% c("612_Control", "No_Protein"))]
 all_results <- lapply(guide_ids,
                       function(x) {
                         analyze_guide(plate_data, guide=x, time_start=10, 
-                                      signal="RFU", mixed_model=F)
+                                      signal="RFU", mixed_model=T)
                       })
 names(all_results) <- guide_ids
 
