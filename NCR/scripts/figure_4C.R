@@ -10,8 +10,8 @@ data_dir <- file.path(project_dir, "data", "supplementary_data")
 
 # load platemap -----------------------------------------------------------
 
-singleLOD_platemap <- xlsx::read.xlsx(file.path(data_dir, "SingleLOD_2 Platemap.xlsx"),
-                                      sheetIndex=1, startRow=2, endRow=18, colIndex=2:17)
+singleLOD_platemap <- openxlsx::read.xlsx(file.path(data_dir, "SingleLOD_2 Platemap.xlsx"),
+                                          sheet=1, rows=2:18, cols=2:17)
 singleLOD_platemap <- data.frame(plate_row=rep(LETTERS[1:nrow(singleLOD_platemap)],
                                                times=ncol(singleLOD_platemap)),
                                  plate_col=rep(seq(ncol(singleLOD_platemap)),
@@ -29,12 +29,12 @@ plate_conc <- unique(singleLOD_platemap$conc)
 
 # load data ---------------------------------------------------------------
 
-singleLOD_data <- xlsx::read.xlsx(file.path(data_dir, "SingleLOD_2.xlsx"),
-                                  sheetName="Sheet2", startRow=54, endRow=114)
+singleLOD_data <- openxlsx::read.xlsx(file.path(data_dir, "SingleLOD_2.xlsx"),
+                                      sheet="Sheet2", rows=54:114)
 singleLOD_data <- lapply(seq(nrow(singleLOD_platemap)),
                          function(x) {
                            tmp_well <- singleLOD_platemap$plate_well[x]
-                           data.frame(time=singleLOD_data$Time..s.,
+                           data.frame(time=singleLOD_data$`Time.[s]`,
                                       RFU=as.numeric(singleLOD_data[[tmp_well]]),
                                       well=tmp_well,
                                       guide_id=singleLOD_platemap$guide_id[x],
@@ -139,52 +139,60 @@ NCR_504_ttest <- lapply(unique(NCR_504_data$time)[-1],
                         })
 NCR_504_ttest <- do.call(rbind, NCR_504_ttest)
 NCR_504_ttest$pvalue_label <- ifelse(NCR_504_ttest$pvalue < 0.05,
-                                     "p<0.05", "p>=0.05")
+                                     "p < 0.05", "p >= 0.05")
 
 NCR_504_ttest_plot <- ggplot(NCR_504_ttest, 
                              aes(x=time, y=estimate, 
                                  ymin=conf_int_min, ymax=conf_int_max)) + 
-  geom_point(aes(col=pvalue_label), size=0.5) + 
-  geom_errorbar(aes(col=pvalue_label)) + 
   geom_line(col="grey35") + theme_classic(base_size=10) + 
-  scale_color_manual(values=c("p>=0.05"="grey35", "p<0.05"="red")) + 
-  geom_hline(yintercept=0) + ylab(bquote("RFU"["100 fM"] - "RFU"["0 fM"])) + 
-  theme(legend.position="top") + labs(col="")
+  geom_point(aes(col=pvalue_label), size=1) + geom_hline(yintercept=0) +
+  geom_errorbar(aes(col=pvalue_label)) + 
+  scale_color_manual(values=c("p >= 0.05"="grey35", "p < 0.05"="red")) + 
+  ylab(bquote("RFU"["100 fM"] - "RFU"["0 fM"])) + 
+  theme(legend.position="bottom") + labs(col="")
 
-NCR_504_slope <- lapply(unique(NCR_504_data$time)[-1],
+NCR_504_slope <- lapply(unique(NCR_504_data$time)[-c(1:4)],
                         function(x) {
                           tmp_data <- subset(NCR_504_data, time<=x)
-                          tmp_model <- lm(RFU_baselineCorr ~ time*conc,
-                                          tmp_data)
+                          # tmp_model <- nlme::lme(RFU_baselineCorr ~ time*conc,
+                          #                        random = ~ 1 + time | well, 
+                          #                        tmp_data)
+                          # tmp_coef <- data.frame(summary(tmp_model)$tTable)
+                          tmp_model <- lm(RFU_baselineCorr ~ time*conc, tmp_data)
                           tmp_coef <- data.frame(summary(tmp_model)$coefficients)
+                          colnames(tmp_coef)[colnames(tmp_coef)=="Value"] <- "Estimate"
+                          colnames(tmp_coef)[colnames(tmp_coef)=="Std..Error"] <- "Std.Error"
+                          colnames(tmp_coef)[colnames(tmp_coef)=="Pr...t.."] <- "p.value"
                           tmp_coef$coef <- rownames(tmp_coef)
                           tmp_coef$time <- x
                           return(tmp_coef)
                         })
 NCR_504_slope <- do.call(rbind, NCR_504_slope)
 NCR_504_slope <- subset(NCR_504_slope, NCR_504_slope$coef == "time:conc100 fM")
-NCR_504_slope$pvalue_label <- ifelse(NCR_504_slope$Pr...t.. < 0.05,
-                                     "p<0.05", "p>=0.05")
+NCR_504_slope$pvalue_label <- ifelse(NCR_504_slope$p.value < 0.05,
+                                     "p < 0.05", "p >= 0.05")
 
 NCR_504_slope_plot <- ggplot(NCR_504_slope, 
                              aes(x=time, y=Estimate,
-                                 ymin=Estimate+qnorm(0.025)*Std..Error,
-                                 ymax=Estimate+qnorm(0.975)*Std..Error)) + 
-  geom_point(aes(col=pvalue_label), size=0.5) + 
-  geom_errorbar(aes(col=pvalue_label)) + 
+                                 ymin=Estimate+qnorm(0.025)*Std.Error,
+                                 ymax=Estimate+qnorm(0.975)*Std.Error)) + 
   geom_line(col="grey35") + theme_classic(base_size=10) + 
-  scale_color_manual(values=c("p>=0.05"="grey35", "p<0.05"="red")) + 
+  geom_point(aes(col=pvalue_label), size=1) + 
+  geom_errorbar(aes(col=pvalue_label)) + 
+  scale_color_manual(values=c("p >= 0.05"="grey35", "p < 0.05"="red")) + 
   geom_hline(yintercept=0) + ylab("RFU/min") + 
-  theme(legend.position="top") + labs(col="")
+  theme(legend.position="bottom") + labs(col="")
 
 NCR_504_trace <- ggplot(NCR_504_data, 
-       aes(x=time, y=RFU_baselineCorr, group=well, col=conc)) + 
+                        aes(x=time, y=RFU_baselineCorr, group=well, col=conc)) + 
   geom_line() + geom_point(size=0.25) + theme_classic(base_size=10) +
   scale_color_manual(values=c("100 fM"="red", "0 fM"="grey35")) + 
   labs(color="") + xlab("min") + ylab("RFU") + 
-  theme(legend.position="top")
+  theme(legend.position="bottom")
 
-figure_4C <- NCR_504_trace + NCR_504_ttest_plot + NCR_504_slope_plot
+figure_4C <- (NCR_504_trace + ggtitle("", subtitle="Raw fluorescence")) + 
+  (NCR_504_ttest_plot + ggtitle("", "Endpoint fluorescence")) + 
+  (NCR_504_slope_plot + ggtitle("", "Fluorescence rate"))
 ggsave(filename=file.path(figure_dir, "figure_4C.pdf"),
        plot=figure_4C,
        device="pdf", width=6.5, height=2.5, units="in")

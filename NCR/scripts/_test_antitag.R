@@ -9,10 +9,6 @@ mappings_fname <- "Anti-Tag experiment mappings.csv"
 
 complementary_nt <- setNames(c("A", "T", "G", "C"), c("U", "A", "C", "G"))
 
-fill_colors <- RColorBrewer::brewer.pal(4, "Set1")
-
-figure_dir <- file.path(here(), "NCR", "figures")
-
 # load platemap -----------------------------------------------------------
 
 # read in file
@@ -53,18 +49,9 @@ platemap$antitag <- sapply(platemap$guide_id,
                                            mappings$antitag_label[mappings$NCR.id==x],
                                            NA))
                            })
-platemap$antitag_full <- sapply(platemap$guide_id,
-                                function(x) {
-                                  ifelse(x %in% mappings$new.NCR.id,
-                                         mappings$antitag[mappings$new.NCR.id==x],
-                                         ifelse(x %in% mappings$NCR.id,
-                                                mappings$antitag[mappings$NCR.id==x],
-                                                NA))
-                                })
 platemap$complementary <- complementary_nt[platemap$tag] == platemap$antitag
 
-plate_samples <- unique(platemap[, c("guide_id", "conc", "group", "tag", 
-                                     "antitag", "antitag_full", "complementary")])
+plate_samples <- unique(platemap[, c("guide_id", "conc", "group", "tag", "antitag", "complementary")])
 plate_samples <- subset(plate_samples, guide_id != "NoProtein")
 plate_samples$group <- with(plate_samples, paste0(group, " (", antitag, ")"))
 
@@ -138,16 +125,16 @@ guide_rates$guide_id <- factor(guide_rates$guide_id,
                                                     })))
 
 guide_rate_plot <- ggplot(guide_rates,
-                          aes(x=tag, y=Estimate, 
+                          aes(x=guide_id, y=Estimate, 
                               ymin=Estimate + qnorm(0.025)*Std..Error,
                               ymax=Estimate + qnorm(0.975)*Std..Error)) + 
   geom_col(aes(fill=tag)) + geom_errorbar(width=0.5, aes(col=complementary)) + 
-  theme_classic() + facet_grid(~antitag_full, scales="free_x") + 
+  theme_classic() + facet_grid(~group, scales="free_x") + 
   xlab("") + ylab("RFU/min") + 
   theme(axis.text.x=element_text(angle=90, hjust=0, vjust=0.5)) + 
   scale_color_manual(values=c("TRUE"="red", "FALSE"="black")) + 
-  scale_fill_manual(values=RColorBrewer::brewer.pal(4, "Set1")) + 
-  labs(col="complementary\ntag")
+  labs(col="complementary\ntag") + 
+  ggtitle("Fluorescence rates for 167 fM")
 
 
 # compare rates for 0fM ---------------------------------------------------
@@ -211,12 +198,3 @@ bkgd_rate_plot <- ggplot(bkgd_rates,
   scale_color_manual(values=c("TRUE"="red", "FALSE"="black")) + 
   labs(col="complementary\ntag") + 
   ggtitle("Fluorescence rates for 0 fM")
-
-# generate plot -----------------------------------------------------------
-
-figure_3C <- guide_rate_plot + 
-  guides(fill=guide_legend(ncol=2)) + labs(col="complementary tag")
-
-ggsave(filename=file.path(figure_dir, "figure_3C.pdf"),
-       plot=figure_3C,
-       device="pdf", width=6.5, height=2, units="in")

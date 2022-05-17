@@ -159,7 +159,7 @@ levels(loo_largepool_rates$multiplex_label) <- c("No Protein", "8 crRNAs", "32 c
 
 # generate plot -----------------------------------------------------------
 
-suppl_figure_6 <- ggplot(subset(loo_largepool_rates, 
+suppl_figure_7 <- ggplot(subset(loo_largepool_rates, 
                                 !((multiplex == "No Protein") | (conc == "30 fM"))), 
                          aes(x=factor(conc, 
                                       levels=c("RNP-only", "300 aM", "1 fM", "3 fM", "10 fM")), 
@@ -178,6 +178,6 @@ suppl_figure_6 <- ggplot(subset(loo_largepool_rates,
   geom_errorbar(data=loo_largepool_mismatch, 
                 aes(ymin=text_height+7, ymax=text_height+7), size=1)
 
-ggsave(file=file.path(figure_dir, "suppl_figure_6.pdf"),
-       plot=suppl_figure_6,
+ggsave(file=file.path(figure_dir, "suppl_figure_7.pdf"),
+       plot=suppl_figure_7,
        device="pdf", width=6.5, height=3.5, units="in")

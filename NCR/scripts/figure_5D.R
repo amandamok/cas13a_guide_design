@@ -27,8 +27,8 @@ variants_platemap$sample <- factor(variants_platemap$sample, levels=variant_samp
 
 # load data ---------------------------------------------------------------
 
-variants_data <- xlsx::read.xlsx(file.path(data_dir, "variant_detection_EM_28092021_data.xlsx"),
-                                 sheetIndex=1, startRow=84, endRow=144)
+variants_data <- readxl::read_xlsx(file.path(data_dir, "variant_detection_EM_28092021_data.xlsx"),
+                                     range="A84:NW144")
 variants_data <- lapply(seq(nrow(variants_platemap)),
                         function(x) {
                           tmp_well <- variants_platemap$plate_well[x]
