@@ -1,144 +1,174 @@
 rm(list=ls())
 
 library(here)
-library(ggplot2)
 
-project_dir <- file.path(here(), "NCR")
-data_dir <- file.path(project_dir, "data", "supplementary_data")
-figure_dir <- file.path(project_dir, "figures")
+data_dir <- file.path(here(), "NCR", "data", "supplementary_data")
+platemap_fname <-"Anti-Tag experiment Platemap 05.12.22.xlsx"
+data_fname <- "Anti-Tag Cas13 primary 051222 Guide_Screening (Modified)_20220512.xlsx"
+mappings_fname <- "Anti-Tag experiment mappings.csv"
+
+complementary_nt <- setNames(c("A", "T", "G", "C"), c("U", "A", "C", "G"))
+
+fill_colors <- RColorBrewer::brewer.pal(4, "Set1")
+
+figure_dir <- file.path(here(), "NCR", "figures")
 
 # load platemap -----------------------------------------------------------
 
-lod_conc <- c(250, 125, 63, 31, 16, 8, 4, 0)
-primary_lod_platemap <- data.frame(plate_row=rep(LETTERS[c(5, 7, 10, 11)], 
-                                                 each=2*length(lod_conc)),
-                                   plate_col=rep(5:20, times=4),
-                                   multiplex=c(rep(8, 2*length(lod_conc)),
-                                               rep(c(NA, 8), times=length(lod_conc)),
-                                               rep(32, 2*length(lod_conc)),
-                                               rep(c(32, NA), times=length(lod_conc))),
-                                   conc=rep(rep(lod_conc, each=2), times=4))
-# all replicates
-primary_lod_platemap <- data.frame(plate_row=rep(LETTERS[5:12],
-                                                 each=2*length(lod_conc)),
-                                   plate_col=rep(5:20, times=8),
-                                   multiplex=c(rep(8, 4*2*length(lod_conc)),
-                                               rep(32, 4*2*length(lod_conc))),
-                                   conc=rep(rep(lod_conc, each=2), times=8))
+# read in file
+platemap <- readxl::read_xlsx(file.path(data_dir, platemap_fname),
+                              range="B2:Y12")
+platemap <- data.frame(label=unlist(platemap),
+                       plate_row=rep(LETTERS[1:nrow(platemap)], times=ncol(platemap)),
+                       plate_col=rep(seq(ncol(platemap)), each=nrow(platemap)),
+                       row.names=NULL)
+platemap <- subset(platemap, !is.na(platemap$label))
 
-primary_lod_platemap$plate_well <- with(primary_lod_platemap, 
-                                        paste0(plate_row, plate_col))
-primary_lod_platemap <- subset(primary_lod_platemap, !is.na(multiplex))
+# add annotations
+platemap$label <- sub(" fM", "fM", platemap$label)
+platemap$label <- sub("No protein", "NoProtein", platemap$label)
+platemap$plate_cell <- with(platemap, paste0(plate_row, plate_col))
+platemap$guide_id <- paste0("NCR_", sub(" .*$", "", platemap$label))
+platemap$guide_id[platemap$guide_id == "NCR_NoProtein"] <- "NoProtein"
+platemap$conc <- sub("^.* ", "", platemap$label)
+platemap$conc[!(platemap$conc %in% c("0fM", "167fM"))] <- NA
 
-# load data ---------------------------------------------------------------
+# load mappings -----------------------------------------------------------
 
-primary_lod_data <- xlsx::read.xlsx(file.path(data_dir, "primary_LOD_20220204.xlsx"),
-                                    sheetIndex=1, startRow=76, endRow=136, header=T)
-primary_lod_data <- lapply(seq(nrow(primary_lod_platemap)),
+# read in file
+mappings <- read.csv(file.path(data_dir, mappings_fname))
+
+# add annotations
+platemap$group <- mappings$NCR.id[match(platemap$guide_id,
+                                        mappings$new.NCR.id)]
+platemap$group[is.na(platemap$group)] <- platemap$guide_id[is.na(platemap$group)]
+platemap$tag <- mappings$new_tag_pos1[match(platemap$guide_id, 
+                                            mappings$new.NCR.id)]
+platemap$tag[is.na(platemap$tag) & !(platemap$guide_id == "NoProtein")] <- "C"
+platemap$antitag <- sapply(platemap$guide_id,
                            function(x) {
-                             tmp_well <- primary_lod_platemap$plate_well[x]
-                             data.frame(time=primary_lod_data$Time..s.,
-                                        RFU=as.numeric(primary_lod_data[[tmp_well]]),
-                                        well=tmp_well,
-                                        multiplex=primary_lod_platemap$multiplex[x],
-                                        conc=primary_lod_platemap$conc[x])
+                             ifelse(x %in% mappings$new.NCR.id,
+                                    mappings$antitag_label[mappings$new.NCR.id==x],
+                                    ifelse(x %in% mappings$NCR.id,
+                                           mappings$antitag_label[mappings$NCR.id==x],
+                                           NA))
                            })
-primary_lod_data <- do.call(rbind, primary_lod_data)
-primary_lod_data$time <- round(primary_lod_data$time / 60)
+platemap$antitag_full <- sapply(platemap$guide_id,
+                                function(x) {
+                                  ifelse(x %in% mappings$new.NCR.id,
+                                         mappings$antitag[mappings$new.NCR.id==x],
+                                         ifelse(x %in% mappings$NCR.id,
+                                                mappings$antitag[mappings$NCR.id==x],
+                                                NA))
+                                })
+platemap$antitag_full_rev <- sapply(platemap$antitag_full,
+                                    function(x) {
+                                      if(is.na(x)) {
+                                        return(NA)
+                                      } else {
+                                        return(paste(rev(strsplit(x, split="")[[1]]), 
+                                                     collapse=""))
+                                      }
+                                    })
+platemap$complementary <- complementary_nt[platemap$tag] == platemap$antitag
 
-# compute slopes ----------------------------------------------------------
+plate_samples <- unique(platemap[, c("guide_id", "conc", "group", "tag", "antitag", 
+                                     "antitag_full", "antitag_full_rev", "complementary")])
+plate_samples <- subset(plate_samples, guide_id != "NoProtein")
+plate_samples$group <- with(plate_samples, paste0(group, " (", antitag, ")"))
 
-primary_lod_slopes <- lapply(unique(primary_lod_data$multiplex),
-                             function(x) {
-                               tmp_slopes <- lapply(unique(primary_lod_data$conc),
-                                                    function(y) {
-                                                      tmp_data <- subset(primary_lod_data,
-                                                                         multiplex==x & 
-                                                                           conc==y & 
-                                                                           time >= 10)
-                                                      tmp_model <- lm(RFU ~ time, tmp_data)
-                                                      tmp_coef <- data.frame(summary(tmp_model)$coefficients)
-                                                      tmp_coef$coef <- rownames(tmp_coef)
-                                                      tmp_coef$multiplex <- x
-                                                      tmp_coef$conc <- y
-                                                      return(tmp_coef)
-                                                    })
-                               tmp_slopes <- do.call(rbind, tmp_slopes)
-                               return(tmp_slopes)
-                             })
-primary_lod_slopes <- do.call(rbind, primary_lod_slopes)
-primary_lod_slopes <- subset(primary_lod_slopes, coef=="time")
-primary_lod_slopes$conc <- factor(primary_lod_slopes$conc, 
-                                  levels=unique(primary_lod_slopes$conc))
+# load plate reader data --------------------------------------------------
 
+# read in file
+plate_data <- readxl::read_xlsx(file.path(data_dir, data_fname),
+                                range="A55:NW115")
+plate_data$time <- plate_data$`Time [s]` / 60
 
-# compute individual slopes -----------------------------------------------
+# parse data by guide
+plate_data <- lapply(seq(nrow(platemap)),
+                     function(x) {
+                       data.frame(time=plate_data$time,
+                                  RFU=plate_data[[platemap$plate_cell[x]]],
+                                  plate_cell=platemap$plate_cell[x],
+                                  guide_id=platemap$guide_id[x],
+                                  conc=platemap$conc[x],
+                                  group=platemap$group[x])
+                     })
+plate_data <- do.call(rbind, plate_data)
 
-primary_lod_individual_slopes <- lapply(primary_lod_platemap$plate_well,
-                                        function(x) {
-                                          tmp_data <- subset(primary_lod_data, well==x)
-                                          tmp_model <- lm(RFU ~ time, tmp_data)
-                                          tmp_coef <- data.frame(summary(tmp_model)$coefficients)
-                                          tmp_coef$coef <- rownames(tmp_coef)
-                                          tmp_coef$plate_well <- x
-                                          return(tmp_coef)
-                                        })
-primary_lod_individual_slopes <- do.call(rbind, primary_lod_individual_slopes)
-primary_lod_individual_slopes <- subset(primary_lod_individual_slopes, coef=="time")
-primary_lod_individual_slopes <- dplyr::left_join(primary_lod_individual_slopes,
-                                                  primary_lod_platemap,
-                                                  by="plate_well")
-ggplot(primary_lod_individual_slopes, 
-       aes(x=factor(conc), y=Estimate,
-           ymin=Estimate+qnorm(0.025)*Std..Error,
-           ymax=Estimate+qnorm(0.975)*Std..Error)) + 
-  geom_col(position="dodge2") + geom_errorbar(position="dodge2") + 
-  facet_grid(multiplex~., scales="free_y") + theme_classic() + 
-  xlab("copies/uL") + ylab("RFU/min") + 
-  geom_hline(yintercept=0)
+# compare rates for 167fM -------------------------------------------------
 
-# compare slopes between 8-plex and 32-plex -------------------------------
-
-primary_lod_compare_slopes <- lapply(c(8, 32),
-                                     function(x) {
-                                       tmp <- lapply(lod_conc[-length(lod_conc)],
-                                                     function(y) {
-                                                       tmp_data <- subset(primary_lod_data,
-                                                                          multiplex==x & 
-                                                                            conc %in% c(0, y) &
-                                                                            time >= 10)
-                                                       tmp_data$conc <- factor(tmp_data$conc, 
-                                                                               levels=c(0, y))
-                                                       tmp_model <- lm(RFU ~ time*conc, tmp_data)
-                                                       tmp_coef <- data.frame(summary(tmp_model)$coefficients)
-                                                       tmp_coef$coef <- rownames(tmp_coef)
-                                                       tmp_coef$multiplex <- x
-                                                       tmp_coef$conc <- y
-                                                       return(tmp_coef)
+guide_rates <- lapply(unique(subset(mappings, antitag_label == "G")$NCR.id),
+                      function(old_guide) {
+                        new_guides <- mappings$new.NCR.id[mappings$NCR.id==old_guide]
+                        tmp_data <- within(subset(plate_data,
+                                                  guide_id %in% c(old_guide, new_guides) & 
+                                                    time >= 10),
+                                           guide_id <- factor(guide_id,
+                                                              levels=c(old_guide, new_guides)))
+                        guide_rates <- lapply(levels(tmp_data$guide_id),
+                                              function(x) {
+                                                tmp_model <- lm(RFU ~ time*conc,
+                                                                data=subset(tmp_data,
+                                                                            guide_id==x))
+                                                tmp_coef <- data.frame(summary(tmp_model)$coefficients)
+                                                tmp_coef$guide_id <- x
+                                                tmp_coef$term <- rownames(tmp_coef)
+                                                return(subset(tmp_coef, term=="time:conc167fM"))
+                                              })
+                        guide_rates <- do.call(rbind, guide_rates)
+                        guide_rates$p_diff <- sapply(guide_rates$guide_id,
+                                                     function(x) {
+                                                       if(x == old_guide) {
+                                                         return(NA)
+                                                       } else {
+                                                         tmp_model <- lm(RFU ~ time * guide_id,
+                                                                         data=subset(tmp_data,
+                                                                                     guide_id %in% c(x, old_guide)))
+                                                         tmp_coef <- data.frame(summary(tmp_model)$coefficients)
+                                                         return(tmp_coef$Pr...t..[grepl("time:", rownames(tmp_coef))])
+                                                       }
                                                      })
-                                       return(do.call(rbind, tmp))
-                                     })
-primary_lod_compare_slopes <- do.call(rbind, primary_lod_compare_slopes)
-primary_lod_compare_slopes <- subset(primary_lod_compare_slopes, 
-                                     grepl("time:", primary_lod_compare_slopes$coef))
-
-# add pvalue annotation
-primary_lod_slopes$lod_pvalue <- primary_lod_compare_slopes$Pr...t..[prodlim::row.match(primary_lod_slopes[, c("multiplex", "conc")],
-                                                                                        primary_lod_compare_slopes[, c("multiplex", "conc")])]
-primary_lod_slopes$lod_pvalue_label <- cut(primary_lod_slopes$lod_pvalue, 
-                                           breaks=c(0, 0.001, 0.01, 0.05, 1),
-                                           labels=c("p<0.001", 
-                                                    "p<0.01", 
-                                                    "p<0.05", 
-                                                    "p>=0.05"))
+                        return(guide_rates)
+                      })
+guide_rates <- do.call(rbind, guide_rates)
+guide_rates <- dplyr::left_join(guide_rates, 
+                                subset(plate_samples, conc=="167fM"), 
+                                by="guide_id")
+guide_rates$group <- factor(guide_rates$group,
+                            levels=c("NCR_518 (A)", "NCR_564 (C)",
+                                     "NCR_504 (G)", "NCR_579 (G)",
+                                     "NCR_1362 (G)", "NCR_1379 (G)"))
+guide_rates$tag <- factor(guide_rates$tag, levels=c("A", "G", "U", "C"))
+guide_rates$guide_id <- factor(guide_rates$guide_id,
+                               levels=unlist(lapply(levels(guide_rates$tag),
+                                                    function(x) {
+                                                      guide_rates$guide_id[guide_rates$tag==x]
+                                                    })))
 
 # generate plot -----------------------------------------------------------
 
-ggplot(primary_lod_slopes, 
-       aes(x=conc, y=Estimate, 
-           ymin=Estimate+qnorm(0.025)*Std..Error,
-           ymax=Estimate+qnorm(0.975)*Std..Error, 
-           fill=lod_pvalue_label)) + 
-  geom_col() + geom_errorbar() + theme_classic() + 
-  facet_grid(~multiplex) + xlab("") + ylab("RFU/min") + labs(fill="")
+figure_5B <- ggplot(guide_rates,
+                    aes(x=paste0("AAA", tag), y=Estimate, 
+                        ymin=Estimate + qnorm(0.025)*Std..Error,
+                        ymax=Estimate + qnorm(0.975)*Std..Error)) + 
+  geom_col(aes(fill=tag)) + geom_errorbar(width=0.5) + theme_classic(base_size=8) + 
+  facet_wrap(antitag_full_rev~., scales="free", ncol=2) + 
+  xlab("tag sequence (5' to 3')") + 
+  ylab("activator-dependent rate\nRFU/min") + 
+  labs(fill="tag 3' nt") + 
+  theme(axis.text.x=element_text(angle=90, hjust=0, vjust=0.5)) + 
+  scale_color_manual(values=c("TRUE"="red", "FALSE"="black")) + 
+  scale_fill_manual(values=RColorBrewer::brewer.pal(4, "Set1")) + 
+  theme(axis.title.x=element_text(margin=margin(t=15, r=0, b=0, l=0)),
+        strip.background=element_rect(fill="#FFA626")) + 
+  geom_segment(data=subset(guide_rates, complementary),
+               aes(x=paste0("AAA", tag), xend=paste0("AAA", tag),
+                   yend=Estimate + qnorm(0.975)*Std..Error + 2,
+                   y=Estimate + qnorm(0.975)*Std..Error + 5),
+               arrow=arrow(length=unit(0.2, "cm")), size=1) + 
+  scale_y_continuous(limits=c(-3, 12))
 
+ggsave(filename=file.path(figure_dir, "figure_5B.pdf"),
+       plot=figure_5B,
+       device="pdf", width=3.5, height=2.5, units="in")

@@ -1,222 +1,134 @@
 rm(list=ls())
 
 library(here)
+library(ggplot2)
+library(patchwork)
 
-data_dir <- file.path(here(), "NCR", "data", "supplementary_data")
-platemap_fname <-"Anti-Tag experiment Platemap 05.12.22.xlsx"
-data_fname <- "Anti-Tag Cas13 primary 051222 Guide_Screening (Modified)_20220512.xlsx"
-mappings_fname <- "Anti-Tag experiment mappings.csv"
-
-complementary_nt <- setNames(c("A", "T", "G", "C"), c("U", "A", "C", "G"))
-
-fill_colors <- RColorBrewer::brewer.pal(4, "Set1")
-
-figure_dir <- file.path(here(), "NCR", "figures")
+project_dir <- file.path(here(), "NCR")
+figure_dir <- file.path(project_dir, "figures")
+data_dir <- file.path(project_dir, "data", "supplementary_data")
 
 # load platemap -----------------------------------------------------------
 
-# read in file
-platemap <- readxl::read_xlsx(file.path(data_dir, platemap_fname),
-                              range="B2:Y12")
-platemap <- data.frame(label=unlist(platemap),
-                       plate_row=rep(LETTERS[1:nrow(platemap)], times=ncol(platemap)),
-                       plate_col=rep(seq(ncol(platemap)), each=nrow(platemap)),
-                       row.names=NULL)
-platemap <- subset(platemap, !is.na(platemap$label))
+singleLOD_platemap <- openxlsx::read.xlsx(file.path(data_dir, "SingleLOD_2 Platemap.xlsx"),
+                                          sheet=1, rows=2:18, cols=2:17)
+singleLOD_platemap <- data.frame(plate_row=rep(LETTERS[1:nrow(singleLOD_platemap)],
+                                               times=ncol(singleLOD_platemap)),
+                                 plate_col=rep(seq(ncol(singleLOD_platemap)),
+                                               each=nrow(singleLOD_platemap)),
+                                 guide_id=unlist(singleLOD_platemap),
+                                 conc=rep(c("No protein", "No activator",
+                                            "1 pM", "300 fM", "100 fM",
+                                            "30 fM", "10 fM", "3 fM"),
+                                          each=2*nrow(singleLOD_platemap)))
+singleLOD_platemap$plate_well <- with(singleLOD_platemap, paste0(plate_row, plate_col))
+singleLOD_platemap <- subset(singleLOD_platemap, guide_id != "NA")
 
-# add annotations
-platemap$label <- sub(" fM", "fM", platemap$label)
-platemap$label <- sub("No protein", "NoProtein", platemap$label)
-platemap$plate_cell <- with(platemap, paste0(plate_row, plate_col))
-platemap$guide_id <- paste0("NCR_", sub(" .*$", "", platemap$label))
-platemap$guide_id[platemap$guide_id == "NCR_NoProtein"] <- "NoProtein"
-platemap$conc <- sub("^.* ", "", platemap$label)
-platemap$conc[!(platemap$conc %in% c("0fM", "167fM"))] <- NA
+plate_guides <- unique(singleLOD_platemap$guide_id)
+plate_conc <- unique(singleLOD_platemap$conc)
 
-# load mappings -----------------------------------------------------------
+# load data ---------------------------------------------------------------
 
-# read in file
-mappings <- read.csv(file.path(data_dir, mappings_fname))
+singleLOD_data <- openxlsx::read.xlsx(file.path(data_dir, "SingleLOD_2.xlsx"),
+                                      sheet="Sheet2", rows=54:114)
+singleLOD_data <- lapply(seq(nrow(singleLOD_platemap)),
+                         function(x) {
+                           tmp_well <- singleLOD_platemap$plate_well[x]
+                           data.frame(time=singleLOD_data$`Time.[s]`,
+                                      RFU=as.numeric(singleLOD_data[[tmp_well]]),
+                                      well=tmp_well,
+                                      guide_id=singleLOD_platemap$guide_id[x],
+                                      conc=singleLOD_platemap$conc[x])
+                         })
+singleLOD_data <- do.call(rbind, singleLOD_data)
+singleLOD_data$time <- round(singleLOD_data$time / 60)
 
-# add annotations
-platemap$group <- mappings$NCR.id[match(platemap$guide_id,
-                                        mappings$new.NCR.id)]
-platemap$group[is.na(platemap$group)] <- platemap$guide_id[is.na(platemap$group)]
-platemap$tag <- mappings$new_tag_pos1[match(platemap$guide_id, 
-                                            mappings$new.NCR.id)]
-platemap$tag[is.na(platemap$tag) & !(platemap$guide_id == "NoProtein")] <- "C"
-platemap$antitag <- sapply(platemap$guide_id,
-                           function(x) {
-                             ifelse(x %in% mappings$new.NCR.id,
-                                    mappings$antitag_label[mappings$new.NCR.id==x],
-                                    ifelse(x %in% mappings$NCR.id,
-                                           mappings$antitag_label[mappings$NCR.id==x],
-                                           NA))
-                           })
-platemap$antitag_full <- sapply(platemap$guide_id,
-                                function(x) {
-                                  ifelse(x %in% mappings$new.NCR.id,
-                                         mappings$antitag[mappings$new.NCR.id==x],
-                                         ifelse(x %in% mappings$NCR.id,
-                                                mappings$antitag[mappings$NCR.id==x],
-                                                NA))
-                                })
-platemap$complementary <- complementary_nt[platemap$tag] == platemap$antitag
+# baseline correction -----------------------------------------------------
 
-plate_samples <- unique(platemap[, c("guide_id", "conc", "group", "tag", 
-                                     "antitag", "antitag_full", "complementary")])
-plate_samples <- subset(plate_samples, guide_id != "NoProtein")
-plate_samples$group <- with(plate_samples, paste0(group, " (", antitag, ")"))
+baseline_RFU <- subset(singleLOD_data, time==10)
+singleLOD_data$baseline_RFU <- baseline_RFU$RFU[match(singleLOD_data$well, 
+                                                      baseline_RFU$well)]
+singleLOD_data$RFU_baselineCorr <- with(singleLOD_data, RFU-baseline_RFU)
 
-# load plate reader data --------------------------------------------------
+# endpoint vs. slope: NCR_504 @ 100fM -------------------------------------
 
-# read in file
-plate_data <- readxl::read_xlsx(file.path(data_dir, data_fname),
-                                range="A55:NW115")
-plate_data$time <- plate_data$`Time [s]` / 60
+NCR_504_data <- subset(singleLOD_data, guide_id == 504 & 
+                         time >= 10 & conc %in% c("100 fM", "No activator"))
+NCR_504_data$conc[NCR_504_data$conc=="No activator"] <- "0 fM"
+NCR_504_data$conc <- factor(NCR_504_data$conc, levels=c("0 fM", "100 fM"))
 
-# parse data by guide
-plate_data <- lapply(seq(nrow(platemap)),
-                     function(x) {
-                       data.frame(time=plate_data$time,
-                                  RFU=plate_data[[platemap$plate_cell[x]]],
-                                  plate_cell=platemap$plate_cell[x],
-                                  guide_id=platemap$guide_id[x],
-                                  conc=platemap$conc[x],
-                                  group=platemap$group[x])
-                     })
-plate_data <- do.call(rbind, plate_data)
+NCR_504_ttest <- lapply(unique(NCR_504_data$time)[-1],
+                        function(x) {
+                          tmp_data <- subset(NCR_504_data, time==x)
+                          tmp_data$conc <- relevel(tmp_data$conc, ref="100 fM")
+                          tmp_test <- t.test(RFU_baselineCorr ~ conc, tmp_data)
+                          data.frame(t_statistic=tmp_test$statistic,
+                                     df=tmp_test$parameter,
+                                     pvalue=tmp_test$p.value,
+                                     estimate=tmp_test$estimate[1] - tmp_test$estimate[2],
+                                     std_err=tmp_test$stderr,
+                                     conf_int_min=tmp_test$conf.int[1],
+                                     conf_int_max=tmp_test$conf.int[2],
+                                     time=x)
+                        })
+NCR_504_ttest <- do.call(rbind, NCR_504_ttest)
+NCR_504_ttest$pvalue_label <- ifelse(NCR_504_ttest$pvalue < 0.05,
+                                     "p < 0.05", "p >= 0.05")
 
-# compare rates for 167fM -------------------------------------------------
+NCR_504_ttest_plot <- ggplot(NCR_504_ttest, 
+                             aes(x=time, y=estimate, 
+                                 ymin=conf_int_min, ymax=conf_int_max)) + 
+  geom_line(col="grey35") + theme_classic(base_size=8) + 
+  geom_point(aes(col=pvalue_label), size=1) + geom_hline(yintercept=0) +
+  geom_errorbar(aes(col=pvalue_label)) + 
+  scale_color_manual(values=c("p >= 0.05"="grey35", "p < 0.05"="red")) + 
+  # ylab(bquote("RFU"["100 fM"] - "RFU"["0 fM"])) + 
+  xlab("time (min)") + 
+  ylab(bquote(atop(Delta*"(reporter cleaved)", "(RFU)"))) +
+  theme(legend.position="bottom") + labs(col="")
 
-guide_rates <- lapply(unique(mappings$NCR.id),
-                      function(old_guide) {
-                        new_guides <- mappings$new.NCR.id[mappings$NCR.id==old_guide]
-                        tmp_data <- within(subset(plate_data,
-                                                  guide_id %in% c(old_guide, new_guides) & 
-                                                    conc=="167fM" & time >= 10),
-                                           guide_id <- factor(guide_id,
-                                                              levels=c(old_guide, new_guides)))
-                        guide_rates <- lapply(levels(tmp_data$guide_id),
-                                              function(x) {
-                                                tmp_model <- lm(RFU ~ time,
-                                                                data=subset(tmp_data,
-                                                                            guide_id==x))
-                                                tmp_coef <- data.frame(summary(tmp_model)$coefficients)
-                                                tmp_coef$guide_id <- x
-                                                tmp_coef$term <- rownames(tmp_coef)
-                                                return(subset(tmp_coef, term=="time"))
-                                              })
-                        guide_rates <- do.call(rbind, guide_rates)
-                        guide_rates$p_diff <- sapply(guide_rates$guide_id,
-                                                     function(x) {
-                                                       if(x == old_guide) {
-                                                         return(NA)
-                                                       } else {
-                                                         tmp_model <- lm(RFU ~ time * guide_id,
-                                                                         data=subset(tmp_data,
-                                                                                     guide_id %in% c(x, old_guide)))
-                                                         tmp_coef <- data.frame(summary(tmp_model)$coefficients)
-                                                         return(tmp_coef$Pr...t..[grepl("time:", rownames(tmp_coef))])
-                                                       }
-                                                     })
-                        return(guide_rates)
-                      })
-guide_rates <- do.call(rbind, guide_rates)
-guide_rates <- dplyr::left_join(guide_rates, 
-                                subset(plate_samples, conc=="167fM"), 
-                                by="guide_id")
-guide_rates$group <- factor(guide_rates$group,
-                            levels=c("NCR_518 (A)", "NCR_564 (C)",
-                                     "NCR_504 (G)", "NCR_579 (G)",
-                                     "NCR_1362 (G)", "NCR_1379 (G)"))
-guide_rates$tag <- factor(guide_rates$tag, levels=c("A", "G", "U", "C"))
-guide_rates$guide_id <- factor(guide_rates$guide_id,
-                               levels=unlist(lapply(levels(guide_rates$tag),
-                                                    function(x) {
-                                                      guide_rates$guide_id[guide_rates$tag==x]
-                                                    })))
+NCR_504_slope <- lapply(unique(NCR_504_data$time)[-c(1:4)],
+                        function(x) {
+                          tmp_data <- subset(NCR_504_data, time<=x)
+                          # tmp_model <- nlme::lme(RFU_baselineCorr ~ time*conc,
+                          #                        random = ~ 1 + time | well, 
+                          #                        tmp_data)
+                          # tmp_coef <- data.frame(summary(tmp_model)$tTable)
+                          tmp_model <- lm(RFU_baselineCorr ~ time*conc, tmp_data)
+                          tmp_coef <- data.frame(summary(tmp_model)$coefficients)
+                          colnames(tmp_coef)[colnames(tmp_coef)=="Value"] <- "Estimate"
+                          colnames(tmp_coef)[colnames(tmp_coef)=="Std..Error"] <- "Std.Error"
+                          colnames(tmp_coef)[colnames(tmp_coef)=="Pr...t.."] <- "p.value"
+                          tmp_coef$coef <- rownames(tmp_coef)
+                          tmp_coef$time <- x
+                          return(tmp_coef)
+                        })
+NCR_504_slope <- do.call(rbind, NCR_504_slope)
+NCR_504_slope <- subset(NCR_504_slope, NCR_504_slope$coef == "time:conc100 fM")
+NCR_504_slope$pvalue_label <- ifelse(NCR_504_slope$p.value < 0.05,
+                                     "p < 0.05", "p >= 0.05")
 
-guide_rate_plot <- ggplot(guide_rates,
-                          aes(x=tag, y=Estimate, 
-                              ymin=Estimate + qnorm(0.025)*Std..Error,
-                              ymax=Estimate + qnorm(0.975)*Std..Error)) + 
-  geom_col(aes(fill=tag)) + geom_errorbar(width=0.5, aes(col=complementary)) + 
-  theme_classic() + facet_grid(~antitag_full, scales="free_x") + 
-  xlab("") + ylab("RFU/min") + 
-  theme(axis.text.x=element_text(angle=90, hjust=0, vjust=0.5)) + 
-  scale_color_manual(values=c("TRUE"="red", "FALSE"="black")) + 
-  scale_fill_manual(values=RColorBrewer::brewer.pal(4, "Set1")) + 
-  labs(col="complementary\ntag")
+NCR_504_slope_plot <- ggplot(NCR_504_slope, 
+                             aes(x=time, y=Estimate,
+                                 ymin=Estimate+qnorm(0.025)*Std.Error,
+                                 ymax=Estimate+qnorm(0.975)*Std.Error)) + 
+  geom_line(col="grey35") + theme_classic(base_size=8) + 
+  geom_point(aes(col=pvalue_label), size=1) + 
+  geom_errorbar(aes(col=pvalue_label)) + 
+  scale_color_manual(values=c("p >= 0.05"="grey35", "p < 0.05"="red")) + 
+  geom_hline(yintercept=0) + xlab("time (min)") + ylab("reaction rate\n(RFU/min)") + 
+  theme(legend.position="bottom") + labs(col="")
 
+NCR_504_trace <- ggplot(NCR_504_data, 
+                        aes(x=time, y=RFU_baselineCorr, group=well, col=conc)) + 
+  geom_line() + geom_point(size=0.25) + theme_classic(base_size=8) +
+  scale_color_manual(values=c("100 fM"="red", "0 fM"="grey35")) + 
+  labs(color="") + xlab("time (min)") + ylab("RFU") + 
+  theme(legend.position="bottom")
 
-# compare rates for 0fM ---------------------------------------------------
-
-bkgd_rates <- lapply(unique(mappings$NCR.id),
-                     function(old_guide) {
-                       new_guides <- mappings$new.NCR.id[mappings$NCR.id==old_guide]
-                       tmp_data <- within(subset(plate_data,
-                                                 guide_id %in% c(old_guide, new_guides) & 
-                                                   conc=="0fM" & time >= 10),
-                                          guide_id <- factor(guide_id,
-                                                             levels=c(old_guide, new_guides)))
-                       bkgd_rates <- lapply(levels(tmp_data$guide_id),
-                                            function(x) {
-                                              tmp_model <- lm(RFU ~ time,
-                                                              data=subset(tmp_data,
-                                                                          guide_id==x))
-                                              tmp_coef <- data.frame(summary(tmp_model)$coefficients)
-                                              tmp_coef$guide_id <- x
-                                              tmp_coef$term <- rownames(tmp_coef)
-                                              return(subset(tmp_coef, term=="time"))
-                                            })
-                       bkgd_rates <- do.call(rbind, bkgd_rates)
-                       bkgd_rates$p_diff <- sapply(bkgd_rates$guide_id,
-                                                   function(x) {
-                                                     if(x == old_guide) {
-                                                       return(NA)
-                                                     } else {
-                                                       tmp_model <- lm(RFU ~ time * guide_id,
-                                                                       data=subset(tmp_data,
-                                                                                   guide_id %in% c(x, old_guide)))
-                                                       tmp_coef <- data.frame(summary(tmp_model)$coefficients)
-                                                       return(tmp_coef$Pr...t..[grepl("time:", rownames(tmp_coef))])
-                                                     }
-                                                   })
-                       return(bkgd_rates)
-                     })
-bkgd_rates <- do.call(rbind, bkgd_rates)
-bkgd_rates <- dplyr::left_join(bkgd_rates, 
-                               subset(plate_samples, conc=="167fM"), 
-                               by="guide_id")
-bkgd_rates$group <- factor(bkgd_rates$group,
-                           levels=c("NCR_518 (A)", "NCR_564 (C)",
-                                    "NCR_504 (G)", "NCR_579 (G)",
-                                    "NCR_1362 (G)", "NCR_1379 (G)"))
-bkgd_rates$tag <- factor(bkgd_rates$tag, levels=c("A", "G", "U", "C"))
-bkgd_rates$guide_id <- factor(bkgd_rates$guide_id,
-                              levels=unlist(lapply(levels(bkgd_rates$tag),
-                                                   function(x) {
-                                                     bkgd_rates$guide_id[bkgd_rates$tag==x]
-                                                   })))
-
-bkgd_rate_plot <- ggplot(bkgd_rates,
-                         aes(x=guide_id, y=Estimate, 
-                             ymin=Estimate + qnorm(0.025)*Std..Error,
-                             ymax=Estimate + qnorm(0.975)*Std..Error)) + 
-  geom_col(aes(fill=tag)) + geom_errorbar(width=0.5, aes(col=complementary)) + 
-  theme_classic() + facet_grid(~group, scales="free_x") + 
-  xlab("") + ylab("RFU/min") + 
-  theme(axis.text.x=element_text(angle=90, hjust=0, vjust=0.5)) + 
-  scale_color_manual(values=c("TRUE"="red", "FALSE"="black")) + 
-  labs(col="complementary\ntag") + 
-  ggtitle("Fluorescence rates for 0 fM")
-
-# generate plot -----------------------------------------------------------
-
-figure_3C <- guide_rate_plot + 
-  guides(fill=guide_legend(ncol=2)) + labs(col="complementary tag")
-
+figure_3C <- (NCR_504_trace + ggtitle("", subtitle="Raw fluorescence")) + 
+  (NCR_504_ttest_plot + ggtitle("", "Endpoint fluorescence")) + 
+  (NCR_504_slope_plot + ggtitle("", "Fluorescence rate"))
 ggsave(filename=file.path(figure_dir, "figure_3C.pdf"),
        plot=figure_3C,
-       device="pdf", width=6.5, height=2, units="in")
+       device="pdf", width=6.5, height=2.25, units="in")

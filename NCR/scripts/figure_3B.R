@@ -2,39 +2,132 @@ rm(list=ls())
 
 library(here)
 library(ggplot2)
-library(ggpubr)
+library(patchwork)
 
 project_dir <- file.path(here(), "NCR")
 figure_dir <- file.path(project_dir, "figures")
+data_dir <- file.path(project_dir, "data", "supplementary_data")
 
-# load guide rates from primary vRNA screen -------------------------------
+# load platemap -----------------------------------------------------------
 
-guide_rate <- read.csv(file.path(project_dir, "data", "guide_rate.csv"))
-guide_rate$antitag_pos1 <- factor(guide_rate$antitag_pos1,
-                                  levels=c("G", "A", "C", "U"))
+singleLOD_platemap <- openxlsx::read.xlsx(file.path(data_dir, "SingleLOD_2 Platemap.xlsx"),
+                                          sheet=1, rows=2:18, cols=2:17)
+singleLOD_platemap <- data.frame(plate_row=rep(LETTERS[1:nrow(singleLOD_platemap)],
+                                               times=ncol(singleLOD_platemap)),
+                                 plate_col=rep(seq(ncol(singleLOD_platemap)),
+                                               each=nrow(singleLOD_platemap)),
+                                 guide_id=unlist(singleLOD_platemap),
+                                 conc=rep(c("No protein", "No activator",
+                                            "1 pM", "300 fM", "100 fM",
+                                            "30 fM", "10 fM", "3 fM"),
+                                          each=2*nrow(singleLOD_platemap)))
+singleLOD_platemap$plate_well <- with(singleLOD_platemap, paste0(plate_row, plate_col))
+singleLOD_platemap <- subset(singleLOD_platemap, guide_id != "NA")
 
-# compute pvalues ---------------------------------------------------------
+plate_guides <- unique(singleLOD_platemap$guide_id)
+plate_conc <- unique(singleLOD_platemap$conc)
 
-antitag_pos1_pvalue <- compare_means(Estimate ~ antitag_pos1,
-                                     guide_rate, method="wilcox.test", 
-                                     p.adjust.method="none")
+# load data ---------------------------------------------------------------
 
-# generate plot -----------------------------------------------------------
+singleLOD_data <- openxlsx::read.xlsx(file.path(data_dir, "SingleLOD_2.xlsx"),
+                                      sheet="Sheet2", rows=54:114)
+singleLOD_data <- lapply(seq(nrow(singleLOD_platemap)),
+                         function(x) {
+                           tmp_well <- singleLOD_platemap$plate_well[x]
+                           data.frame(time=singleLOD_data$`Time.[s]`,
+                                      RFU=as.numeric(singleLOD_data[[tmp_well]]),
+                                      well=tmp_well,
+                                      guide_id=singleLOD_platemap$guide_id[x],
+                                      conc=singleLOD_platemap$conc[x])
+                         })
+singleLOD_data <- do.call(rbind, singleLOD_data)
+singleLOD_data$time <- round(singleLOD_data$time / 60)
 
-fill_colors <- RColorBrewer::brewer.pal(4, "Set1")
-names(fill_colors) <- sort(levels(guide_rate$antitag_pos1))
+# baseline correction -----------------------------------------------------
 
-figure_3B <- ggplot(guide_rate, aes(x=antitag_pos1, y=Estimate)) + 
-   geom_violin(aes(fill=antitag_pos1), 
-               draw_quantiles=c(0.25, 0.75), linetype="dashed") +
-   geom_violin(fill="transparent", draw_quantiles=0.5) +
-   geom_dotplot(binaxis="y", stackdir="center", binwidth=1) +
-   xlab("first position of anti-tag") + ylab("activator-dependent rate\nRFU/min") + 
-   theme_classic(base_size=10) + guides(fill="none") + 
-   scale_fill_manual(values=fill_colors) + 
-   stat_pvalue_manual(data=subset(antitag_pos1_pvalue, group1=="G"),
-                      label="p.signif", y.position=c(80, 90, 100), size=2)
-   
+baseline_RFU <- subset(singleLOD_data, time==10)
+singleLOD_data$baseline_RFU <- baseline_RFU$RFU[match(singleLOD_data$well, 
+                                                      baseline_RFU$well)]
+singleLOD_data$RFU_baselineCorr <- with(singleLOD_data, RFU-baseline_RFU)
+
+# endpoint vs. slope: NCR_604 @ 100fM -------------------------------------
+
+NCR_604_data <- subset(singleLOD_data, guide_id == 604 & 
+                         time >= 10 & conc %in% c("100 fM", "No activator"))
+NCR_604_data$conc[NCR_604_data$conc=="No activator"] <- "0 fM"
+NCR_604_data$conc <- factor(NCR_604_data$conc, levels=c("0 fM", "100 fM"))
+
+NCR_604_ttest <- lapply(unique(NCR_604_data$time)[-1],
+                        function(x) {
+                          tmp_data <- subset(NCR_604_data, time==x)
+                          tmp_data$conc <- relevel(tmp_data$conc, ref="100 fM")
+                          tmp_test <- t.test(RFU_baselineCorr ~ conc, tmp_data)
+                          data.frame(t_statistic=tmp_test$statistic,
+                                     df=tmp_test$parameter,
+                                     pvalue=tmp_test$p.value,
+                                     estimate=tmp_test$estimate[1] - tmp_test$estimate[2],
+                                     std_err=tmp_test$stderr,
+                                     conf_int_min=tmp_test$conf.int[1],
+                                     conf_int_max=tmp_test$conf.int[2],
+                                     time=x)
+                        })
+NCR_604_ttest <- do.call(rbind, NCR_604_ttest)
+NCR_604_ttest$pvalue_label <- ifelse(NCR_604_ttest$pvalue < 0.05,
+                                     "p < 0.05", "p >= 0.05")
+
+NCR_604_ttest_plot <- ggplot(NCR_604_ttest, 
+                             aes(x=time, y=estimate, 
+                                 ymin=conf_int_min, ymax=conf_int_max)) + 
+  geom_line(col="grey35") + theme_classic(base_size=8) + 
+  geom_point(aes(col=pvalue_label), size=1) + geom_hline(yintercept=0) +
+  geom_errorbar(aes(col=pvalue_label)) + 
+  scale_color_manual(values=c("p >= 0.05"="grey35", "p < 0.05"="red")) + 
+  xlab("time (min)") + 
+  ylab(bquote(atop(Delta*"(reporter cleaved)", "(RFU)"))) +
+  theme(legend.position="bottom") + labs(col="")
+
+NCR_604_slope <- lapply(unique(NCR_604_data$time)[-c(1:4)],
+                        function(x) {
+                          tmp_data <- subset(NCR_604_data, time<=x)
+                          # tmp_model <- nlme::lme(RFU_baselineCorr ~ time*conc,
+                          #                        random = ~ 1 + time | well, 
+                          #                        tmp_data)
+                          # tmp_coef <- data.frame(summary(tmp_model)$tTable)
+                          tmp_model <- lm(RFU_baselineCorr ~ time*conc, tmp_data)
+                          tmp_coef <- data.frame(summary(tmp_model)$coefficients)
+                          colnames(tmp_coef)[colnames(tmp_coef)=="Value"] <- "Estimate"
+                          colnames(tmp_coef)[colnames(tmp_coef)=="Std..Error"] <- "Std.Error"
+                          colnames(tmp_coef)[colnames(tmp_coef)=="Pr...t.."] <- "p.value"
+                          tmp_coef$coef <- rownames(tmp_coef)
+                          tmp_coef$time <- x
+                          return(tmp_coef)
+                        })
+NCR_604_slope <- do.call(rbind, NCR_604_slope)
+NCR_604_slope <- subset(NCR_604_slope, NCR_604_slope$coef == "time:conc100 fM")
+NCR_604_slope$pvalue_label <- ifelse(NCR_604_slope$p.value < 0.05,
+                                     "p < 0.05", "p >= 0.05")
+
+NCR_604_slope_plot <- ggplot(NCR_604_slope, 
+                             aes(x=time, y=Estimate,
+                                 ymin=Estimate+qnorm(0.025)*Std.Error,
+                                 ymax=Estimate+qnorm(0.975)*Std.Error)) + 
+  geom_line(col="grey35") + theme_classic(base_size=8) + 
+  geom_point(aes(col=pvalue_label), size=1) + 
+  geom_errorbar(aes(col=pvalue_label)) + 
+  scale_color_manual(values=c("p >= 0.05"="grey35", "p < 0.05"="red")) + 
+  geom_hline(yintercept=0) + xlab("time (min)") + ylab("reaction rate\n(RFU/min)") + 
+  theme(legend.position="bottom") + labs(col="")
+
+NCR_604_trace <- ggplot(NCR_604_data, 
+                        aes(x=time, y=RFU_baselineCorr, group=well, col=conc)) + 
+  geom_line() + geom_point(size=0.25) + theme_classic(base_size=8) +
+  scale_color_manual(values=c("100 fM"="red", "0 fM"="grey35")) + 
+  labs(color="") + xlab("time (min)") + ylab("RFU") + 
+  theme(legend.position="bottom")
+
+figure_3B <- (NCR_604_trace + ggtitle("", subtitle="Raw fluorescence")) + 
+  (NCR_604_ttest_plot + ggtitle("", "Endpoint fluorescence")) + 
+  (NCR_604_slope_plot + ggtitle("", "Fluorescence rate"))
 ggsave(filename=file.path(figure_dir, "figure_3B.pdf"),
        plot=figure_3B,
-       device="pdf", width=3, height=2, units="in")
+       device="pdf", width=6.5, height=2.25, units="in")

@@ -37,8 +37,8 @@ suppl_figure_1 <- ggplot(guide_rate,
                              ymin=gblock_rate+qnorm(0.025)*gblock_stderr,
                              ymax=gblock_rate+qnorm(0.975)*gblock_stderr)) + 
   geom_errorbar(col="grey35", alpha=0.5) + geom_errorbarh(col="grey35", alpha=0.5) + 
-  geom_point(col="grey35") + theme_classic(base_size=10) + coord_fixed(ratio=1) +
-  xlab("vRNA rate (RFU/min)") + ylab("gBlock rate (RFU/min)") + 
+  geom_point(col="grey35") + theme_classic(base_size=8) + coord_fixed(ratio=1) +
+  xlab("viral RNA rate (RFU/min)") + ylab("IVT RNA rate (RFU/min)") + 
   ggtitle(bquote(rho == .(signif(vRNA_gBlock_corr, 3))))
 
 ggsave(filename=file.path(figure_dir, "suppl_figure_1.pdf"),

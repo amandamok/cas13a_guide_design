@@ -37,8 +37,8 @@ guide_rate <- subset(guide_rate, NCR.id != "NCR_1344")
 
 # generate plot -----------------------------------------------------------
 
-summary_plot <- ggplot(guide_rate, aes(x=start, y=Estimate)) + theme_classic(base_size=10) + 
-  geom_point(col="grey35") + 
+summary_plot <- ggplot(guide_rate, aes(x=start, y=Estimate)) + 
+  theme_classic(base_size=8) + geom_point(col="grey35") + 
   geom_errorbar(aes(ymin=Estimate+qnorm(0.025)*Std.Error,
                     ymax=Estimate+qnorm(0.975)*Std.Error),
                 col="grey35") + 

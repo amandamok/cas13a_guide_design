@@ -38,10 +38,10 @@ data_predict_527$RFU[data_predict_527$activator=="100fM"] <-
 
 # generate plot
 guide_plot_527 <- ggplot(data_predict_527, aes(x=time, y=RFU, col=activator)) +
-  geom_line(size=2, alpha=0.5) + theme_classic(base_size=10) + 
+  geom_line(size=2, alpha=0.5) + theme_classic(base_size=8) + 
   geom_line(data=data_527, aes(x=time, y=RFU, col=activator, group=well_384)) +
   scale_color_manual(values=c("noActivator"="grey35", "100fM"="red")) +
-  ggtitle("target region: 7720-7739") +
+  ggtitle("crRNA 527") +
   xlab("time (min)") + ylab("RFU") + guides(col="none")
 
 barplot_527 <- ggplot(data.frame(rate=c(coef_527$Value[rownames(coef_527)=="time"],
@@ -54,7 +54,7 @@ barplot_527 <- ggplot(data.frame(rate=c(coef_527$Value[rownames(coef_527)=="time
                       aes(x=sample, y=rate, fill=sample,
                           ymin=rate+qnorm(0.025)*std_error,
                           ymax=rate+qnorm(0.975)*std_error)) + 
-  geom_col() + geom_errorbar(width=0.5) + theme_classic(base_size=10) + 
+  geom_col() + geom_errorbar(width=0.5) + theme_classic(base_size=8) + 
   scale_fill_manual(values=c("RNP\nonly"="grey35", "100\nfM"="red")) + 
   guides(fill="none") + xlab("") + ylab("RFU/min")
 
@@ -81,10 +81,10 @@ data_predict_553$RFU[data_predict_553$activator=="100fM"] <-
 
 # generate plot
 guide_plot_553 <- ggplot(data_predict_553, aes(x=time, y=RFU, col=activator)) +
-  geom_line(size=2, alpha=0.5) + theme_classic(base_size=10) + 
+  geom_line(size=2, alpha=0.5) + theme_classic(base_size=8) + 
   geom_line(data=data_553, aes(x=time, y=RFU, col=activator, group=well_384)) +
   scale_color_manual(values=c("noActivator"="grey35", "100fM"="red")) +
-  ggtitle("target region: 16420-16439") +
+  ggtitle("crRNA 553") +
   xlab("time (min)") + ylab("RFU") + guides(col="none")
 
 barplot_553 <- ggplot(data.frame(rate=c(coef_553$Value[rownames(coef_553)=="time"],
@@ -97,7 +97,7 @@ barplot_553 <- ggplot(data.frame(rate=c(coef_553$Value[rownames(coef_553)=="time
                       aes(x=sample, y=rate, fill=sample,
                           ymin=rate+qnorm(0.025)*std_error,
                           ymax=rate+qnorm(0.975)*std_error)) + 
-  geom_col() + geom_errorbar(width=0.5) + theme_classic(base_size=10) + 
+  geom_col() + geom_errorbar(width=0.5) + theme_classic(base_size=8) + 
   scale_fill_manual(values=c("RNP\nonly"="grey35", "100\nfM"="red")) + 
   guides(fill="none") + xlab("") + ylab("RFU/min")
 
