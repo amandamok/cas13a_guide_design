@@ -149,25 +149,26 @@ guide_rates$guide_id <- factor(guide_rates$guide_id,
 # generate plot -----------------------------------------------------------
 
 figure_5A <- ggplot(guide_rates,
-                          aes(x=paste0("AAA", tag), y=Estimate, 
-                              ymin=Estimate + qnorm(0.025)*Std..Error,
-                              ymax=Estimate + qnorm(0.975)*Std..Error)) + 
-  geom_col(aes(fill=tag)) + geom_errorbar(width=0.5) + theme_classic(base_size=8) + 
-  facet_wrap(antitag_full_rev~., scales="free_x", ncol=1) + 
-  xlab("tag sequence (5' to 3')") + 
-  ylab("activator-dependent rate\nRFU/min") + 
-  labs(fill="tag 3' nt") + 
-  theme(axis.text.x=element_text(angle=90, hjust=0, vjust=0.5)) + 
-  scale_color_manual(values=c("TRUE"="red", "FALSE"="black")) + 
-  scale_fill_manual(values=RColorBrewer::brewer.pal(4, "Set1")) + 
-  theme(axis.title.x=element_text(margin=margin(t=15, r=0, b=0, l=0)),
-        strip.background=element_rect(fill="#FFA626")) + 
-  geom_segment(data=subset(guide_rates, complementary),
-               aes(x=paste0("AAA", tag), xend=paste0("AAA", tag),
-                   yend=Estimate + qnorm(0.975)*Std..Error + 2,
-                   y=Estimate + qnorm(0.975)*Std..Error + 10),
-               arrow=arrow(length=unit(0.2, "cm")), size=1)
+                    aes(x=antitag_full, y=Estimate, 
+                        ymin=Estimate + qnorm(0.025)*Std..Error,
+                        ymax=Estimate + qnorm(0.975)*Std..Error,
+                        fill=tag)) + 
+  geom_col(position=position_dodge()) + 
+  geom_errorbar(width=0.5, position=position_dodge(width=0.9)) + 
+  theme_classic(base_size=8) + labs(fill="tag 3' nt") + 
+  xlab("anti-tag sequence") + ylab("activator-dependent rate\nRFU/min") + 
+  scale_fill_manual(values=RColorBrewer::brewer.pal(4, "Set1")) 
+  # facet_wrap(antitag_full_rev~., scales="free_x", ncol=1) + 
+  # theme(axis.text.x=element_text(angle=90, hjust=0, vjust=0.5)) + 
+  # scale_color_manual(values=c("TRUE"="red", "FALSE"="black")) + 
+  # theme(axis.title.x=element_text(margin=margin(t=15, r=0, b=0, l=0)),
+  #       strip.background=element_rect(fill="#FFA626"))
+  # geom_segment(data=subset(guide_rates, complementary),
+  #              aes(x=paste0("AAA", tag), xend=paste0("AAA", tag),
+  #                  yend=Estimate + qnorm(0.975)*Std..Error + 2,
+  #                  y=Estimate + qnorm(0.975)*Std..Error + 10),
+  #              arrow=arrow(length=unit(0.2, "cm")), size=1)
 
 ggsave(filename=file.path(figure_dir, "figure_5A.pdf"),
        plot=figure_5A,
-       device="pdf", width=3, height=2.5, units="in")
+       device="pdf", width=2.75, height=1.5, units="in")

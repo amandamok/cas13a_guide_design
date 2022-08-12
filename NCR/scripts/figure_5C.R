@@ -151,9 +151,9 @@ guide_rates <- plyr::join(guide_rates,
                                                "variant", "tag", "lineage")]), 
                           by="guide_id")
 
-variant_label <- c("15240_T"="15240\nDelta: C\nOmicron: U",
-                   "21618_T"="21618\nDelta: G\nOmicron: C",
-                   "23202_A"="23202\nDelta: C\nOmicron: A")
+variant_label <- c("15240_T"="15240 SNV\nDelta: C\nOmicron: U",
+                   "21618_T"="21618 SNV\nDelta: G\nOmicron: C",
+                   "23202_A"="23202 SNV \nDelta: C\nOmicron: A")
 guide_rates$variant_label <- variant_label[guide_rates$variant]
 
 guide_labels <- c("1659"="Delta\nAAAG",
@@ -165,14 +165,14 @@ guide_labels <- c("1659"="Delta\nAAAG",
 guide_rates$guide_label <- guide_labels[guide_rates$guide_id]
 
 figure_5C <- ggplot(guide_rates,
-                    aes(x=guide_label, y=Estimate, fill=activator,
+                    aes(x=sub("AAA", "", guide_label), y=Estimate, fill=activator,
                         ymin=Estimate+qnorm(0.025)*Std..Error,
                         ymax=Estimate+qnorm(0.975)*Std..Error)) + 
   geom_col(position="dodge", width=0.8) + 
   geom_errorbar(position=position_dodge(0.8), width=0.5) + 
   theme_classic(base_size=8) + 
-  theme(axis.text.x=element_text(angle=90, hjust=0.5, vjust=0.5)) + 
-  xlab("tag sequence (5' to 3')") + ylab("RFU/min") + 
+  # theme(axis.text.x=element_text(angle=90, hjust=0.5, vjust=0.5)) + 
+  xlab("variant-complementary tag") + ylab("RFU/min") + 
   facet_wrap(~variant_label, scales="free_x") + 
   theme(axis.title.x=element_text(margin=margin(t=15, r=0, b=0, l=0)),
         strip.background=element_rect(fill="#FFA626")) + 
@@ -180,4 +180,4 @@ figure_5C <- ggplot(guide_rates,
 
 ggsave(filename=file.path(figure_dir, "figure_5C.pdf"),
        plot=figure_5C,
-       device="pdf", width=6.5, height=2, units="in")
+       device="pdf", width=6.5, height=2.25, units="in")

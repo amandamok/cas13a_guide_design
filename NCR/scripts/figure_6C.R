@@ -92,8 +92,8 @@ figure_6C <- ggplot(endpoint_means, aes(x=conc, y=RFU)) +
   # geom_errorbar(aes(ymin=RFU + qnorm(0.025)*std_dev,
   #                   ymax=RFU + qnorm(0.975)*std_dev), width=0.5) + 
   facet_grid(~factor(multiplex, levels=c("8 crRNAs", "32 crRNAs"))) + 
-  geom_point(data=endpoint_data,shape=1) + 
-  stat_pvalue_manual(endpoint_pvalues) + labs(fill="") + 
+  geom_point(data=endpoint_data,shape=1) + labs(fill="") + 
+  # stat_pvalue_manual(endpoint_pvalues) + 
   scale_fill_manual(values=c("p < 0.05"="red", "ns"="grey35")) + 
   xlab(TeX("SARS-CoV-2 RNA (copies/$\\mu$L)")) + 
   ylab(TeX("Fluorescence ($F/F_6$)")) + 

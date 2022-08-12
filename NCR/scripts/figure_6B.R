@@ -105,7 +105,7 @@ figure_6B <- ggplot(subset(lod_slopes, !grepl("no_", conc)),
                         ymax=Estimate + qnorm(0.975)*Std..Error)) + 
   geom_col(aes(fill=LOD_p_label)) + geom_errorbar(width=0.5) + 
   facet_grid(~factor(multiplex, levels=c("8 crRNAs", "32 crRNAs"))) + 
-  theme_classic(base_size=8) + stat_pvalue_manual(lod_pvalues, label="p.label") + 
+  theme_classic(base_size=8) + # stat_pvalue_manual(lod_pvalues, label="p.label") + 
   scale_fill_manual(values=c("p < 0.05"="red", "ns"="grey35")) + 
   xlab(TeX("SARS-CoV-2 RNA (copies/$\\mu$L)")) + 
   ylab("RFU/min") + 
