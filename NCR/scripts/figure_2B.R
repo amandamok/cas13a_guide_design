@@ -41,7 +41,7 @@ guide_plot_527 <- ggplot(data_predict_527, aes(x=time, y=RFU, col=activator)) +
   geom_line(size=2, alpha=0.5) + theme_classic(base_size=8) + 
   geom_line(data=data_527, aes(x=time, y=RFU, col=activator, group=well_384)) +
   scale_color_manual(values=c("noActivator"="grey35", "100fM"="red")) +
-  ggtitle("crRNA 527") +
+  ggtitle("crRNA 527 (fast)") +
   xlab("time (min)") + ylab("RFU") + guides(col="none")
 
 barplot_527 <- ggplot(data.frame(rate=c(coef_527$Value[rownames(coef_527)=="time"],
@@ -84,7 +84,7 @@ guide_plot_553 <- ggplot(data_predict_553, aes(x=time, y=RFU, col=activator)) +
   geom_line(size=2, alpha=0.5) + theme_classic(base_size=8) + 
   geom_line(data=data_553, aes(x=time, y=RFU, col=activator, group=well_384)) +
   scale_color_manual(values=c("noActivator"="grey35", "100fM"="red")) +
-  ggtitle("crRNA 553") +
+  ggtitle("crRNA 553 (slow)") +
   xlab("time (min)") + ylab("RFU") + guides(col="none")
 
 barplot_553 <- ggplot(data.frame(rate=c(coef_553$Value[rownames(coef_553)=="time"],
